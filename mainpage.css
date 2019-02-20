@@ -20,11 +20,6 @@ body{
     color: black;
 }
 
-
-
-
-
-
 .bannerPic {
     display: block;
     width: 100%;
@@ -34,30 +29,24 @@ body{
 
 }
 
-
-
 .itempic {
-    width: 600px;
-    height: 600px;
-    display:block;
+    /* width: 600px; */
+    /* height: 600px; */
+    width: 100%;
+    /* height: 100%; */
+    /* display:block; */
     align-content: center;
     
 
 }
 
-
-
 .item {
-    float: right;
-    background-color: lightgray;
-    position: relative;
-    padding: 10px;
-    text-align: center;
+    /* float: right; */
+    /* background-color: lightgray; */
+    /* position: relative; */
+    /* padding: 10px; */
+    /* text-align: center; */
 }
-
-
-
-
 
 /* Top left text */
 .infos {
@@ -74,6 +63,7 @@ body{
 .infos:hover{
     background-color: rgba(32,32,32,1);
 }
+
 .panels {
   position: absolute;
   bottom: 10px;
@@ -167,8 +157,6 @@ body{
     
 }
 
-
-
-
-
-
+.container {
+  margin: 0;
+}
