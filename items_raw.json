@@ -1,0 +1,103 @@
+{
+    "Fruits and Vegetables": {
+        "Fruits": {
+            "1":{"name":"Loapple"},
+            "2":{"name":"LOpear"},
+            "29":{"name":"LOpear"},
+            "31":{"name":"LOpear"},
+            "3":{"name":"SSwaterlemon"}
+        },
+        "Vegetables": {
+            "4":{"name":"fresh salad"},
+            "5":{"name":"mushroom"},
+            "30":{"name":"mushroom"}
+        
+        },
+        "Fresh Cut Fruits and Vegetables": {
+            "5":{"name":"fresh coleslaw"}
+        
+        },
+        "Dried Nuts": {
+            "6":{"name":"dry ee"}
+            
+        },
+        "Ethnic Vegetables": {
+            "7":{"name":"ss"}
+        }
+    },
+    "Bakery": {
+        "Fresh Bread": {
+           "8":{"name":"breadA"}
+        },
+        "Cakes": {
+            "9":{"name":"CakeA"}
+        },
+        "Pastries": {
+            "10":{"name":"Pastriesa"}
+        },
+        "Brownies": {
+           "11":{"name":"browniesa"}
+        },
+        "Cookies": {
+            "11":{"name":"LittleCookice"}
+        }
+    },
+    "Dairy and Eggs": {
+        "Milk": {
+            "11":{"name":"200ml-milk"}
+        },
+        "Cheese": {
+            "12":{"name":"Plain Cheese"}
+        },
+        "Yogurt": {
+            "13":{"name":"stawBerry Yogurt"}
+        },
+        "Butter and Spreads": {
+            "14":{"name":"golden butter"}
+        },
+        "Desserts": {
+            "15":{"name":"biscuts"}
+        }
+    },
+    "Drinks": {
+        "Coffee": {
+            "16":{"name":"coffee beans"}
+        },
+        "Tea": {
+            "17":{"name":"green Tea"}
+        },
+        "Water": {
+            "17":{"name":"bottle water"},
+            "18":{"name":"bottle water"}
+        },
+        "Juice": {
+            "19":{"name":"apple juice"},
+            "20":{"name":"apple juice"}
+        },
+        "Sports and Energy Drinks": {
+            "21":{"name":"EnergyX"}
+        }
+    },
+    "Frozen Food": {
+        "Meals": {
+            "22":{"name":"well done rice"},
+            "23":{"name":"well done rice"},
+            "24":{"name":"well done rice"}
+        },
+        "Meat": {
+            "25":{"name":"frozen beef"},
+            "26":{"name":"frozen beef"}
+        },
+        "Ice Cream": {
+            "27":{"name":"valina"},
+            "28":{"name":"valina"}
+        }
+    },
+    "Meat and Seafood": {
+        "Beef and Veal": {},
+        "Chicken and Turkey": {},
+        "Pork": {},
+        "Lamb and Goat": {},
+        "Seafood": {}
+    }
+}
