@@ -1,0 +1,173 @@
+input[type=text] {
+
+    background-color: hsl(0, 0%, 15%);
+    color: hsl(59, 83%, 82%);
+
+    font-size: 12px;
+    margin: 0px;
+    padding: 12px 24px !important;
+    border: 0px;
+}
+
+
+body{
+    background-color: dimgray;
+}
+.sortalgos {
+
+    float: relative;
+    position: fixed;
+    color: black;
+}
+
+
+
+.userimg {
+    width: 200px;
+    padding: 30px;
+}
+
+.bannerPic {
+    display: block;
+    width: 100%;
+
+    /* Add properties below */
+    height: 100%;
+
+}
+
+
+
+.itempic {
+    width: 600px;
+    height: 600px;
+    display:block;
+    align-content: center;
+    
+
+}
+
+
+
+.item {
+    float: right;
+    background-color: lightgray;
+    position: relative;
+    padding: 10px;
+    text-align: center;
+}
+
+
+
+
+
+/* Top left text */
+.infos {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  float:left;
+    padding:20px;
+    font-size: 24px;
+    color:lightgreen;
+    background-color: rgba(32,32,32,0.3);
+}
+
+.infos:hover{
+    background-color: rgba(32,32,32,1);
+}
+.panels {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  float:right;
+    font-size: 24px;
+    color:lightgoldenrodyellow;
+    
+}
+
+.panel1{
+    height:100px;
+    width:100px;
+    float:right;
+    font-size: 24px;
+    text-align: center;
+    background-color: rgba(249, 74, 117,0.6);
+}
+
+.panel1:hover{
+    background-color: rgba(249, 74, 117,1);
+}
+
+.panel2{
+    height:100px;
+    width:100px;
+    float:right;
+    font-size: 24px;
+    text-align: center;
+    background-color: rgba(0,153,153,0.6);
+}
+
+.panel2:hover{
+    background-color: rgba(0,153,153,1);
+}
+
+.panel3{
+    height:100px;
+    width:100px;
+    float:right;
+    font-size: 24px;
+    text-align: center;
+    background-color: rgba(0,102,102,0.7);
+}
+
+.panel3:hover{
+    background-color: rgba(0,102,102,1);
+}
+
+
+/* Top right text */
+.userimgholder{
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+
+.userimg{
+  border-radius: 50%;
+    width:150px;
+    height: 150px;
+}
+
+
+.userimg:hover{
+    transition: 300ms ease all;
+    transform: rotate(-180deg);
+    top:100px;
+    right:0px;
+      -webkit-filter: grayscale(1);
+  filter: grayscale(1);
+    
+    
+}
+/* Bottom right text */
+.bottom-right {
+  position: absolute;
+  bottom: 8px;
+  right: 16px;
+    
+    
+}
+
+
+.infopiece {
+    float:left;
+    clear:right;
+    
+}
+
+
+
+
+
+

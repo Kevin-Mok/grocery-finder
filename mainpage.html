@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+<title>W3.CSS Template</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" type="text/css" href="mainpage.css">
+<style>
+    body {font-family: "Lato", sans-serif}
+.mySlides {display: none}
+</style>
+
+<body>
+
+    <!-- Navbar -->
+    <div class="w3-top">
+
+
+        <div class="w3-bar w3-black w3-card" style="padding-right:200px;">
+            <a class="w3-bar-item w3-button w3-padding-large w3-hide-medium w3-hide-large w3-right" href="javascript:void(0)" onclick="myFunction()" title="Toggle Navigation Menu"><i class="fa fa-bars"></i></a>
+
+            <div class="w3-dropdown-hover w3-xlarge" style="float:right ">
+                <button class="w3-padding-large w3-button" title="More">CLASS 1</button>
+                <div class="w3-dropdown-content w3-bar-block w3-card-4">
+                    <a href="#" class="w3-bar-item w3-button w3-xlarge">CLASS 1.1</a>
+                    <a href="#" class="w3-bar-item w3-button">CLASS 1.2</a>
+                    <a href="#" class="w3-bar-item w3-button">CLASS 1.3</a>
+                </div>
+            </div>
+            <div class="w3-dropdown-hover w3-xlarge" style="float:right">
+                <button class="w3-padding-large w3-button" title="More">CLASS 2</button>
+                <div class="w3-dropdown-content w3-bar-block w3-card-4">
+                    <a href="#" class="w3-bar-item w3-button">CLASS 2.1</a>
+                    <a href="#" class="w3-bar-item w3-button">CLASS 2.2</a>
+                    <a href="#" class="w3-bar-item w3-button">CLASS 2.3</a>
+                </div>
+            </div>
+            <div class="w3-dropdown-hover w3-xlarge" style="float:right">
+                <button class="w3-padding-large w3-button" title="More">CLASS 3</button>
+                <div class="w3-dropdown-content w3-bar-block w3-card-4">
+                    <a href="#" class="w3-bar-item w3-button">CLASS 3.1</a>
+                    <a href="#" class="w3-bar-item w3-button">CLASS 3.2</a>
+                    <a href="#" class="w3-bar-item w3-button">CLASS 3.3</a>
+                </div>
+            </div>
+
+            <div class="w3-dropdown-hover w3-xlarge" style="float:right">
+                <button class="w3-padding-large w3-button" title="More">CLASS 4</button>
+                <div class="w3-dropdown-content w3-bar-block w3-card-4">
+                    <a href="#" class="w3-bar-item w3-button">CLASS 4.1</a>
+                    <a href="#" class="w3-bar-item w3-button">CLASS 4.2</a>
+                    <a href="#" class="w3-bar-item w3-button">CLASS 4.3</a>
+                </div>
+            </div>
+
+
+            <div class="w3-dropdown-hover w3-xlarge" style="float:right">
+
+                <input id="search" type="text" placeholder="anything?" class="w3-padding-large w3-hover-red w3-xlarge w3-right">
+                <a href="javascript:void(0)" class="w3-padding-large w3-hover-red w3-hide-small w3-right"><i class="fa fa-search"></i></a>
+            </div>
+
+
+
+            <div class="w3-dropdown-hover w3-xlarge w3-hover-red">
+                <img src="user.png" class="userimg" class="w3-padding-large w3-button" title="More">
+
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+
+   
+
+
+    <div id="banner">
+        <!-- Just holds the banner image, don't need to style this div. -->
+
+        <!-- Banner image goes in here -->
+        <img class="bannerPic" src="background.jpg">
+
+    </div>
+
+
+    <!-- Navbar on small screens (remove the onclick attribute if you want the navbar to always show on top of the content when clicking on the links) -->
+        <div class="w3-top" style="position:relative" style="">
+
+
+        <div class="w3-bar w3-black w3-card" style="padding-right:30%;">
+            <a class="w3-bar-item w3-button w3-padding-large w3-hide-medium w3-hide-large w3-right" href="javascript:void(0)" onclick="myFunction()" title="Toggle Navigation Menu"><i class="fa fa-bars"></i></a>
+
+            <div class="w3-dropdown-hover w3-xlarge" style="float:right; ">
+                <button class="w3-padding-large w3-button" title="More">all post</button>
+             
+            </div>
+            <div class="w3-dropdown-hover w3-xlarge" style="float:right">
+                <button class="w3-padding-large w3-button" title="More">my chart</button>
+         
+            </div>
+            <div class="w3-dropdown-hover w3-xlarge" style="float:right">
+                <button class="w3-padding-large w3-button" title="More">buyed</button>
+            </div>
+
+            <div class="w3-dropdown-hover w3-xlarge" style="float:right">
+                <button class="w3-padding-large w3-button" title="More">all user</button>
+            </div>
+
+
+            <div class="w3-dropdown-hover w3-xlarge" style="float:right">
+
+                <input id="search" type="text" placeholder="anything?" class="w3-padding-large w3-hover-red w3-xlarge w3-right">
+                <a href="javascript:void(0)" class="w3-padding-large w3-hover-red w3-hide-small w3-right"><i class="fa fa-search"></i></a>
+            </div>
+
+
+
+         
+
+        </div>
+ <div class="w3-top" style="top:150px;">
+
+        <nav class="w3-sidebar w3-bar-block w3-small w3-hide-small w3-center" style="float:right background-color:black;height:auto;width:200px;">
+            <!-- Avatar image in top left corner -->
+
+            <a href="#" class="w3-bar-item w3-button w3-padding-small w3-black w3-hover-gray">
+
+                <p>sort algo1</p>
+            </a>
+            <a href="#about" class="w3-bar-item w3-button w3-padding-small w3-black w3-hover-gray">
+                <i class="fa fa-user w3-large"></i>
+                <p>sort algo2</p>
+            </a>
+            <a href="#photos" class="w3-bar-item w3-button w3-padding-small w3-black w3-hover-gray">
+
+                <p>sort algo3</p>
+            </a>
+            <a href="#contact" class="w3-bar-item w3-button w3-padding-small w3-black w3-hover-gray">
+
+                <p>sort algo4</p>
+            </a>
+            <a href="#contact" class="w3-bar-item w3-button w3-padding-small w3-black w3-hover-gray">
+
+                <p>sort algo5</p>
+            </a>
+            <a href="#contact" class="w3-bar-item w3-button w3-padding-small w3-black w3-hover-gray">
+
+                <p>sort algo6</p>
+            </a>
+
+
+
+        </nav>
+
+
+    </div>
+
+    </div>
+    
+
+    <div class="container">
+        <div class="item">
+            <img class="itempic" src="imgs/img2.jpg" alt="something at here">
+
+            <div class="infos">
+                <div class="infopiece">$200</div>
+                <br>
+                <div class="infopiece">★★★</div>
+                <br>
+                <div class="infopiece">2019-09-02</div>
+                </div>
+            
+            <div class="panels">
+                <span class="panel1">delete</span>
+                
+                <span class="panel2">buy</span>
+                
+                <span class="panel3">add<br>chart</span>
+            </div>    
+            <div class="userimgholder">
+                <img class="userimg" src="background.jpg" alt="something at here">
+            </div>
+        </div>
+        
+        <div class="item">
+            <img class="itempic" src="imgs/img0.jpg" alt="something at here">
+
+            <div class="infos">
+                <div class="infopiece">$2734</div>
+                <br>
+                <div class="infopiece">★★★</div>
+                <br>
+                <div class="infopiece">2013-1-20</div>
+                </div>
+            
+            <div class="panels">
+                <span class="panel1">delete</span>
+                
+                <span class="panel2">buy</span>
+                
+                <span class="panel3">add<br>chart</span>
+            </div>    
+            <div class="userimgholder">
+                <img class="userimg" src="imgs/img0.jpg" alt="something at here">
+            </div>
+        </div>
+
+
+<div class="item">
+            <img class="itempic" src="imgs/img1.jpg" alt="something at here">
+
+            <div class="infos">
+                <div class="infopiece">$270</div>
+                <br>
+                <div class="infopiece">★★★★</div>
+                <br>
+                <div class="infopiece">2012-3-10</div>
+                </div>
+            
+            <div class="panels">
+                <span class="panel1">delete</span>
+                
+                <span class="panel2">buy</span>
+                
+                <span class="panel3">add<br>chart</span>
+            </div>    
+            <div class="userimgholder">
+                <img class="userimg" src="imgs/img1.jpg" alt="something at here">
+            </div>
+        </div>
+
+
+<div class="item">
+            <img class="itempic" src="imgs/img2.jpg" alt="something at here">
+
+            <div class="infos">
+                <div class="infopiece">$673</div>
+                <br>
+                <div class="infopiece">★</div>
+                <br>
+                <div class="infopiece">2017-1-27</div>
+                </div>
+            
+            <div class="panels">
+                <span class="panel1">delete</span>
+                
+                <span class="panel2">buy</span>
+                
+                <span class="panel3">add<br>chart</span>
+            </div>    
+            <div class="userimgholder">
+                <img class="userimg" src="imgs/img2.jpg" alt="something at here">
+            </div>
+        </div>
+
+
+<div class="item">
+            <img class="itempic" src="imgs/img3.jpg" alt="something at here">
+
+            <div class="infos">
+                <div class="infopiece">$513</div>
+                <br>
+                <div class="infopiece">★★★</div>
+                <br>
+                <div class="infopiece">2019-7-16</div>
+                </div>
+            
+            <div class="panels">
+                <span class="panel1">delete</span>
+                
+                <span class="panel2">buy</span>
+                
+                <span class="panel3">add<br>chart</span>
+            </div>    
+            <div class="userimgholder">
+                <img class="userimg" src="imgs/img3.jpg" alt="something at here">
+            </div>
+        </div>
+
+
+<div class="item">
+            <img class="itempic" src="imgs/img4.jpg" alt="something at here">
+
+            <div class="infos">
+                <div class="infopiece">$1652</div>
+                <br>
+                <div class="infopiece">★★★★</div>
+                <br>
+                <div class="infopiece">2013-8-12</div>
+                </div>
+            
+            <div class="panels">
+                <span class="panel1">delete</span>
+                
+                <span class="panel2">buy</span>
+                
+                <span class="panel3">add<br>chart</span>
+            </div>    
+            <div class="userimgholder">
+                <img class="userimg" src="imgs/img4.jpg" alt="something at here">
+            </div>
+        </div>
+
+
+<div class="item">
+            <img class="itempic" src="imgs/img5.jpg" alt="something at here">
+
+            <div class="infos">
+                <div class="infopiece">$2164</div>
+                <br>
+                <div class="infopiece">★★★★★</div>
+                <br>
+                <div class="infopiece">2015-7-18</div>
+                </div>
+            
+            <div class="panels">
+                <span class="panel1">delete</span>
+                
+                <span class="panel2">buy</span>
+                
+                <span class="panel3">add<br>chart</span>
+            </div>    
+            <div class="userimgholder">
+                <img class="userimg" src="imgs/img5.jpg" alt="something at here">
+            </div>
+        </div>
+
+
+<div class="item">
+            <img class="itempic" src="imgs/img6.jpg" alt="something at here">
+
+            <div class="infos">
+                <div class="infopiece">$852</div>
+                <br>
+                <div class="infopiece">★★★</div>
+                <br>
+                <div class="infopiece">2012-5-19</div>
+                </div>
+            
+            <div class="panels">
+                <span class="panel1">delete</span>
+                
+                <span class="panel2">buy</span>
+                
+                <span class="panel3">add<br>chart</span>
+            </div>    
+            <div class="userimgholder">
+                <img class="userimg" src="imgs/img6.jpg" alt="something at here">
+            </div>
+        </div>
+
+
+<div class="item">
+            <img class="itempic" src="imgs/img7.jpg" alt="something at here">
+
+            <div class="infos">
+                <div class="infopiece">$2112</div>
+                <br>
+                <div class="infopiece">★★★★★</div>
+                <br>
+                <div class="infopiece">2014-12-4</div>
+                </div>
+            
+            <div class="panels">
+                <span class="panel1">delete</span>
+                
+                <span class="panel2">buy</span>
+                
+                <span class="panel3">add<br>chart</span>
+            </div>    
+            <div class="userimgholder">
+                <img class="userimg" src="imgs/img7.jpg" alt="something at here">
+            </div>
+        </div>
+
+
+<div class="item">
+            <img class="itempic" src="imgs/img8.jpg" alt="something at here">
+
+            <div class="infos">
+                <div class="infopiece">$62</div>
+                <br>
+                <div class="infopiece">★★★★</div>
+                <br>
+                <div class="infopiece">2015-11-6</div>
+                </div>
+            
+            <div class="panels">
+                <span class="panel1">delete</span>
+                
+                <span class="panel2">buy</span>
+                
+                <span class="panel3">add<br>chart</span>
+            </div>    
+            <div class="userimgholder">
+                <img class="userimg" src="imgs/img8.jpg" alt="something at here">
+            </div>
+        </div>
+
+
+<div class="item">
+            <img class="itempic" src="imgs/img9.jpg" alt="something at here">
+
+            <div class="infos">
+                <div class="infopiece">$2500</div>
+                <br>
+                <div class="infopiece">★★★★★</div>
+                <br>
+                <div class="infopiece">2014-10-18</div>
+                </div>
+            
+            <div class="panels">
+                <span class="panel1">delete</span>
+                
+                <span class="panel2">buy</span>
+                
+                <span class="panel3">add<br>chart</span>
+            </div>    
+            <div class="userimgholder">
+                <img class="userimg" src="imgs/img9.jpg" alt="something at here">
+            </div>
+        </div>
+
+
+<div class="item">
+            <img class="itempic" src="imgs/img10.jpg" alt="something at here">
+
+            <div class="infos">
+                <div class="infopiece">$2993</div>
+                <br>
+                <div class="infopiece">★</div>
+                <br>
+                <div class="infopiece">2016-6-7</div>
+                </div>
+            
+            <div class="panels">
+                <span class="panel1">delete</span>
+                
+                <span class="panel2">buy</span>
+                
+                <span class="panel3">add<br>chart</span>
+            </div>    
+            <div class="userimgholder">
+                <img class="userimg" src="imgs/img10.jpg" alt="something at here">
+            </div>
+        </div>
+    </div>
+    
+    
+
+    <script>
+        // Automatic Slideshow - change image every 4 seconds
+        var myIndex = 0;
+        carousel();
+
+        function carousel() {
+            var i;
+            var x = document.getElementsByClassName("mySlides");
+            for (i = 0; i < x.length; i++) {
+                x[i].style.display = "none";
+            }
+            myIndex++;
+            if (myIndex > x.length) {
+                myIndex = 1
+            }
+            x[myIndex - 1].style.display = "block";
+            setTimeout(carousel, 4000);
+        }
+
+        // Used to toggle the menu on small screens when clicking on the menu button
+        function myFunction() {
+            var x = document.getElementById("navDemo");
+            if (x.className.indexOf("w3-show") == -1) {
+                x.className += " w3-show";
+            } else {
+                x.className = x.className.replace(" w3-show", "");
+            }
+        }
+
+        // When the user clicks anywhere outside of the modal, close it
+        var modal = document.getElementById('ticketModal');
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+
+    </script>
+
+</body>
+
+</html>
