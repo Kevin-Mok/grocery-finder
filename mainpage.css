@@ -22,10 +22,8 @@ body{
 
 
 
-.userimg {
-    width: 200px;
-    padding: 30px;
-}
+
+
 
 .bannerPic {
     display: block;
@@ -135,9 +133,12 @@ body{
 
 .userimg{
   border-radius: 50%;
+    padding: 20px;
     width:150px;
     height: 150px;
 }
+
+
 
 
 .userimg:hover{
