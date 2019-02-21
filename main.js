@@ -13,7 +13,7 @@ function createNewRow() {
 
 function createNewFoodDiv() {
 	const foodDiv = document.createElement('div')
-	foodDiv.className = 'item col-sm-4'
+	foodDiv.className = 'item col-sm-4 col-lg-3 col-xl-2'
 	return foodDiv
 }
 

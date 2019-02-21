@@ -1,6 +1,6 @@
 - cart
   - green check over image
     - when hovering
-  - id in element?
+    - red 'x' when already selected
   - add to cart
-  - item captions
+  - id in element for selecting?
