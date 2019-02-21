@@ -1,0 +1,50 @@
+body {
+    background-color: #66ccff;
+}
+
+.navbar-custom {
+    height: 70px;
+    background-color: black;
+}
+
+.nav-link {
+    color: white!important;
+}
+
+.pointer {
+    cursor: pointer!important;
+}
+
+#searchButton {
+    background-color: #282828;
+    border: none;
+}
+
+.hover-red:hover {
+    background-color: #ED2A2A!important;
+}
+
+#searchBar {
+    transition: background-color 0.3s ease;
+    height: 34px
+}
+
+#navDropdownList {
+    margin-right: 55px;
+}
+
+input:focus {
+    background-color: #ED2A2A!important;
+}
+
+#navCollapseBtn {
+    background-color: #282828;
+}
+
+#navCollapseIcon {
+    font-size: 28px;
+}
+
+#largeSearchForm {
+    margin-left: 45px;
+}

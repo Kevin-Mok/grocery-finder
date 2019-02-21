@@ -1,0 +1,8 @@
+- cart
+  - green check over image
+    - when hovering
+  - id in element?
+  - add to cart
+  - item captions
+- user profile/sorting in nav. bar
+- dynamically generate items
