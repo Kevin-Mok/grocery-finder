@@ -26,14 +26,14 @@
 
         <div class="collapse navbar-collapse" id="navbarsExampleDefault">
 
-            <form class="form-inline my-2 my-lg-0 d-none d-xl-block" id="searchForm">
+            <form class="form-inline my-2 my-lg-0 d-none d-xl-block" id="largeSearchForm">
                 <input class="form-control mr-sm-2 hover-red" id="searchBar" type="text" placeholder="Search">
                 <button class="btn btn-secondary my-2 my-sm-0 hover-red" id="searchButton" type="submit">
                     <i class="fa fa-search"></i>
                 </button>
             </form>
 
-            <ul class="navbar-nav ml-auto">
+            <ul class="navbar-nav ml-auto" id="navDropdownList">
 
                 <li class="nav-item order-0"><a class="nav-link pointer">All</a></li>
 
@@ -105,10 +105,10 @@
             </ul>
 
             <!-- Notice how there are two search bars/forms in this html file
-            The first search bar/form at the top is the search bar that is visible for large screens
+            The first search bar/form at the top is the search bar that is visible for large screens (#largeSearchForm)
             This search bar/form is the search bar that is visible in the dropdown, when the navbar is collapsed
             as a result of a small screen -->
-            <form class="form-inline my-2 my-lg-0 d-xl-none" id="searchForm">
+            <form class="form-inline my-2 my-lg-0 d-xl-none" id="#smallSearchForm">
                 <input class="form-control mr-sm-2 hover-red" id="searchBar" type="text" placeholder="Search">
                 <button class="btn btn-secondary my-2 my-sm-0 hover-red" id="searchButton" type="submit"><i class="fa fa-search"></i></button>
             </form>
