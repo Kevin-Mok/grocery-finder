@@ -1,5 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
+<!-- head {{{ -->
+
+<head>
 <title>W3.CSS Template</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -7,375 +10,127 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<!-- <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"> -->
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-<link rel="stylesheet" type="text/css" href="mainpage.css">
-<style>
-    body {font-family: "Lato", sans-serif}
-.mySlides {display: none}
-</style>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+<link rel="stylesheet" type="text/css" href="main.css">
+</head>
+
+<!-- }}} head -->
 
 <body>
 
-    <!-- nav-bar {{{ -->
+    <!-- navbar {{{ -->
     
-    <div class="w3-top" style="left:150px;">
-
-
-        <div class="w3-bar w3-black w3-card" style="padding-right:300px; height: 75px;">
-            <a class="w3-bar-item w3-button w3-padding-large w3-hide-medium w3-hide-large w3-right" href="javascript:void(0)" onclick="myFunction()" title="Toggle Navigation Menu"><i class="fa fa-bars"></i></a>
-
-            <div class="w3-dropdown-hover w3-xlarge" style="float:right;">
-                <button class="w3-padding-large w3-button" title="More" style="height: 75px;font-size:20px;">Fruits and Vegetables</button>
-                <div class="w3-dropdown-content w3-bar-block w3-card-4">
-
-
-                    <a href="#" class="w3-bar-item w3-button w3-xlarge">All</a>
-
-                    <a href="#" class="w3-bar-item w3-button w3-xlarge">Fruits</a>
-
-                    <a href="#" class="w3-bar-item w3-button w3-xlarge">Vegetables</a>
-
-                    <a href="#" class="w3-bar-item w3-button w3-xlarge">Fresh Cut Fruits and Vegetables</a>
-
-                    <a href="#" class="w3-bar-item w3-button w3-xlarge">Dried Nuts</a>
-
-                    <a href="#" class="w3-bar-item w3-button w3-xlarge">Ethnic Vegetables</a>
-
-
-                </div>
-            </div>
-
-
-
-            <div class="w3-dropdown-hover w3-xlarge" style="float:right;">
-                <button class="w3-padding-large w3-button" title="More" style="height: 75px;font-size:20px;">Bakery</button>
-                <div class="w3-dropdown-content w3-bar-block w3-card-4">
-
-
-                    <a href="#" class="w3-bar-item w3-button w3-xlarge">Fresh Bread</a>
-
-                    <a href="#" class="w3-bar-item w3-button w3-xlarge">Cakes</a>
-
-                    <a href="#" class="w3-bar-item w3-button w3-xlarge">Pastries</a>
-
-                    <a href="#" class="w3-bar-item w3-button w3-xlarge">Brownies</a>
-
-                    <a href="#" class="w3-bar-item w3-button w3-xlarge">Cookies</a>
-
-
-                </div>
-            </div>
-
-
-
-            <div class="w3-dropdown-hover w3-xlarge" style="float:right;">
-                <button class="w3-padding-large w3-button" title="More" style="height: 75px;font-size:20px;">Dairy and Eggs</button>
-                <div class="w3-dropdown-content w3-bar-block w3-card-4">
-
-
-                    <a href="#" class="w3-bar-item w3-button w3-xlarge">Milk</a>
-
-                    <a href="#" class="w3-bar-item w3-button w3-xlarge">Cheese</a>
-
-                    <a href="#" class="w3-bar-item w3-button w3-xlarge">Yogurt</a>
-
-                    <a href="#" class="w3-bar-item w3-button w3-xlarge">Butter and Spreads</a>
-
-                    <a href="#" class="w3-bar-item w3-button w3-xlarge">Desserts</a>
-
-
-                </div>
-            </div>
-
-
-
-            <div class="w3-dropdown-hover w3-xlarge" style="float:right;">
-                <button class="w3-padding-large w3-button" title="More" style="height: 75px;font-size:20px;">Drinks</button>
-                <div class="w3-dropdown-content w3-bar-block w3-card-4">
-
-
-                    <a href="#" class="w3-bar-item w3-button w3-xlarge">Coffee</a>
-
-                    <a href="#" class="w3-bar-item w3-button w3-xlarge">Tea</a>
-
-                    <a href="#" class="w3-bar-item w3-button w3-xlarge">Water</a>
-
-                    <a href="#" class="w3-bar-item w3-button w3-xlarge">Juice</a>
-
-                    <a href="#" class="w3-bar-item w3-button w3-xlarge">Sports and Energy Drinks</a>
-
-
-                </div>
-            </div>
-
-
-
-            <div class="w3-dropdown-hover w3-xlarge" style="float:right;">
-                <button class="w3-padding-large w3-button" title="More" style="height: 75px;font-size:20px;">Frozen Food</button>
-                <div class="w3-dropdown-content w3-bar-block w3-card-4">
-
-
-                    <a href="#" class="w3-bar-item w3-button w3-xlarge">Meals</a>
-
-                    <a href="#" class="w3-bar-item w3-button w3-xlarge">Meat</a>
-
-                    <a href="#" class="w3-bar-item w3-button w3-xlarge">Ice Cream</a>
-
-
-                </div>
-            </div>
-
-
-
-            <div class="w3-dropdown-hover w3-xlarge" style="float:right;">
-                <button class="w3-padding-large w3-button" title="More" style="height: 75px;font-size:20px;">Meat and Seafood</button>
-                <div class="w3-dropdown-content w3-bar-block w3-card-4">
-
-
-                    <a href="#" class="w3-bar-item w3-button w3-xlarge">Beef and Veal</a>
-
-                    <a href="#" class="w3-bar-item w3-button w3-xlarge">Chicken and Turkey</a>
-
-                    <a href="#" class="w3-bar-item w3-button w3-xlarge">Pork</a>
-
-                    <a href="#" class="w3-bar-item w3-button w3-xlarge">Lamb and Goat</a>
-
-                    <a href="#" class="w3-bar-item w3-button w3-xlarge">Seafood</a>
-
-
-                </div>
-            </div>
-
-            <div class="w3-dropdown-hover w3-xlarge" style="float:right">
-                <button class="w3-padding-large w3-button" title="More" style="height:  75px; font-size:20px;">ALL</button>
-
-            </div>
-
-
-            <div class="w3-dropdown-hover w3-xlarge" style="float:right">
-
-                <input id="search" type="text" placeholder="anything?" class="w3-padding-large w3-hover-red w3-xlarge w3-right" style="height: 75px;">
-                <a href="javascript:void(0)" class="w3-padding-large w3-hover-red w3-hide-small w3-right"><i class="fa fa-search" style="height: 75px; align-items: center"></i></a>
-            </div>
-
-
-
-
-
+    <nav class="navbar navbar-expand-xl fixed-top navbar-custom">
+        <button class="navbar-toggler" id="navCollapseBtn" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault">
+          <span class="navbar-toggler-icon">
+              <i class="fas fa-bars" id="navCollapseIcon"></i>
+          </span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+
+            <form class="form-inline my-2 my-lg-0 d-none d-xl-block" id="largeSearchForm">
+                <input class="form-control mr-sm-2 hover-red" id="searchBar" type="text" placeholder="Search">
+                <button class="btn btn-secondary my-2 my-sm-0 hover-red" id="searchButton" type="submit">
+                    <i class="fa fa-search"></i>
+                </button>
+            </form>
+
+            <ul class="navbar-nav ml-auto" id="navDropdownList">
+
+                <li class="nav-item order-0"><a class="nav-link pointer">All</a></li>
+
+                <li class="nav-item dropdown pointer">
+                    <a class="nav-link dropdown-toggle" data-toggle="dropdown">Meat and Seafood</a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item pointer">Beef and Veal</a>
+                        <a class="dropdown-item pointer">Chicken and Turkey</a>
+                        <a class="dropdown-item pointer">Pork</a>
+                        <a class="dropdown-item pointer">Lamb and Goat</a>
+                        <a class="dropdown-item pointer">Seafood</a>
+                    </div>
+                </li>
+
+                <li class="nav-item dropdown pointer">
+                    <a class="nav-link dropdown-toggle" data-toggle="dropdown">Frozen Food</a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item pointer">Meals</a>
+                        <a class="dropdown-item pointer">Meat</a>
+                        <a class="dropdown-item pointer">Ice Cream</a>
+                    </div>
+                </li>
+
+                <li class="nav-item dropdown pointer">
+                    <a class="nav-link dropdown-toggle" data-toggle="dropdown">Drinks</a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item pointer">Coffee</a>
+                        <a class="dropdown-item pointer">Tea</a>
+                        <a class="dropdown-item pointer">Water</a>
+                        <a class="dropdown-item pointer">Juice</a>
+                        <a class="dropdown-item pointer">Sports and Energy Drinks</a>
+                    </div>
+                </li>
+
+                <li class="nav-item dropdown pointer">
+                    <a class="nav-link dropdown-toggle" data-toggle="dropdown">Dairy and Eggs</a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item pointer">Milk</a>
+                        <a class="dropdown-item pointer">Cheese</a>
+                        <a class="dropdown-item pointer">Yogurt</a>
+                        <a class="dropdown-item pointer">Butter and Spreads</a>
+                        <a class="dropdown-item pointer">Desserts</a>
+                    </div>
+                </li>
+
+                <li class="nav-item dropdown pointer">
+                    <a class="nav-link dropdown-toggle" data-toggle="dropdown">Fruits and Vegetables</a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item pointer">All</a>
+                        <a class="dropdown-item pointer">Fruits</a>
+                        <a class="dropdown-item pointer">Vegetables</a>
+                        <a class="dropdown-item pointer">Fresh Cut Fruits and Vegetables</a>
+                        <a class="dropdown-item pointer">Dried Nuts</a>
+                        <a class="dropdown-item pointer">Ethnic Vegetables</a>
+                    </div>
+                </li>
+
+                <li class="nav-item dropdown pointer">
+                    <a class="nav-link dropdown-toggle" data-toggle="dropdown">Bakery</a>
+                    <div class="dropdown-menu pointer">
+                        <a class="dropdown-item pointer">Fresh Bread</a>
+                        <a class="dropdown-item pointer">Cakes</a>
+                        <a class="dropdown-item pointer">Pastries</a>
+                        <a class="dropdown-item pointer">Brownies</a>
+                        <a class="dropdown-item pointer">Cookies</a>
+                    </div>
+                </li>
+
+            </ul>
+
+            <!-- Notice how there are two search bars/forms in this html file
+            The first search bar/form at the top is the search bar that is visible for large screens (#largeSearchForm)
+            This search bar/form is the search bar that is visible in the dropdown, when the navbar is collapsed
+            as a result of a small screen -->
+            <form class="form-inline my-2 my-lg-0 d-xl-none" id="#smallSearchForm">
+                <input class="form-control mr-sm-2 hover-red" id="searchBar" type="text" placeholder="Search">
+                <button class="btn btn-secondary my-2 my-sm-0 hover-red" id="searchButton" type="submit"><i class="fa fa-search"></i></button>
+            </form>
         </div>
-
-
-    </div>
+    </nav>
     
-    <!-- }}} nav-bar -->
-
-    <div>
-        <div class="w3-dropdown-hover w3-xlarge w3-hover-red" style="position: fixed; top:0px; z-index: 99">
-            <img src="user.png" class="userimg" title="More">
-        </div>
-
-    </div>
-
-
-    <!-- <div id="banner"> -->
-        <!-- <img class="bannerPic" src="background.jpg"> -->
-    <!-- </div> -->
-
-    <!-- Navbar on small screens (remove the onclick attribute if you want the navbar to always show on top of the content when clicking on the links) -->
-    <div class="w3-top" style="position:relative">
-
-    <!-- small nav-bar {{{ -->
-    
-        <div class="w3-bar w3-black w3-card" style="padding-right:30%;">
-            <a class="w3-bar-item w3-button w3-padding-large w3-hide-medium w3-hide-large w3-right" href="javascript:void(0)" onclick="myFunction()" title="Toggle Navigation Menu"><i class="fa fa-bars"></i></a>
-
-            <div class="w3-dropdown-hover w3-xlarge" style="float:right; ">
-                <button class="w3-padding-large w3-button" title="More">all post</button>
-
-            </div>
-            <div class="w3-dropdown-hover w3-xlarge" style="float:right">
-                <button class="w3-padding-large w3-button" title="More">my chart</button>
-
-            </div>
-            <div class="w3-dropdown-hover w3-xlarge" style="float:right">
-                <button class="w3-padding-large w3-button" title="More">buyed</button>
-            </div>
-
-            <div class="w3-dropdown-hover w3-xlarge" style="float:right">
-                <button class="w3-padding-large w3-button" title="More">all user</button>
-            </div>
-
-
-            <div class="w3-dropdown-hover w3-xlarge" style="float:right">
-
-                <input id="search" type="text" placeholder="anything?" class="w3-padding-large w3-hover-red w3-xlarge w3-right">
-                <a href="javascript:void(0)" class="w3-padding-large w3-hover-red w3-hide-small w3-right"><i class="fa fa-search"></i></a>
-            </div>
-
-
-
-
-
-        </div>
-    
-    <!-- }}} small nav-bar -->
-
-        <!-- sorting {{{ -->
-        
-        <div class="w3-top" style="top:150px;">
-
-            <nav class="w3-sidebar w3-bar-block w3-small w3-hide-small w3-center" style="float:right background-color:black;height:auto;width:150px;">
-                <!-- Avatar image in top left corner -->
-
-                <a href="#" class="w3-bar-item w3-button w3-padding-small w3-black w3-hover-gray">
-
-                    <p>Random</p>
-                </a>
-                <a href="#about" class="w3-bar-item w3-button w3-padding-small w3-black w3-hover-gray">
-                    <i class="fa fa-user w3-large"></i>
-                    <p>Price: low -> high</p>
-                </a>
-                <a href="#photos" class="w3-bar-item w3-button w3-padding-small w3-black w3-hover-gray">
-
-                    <p>Price: high -> low</p>
-                </a>
-                <a href="#contact" class="w3-bar-item w3-button w3-padding-small w3-black w3-hover-gray">
-
-                    <p>Custom Rate</p>
-                </a>
-                <a href="#contact" class="w3-bar-item w3-button w3-padding-small w3-black w3-hover-gray">
-
-                    <p>Distance</p>
-                </a>
-
-
-
-            </nav>
-
-
-        </div>
-        
-        <!-- }}} sorting -->
-
-    </div>
-
+    <!-- }}} navbar -->
 
     <div class="container">
       <div class="row">
-        
-        <!-- item {{{ -->
-        
-        <div class="item">
-            <img class="itempic" src="imgs/img2.jpg" alt="something at here">
-
-            <div class="infos">
-                <div class="infopiece">$200</div>
-                <br>
-                <div class="infopiece">★★★</div>
-                <br>
-                <div class="infopiece">2019-09-02</div>
-            </div>
-
-            <div class="panels">
-                <span class="panel1">delete</span>
-
-                <span class="panel2">buy</span>
-
-                <span class="panel3">add<br>chart</span>
-            </div>
-            <div class="userimgholder">
-                <img class="userimg" src="background.jpg" alt="something at here">
-            </div>
-        </div>
-        
-        <!-- }}} item -->
-
-        <!-- item {{{ -->
-        
-        <div class="item">
-            <img class="itempic" src="imgs/img2.jpg" alt="something at here">
-
-            <div class="infos">
-                <div class="infopiece">$200</div>
-                <br>
-                <div class="infopiece">★★★</div>
-                <br>
-                <div class="infopiece">2019-09-02</div>
-            </div>
-
-            <div class="panels">
-                <span class="panel1">delete</span>
-
-                <span class="panel2">buy</span>
-
-                <span class="panel3">add<br>chart</span>
-            </div>
-            <div class="userimgholder">
-                <img class="userimg" src="background.jpg" alt="something at here">
-            </div>
-        </div>
-        
-        <!-- }}} item -->
-
-        <!-- item {{{ -->
-        
-        <div class="item">
-            <img class="itempic" src="imgs/img2.jpg" alt="something at here">
-
-            <div class="infos">
-                <div class="infopiece">$200</div>
-                <br>
-                <div class="infopiece">★★★</div>
-                <br>
-                <div class="infopiece">2019-09-02</div>
-            </div>
-
-            <div class="panels">
-                <span class="panel1">delete</span>
-
-                <span class="panel2">buy</span>
-
-                <span class="panel3">add<br>chart</span>
-            </div>
-            <div class="userimgholder">
-                <img class="userimg" src="background.jpg" alt="something at here">
-            </div>
-        </div>
-        
-        <!-- }}} item -->
-
-        <!-- item {{{ -->
-        
-        <div class="item">
-            <img class="itempic" src="imgs/img2.jpg" alt="something at here">
-
-            <div class="infos">
-                <div class="infopiece">$200</div>
-                <br>
-                <div class="infopiece">★★★</div>
-                <br>
-                <div class="infopiece">2019-09-02</div>
-            </div>
-
-            <div class="panels">
-                <span class="panel1">delete</span>
-
-                <span class="panel2">buy</span>
-
-                <span class="panel3">add<br>chart</span>
-            </div>
-            <div class="userimgholder">
-                <img class="userimg" src="background.jpg" alt="something at here">
-            </div>
-        </div>
-        
-        <!-- }}} item -->
-
       </div>
     </div>
 
-    <script type='text/javascript' src='mainpage.js'></script>
+    <script type='text/javascript' src='main.js'></script>
 </body>
 
 </html>
