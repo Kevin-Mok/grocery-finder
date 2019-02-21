@@ -15,18 +15,30 @@ function createNewFoodDiv() {
 	return foodDiv
 }
 
+function createNewCheckIcon() {
+	const checkIcon = document.createElement('i')
+	checkIcon.className = "check-icon far fa-check-circle fa-7x"
+	checkIcon.style.display = 'none'
+	return checkIcon
+}
+
 function displayCheckOnFood(e) {
-	if (e.target.classList.contains('food-img')) {
-		const foodDiv = e.target.parentElement
-		// log(foodDiv)
-		const checkIcon = document.createElement('i')
-		checkIcon.className = "check-icon far fa-check-circle"
-		foodDiv.appendChild(checkIcon)
+	const foodDiv = e.target.parentElement
+	if (foodDiv.classList.contains('food-div')) {
+		foodDiv.querySelector('.check-icon').style.display = 'inline'
+	}
+}
+
+function hideCheckOnFood(e) {
+	const foodDiv = e.target.parentElement
+	if (foodDiv.classList.contains('food-div')) {
+		foodDiv.querySelector('.check-icon').style.display = 'none'
 	}
 }
 
 const foodGridDiv = document.querySelector('#food-grid')
 foodGridDiv.addEventListener('mouseover', displayCheckOnFood);
+foodGridDiv.addEventListener('mouseout', hideCheckOnFood);
 
 const fruits = {"1":{"name":"Red Apple","store_name":"storeA","img":"imgs/apples.jpg","price":189},"2":{"name":"Yellow Lemon","store_name":"storeC","img":"imgs/lemon.jpg","price":192},"3":{"name":"Green Lemon","store_name":"storeC","img":"imgs/green-lemon.jpg","price":68},"4":{"name":"Green Apple","store_name":"storeC","img":"imgs/green-apple.jpg","price":159},"5":{"name":"Waterlemon","store_name":"storeA","img":"","price":196}}
 
@@ -40,6 +52,7 @@ Object.keys(fruits).forEach(function(key, index) {
 	foodImg.src = fruits[key]["img"]
 	foodImg.className = 'food-img'
 	foodDiv.appendChild(foodImg)
+	foodDiv.appendChild(createNewCheckIcon())
 	curRow.appendChild(foodDiv)
 })
 

@@ -1,6 +1,4 @@
 - cart
-  - remove when mouse off
-  - make check green
   - permanent check when clicked
     - red 'x' when already selected and hovering
   - add to cart
