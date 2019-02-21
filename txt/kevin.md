@@ -1,6 +1,7 @@
 - cart
-  - green check over image
-    - when hovering
-    - red 'x' when already selected
+  - remove when mouse off
+  - make check green
+  - permanent check when clicked
+    - red 'x' when already selected and hovering
   - add to cart
   - id in element for selecting?
