@@ -3,13 +3,13 @@
 <!-- head {{{ -->
 
 <head>
-<title>W3.CSS Template</title>
+<title>Grocery Finder</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script type="text/javascript" src="http://livejs.com/live.js"></script>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 <!-- <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"> -->
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
@@ -26,7 +26,7 @@
     <div class="container">
     <!-- navbar {{{ -->
     
-    <nav class="navbar navbar-expand-xl fixed-top navbar-custom">
+    <nav class="navbar navbar-expand-lg fixed-top navbar-custom">
         <button class="navbar-toggler" id="navCollapseBtn" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault">
           <span class="navbar-toggler-icon">
               <i class="fas fa-bars" id="navCollapseIcon"></i>
@@ -35,19 +35,29 @@
 
         <div class="collapse navbar-collapse" id="navbarsExampleDefault">
 
-            <form class="form-inline my-2 my-lg-0 d-none d-xl-block" id="largeSearchForm">
+            <i class="fas fa-user-circle fa-2x"></i>
+
+            <form class="form-inline my-2 my-lg-0 d-none d-xl-block ml-auto" id="largeSearchForm">
                 <input class="form-control mr-sm-2 hover-red" id="searchBar" type="text" placeholder="Search">
                 <button class="btn btn-secondary my-2 my-sm-0 hover-red" id="searchButton" type="submit">
                     <i class="fa fa-search"></i>
                 </button>
             </form>
 
-            <ul class="navbar-nav ml-auto" id="navDropdownList">
+            <ul class="navbar-nav" id="navDropdownList">
+
+                <li class="nav-item dropdown pointer" id="sort-options">
+                    <a class="nav-link dropdown-toggle"
+                      data-toggle="dropdown"><i class="fas fa-sort-alpha-down"></i></a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item pointer"><i class="fas fa-sort-alpha-up"></i></a>
+                    </div>
+                </li>
 
                 <li class="nav-item order-0"><a class="nav-link pointer">All</a></li>
 
                 <li class="nav-item dropdown pointer">
-                    <a class="nav-link dropdown-toggle" data-toggle="dropdown">Meat and Seafood</a>
+                    <a class="nav-link dropdown-toggle" data-toggle="dropdown">Meat</a>
                     <div class="dropdown-menu">
                         <a class="dropdown-item pointer">Beef and Veal</a>
                         <a class="dropdown-item pointer">Chicken and Turkey</a>
@@ -58,7 +68,7 @@
                 </li>
 
                 <li class="nav-item dropdown pointer">
-                    <a class="nav-link dropdown-toggle" data-toggle="dropdown">Frozen Food</a>
+                    <a class="nav-link dropdown-toggle" data-toggle="dropdown">Frozen</a>
                     <div class="dropdown-menu">
                         <a class="dropdown-item pointer">Meals</a>
                         <a class="dropdown-item pointer">Meat</a>
@@ -78,7 +88,7 @@
                 </li>
 
                 <li class="nav-item dropdown pointer">
-                    <a class="nav-link dropdown-toggle" data-toggle="dropdown">Dairy and Eggs</a>
+                    <a class="nav-link dropdown-toggle" data-toggle="dropdown">Dairy</a>
                     <div class="dropdown-menu">
                         <a class="dropdown-item pointer">Milk</a>
                         <a class="dropdown-item pointer">Cheese</a>
@@ -89,7 +99,8 @@
                 </li>
 
                 <li class="nav-item dropdown pointer">
-                    <a class="nav-link dropdown-toggle" data-toggle="dropdown">Fruits and Vegetables</a>
+                    <a class="nav-link dropdown-toggle"
+                      data-toggle="dropdown">Produce</a>
                     <div class="dropdown-menu">
                         <a class="dropdown-item pointer">All</a>
                         <a class="dropdown-item pointer">Fruits</a>

@@ -26,7 +26,6 @@ Object.keys(fruits).forEach(function(key, index) {
 	const foodDiv = createNewFoodDiv()
 	const foodImg = document.createElement('img')
 	foodImg.src = fruits[key]["img"]
-	log(foodImg)
 	foodDiv.appendChild(foodImg)
 	curRow.appendChild(foodDiv)
 })
