@@ -1,3 +1,5 @@
+/* harry {{{ */
+
 input[type=text] {
 
     background-color: hsl(0, 0%, 15%);
@@ -10,9 +12,6 @@ input[type=text] {
 }
 
 
-body{
-    background-color: dimgray;
-}
 .sortalgos {
 
     float: relative;
@@ -20,32 +19,8 @@ body{
     color: black;
 }
 
-.bannerPic {
-    display: block;
-    width: 100%;
-
-    /* Add properties below */
-    height: 100%;
-
-}
-
-.itempic {
-    /* width: 600px; */
-    /* height: 600px; */
-    width: 100%;
-    /* height: 100%; */
-    /* display:block; */
-    align-content: center;
-    
-
-}
-
-.item {
-    /* float: right; */
-    /* background-color: lightgray; */
-    /* position: relative; */
-    /* padding: 10px; */
-    /* text-align: center; */
+#food-grid {
+  /* margin-top:  */
 }
 
 /* Top left text */
@@ -157,10 +132,26 @@ body{
     
 }
 
+/* }}} harry */
+
+body{
+  padding-top: 3em;
+  background-color: grey;
+}
+
+#food-grid {
+  margin-top: 3em;
+}
+
+#food-grid img {
+  width: 100%;
+}
+
 /* navbar {{{ */
 
 .navbar-custom {
-    height: 70px;
+    /* height: 70px; */
+    height: 3em;
     background-color: black;
 }
 
