@@ -1,5 +1,4 @@
 - cart
-  - permanent check when clicked
-    - red 'x' when already selected and hovering
+  - add Sass example to issue
   - add to cart
   - id in element for selecting?

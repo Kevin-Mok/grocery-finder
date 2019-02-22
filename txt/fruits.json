@@ -24,9 +24,9 @@
 		"price": 159
 	},
 	"5": {
-		"name": "Waterlemon",
+		"name": "Cherries",
 		"store_name": "storeA",
-		"img": "",
+		"img": "imgs/cherries.jpg",
 		"price": 196
 	}
 }

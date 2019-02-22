@@ -139,6 +139,13 @@ body{
   background-color: grey;
 }
 
+@mixin center-rel-parent() {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate( -50%, -50% );
+}
+
 #food-grid {
   margin-top: 3em;
 
@@ -154,12 +161,15 @@ body{
   }
 
   .check-icon {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate( -50%, -50% );
+    @include center-rel-parent();
     // color: green;
     color: #00ff33;
+    opacity: .7;
+  }
+
+  .remove-icon {
+    @include center-rel-parent();
+    color: red;
     opacity: .7;
   }
 }

@@ -1,6 +1,6 @@
 const log = console.log
 
-// fxn's/vars {{{ //
+// return elem fxn's {{{ //
 
 function createNewRow() {
 	const curRow = document.createElement('div')
@@ -22,30 +22,65 @@ function createNewCheckIcon() {
 	return checkIcon
 }
 
-function displayCheckOnFood(e) {
+function createNewRemoveIcon() {
+	const removeIcon = document.createElement('i')
+	removeIcon.className = "remove-icon far fa-times-circle fa-7x"
+	removeIcon.style.display = 'none'
+	return removeIcon
+}
+
+// }}} return elem fxn's //
+
+// show/hide checks {{{ //
+
+function showIconsOnFood(e) {
+	// log(e)
 	const foodDiv = e.target.parentElement
 	if (foodDiv.classList.contains('food-div')) {
-		foodDiv.querySelector('.check-icon').style.display = 'inline'
+		if (e.type == 'mouseover') {
+			if (foodDiv.classList.contains('in-cart')) {
+				// if in cart, hide check and show remove
+				foodDiv.querySelector('.check-icon').style.display = 'none'
+				foodDiv.querySelector('.remove-icon').style.display = 'inline'
+			} else {
+				// else, just show check
+				foodDiv.querySelector('.check-icon').style.display = 'inline'
+			}
+		} else if (e.type == 'mouseout') {
+			if (foodDiv.classList.contains('in-cart')) {
+				foodDiv.querySelector('.check-icon').style.display = 'inline'
+			} else {
+				foodDiv.querySelector('.check-icon').style.display = 'none'
+			}
+			// always hide remove after mouseout
+			foodDiv.querySelector('.remove-icon').style.display = 'none'
+		}
 	}
 }
 
-function hideCheckOnFood(e) {
+function addFoodToCart(e) {
 	const foodDiv = e.target.parentElement
-	if (foodDiv.classList.contains('food-div')) {
-		foodDiv.querySelector('.check-icon').style.display = 'none'
+	if (foodDiv.classList.contains('food-div') && !foodDiv.classList.contains('in-cart')) {
+		foodDiv.classList.add('in-cart')
+	} else {
+		foodDiv.classList.remove('in-cart')
 	}
 }
 
 const foodGridDiv = document.querySelector('#food-grid')
-foodGridDiv.addEventListener('mouseover', displayCheckOnFood);
-foodGridDiv.addEventListener('mouseout', hideCheckOnFood);
+foodGridDiv.addEventListener('mouseover', showIconsOnFood);
+foodGridDiv.addEventListener('mouseout', showIconsOnFood);
+foodGridDiv.addEventListener('click', addFoodToCart);
 
-const fruits = {"1":{"name":"Red Apple","store_name":"storeA","img":"imgs/apples.jpg","price":189},"2":{"name":"Yellow Lemon","store_name":"storeC","img":"imgs/lemon.jpg","price":192},"3":{"name":"Green Lemon","store_name":"storeC","img":"imgs/green-lemon.jpg","price":68},"4":{"name":"Green Apple","store_name":"storeC","img":"imgs/green-apple.jpg","price":159},"5":{"name":"Waterlemon","store_name":"storeA","img":"","price":196}}
+// }}} show/hide checks //
 
-// }}} fxn's/vars //
+// add food to row {{{ //
+
+const fruits = {"1":{"name":"Red Apple","store_name":"storeA","img":"imgs/apples.jpg","price":189},"2":{"name":"Yellow Lemon","store_name":"storeC","img":"imgs/lemon.jpg","price":192},"3":{"name":"Green Lemon","store_name":"storeC","img":"imgs/green-lemon.jpg","price":68},"4":{"name":"Green Apple","store_name":"storeC","img":"imgs/green-apple.jpg","price":159},"5":{"name":"Cherries","store_name":"storeA","img":"imgs/cherries.jpg","price":196}}
 
 let curRow = createNewRow()
 foodGridDiv.appendChild(curRow)
+
 Object.keys(fruits).forEach(function(key, index) {
 	const foodDiv = createNewFoodDiv()
 	const foodImg = document.createElement('img')
@@ -53,8 +88,11 @@ Object.keys(fruits).forEach(function(key, index) {
 	foodImg.className = 'food-img'
 	foodDiv.appendChild(foodImg)
 	foodDiv.appendChild(createNewCheckIcon())
+	foodDiv.appendChild(createNewRemoveIcon())
 	curRow.appendChild(foodDiv)
 })
+
+// }}} add food to row //
 
 // navbar search {{{ //
 
