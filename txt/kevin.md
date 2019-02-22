@@ -1,1 +1,2 @@
-- display cart/items
+- display cart
+- food name labels

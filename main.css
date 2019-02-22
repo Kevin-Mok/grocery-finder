@@ -126,6 +126,12 @@ body {
 #food-grid {
   margin-top: 3em;
 }
+#food-grid #category-instructions {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
 #food-grid .food-div {
   position: relative;
 }

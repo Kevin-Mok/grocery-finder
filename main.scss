@@ -149,6 +149,10 @@ body{
 #food-grid {
   margin-top: 3em;
 
+  #category-instructions {
+    @include center-rel-parent();
+  }
+
   .food-div {
     position: relative;
   }

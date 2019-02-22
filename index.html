@@ -49,6 +49,7 @@
 
             <ul class="navbar-nav" id="category-list">
 
+                <!-- TODO: move this outside -->
                 <li class="nav-item dropdown pointer" id="sort-options">
                     <a class="nav-link dropdown-toggle"
                       data-toggle="dropdown"><i class="fas fa-sort-alpha-down"></i></a>
@@ -57,7 +58,9 @@
                     </div>
                 </li>
 
-                <li class="nav-item order-0"><a class="nav-link pointer">All</a></li>
+                <li class="nav-item order-0">
+                  <a class="nav-link pointer" id="all-items">All</a>
+                </li>
 
             </ul>
 
@@ -75,6 +78,7 @@
     <!-- }}} navbar -->
 
     <div id="food-grid">
+      <p class="text-center" id="category-instructions">Select a category to begin adding items to your cart.</p>
     </div>
 
     </div>

@@ -46,8 +46,9 @@ function createFoodCategory(name) {
 
 	foodCategory.appendChild(categoryLabel)
 	foodCategory.appendChild(dropdown)
+
 	const allSubCategory = createFoodSubcategory('All')
-	allSubCategory.id = name.toLowerCase() + '-dropdown-item'
+	allSubCategory.id = name.toLowerCase() + '-items'
 	addSubToCategory(foodCategory, allSubCategory)
 
 	return foodCategory
@@ -56,7 +57,6 @@ function createFoodCategory(name) {
 function createFoodSubcategory(name) {
 	const subcategory = document.createElement('a')
 	subcategory.className = 'dropdown-item pointer'
-	subcategory.id = name.toLowerCase() + '-dropdown-item'
 	subcategory.setAttribute('data-toggle', 'dropdown')
 	subcategory.textContent = name
 
@@ -122,8 +122,9 @@ foodGrid.addEventListener('click', toggleFoodCartStatus);
 // food data (phase 1) {{{ //
 
 const fruits = {"1":{"name":"Red Apple","store_name":"storeA","img":"imgs/apples.jpg","price":189},"2":{"name":"Yellow Lemon","store_name":"storeC","img":"imgs/lemon.jpg","price":192},"3":{"name":"Green Lemon","store_name":"storeC","img":"imgs/green-lemon.jpg","price":68},"4":{"name":"Green Apple","store_name":"storeC","img":"imgs/green-apple.jpg","price":159},"5":{"name":"Cherries","store_name":"storeA","img":"imgs/cherries.jpg","price":196}}
-
 const vegetables = {"11":{"name":"Carrots","store_name":"storeA","img":"imgs/carrots.jpg","price":189},"12":{"name":"Broccoli","store_name":"storeC","img":"imgs/broccoli.jpg","price":192},"13":{"name":"Red Bell Pepper","store_name":"storeC","img":"imgs/bell-pepper-red.jpg","price":68},"14":{"name":"Eggplant","store_name":"storeC","img":"imgs/eggplant.jpg","price":159},"15":{"name":"Zucchini","store_name":"storeA","img":"imgs/zucchini.jpg","price":196}}
+const produce = Object.assign({}, fruits, vegetables)
+const all = Object.assign({}, produce)
 
 function createFoodCategories(categories) {
 	Object.keys(categories).forEach(function(key) {
@@ -140,6 +141,7 @@ createFoodCategories(categories)
 
 // }}} food data //
 
+// TODO: transition in //
 function displayFood(foodDict) {//{{{
 	foodGrid.innerHTML = ''
 	let curRow = createNewRow()
@@ -158,8 +160,22 @@ function displayFood(foodDict) {//{{{
 	})
 }//}}}
 
+function changeCategory(e) {
+	// log(e)
+	if (e.target.id == 'all-items') {
+		displayFood(all)
+	} else if (e.target.classList.contains('dropdown-item')) {
+		let foodCategoryName = e.target.textContent.toLowerCase()
+		if (foodCategoryName == 'all') {
+			foodCategoryName = /(\w*)-*/g.exec(e.target.id)[1]
+		}
+		eval('displayFood(' + foodCategoryName +')')
+	}
+}
+
+categoryList.addEventListener('click', changeCategory, true)
 // displayFood(fruits)
-displayFood(vegetables)
+// displayFood(vegetables)
 
 // navbar search {{{ //
 
