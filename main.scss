@@ -146,6 +146,13 @@ body{
   transform: translate( -50%, -50% );
 }
 
+@mixin rel-parent($from-left, $from-top) {
+  position: absolute;
+  left: $from-left;
+  top: $from-top;
+  transform: translate( -$from-left, -$from-top );
+}
+
 #food-grid {
   margin-top: 3em;
 
@@ -155,6 +162,7 @@ body{
 
   .food-div {
     position: relative;
+    margin-bottom: 3rem;
   }
 
   .food-img {
@@ -162,6 +170,14 @@ body{
     height: 100%;
     /* object-fit: none; */
     object-fit: cover;
+  }
+
+  .food-info {
+    @include rel-parent(0%, 100%);
+    margin-left: 15px;
+    color: white;
+    background-color: rgba(0,0,0,0.7);
+    padding: .3em;
   }
 
   .check-icon {

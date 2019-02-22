@@ -1,2 +1,3 @@
 - display cart
+  - create food dict from id's
 - food name labels
