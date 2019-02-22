@@ -1,2 +1,1 @@
-- cart
-  - display items
+- display cart/items
