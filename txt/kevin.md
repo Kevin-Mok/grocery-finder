@@ -1,3 +1,4 @@
-- display cart
-  - create food dict from id's
-- food name labels
+- convert nav dropdown hover to plain JS
+- scrape site for addresses
+  - https://www.fakeaddressgenerator.com/Canada_Real_Random_Address/index/city/Toronto
+  - calculate distance from UofT

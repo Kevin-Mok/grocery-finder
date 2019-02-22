@@ -3,86 +3,86 @@
 <!-- head {{{ -->
 
 <head>
-<title>Grocery Finder</title>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<script type="text/javascript" src="http://livejs.com/live.js"></script>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-<!-- <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"> -->
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  <title>Grocery Finder</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script type="text/javascript" src="http://livejs.com/live.js"></script>
 
-<link rel="stylesheet" type="text/css" href="main.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+
+  <!-- Bootstrap -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+
+  <link rel="stylesheet" type="text/css" href="main.css">
 </head>
 
 <!-- }}} head -->
 
 <body>
-    <div class="container-fluid">
-    <!-- navbar {{{ -->
-    
-    <nav class="navbar navbar-expand-lg fixed-top navbar-custom">
-        <button class="navbar-toggler" id="navCollapseBtn" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault">
-          <span class="navbar-toggler-icon">
-              <i class="fas fa-bars" id="navCollapseIcon"></i>
-          </span>
+  <div class="container-fluid">
+  <!-- navbar {{{ -->
+  
+  <nav class="navbar navbar-expand-lg fixed-top navbar-custom">
+    <button class="navbar-toggler" id="navCollapseBtn" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault">
+      <span class="navbar-toggler-icon">
+        <i class="fas fa-bars" id="navCollapseIcon"></i>
+      </span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+
+      <i class="fas fa-user-circle fa-2x"></i>
+
+      <button class="btn my-2 my-sm-0 hover-red ml-auto" id="cart-btn">
+        <i class="fas fa-shopping-cart fa-lg"></i>
+      </button>
+
+      <form class="form-inline my-2 my-lg-0 d-none d-xl-block" id="largeSearchForm">
+        <input class="form-control mr-sm-2 hover-red" id="searchBar" type="text" placeholder="Search">
+        <button class="btn btn-secondary my-2 my-sm-0 hover-red" id="searchButton" type="submit">
+          <i class="fa fa-search"></i>
         </button>
+      </form>
 
-        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+      <ul class="navbar-nav" id="category-list">
 
-            <i class="fas fa-user-circle fa-2x"></i>
+        <!-- TODO: move this outside -->
+        <li class="nav-item dropdown pointer" id="sort-options">
+          <a class="nav-link dropdown-toggle"
+            data-toggle="dropdown"><i class="fas fa-sort-alpha-down"></i></a>
+          <div class="dropdown-menu">
+            <a class="dropdown-item pointer"><i class="fas fa-sort-alpha-up"></i></a>
+          </div>
+        </li>
 
-            <button class="btn my-2 my-sm-0 hover-red ml-auto" id="cart-btn">
-              <i class="fas fa-shopping-cart fa-lg"></i>
-            </button>
+        <li class="nav-item order-0">
+          <a class="nav-link pointer" id="all-items">All</a>
+        </li>
 
-            <form class="form-inline my-2 my-lg-0 d-none d-xl-block" id="largeSearchForm">
-                <input class="form-control mr-sm-2 hover-red" id="searchBar" type="text" placeholder="Search">
-                <button class="btn btn-secondary my-2 my-sm-0 hover-red" id="searchButton" type="submit">
-                    <i class="fa fa-search"></i>
-                </button>
-            </form>
+      </ul>
 
-            <ul class="navbar-nav" id="category-list">
-
-                <!-- TODO: move this outside -->
-                <li class="nav-item dropdown pointer" id="sort-options">
-                    <a class="nav-link dropdown-toggle"
-                      data-toggle="dropdown"><i class="fas fa-sort-alpha-down"></i></a>
-                    <div class="dropdown-menu">
-                        <a class="dropdown-item pointer"><i class="fas fa-sort-alpha-up"></i></a>
-                    </div>
-                </li>
-
-                <li class="nav-item order-0">
-                  <a class="nav-link pointer" id="all-items">All</a>
-                </li>
-
-            </ul>
-
-            <!-- Notice how there are two search bars/forms in this html file
-            The first search bar/form at the top is the search bar that is visible for large screens (#largeSearchForm)
-            This search bar/form is the search bar that is visible in the dropdown, when the navbar is collapsed
-            as a result of a small screen -->
-            <form class="form-inline my-2 my-lg-0 d-xl-none" id="#smallSearchForm">
-                <input class="form-control mr-sm-2 hover-red" id="searchBar" type="text" placeholder="Search">
-                <button class="btn btn-secondary my-2 my-sm-0 hover-red" id="searchButton" type="submit"><i class="fa fa-search"></i></button>
-            </form>
-        </div>
-    </nav>
-    
-    <!-- }}} navbar -->
-
-    <div id="food-grid">
-      <p class="text-center" id="category-instructions">Select a category to begin adding items to your cart.</p>
+      <!-- Notice how there are two search bars/forms in this html file
+      The first search bar/form at the top is the search bar that is visible for large screens (#largeSearchForm)
+      This search bar/form is the search bar that is visible in the dropdown, when the navbar is collapsed
+      as a result of a small screen -->
+      <form class="form-inline my-2 my-lg-0 d-xl-none" id="#smallSearchForm">
+        <input class="form-control mr-sm-2 hover-red" id="searchBar" type="text" placeholder="Search">
+        <button class="btn btn-secondary my-2 my-sm-0 hover-red" id="searchButton" type="submit"><i class="fa fa-search"></i></button>
+      </form>
     </div>
+  </nav>
+  
+  <!-- }}} navbar -->
 
-    </div>
-    <script type='text/javascript' src='main.js'></script>
+  <div id="food-grid">
+    <p class="text-center" id="category-instructions">Select a category to begin adding items to your cart.</p>
+  </div>
+
+  </div>
+  <script type='text/javascript' src='main.js'></script>
 </body>
 
 </html>
