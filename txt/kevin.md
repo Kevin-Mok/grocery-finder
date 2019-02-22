@@ -1,4 +1,2 @@
 - cart
-  - add Sass example to issue
-  - add to cart
-  - id in element for selecting?
+  - display items

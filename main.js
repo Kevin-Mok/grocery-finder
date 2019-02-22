@@ -58,41 +58,48 @@ function showIconsOnFood(e) {
 	}
 }
 
-function addFoodToCart(e) {
+const cart = []
+
+function toggleFoodCartStatus(e) {
 	const foodDiv = e.target.parentElement
+	const foodId = /food-div-(\d*)/g.exec(foodDiv.id)[1]
+	// log(numRegex.test(foodDiv.id))
 	if (foodDiv.classList.contains('food-div') && !foodDiv.classList.contains('in-cart')) {
+		cart.push(foodId)
 		foodDiv.classList.add('in-cart')
 	} else {
+		cart.splice(cart.indexOf(foodId), 1)
 		foodDiv.classList.remove('in-cart')
 	}
+	log(cart)
 }
 
 const foodGridDiv = document.querySelector('#food-grid')
 foodGridDiv.addEventListener('mouseover', showIconsOnFood);
 foodGridDiv.addEventListener('mouseout', showIconsOnFood);
-foodGridDiv.addEventListener('click', addFoodToCart);
+foodGridDiv.addEventListener('click', toggleFoodCartStatus);
 
 // }}} show/hide checks //
 
-// add food to row {{{ //
-
 const fruits = {"1":{"name":"Red Apple","store_name":"storeA","img":"imgs/apples.jpg","price":189},"2":{"name":"Yellow Lemon","store_name":"storeC","img":"imgs/lemon.jpg","price":192},"3":{"name":"Green Lemon","store_name":"storeC","img":"imgs/green-lemon.jpg","price":68},"4":{"name":"Green Apple","store_name":"storeC","img":"imgs/green-apple.jpg","price":159},"5":{"name":"Cherries","store_name":"storeA","img":"imgs/cherries.jpg","price":196}}
 
-let curRow = createNewRow()
-foodGridDiv.appendChild(curRow)
+function displayFruits() {//{{{
+	let curRow = createNewRow()
+	foodGridDiv.appendChild(curRow)
 
-Object.keys(fruits).forEach(function(key, index) {
-	const foodDiv = createNewFoodDiv()
-	const foodImg = document.createElement('img')
-	foodImg.src = fruits[key]["img"]
-	foodImg.className = 'food-img'
-	foodDiv.appendChild(foodImg)
-	foodDiv.appendChild(createNewCheckIcon())
-	foodDiv.appendChild(createNewRemoveIcon())
-	curRow.appendChild(foodDiv)
-})
-
-// }}} add food to row //
+	Object.keys(fruits).forEach(function(key, index) {
+		const foodDiv = createNewFoodDiv()
+		foodDiv.id = 'food-div-' + key
+		const foodImg = document.createElement('img')
+		foodImg.src = fruits[key]["img"]
+		foodImg.className = 'food-img'
+		foodDiv.appendChild(foodImg)
+		foodDiv.appendChild(createNewCheckIcon())
+		foodDiv.appendChild(createNewRemoveIcon())
+		curRow.appendChild(foodDiv)
+	})
+}
+displayFruits()//}}}
 
 // navbar search {{{ //
 
