@@ -1,4 +1,4 @@
-//  mixins {{{ // 
+//  mixins {{{ //
 
 @mixin center-rel-parent() {
   position: absolute;
@@ -14,15 +14,14 @@
   transform: translate( -$from-left, -$from-top );
 }
 
-//  }}} mixins // 
+//  }}} mixins //
 
 body{
-  padding-top: 3em;
   background-color: grey;
 }
 
 #food-grid {// {{{
-  margin-top: 3em;
+  margin-top: 6em;
 
   #category-instructions {
     @include center-rel-parent();
