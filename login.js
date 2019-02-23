@@ -17,7 +17,7 @@ function logInLinkClicked() {
 //   <h1 class="popup-title">Login</h1>
 //   <p class="popup-text">Your groceries are just a click away!</p>
 //   <div class="popup-input-div">
-//     <i class="fas fa-envelope popup-icon"></i><input class="input-box" type="email" placeholder="Email">
+//     <i class="fas fa-envelope popup-icon"></i><input class="input-box" type="email" placeholder="Username">
 //   </div>
 //   <div class="popup-input-div">
 //     <i class="fas fa-unlock popup-icon"></i><input class="input-box" type="password" placeholder="Password">
@@ -35,7 +35,7 @@ function openLoginPopup() {
   const h1 = createElementWithText('h1', 'popup-title', '', 'Login');
   const p1 = createElementWithText('p', 'popup-text', '', 'Your groceries are just a click away!');
 
-  const usernameDiv = createInputPopupDiv("fa-envelope", "email", "Email", "loginEmail");
+  const usernameDiv = createInputPopupDiv("fa-envelope", "email", "Username", "loginUsername");
   const passwordDiv = createInputPopupDiv("fa-unlock", "password", "Password", "loginPassword");
 
   const loginBtn = createElementWithText("button", "btn btn-primary popup-button", "popupLoginBtn", "Login");
@@ -68,7 +68,7 @@ function openSignupPopup() {
   const h1 = createElementWithText('h1', 'popup-title', '', 'Sign up');
   const p1 = createElementWithText('p', 'popup-text', '', 'Your groceries are just a click away!');
 
-  const usernameDiv = createInputPopupDiv("fa-envelope", "email", "Email");
+  const usernameDiv = createInputPopupDiv("fa-envelope", "email", "Username");
   const passwordDiv = createInputPopupDiv("fa-unlock", "password", "Password");
 
   const loginBtn = createElementWithText("button", "btn btn-primary popup-button", "popupLoginBtn", "Signup");
@@ -136,13 +136,16 @@ function blurBackgroundToggle() {
 }
 
 function loginBtnClicked() {
-  const loginEmail = document.querySelector("#loginEmail").value;
+  const loginUsername = document.querySelector("#loginUsername").value;
   const loginPassword = document.querySelector("#loginPassword").value;
 
-  if (loginEmail == 'admin' && loginPassword == 'admin') {
-    alert("Login Successful");
+  if (loginUsername == 'admin' && loginPassword == 'admin') {
+    alert("Admin Login Successful. (Redirect to the admin page)");
+    closePopup();
+  } else if (loginUsername == 'user' && loginPassword == 'user') {
+    alert("User Login Successful. (Redirect to the user page)" );
     closePopup();
   } else {
-    alert("Login Unsuccessful");
+    alert("User Login Successful. (Redirect to the user page)" );
   }
 }
