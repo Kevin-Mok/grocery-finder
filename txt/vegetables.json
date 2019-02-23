@@ -1,0 +1,32 @@
+{
+	"11": {
+		"name": "Carrots",
+		"store_name": "storeA",
+		"img": "imgs/carrots.jpg",
+		"price": 189
+	},
+	"12": {
+		"name": "Broccoli",
+		"store_name": "storeC",
+		"img": "imgs/broccoli.jpg",
+		"price": 192
+	},
+	"13": {
+		"name": "Red Bell Pepper",
+		"store_name": "storeC",
+		"img": "imgs/bell-pepper-red.jpg",
+		"price": 68
+	},
+	"14": {
+		"name": "Eggplant",
+		"store_name": "storeC",
+		"img": "imgs/eggplant.jpg",
+		"price": 159
+	},
+	"15": {
+		"name": "Zucchini",
+		"store_name": "storeA",
+		"img": "imgs/zucchini.jpg",
+		"price": 196
+	}
+}

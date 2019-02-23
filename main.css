@@ -1,0 +1,111 @@
+body {
+  padding-top: 3em;
+  background-color: grey;
+}
+
+#food-grid {
+  margin-top: 3em;
+}
+#food-grid #category-instructions {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+#food-grid .food-div {
+  position: relative;
+  margin-bottom: 3rem;
+}
+#food-grid .food-img {
+  width: 100%;
+  height: 100%;
+  /* object-fit: none; */
+  object-fit: cover;
+}
+#food-grid .food-info {
+  position: absolute;
+  left: 0%;
+  top: 100%;
+  transform: translate(0%, -100%);
+  margin-left: 15px;
+  color: white;
+  background-color: rgba(0, 0, 0, 0.7);
+  padding: 0.3em;
+}
+#food-grid .check-icon {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  color: #00ff33;
+  opacity: 0.7;
+}
+#food-grid .remove-icon {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  color: red;
+  opacity: 0.7;
+}
+
+/* navbar {{{ */
+.navbar-custom {
+  /* height: 70px; */
+  height: 3em;
+  background-color: black;
+}
+
+.nav-link {
+  color: white !important;
+}
+
+.pointer {
+  cursor: pointer !important;
+}
+
+#searchButton {
+  background-color: #282828;
+  border: none;
+}
+
+.hover-red:hover {
+  background-color: #ED2A2A !important;
+}
+
+#searchBar {
+  transition: background-color 0.3s ease;
+  height: 34px;
+}
+
+#navDropdownList {
+  margin-right: 55px;
+}
+
+input:focus {
+  background-color: #ED2A2A !important;
+}
+
+#navCollapseBtn {
+  background-color: #282828;
+}
+
+#navCollapseIcon {
+  font-size: 28px;
+}
+
+#largeSearchForm {
+  margin-left: 1em;
+}
+
+#sort-options {
+  margin-right: 1em;
+}
+
+.fa-shopping-cart {
+  color: white;
+}
+
+/* }}} navbar */
+
+/*# sourceMappingURL=main.css.map */

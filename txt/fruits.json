@@ -1,0 +1,32 @@
+{
+	"1": {
+		"name": "Red Apple",
+		"store_name": "storeA",
+		"img": "imgs/apples.jpg",
+		"price": 189
+	},
+	"2": {
+		"name": "Yellow Lemon",
+		"store_name": "storeC",
+		"img": "imgs/lemon.jpg",
+		"price": 192
+	},
+	"3": {
+		"name": "Green Lemon",
+		"store_name": "storeC",
+		"img": "imgs/green-lemon.jpg",
+		"price": 68
+	},
+	"4": {
+		"name": "Green Apple",
+		"store_name": "storeC",
+		"img": "imgs/green-apple.jpg",
+		"price": 159
+	},
+	"5": {
+		"name": "Cherries",
+		"store_name": "storeA",
+		"img": "imgs/cherries.jpg",
+		"price": 196
+	}
+}
