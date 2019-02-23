@@ -16,11 +16,24 @@ body {
   position: relative;
   margin-bottom: 3rem;
 }
+#food-grid .food-div:before {
+  content: "";
+  display: block;
+  width: 0;
+  padding-top: 100%;
+}
 #food-grid .food-img {
   width: 100%;
   height: 100%;
   /* object-fit: none; */
   object-fit: cover;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  padding-left: 15px;
+  padding-right: 15px;
 }
 #food-grid .food-info {
   position: absolute;
