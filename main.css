@@ -6,9 +6,13 @@ body {
   height: 100%;
   background-color: grey;
 }
+body .container-fluid {
+  height: 100%;
+}
 
 #food-grid {
   padding-top: 6em;
+  height: 100%;
 }
 #food-grid #category-instructions {
   position: absolute;
@@ -123,6 +127,7 @@ input:focus {
   color: white;
 }
 
+/* }}} navbar */
 #userSettingsButton {
   background-color: black;
   border: none;
@@ -136,7 +141,7 @@ input:focus {
   /* position: fixed;
   top: 0;
   left: 0; */
-  box-shadow:rgba(255,255,255,0.05);
+  box-shadow: rgba(255, 255, 255, 0.05);
   filter: blur(10px);
 }
 
@@ -208,11 +213,8 @@ input:focus {
   margin-left: 5px;
 }
 
-
 input:focus {
   outline: none;
 }
-
-/* }}} navbar */
 
 /*# sourceMappingURL=main.css.map */
