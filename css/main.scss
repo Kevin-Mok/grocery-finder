@@ -25,6 +25,8 @@ html {
 body {
   height: 100%;
   background-color: grey;
+  font-family: 'Roboto', sans-serif;
+  font-size: 22px;
 
   .container-fluid {
     height: 100%;
@@ -89,63 +91,97 @@ body {
   }
 }// }}}
 
+.media {
+  background-color: rgba(255,255,255,0.4);
+  // background-color: white;
+  padding: 1.5em;
+  border-radius: 1em;
+  width: 100%;
+  margin-bottom: 2em;
+  margin-left: 2em;
+  margin-right: 2em;
+
+  .media-left {
+    width: 33%;
+
+    .media-object {
+      width: 100%;
+    }
+  }
+
+  .media-body {
+    margin-left: 1em;
+
+    .media-heading {
+      // color: #;
+      padding-bottom: 1em;
+    }
+  }
+}
+
 /* navbar {{{ */
 
-.navbar-custom {
+nav {
   /* height: 70px; */
   height: 3em;
   background-color: black;
-}
 
-.nav-link {
-  color: white!important;
-}
+  .navbar-nav {
+    .nav-link {
+      color: white!important;
+    }
 
-.pointer {
-  cursor: pointer!important;
-}
+    .pointer {
+      cursor: pointer!important;
+    }
+  }
 
-#searchButton {
-  background-color: #282828;
-  border: none;
-}
+  #searchBar {
+    transition: background-color 0.3s ease;
+    height: 34px
+  }
 
-.hover-red:hover {
-  background-color: #ED2A2A!important;
-}
+  #searchButton {
+    background-color: #282828;
+    border: none;
+  }
 
+  #searchBar {
+    transition: background-color 0.3s ease;
+    height: 34px
+  }
 
-#searchBar {
-  transition: background-color 0.3s ease;
-  height: 34px
-}
+  .hover-red:hover {
+    background-color: #ED2A2A!important;
+  }
 
-#navDropdownList {
-  margin-right: 55px;
-}
+  #navDropdownList {
+    margin-right: 55px;
+  }
 
-input:focus {
-  background-color: #ED2A2A!important;
-}
+  input:focus {
+    background-color: #ED2A2A!important;
+  }
 
-#navCollapseBtn {
-  background-color: #282828;
-}
+  #navCollapseBtn {
+    background-color: #282828;
+  }
 
-#navCollapseIcon {
-  font-size: 28px;
-}
+  #navCollapseIcon {
+    font-size: 28px;
+  }
 
-#largeSearchForm {
-  margin-left: 1em;
-}
+  #largeSearchForm {
+    margin-left: 1em;
+  }
 
-#sort-options {
-  margin-right: 1em;
-}
+  #sort-options {
+    margin-right: 1em;
+  }
 
-.fa-shopping-cart {
-  color: white;
+  i {
+    color: white;
+  }
 }
 
 /* }}} navbar */

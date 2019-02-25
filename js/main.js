@@ -12,65 +12,45 @@ const categoryList = document.querySelector('#category-list')
 const fruits = {//{{{
 	"1": {
 		"name": "Apples (Red)",
-		"store_name": "storeA",
 		"img": "imgs/produce/fruits/apples.jpg",
-		"price": 189
 	},
 	"2": {
 		"name": "Lemon (Yellow)",
-		"store_name": "storeC",
 		"img": "imgs/produce/fruits/lemon.jpg",
-		"price": 192
 	},
 	"3": {
 		"name": "Lemon (Green)",
-		"store_name": "storeC",
 		"img": "imgs/produce/fruits/green-lemon.jpg",
-		"price": 68
 	},
 	"4": {
 		"name": "Apples (Green)",
-		"store_name": "storeC",
 		"img": "imgs/produce/fruits/green-apple.jpg",
-		"price": 159
 	},
 	"5": {
 		"name": "Cherries",
-		"store_name": "storeA",
 		"img": "imgs/produce/fruits/cherries.jpg",
-		"price": 196
 	}
 }//}}}
 const vegetables = {//{{{
 	"11": {
 		"name": "Carrots",
-		"store_name": "storeA",
 		"img": "imgs/produce/vegetables/carrots.jpg",
-		"price": 189
 	},
 	"12": {
 		"name": "Broccoli",
-		"store_name": "storeC",
 		"img": "imgs/produce/vegetables/broccoli.jpg",
-		"price": 192
 	},
 	"13": {
 		"name": "Bell Pepper (Red)",
-		"store_name": "storeC",
 		"img": "imgs/produce/vegetables/bell-pepper-red.jpg",
-		"price": 68
 	},
 	"14": {
 		"name": "Eggplant",
-		"store_name": "storeC",
 		"img": "imgs/produce/vegetables/eggplant.jpg",
-		"price": 159
 	},
 	"15": {
 		"name": "Zucchini",
-		"store_name": "storeA",
 		"img": "imgs/produce/vegetables/zucchini.jpg",
-		"price": 196
 	}
 }//}}}
 const stores = {//{{{
@@ -102,46 +82,13 @@ const categories = {"Produce": ['Fruits', 'Vegetables']}
 
 // create elem fxn's {{{ //
 
-function createNewRow() {
+function createRow() {//{{{
   const curRow = document.createElement('div')
   curRow.className = 'row'
   return curRow
-}
+}//}}}
 
-function createNewFoodDiv() {
-  const foodDiv = document.createElement('div')
-  // foodDiv.classList.add('food-div', 'col-sm-4', 'col-lg-3', 'col-xl-2')
-  foodDiv.className = 'food-div col-sm-4 col-lg-3 col-xl-2'
-  return foodDiv
-}
-
-function createNewFoodImg(src) {
-  const foodImg = document.createElement('img')
-  foodImg.className = 'food-img img-fluid rounded'
-  foodImg.src = src
-  return foodImg
-}
-
-function createNewFoodInfo(name) {
-  const foodInfo = document.createElement('p')
-  foodInfo.className = 'food-info'
-  foodInfo.textContent = name
-  return foodInfo
-}
-
-function createNewCheckIcon() {
-  const checkIcon = document.createElement('i')
-  checkIcon.className = "check-icon far fa-check-circle fa-7x"
-  checkIcon.style.display = 'none'
-  return checkIcon
-}
-
-function createNewRemoveIcon() {
-  const removeIcon = document.createElement('i')
-  removeIcon.className = "remove-icon far fa-times-circle fa-7x"
-  removeIcon.style.display = 'none'
-  return removeIcon
-}
+// food categories {{{ //
 
 function createFoodCategory(name) {
   const foodCategory = document.createElement('li')
@@ -179,6 +126,103 @@ function addSubToCategory(category, subcategory) {
   category.querySelector('.dropdown-menu').appendChild(subcategory)
 }
 
+// }}} food categories //
+
+// food {{{ //
+
+function createFoodDiv() {
+  const foodDiv = document.createElement('div')
+  // foodDiv.classList.add('food-div', 'col-sm-4', 'col-lg-3', 'col-xl-2')
+  foodDiv.className = 'food-div col-sm-4 col-lg-3 col-xl-2'
+  return foodDiv
+}
+
+function createFoodImg(src) {
+  const foodImg = document.createElement('img')
+  foodImg.className = 'food-img img-fluid rounded'
+  foodImg.src = src
+  return foodImg
+}
+
+function createFoodInfo(name) {
+  const foodInfo = document.createElement('p')
+  foodInfo.className = 'food-info'
+  foodInfo.textContent = name
+  return foodInfo
+}
+
+// icons {{{ //
+
+function createCheckIcon() {
+  const checkIcon = document.createElement('i')
+  checkIcon.className = "check-icon far fa-check-circle fa-7x"
+  checkIcon.style.display = 'none'
+  return checkIcon
+}
+
+function createRemoveIcon() {
+  const removeIcon = document.createElement('i')
+  removeIcon.className = "remove-icon far fa-times-circle fa-7x"
+  removeIcon.style.display = 'none'
+  return removeIcon
+}
+
+
+// }}} icons //
+
+// }}} food //
+
+// store {{{ //
+
+function createStoreDiv() {
+  const storeDiv = document.createElement('div')
+  storeDiv.className = 'media col-xl-5 mx-auto'
+  return storeDiv
+}
+
+function createStoreThumbnail(src) {
+  const storeThumbnail = document.createElement('div')
+  storeThumbnail.className = 'media-left'
+
+  const storeImg = document.createElement('img')
+  storeImg.className = 'media-object img-thumbnail'
+  storeImg.src = src
+
+  storeThumbnail.appendChild(storeImg)
+
+  return storeThumbnail
+}
+
+function createStoreBody(name) {
+  const storeBody = document.createElement('div')
+  storeBody.className = 'media-body'
+
+  const storeHeader = document.createElement('h3')
+  storeHeader.className = 'media-heading'
+  storeHeader.textContent = name
+
+  const cartPrice = document.createElement('p')
+  // storeHeader.className = 'media-heading'
+  cartPrice.textContent = "Cart Price: "
+
+  const storeDistance = document.createElement('p')
+  // storeHeader.className = 'media-heading'
+  storeDistance.textContent = "Store Distance: "
+
+  storeBody.appendChild(storeHeader)
+  storeBody.appendChild(cartPrice)
+  storeBody.appendChild(storeDistance)
+
+  return storeBody
+}
+
+/* function createStoreInfo(storeBody) {
+  const cartPrice = document.createElement('p')
+  cartPrice.textContent = name
+} */
+
+// }}} store //
+
 // }}} return elem fxn's //
 
 // show food {{{ //
@@ -213,18 +257,18 @@ $( ".dropdown" ).mouseout(function() {
 // TODO: transition in //
 function displayFood(foodDict) {//{{{
   foodGrid.innerHTML = ''
-  let curRow = createNewRow()
+  let curRow = createRow()
   foodGrid.appendChild(curRow)
 
   Object.keys(foodDict).forEach(function(key) {
-    const foodDiv = createNewFoodDiv()
+    const foodDiv = createFoodDiv()
     foodDiv.id = 'food-div-' + key
 
-    foodDiv.appendChild(createNewFoodImg(foodDict[key]["img"]))
-    foodDiv.appendChild(createNewFoodInfo(foodDict[key]["name"]))
-    const checkIcon = createNewCheckIcon()
+    foodDiv.appendChild(createFoodImg(foodDict[key]["img"]))
+    foodDiv.appendChild(createFoodInfo(foodDict[key]["name"]))
+    const checkIcon = createCheckIcon()
     foodDiv.appendChild(checkIcon)
-    foodDiv.appendChild(createNewRemoveIcon())
+    foodDiv.appendChild(createRemoveIcon())
 
     if (cart.indexOf(key) != -1) {
       foodDiv.classList.add('in-cart')
@@ -234,6 +278,28 @@ function displayFood(foodDict) {//{{{
     curRow.appendChild(foodDiv)
   })
 }//}}}
+
+function displayStores(storeDict) {//{{{
+  foodGrid.innerHTML = ''
+  let curRow = createRow()
+  foodGrid.appendChild(curRow)
+
+  Object.keys(storeDict).forEach(function(key) {
+    const storeDiv = createStoreDiv()
+    storeDiv.id = 'store-div-' + key
+
+    storeDiv.appendChild(createStoreThumbnail(storeDict[key]["img"]))
+    storeDiv.appendChild(createStoreBody(storeDict[key]["name"]))
+    // storeDiv.appendChild(createStoreInfo(storeDict[key]["name"]))
+
+    curRow.appendChild(storeDiv)
+  })
+}//}}}
+// displayStores(stores)
+document.querySelector('#calc-btn').addEventListener('click', function() {
+  displayStores(stores)
+})
+
 
 function createCartFoodDict() {
   const cartFoodDict = {}
@@ -314,4 +380,3 @@ foodGrid.addEventListener('mouseout', showIconsOnFood);
 foodGrid.addEventListener('click', toggleFoodCartStatus);
 
 // }}} show/hide checks //
-
