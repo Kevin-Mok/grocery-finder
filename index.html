@@ -23,9 +23,9 @@
 <!-- }}} head -->
 
 <body>
-  <div class="container-fluid">
+  <div class="container-fluid transition-all">
   <!-- navbar {{{ -->
-  
+
   <nav class="navbar navbar-expand-lg fixed-top navbar-custom">
     <button class="navbar-toggler" id="navCollapseBtn" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault">
       <span class="navbar-toggler-icon">
@@ -35,7 +35,15 @@
 
     <div class="collapse navbar-collapse" id="navbarsExampleDefault">
 
-      <i class="fas fa-user-circle fa-2x"></i>
+      <div class="dropdown">
+        <button class="btn btn-secondary" type="button" id="userSettingsButton" data-toggle="dropdown">
+          <i class="fas fa-user-circle fa-2x"></i>
+        </button>
+        <div class="dropdown-menu">
+          <a class="dropdown-item" href="#" onclick="openLoginPopup()">Login</a>
+          <a class="dropdown-item" href="#" onclick="openSignupPopup()">Sign up</a>
+        </div>
+      </div>
 
       <button class="btn my-2 my-sm-0 hover-red ml-auto" id="cart-btn">
         <i class="fas fa-shopping-cart fa-lg"></i>
@@ -70,12 +78,13 @@
       This search bar/form is the search bar that is visible in the dropdown, when the navbar is collapsed
       as a result of a small screen -->
       <form class="form-inline my-2 my-lg-0 d-xl-none" id="#smallSearchForm">
-        <input class="form-control mr-sm-2 hover-red" id="searchBar" type="text" placeholder="Search">
-        <button class="btn btn-secondary my-2 my-sm-0 hover-red" id="searchButton" type="submit"><i class="fa fa-search"></i></button>
+        <input class="form-control mr-sm-2 hover-red" id="searchBarCollapsed" type="text" placeholder="Search">
+        <button class="btn btn-secondary my-2 my-sm-0 hover-red"
+          id="searchButtonCollapsed" type="submit"><i class="fa fa-search"></i></button>
       </form>
     </div>
   </nav>
-  
+
   <!-- }}} navbar -->
 
   <div id="food-grid">
@@ -83,7 +92,9 @@
   </div>
 
   </div>
+
   <script type='text/javascript' src='main.js'></script>
+  <script type='text/javascript' src='login.js'></script>
 </body>
 
 </html>

@@ -1,10 +1,18 @@
+html {
+  height: 100%;
+}
+
 body {
-  padding-top: 3em;
+  height: 100%;
   background-color: grey;
+}
+body .container-fluid {
+  height: 100%;
 }
 
 #food-grid {
-  margin-top: 3em;
+  padding-top: 6em;
+  height: 100%;
 }
 #food-grid #category-instructions {
   position: absolute;
@@ -120,5 +128,93 @@ input:focus {
 }
 
 /* }}} navbar */
+#userSettingsButton {
+  background-color: black;
+  border: none;
+}
+
+.transition-all {
+  transition: all 0.5s ease;
+}
+
+.blur {
+  /* position: fixed;
+  top: 0;
+  left: 0; */
+  box-shadow: rgba(255, 255, 255, 0.05);
+  filter: blur(10px);
+}
+
+.popup {
+  padding-top: 40px;
+  padding-bottom: 40px;
+  border-radius: 5px;
+  text-align: center;
+  background-color: black;
+  height: 400px;
+  width: 360px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.popup-title {
+  color: white;
+  font-size: 70px;
+  font-weight: 300;
+}
+
+.input-box {
+  display: inline-block;
+  margin-left: 50px;
+  width: 250px;
+  margin-right: 0;
+  border-radius: 5px;
+  border: none;
+  height: 35px;
+  padding-left: 20px;
+}
+
+.popup-input-div {
+  position: relative;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 10px;
+  width: 300px;
+  /* background-color: pink; */
+}
+
+.popup-icon {
+  color: white;
+  font-size: 30px;
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  margin: 0;
+}
+
+.popup-text {
+  color: white;
+  font-weight: 300;
+}
+
+.popup-button {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+#popupLoginBtn {
+  margin-right: 5px;
+}
+
+#popupCancelBtn {
+  margin-left: 5px;
+}
+
+input:focus {
+  outline: none;
+}
 
 /*# sourceMappingURL=main.css.map */
