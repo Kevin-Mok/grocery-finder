@@ -2,31 +2,31 @@
 	"11": {
 		"name": "Carrots",
 		"store_name": "storeA",
-		"img": "imgs/carrots.jpg",
+		"img": "imgs/produce/vegetables/carrots.jpg",
 		"price": 189
 	},
 	"12": {
 		"name": "Broccoli",
 		"store_name": "storeC",
-		"img": "imgs/broccoli.jpg",
+		"img": "imgs/produce/vegetables/broccoli.jpg",
 		"price": 192
 	},
 	"13": {
-		"name": "Red Bell Pepper",
+		"name": "Bell Pepper (Red)",
 		"store_name": "storeC",
-		"img": "imgs/bell-pepper-red.jpg",
+		"img": "imgs/produce/vegetables/bell-pepper-red.jpg",
 		"price": 68
 	},
 	"14": {
 		"name": "Eggplant",
 		"store_name": "storeC",
-		"img": "imgs/eggplant.jpg",
+		"img": "imgs/produce/vegetables/eggplant.jpg",
 		"price": 159
 	},
 	"15": {
 		"name": "Zucchini",
 		"store_name": "storeA",
-		"img": "imgs/zucchini.jpg",
+		"img": "imgs/produce/vegetables/zucchini.jpg",
 		"price": 196
 	}
 }

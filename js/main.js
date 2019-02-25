@@ -9,8 +9,70 @@ const categoryList = document.querySelector('#category-list')
 
 // food data (phase 1) {{{ //
 
-const fruits = {"1":{"name":"Red Apple","store_name":"storeA","img":"imgs/apples.jpg","price":189},"2":{"name":"Yellow Lemon","store_name":"storeC","img":"imgs/lemon.jpg","price":192},"3":{"name":"Green Lemon","store_name":"storeC","img":"imgs/green-lemon.jpg","price":68},"4":{"name":"Green Apple","store_name":"storeC","img":"imgs/green-apple.jpg","price":159},"5":{"name":"Cherries","store_name":"storeA","img":"imgs/cherries.jpg","price":196}}
-const vegetables = {"11":{"name":"Carrots","store_name":"storeA","img":"imgs/carrots.jpg","price":189},"12":{"name":"Broccoli","store_name":"storeC","img":"imgs/broccoli.jpg","price":192},"13":{"name":"Red Bell Pepper","store_name":"storeC","img":"imgs/bell-pepper-red.jpg","price":68},"14":{"name":"Eggplant","store_name":"storeC","img":"imgs/eggplant.jpg","price":159},"15":{"name":"Zucchini","store_name":"storeA","img":"imgs/zucchini.jpg","price":196}}
+const fruits = {//{{{
+	"1": {
+		"name": "Apples (Red)",
+		"store_name": "storeA",
+		"img": "imgs/produce/fruits/apples.jpg",
+		"price": 189
+	},
+	"2": {
+		"name": "Lemon (Yellow)",
+		"store_name": "storeC",
+		"img": "imgs/produce/fruits/lemon.jpg",
+		"price": 192
+	},
+	"3": {
+		"name": "Lemon (Green)",
+		"store_name": "storeC",
+		"img": "imgs/produce/fruits/green-lemon.jpg",
+		"price": 68
+	},
+	"4": {
+		"name": "Apples (Green)",
+		"store_name": "storeC",
+		"img": "imgs/produce/fruits/green-apple.jpg",
+		"price": 159
+	},
+	"5": {
+		"name": "Cherries",
+		"store_name": "storeA",
+		"img": "imgs/produce/fruits/cherries.jpg",
+		"price": 196
+	}
+}//}}}
+const vegetables = {//{{{
+	"11": {
+		"name": "Carrots",
+		"store_name": "storeA",
+		"img": "imgs/produce/vegetables/carrots.jpg",
+		"price": 189
+	},
+	"12": {
+		"name": "Broccoli",
+		"store_name": "storeC",
+		"img": "imgs/produce/vegetables/broccoli.jpg",
+		"price": 192
+	},
+	"13": {
+		"name": "Bell Pepper (Red)",
+		"store_name": "storeC",
+		"img": "imgs/produce/vegetables/bell-pepper-red.jpg",
+		"price": 68
+	},
+	"14": {
+		"name": "Eggplant",
+		"store_name": "storeC",
+		"img": "imgs/produce/vegetables/eggplant.jpg",
+		"price": 159
+	},
+	"15": {
+		"name": "Zucchini",
+		"store_name": "storeA",
+		"img": "imgs/produce/vegetables/zucchini.jpg",
+		"price": 196
+	}
+}//}}}
 const produce = Object.assign({}, fruits, vegetables)
 const all = Object.assign({}, produce)
 

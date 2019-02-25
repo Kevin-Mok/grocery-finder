@@ -1,32 +1,32 @@
 {
 	"1": {
-		"name": "Red Apple",
+		"name": "Apples (Red)",
 		"store_name": "storeA",
-		"img": "imgs/apples.jpg",
+		"img": "imgs/produce/fruits/apples.jpg",
 		"price": 189
 	},
 	"2": {
-		"name": "Yellow Lemon",
+		"name": "Lemon (Yellow)",
 		"store_name": "storeC",
-		"img": "imgs/lemon.jpg",
+		"img": "imgs/produce/fruits/lemon.jpg",
 		"price": 192
 	},
 	"3": {
-		"name": "Green Lemon",
+		"name": "Lemon (Green)",
 		"store_name": "storeC",
-		"img": "imgs/green-lemon.jpg",
+		"img": "imgs/produce/fruits/green-lemon.jpg",
 		"price": 68
 	},
 	"4": {
-		"name": "Green Apple",
+		"name": "Apples (Green)",
 		"store_name": "storeC",
-		"img": "imgs/green-apple.jpg",
+		"img": "imgs/produce/fruits/green-apple.jpg",
 		"price": 159
 	},
 	"5": {
 		"name": "Cherries",
 		"store_name": "storeA",
-		"img": "imgs/cherries.jpg",
+		"img": "imgs/produce/fruits/cherries.jpg",
 		"price": 196
 	}
 }
