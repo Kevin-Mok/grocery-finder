@@ -73,6 +73,24 @@ const vegetables = {//{{{
 		"price": 196
 	}
 }//}}}
+const stores = {//{{{
+  "1": {
+    "name": "Loblaws",
+    "img": "imgs/stores/loblaws.jpg",
+  },
+	"2": {
+		"name": "Metro",
+		"img": "imgs/stores/metro.jpg",
+	},
+	"3": {
+		"name": "Sobeys",
+		"img": "imgs/stores/sobeys.jpg",
+	},
+	"4": {
+		"name": "Whole Foods",
+		"img": "imgs/stores/whole-foods.jpg",
+	},
+}//}}}
 const produce = Object.assign({}, fruits, vegetables)
 const all = Object.assign({}, produce)
 
