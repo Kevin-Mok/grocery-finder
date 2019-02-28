@@ -1,369 +1,151 @@
 <!DOCTYPE html>
 <html lang="en">
-<title>W3.CSS Template</title>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- head {{{ -->
 
-<!-- Bootstrap -->
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-        crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-        crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-        crossorigin="anonymous"></script>
+<head>
+    <title>Grocery Finder</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script type="text/javascript" src="http://livejs.com/live.js"></script>
 
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
-      integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-<link rel="stylesheet" type="text/css" href="css/userpage.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+    
+
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+    <link rel="stylesheet" type="text/css" href="css/user.css">
+    
+</head>
+
+<!-- }}} head -->
 
 <body>
-<nav class="navbar navbar-expand-xl fixed-top navbar-custom">
-    <div class="collapse navbar-collapse" id="navbarsExampleDefault">
-        <button class="btn btn-secondary my-2 my-sm-0 hover-red" id="backButton" type="submit">
-            back
-        </button>
-    </div>
-</nav>
+    <div class="container-fluid transition-all">
+        <!-- navbar {{{ -->
 
-
-<div class="portfolioBox">
-    <img class="banPic" src="imgs/img6.jpg">
-    <div class="portfolio">
-        <img class="photo" src="imgs/img3.jpg">
-    </div>
-
-    <form class="infoBox">
-
-        <div class="nameinfo">
-            <input class="nameBar" type="text" placeholder="name">
-            <button class="nameButton" type="submit">
-                edit
+        <nav class="navbar navbar-expand-lg fixed-top navbar-custom">
+            <button class="navbar-toggler" id="navCollapseBtn" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault">
+                <span class="navbar-toggler-icon">
+                    <i class="fas fa-bars" id="navCollapseIcon"></i>
+                </span>
             </button>
+
+            <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+
+                <div class="dropdown">
+                    <button class="btn btn-secondary" type="button" id="userSettingsButton" data-toggle="dropdown">
+                        <img src="imgs/cappuccino.jpg" class="rounded-circle" height=30px width=30px>
+                    </button>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="index.html">Logout</a>
+                    </div>
+                </div>
+
+
+
+                <button class="btn my-2 my-sm-0 hover-red ml-auto" id="cart-btn">
+                    <i class="fas fa-shopping-cart fa-lg"></i>
+                </button>
+
+                <form class="form-inline my-2 my-lg-0 d-none d-xl-block" id="largeSearchForm">
+                    <input class="form-control mr-sm-2 hover-red" id="searchBar" type="text" placeholder="Search">
+                    <button class="btn btn-secondary my-2 my-sm-0 hover-red" id="searchButton" type="submit">
+                        <i class="fa fa-search"></i>
+                    </button>
+                </form>
+
+                <ul class="navbar-nav" id="category-list">
+
+                    <!-- TODO: move this outside -->
+                    <li class="nav-item dropdown pointer" id="sort-options">
+                        <a class="nav-link dropdown-toggle" data-toggle="dropdown"><i class="fas fa-sort-alpha-down"></i></a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item pointer"><i class="fas fa-sort-alpha-up"></i></a>
+                        </div>
+                    </li>
+
+                    <li class="nav-item order-0">
+                        <a class="nav-link pointer" id="all-items">All</a>
+                    </li>
+
+                </ul>
+
+
+
+                <!-- Notice how there are two search bars/forms in this html file
+      The first search bar/form at the top is the search bar that is visible for large screens (#largeSearchForm)
+      This search bar/form is the search bar that is visible in the dropdown, when the navbar is collapsed
+      as a result of a small screen -->
+
+            </div>
+
+
+       
+
+        </nav>
+
+        <!-- }}} navbar -->
+<div class="profile" >
+            
+           
+            <!-- nameform {{{ -->
+            <div class="formContainer">
+                name:
+            <form class="form-inline my-2 my-lg-0 d-none d-xl-block align-middle" id="nameForm">
+                <span class="text-white" id="nameValue">mynames</span>
+                <button class="btn btn-secondary my-2 my-sm-0" onclick="nameEdit()" type="submit">
+                    <i class="fa fa-wrench"></i>
+                </button>
+            </form>
+                
+            
+           </div>
+            
+            <!-- passwordform {{{ -->
+            <div class="formContainer">
+                password:
+            <form class="form-inline my-2 my-lg-0 d-none d-xl-block align-middle" id="pwForm">
+                <span class="text-white" id="nameValue">****</span>
+                <button class="btn btn-secondary my-2 my-sm-0" id="pwButton" onclick="pwEdit()" type="submit">
+                    <i class="fa fa-wrench"></i>
+                </button>
+
+            </form>
+            </div>
+            
+        
+            <div class="formContainer">
+                location:
+            <form class="form-inline my-2 my-lg-0 d-none d-xl-block align-middle" id="locaForm">
+                <span class="text-white" id="nameValue">32 gugu st</span>
+                <button class="btn btn-secondary my-2 my-sm-0" id="locaButton" onclick="locaEdit()" type="submit">
+                    <i class="fa fa-wrench"></i>
+                </button>
+
+            </form>
+            </div>
         </div>
+
+ 
+        
         <br>
-
-        <div class="passwordinfo">
-            <input class="passwordBar" type="text" placeholder="password">
-            <button class="PasswordButton" type="submit">
-                edit
-            </button>
+        <div id="food-grid">
+            <p class="text-center" id="category-instructions">Select a category to begin adding items to your cart.</p>
         </div>
 
-    </form>
-
-</div>
-
-<nav class="navbar navbar-expand-xl navbar-custom">
-    <ul class="navbar-nav ml-auto " id="navDropdownList">
-
-        <li class="nav-item order-0 hover-white">My Chart</li>
-        <li class="nav-item order-0 hover-white">Already Buyed</li>
-
-
-    </ul>
-</nav>
-
-
-<br>
-
-<div class="itemBox">
-    <div class="item">
-        <img class="itempic" src="imgs/12-eggs.jpg" alt="something at here">
-
-        <div class="iteminfos">
-            <div class="infopiece">$200</div>
-            <br>
-            <div class="infopiece">★★★</div>
-            <br>
-            <div class="infopiece">2019-09-02</div>
-        </div>
-
-        <div class="panels">
-            <span class="panel1">delete</span>
-
-            <span class="panel2">buy</span>
-
-            <span class="panel3">add<br>chart</span>
-        </div>
-        <div class="userimgholder">
-            <img class="userimg" src="background.jpg" alt="something at here">
-        </div>
     </div>
 
-    <div class="item">
-        <img class="itempic" src="imgs/apples.jpg" alt="something at here">
+    <script type='text/javascript' src='js/main.js'></script>
+    <script type='text/javascript' src='js/login.js'></script>
+    <script type='text/javascript' src='js/user.js'></script>
 
-        <div class="iteminfos">
-            <div class="infopiece">$2734</div>
-            <br>
-            <div class="infopiece">★★★</div>
-            <br>
-            <div class="infopiece">2013-1-20</div>
-        </div>
-
-        <div class="panels">
-            <span class="panel1">delete</span>
-
-            <span class="panel2">buy</span>
-
-            <span class="panel3">add<br>chart</span>
-        </div>
-        <div class="userimgholder">
-            <img class="userimg" src="imgs/img0.jpg" alt="something at here">
-        </div>
-    </div>
-
-
-    <div class="item">
-        <img class="itempic" src="imgs/cappuccino.jpg" alt="something at here">
-
-        <div class="iteminfos">
-            <div class="infopiece">$270</div>
-            <br>
-            <div class="infopiece">★★★★</div>
-            <br>
-            <div class="infopiece">2012-3-10</div>
-        </div>
-
-        <div class="panels">
-            <span class="panel1">delete</span>
-
-            <span class="panel2">buy</span>
-
-            <span class="panel3">add<br>chart</span>
-        </div>
-        <div class="userimgholder">
-            <img class="userimg" src="imgs/img1.jpg" alt="something at here">
-        </div>
-    </div>
-
-
-    <div class="item">
-        <img class="itempic" src="imgs/chocolate-ice-cream.jpg" alt="something at here">
-
-        <div class="iteminfos">
-            <div class="infopiece">$673</div>
-            <br>
-            <div class="infopiece">★</div>
-            <br>
-            <div class="infopiece">2017-1-27</div>
-        </div>
-
-        <div class="panels">
-            <span class="panel1">delete</span>
-
-            <span class="panel2">buy</span>
-
-            <span class="panel3">add<br>chart</span>
-        </div>
-        <div class="userimgholder">
-            <img class="userimg" src="imgs/img2.jpg" alt="something at here">
-        </div>
-    </div>
-
-
-    <div class="item">
-        <img class="itempic" src="imgs/coca-cola-bottle.jpg" alt="something at here">
-
-        <div class="iteminfos">
-            <div class="infopiece">$513</div>
-            <br>
-            <div class="infopiece">★★★</div>
-            <br>
-            <div class="infopiece">2019-7-16</div>
-        </div>
-
-        <div class="panels">
-            <span class="panel1">delete</span>
-
-            <span class="panel2">buy</span>
-
-            <span class="panel3">add<br>chart</span>
-        </div>
-        <div class="userimgholder">
-            <img class="userimg" src="imgs/img3.jpg" alt="something at here">
-        </div>
-    </div>
-
-
-    <div class="item">
-        <img class="itempic" src="imgs/green-apple.jpg" alt="something at here">
-
-        <div class="iteminfos">
-            <div class="infopiece">$1652</div>
-            <br>
-            <div class="infopiece">★★★★</div>
-            <br>
-            <div class="infopiece">2013-8-12</div>
-        </div>
-
-        <div class="panels">
-            <span class="panel1">delete</span>
-
-            <span class="panel2">buy</span>
-
-            <span class="panel3">add<br>chart</span>
-        </div>
-        <div class="userimgholder">
-            <img class="userimg" src="imgs/img4.jpg" alt="something at here">
-        </div>
-    </div>
-
-
-    <div class="item">
-        <img class="itempic" src="imgs/fried-chicken.jpg" alt="something at here">
-
-        <div class="iteminfos">
-            <div class="infopiece">$2164</div>
-            <br>
-            <div class="infopiece">★★★★★</div>
-            <br>
-            <div class="infopiece">2015-7-18</div>
-        </div>
-
-        <div class="panels">
-            <span class="panel1">delete</span>
-
-            <span class="panel2">buy</span>
-
-            <span class="panel3">add<br>chart</span>
-        </div>
-        <div class="userimgholder">
-            <img class="userimg" src="imgs/img5.jpg" alt="something at here">
-        </div>
-    </div>
-
-
-    <div class="item">
-        <img class="itempic" src="imgs/green-lemon.jpg" alt="something at here">
-
-        <div class="iteminfos">
-            <div class="infopiece">$852</div>
-            <br>
-            <div class="infopiece">★★★</div>
-            <br>
-            <div class="infopiece">2012-5-19</div>
-        </div>
-
-        <div class="panels">
-            <span class="panel1">delete</span>
-
-            <span class="panel2">buy</span>
-
-            <span class="panel3">add<br>chart</span>
-        </div>
-        <div class="userimgholder">
-            <img class="userimg" src="imgs/img6.jpg" alt="something at here">
-        </div>
-    </div>
-
-
-    <div class="item">
-        <img class="itempic" src="imgs/macaron.jpg" alt="something at here">
-
-        <div class="iteminfos">
-            <div class="infopiece">$2112</div>
-            <br>
-            <div class="infopiece">★★★★★</div>
-            <br>
-            <div class="infopiece">2014-12-4</div>
-        </div>
-
-        <div class="panels">
-            <span class="panel1">delete</span>
-
-            <span class="panel2">buy</span>
-
-            <span class="panel3">add<br>chart</span>
-        </div>
-        <div class="userimgholder">
-            <img class="userimg" src="imgs/img7.jpg" alt="something at here">
-        </div>
-    </div>
-
-
-    <div class="item">
-        <img class="itempic" src="imgs/matcha.jpg" alt="something at here">
-
-        <div class="iteminfos">
-            <div class="infopiece">$62</div>
-            <br>
-            <div class="infopiece">★★★★</div>
-            <br>
-            <div class="infopiece">2015-11-6</div>
-        </div>
-
-        <div class="panels">
-            <span class="panel1">delete</span>
-
-            <span class="panel2">buy</span>
-
-            <span class="panel3">add<br>chart</span>
-        </div>
-        <div class="userimgholder">
-            <img class="userimg" src="imgs/img8.jpg" alt="something at here">
-        </div>
-    </div>
-
-
-    <div class="item">
-        <img class="itempic" src="imgs/ice-cream.jpg" alt="something at here">
-
-        <div class="iteminfos">
-            <div class="infopiece">$2500</div>
-            <br>
-            <div class="infopiece">★★★★★</div>
-            <br>
-            <div class="infopiece">2014-10-18</div>
-        </div>
-
-        <div class="panels">
-            <span class="panel1">delete</span>
-
-            <span class="panel2">buy</span>
-
-            <span class="panel3">add<br>chart</span>
-        </div>
-        <div class="userimgholder">
-            <img class="userimg" src="imgs/img9.jpg" alt="something at here">
-        </div>
-    </div>
-
-
-    <div class="item">
-        <img class="itempic" src="imgs/mix-nuts.jpg" alt="something at here">
-
-        <div class="iteminfos">
-            <div class="infopiece">$2993</div>
-            <br>
-            <div class="infopiece">★</div>
-            <br>
-            <div class="infopiece">2016-6-7</div>
-        </div>
-
-        <div class="panels">
-            <span class="panel1">delete</span>
-
-            <span class="panel2">buy</span>
-
-            <span class="panel3">add<br>chart</span>
-        </div>
-        <div class="userimgholder">
-            <img class="userimg" src="imgs/img10.jpg" alt="something at here">
-        </div>
-    </div>
-</div>
-
-
-<script type='text/javascript' src='xxx'></script>
 </body>
 
 </html>

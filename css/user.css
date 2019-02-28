@@ -1,0 +1,28 @@
+
+.profile{
+    display: block;
+    
+    width:120%;
+    background-color:dimgray;
+    margin-top:100px;
+    height:400px;
+    padding:0px;
+    border:0px;
+    align-content: center;
+    flex-wrap: wrap;
+    margin-left: -100px;
+    color:skyblue;
+    
+}
+
+
+.formContainer{
+    
+    width:100%;
+    display: inline-block;
+    margin:10px;
+    border:10px;
+    padding: 10px;
+    margin-left:20%;
+    
+}
