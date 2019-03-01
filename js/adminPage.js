@@ -15,13 +15,13 @@ class User {
 
 // Dummy user data for phase 1
 
-users.push(new User("Obama", new Date("September 21, 2017 05:25:11"), new Date("September 21, 2017 05:25:11"), 'imgs/profile-pictures/obama.jpg', null));
-users.push(new User("ProGamer", new Date("May 11, 2016 09:29:29"), new Date("May 11, 2016 09:29:29"),'imgs/profile-pictures/default.jpg', null));
-users.push(new User("TimeTraveller", new Date("December 19, 2019 18:59:59"), new Date("December 19, 2019 18:59:59"), 'imgs/profile-pictures/default.jpg', null));
+users.push(new User("Obama", new Date("September 21, 2017 05:25:11"), new Date("February 20, 2018 06:21:33"), 'imgs/profile-pictures/obama.jpg', null));
+users.push(new User("ProGamer", new Date("May 11, 2016 09:29:29"), new Date("May 11, 2016 09:29:29"),'imgs/profile-pictures/progamer.jpeg', null));
+users.push(new User("TimeTraveller", new Date("December 19, 2019 18:59:59"), new Date("December 20, 2019 17:10:02"), 'imgs/profile-pictures/timetraveller.jpeg', null));
 users.push(new User("Ronald", new Date("August 5, 2017 17:21:22"), new Date("August 5, 2017 17:21:22"), 'imgs/profile-pictures/default.jpg', null));
-users.push(new User("Bucky", new Date("January 6, 2016 01:45:00"), new Date("January 6, 2016 01:45:00"), 'imgs/profile-pictures/default.jpg', null));
-users.push(new User("Tony", new Date("February 28, 2019 05:27:19"), new Date("February 28, 2019 05:27:19"), 'imgs/profile-pictures/default.jpg', null));
-users.push(new User("Barnes", new Date("July 1, 2017 23:21:19"), new Date("July 1, 2017 23:21:19"), 'imgs/profile-pictures/default.jpg', null));
+users.push(new User("Bucky", new Date("January 6, 2016 01:45:00"), new Date("January 6, 2016 07:12:32"), 'imgs/profile-pictures/default.jpg', null));
+users.push(new User("Tony", new Date("February 28, 2019 05:27:19"), new Date("January 19, 2019 05:27:19"), 'imgs/profile-pictures/default.jpg', null));
+users.push(new User("Barnes", new Date("July 1, 2017 23:21:19"), new Date("July 4, 2017 23:59:59"), 'imgs/profile-pictures/barnes.jpeg', null));
 
 
 // loadUsers fills the user listing box
@@ -189,6 +189,8 @@ function main() {
 	}
 
 */
+	
+	document.body.background = './imgs/adminPageBackgrounds/adminpagebackground.jpg';
 	loadUsers();
 	
 }
