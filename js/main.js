@@ -206,7 +206,7 @@ function createStoreBody(name) {
 
   const cartPriceParElem = document.createElement('p')
   cartPriceParElem.className = 'cart-price-label'
-  cartPriceParElem.textContent = "Cart Price: $"
+  cartPriceParElem.textContent = "Cart Price: "
 
   const cartPriceSpanElem = document.createElement('span')
   cartPriceSpanElem.className = 'cart-price-value'
@@ -219,8 +219,6 @@ function createStoreBody(name) {
   const storeDistSpanElem = document.createElement('span')
   storeDistSpanElem.className = 'store-dist-value'
   storeDistParElem.appendChild(storeDistSpanElem)
-  const storeDistUnits = document.createTextNode('km')
-  storeDistParElem.appendChild(storeDistUnits)
 
   storeBody.appendChild(storeHeader)
   storeBody.appendChild(cartPriceParElem)
@@ -292,6 +290,36 @@ function displayFood(foodDict) {//{{{
   })
 }//}}}
 
+function createCartFoodDict() {
+  const cartFoodDict = {}
+  cart.forEach(function(foodId) {
+    cartFoodDict[foodId] = all[foodId]
+  })
+  return cartFoodDict
+}
+document.querySelector('#cart-btn').addEventListener('click', function() {
+  cartView = true
+  displayFood(createCartFoodDict())
+})
+
+function changeCategory(e) {//{{{
+  cartView = false
+  if (e.target.id == 'all-items') {
+    displayFood(all)
+  } else if (e.target.classList.contains('dropdown-item')) {
+    let foodCategoryName = e.target.textContent.toLowerCase()
+    if (foodCategoryName == 'all') {
+      foodCategoryName = /(\w*)-*/g.exec(e.target.id)[1]
+    }
+    eval('displayFood(' + foodCategoryName +')')
+  }
+}
+categoryList.addEventListener('click', changeCategory, true)//}}}
+
+// }}} show food //
+
+// show stores {{{ //
+
 function generateRandomFloat(min, max) {//{{{
   return (Math.random() * (max - min) + min).toFixed(2)
 }//}}}
@@ -360,12 +388,19 @@ function hsv2rgb(h, s, v) {//{{{
   }).join('');
 }//}}}
 
-function colorValuesByRange(valueElems, range) {
+function colorValuesByRange(valueElems, range) {//{{{
   for (const valueElem of valueElems) {
     const percentOfMax = (valueElem.textContent - range.min) / (range.max - range.min)
     // TODO: need to modify saturation/value values to get darker colors?
     // depends on bg //
     valueElem.style.color = hsv2rgb(Math.floor((1 - percentOfMax) * 120), .8, .9)
+  }
+}//}}}
+
+function addUnitToValues(valueElems, unit, frontOrBack) {
+  for (const valueElem of valueElems) {
+    const value = valueElem.textContent
+    valueElem.textContent = (frontOrBack == 'front') ? unit + value : value + unit
   }
 }
 
@@ -388,43 +423,22 @@ function displayStores(storeDict) {//{{{
     curRow.appendChild(storeDiv)
   })
 
-  colorValuesByRange(document.querySelectorAll('.cart-price-value'), cartPriceRange)
-  colorValuesByRange(document.querySelectorAll('.store-dist-value'), storeDistRange)
+  const cartPriceValueElems = document.querySelectorAll('.cart-price-value')
+  const storeDistValueElems = document.querySelectorAll('.store-dist-value')
+
+  colorValuesByRange(cartPriceValueElems, cartPriceRange)
+  colorValuesByRange(storeDistValueElems, storeDistRange)
+
+  addUnitToValues(cartPriceValueElems, '$', 'front')
+  addUnitToValues(storeDistValueElems, ' km', 'back')
 }
 displayStores(stores)
 document.querySelector('#calc-btn').addEventListener('click', function() {
   displayStores(stores)
 })//}}}
-// colorCartPrices()
 log(cartPriceRange, storeDistRange)
 
-function createCartFoodDict() {
-  const cartFoodDict = {}
-  cart.forEach(function(foodId) {
-    cartFoodDict[foodId] = all[foodId]
-  })
-  return cartFoodDict
-}
-document.querySelector('#cart-btn').addEventListener('click', function() {
-  cartView = true
-  displayFood(createCartFoodDict())
-})
-
-function changeCategory(e) {//{{{
-  cartView = false
-  if (e.target.id == 'all-items') {
-    displayFood(all)
-  } else if (e.target.classList.contains('dropdown-item')) {
-    let foodCategoryName = e.target.textContent.toLowerCase()
-    if (foodCategoryName == 'all') {
-      foodCategoryName = /(\w*)-*/g.exec(e.target.id)[1]
-    }
-    eval('displayFood(' + foodCategoryName +')')
-  }
-}
-categoryList.addEventListener('click', changeCategory, true)//}}}
-
-// }}} show food //
+// }}} show stores //
 
 // show/hide checks {{{ //
 
