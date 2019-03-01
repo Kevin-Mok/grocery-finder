@@ -2,6 +2,7 @@
 'use strict'
 
 let users = [];
+let hidden_users = [];
 
 class User {
 	constructor(username, dateJoined, lastLogin, profilePicture, bannedUntil) {
@@ -165,6 +166,12 @@ function resetUI() {
 	const selectedUserFrameInitialText = document.createTextNode('Start by selecting a listed user');
 	selectedUserFrameInitial.appendChild(selectedUserFrameInitialText);
 	selectedUserFrame.appendChild(selectedUserFrameInitial);
+
+}
+
+document.addEventListener("click", filterUsers);
+
+function filterUsers(e) {
 
 }
 
