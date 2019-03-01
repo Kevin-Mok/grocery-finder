@@ -100,7 +100,6 @@
 
 .userEntryFrame {
 	height:110px;
-	border-bottom:3px grey solid;
 }
 
 .userEntryFrame:hover {
@@ -198,4 +197,23 @@
 	color:white;
 	top:100px;
 	position:absolute;
+}
+
+.deleteUserButton {
+	font-size:26px;
+	color:white;
+	background-color:rgb(230, 0, 0);
+	border-radius:10%;
+	left:50%;
+	top:85%;
+	transform:translate(-50%, -50%);
+	height:36px;
+	width:162px;
+	position:absolute;
+	text-align:center;
+}
+
+.deleteUserButton:hover {
+	background-color:rgb(179, 0, 0);
+	cursor:pointer;
 }

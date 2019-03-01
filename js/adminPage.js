@@ -81,6 +81,8 @@ function userSelected(e) {
 	while (selectedUserFrame.firstChild) {
 		selectedUserFrame.removeChild(selectedUserFrame.firstChild);
 	}
+
+	selectedUserFrame.user = target.user;
 	
 	const selectedUserProfilePictureFrame = document.createElement('div');
 	selectedUserProfilePictureFrame.className = 'selectedUserProfilePictureFrame';
@@ -108,9 +110,61 @@ function userSelected(e) {
 	selectedUserTimeDetails.appendChild(selectedUserDateRegisteredText);
 	selectedUserDetailsFrame.appendChild(selectedUserTimeDetails);
 
-	console.log(target.user.dateJoined.toLocaleDateString() + ' ' + target.user.dateJoined.toLocaleTimeString());
 	selectedUserFrame.appendChild(selectedUserDetailsFrame);
 
+	const deleteUserButton = document.createElement('div');
+	deleteUserButton.className = 'deleteUserButton';
+	const deleteUserButtonText = document.createTextNode('Delete User');
+	deleteUserButton.appendChild(deleteUserButtonText);
+
+	deleteUserButton.addEventListener('click', deleteUser);
+
+	selectedUserFrame.appendChild(deleteUserButton);
+
+
+}
+
+function deleteUser(e) {
+
+	const verification = window.prompt("Are you sure you want to permanently delete this user? \n (Type 'delete' and press OK to confirm)");
+
+	if (verification == 'delete') {
+	
+		const targetUser = e.target.parentElement.user;
+
+		console.log(users);
+
+		let newUsersList = users.filter(function(user) {return user.username != targetUser.username});
+
+		users = newUsersList;
+
+		console.log(users);
+
+		resetUI();
+
+	}
+	
+}
+
+function resetUI() {
+
+	/* Clear, and reload the user listing box */
+	const userListingBox = document.querySelector('.userListingBox');
+	while (userListingBox.firstChild) {
+		userListingBox.removeChild(userListingBox.firstChild);
+	}
+	loadUsers();
+
+	/* Clear, and reload the selected user box with the initial text*/
+	const selectedUserFrame = document.querySelector('.selectedUserFrame');
+	while (selectedUserFrame.firstChild) {
+		selectedUserFrame.removeChild(selectedUserFrame.firstChild);
+	}
+	const selectedUserFrameInitial = document.createElement('div');
+	selectedUserFrameInitial.className = 'selectedUserFrameInitialText';
+	const selectedUserFrameInitialText = document.createTextNode('Start by selecting a listed user');
+	selectedUserFrameInitial.appendChild(selectedUserFrameInitialText);
+	selectedUserFrame.appendChild(selectedUserFrameInitial);
 
 }
 
