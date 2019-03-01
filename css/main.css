@@ -87,11 +87,11 @@ body .container-fluid {
 .store-div .store-img-div .store-img {
   width: 100%;
 }
-.store-div .store-div-body {
+.store-div .store-body {
   margin-left: 1em;
 }
-.store-div .store-div-body .store-name {
-  padding-bottom: 1em;
+.store-div .store-body .store-name {
+  padding-bottom: 0.5em;
 }
 
 /* navbar {{{ */

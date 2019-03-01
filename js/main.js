@@ -177,13 +177,13 @@ function createRemoveIcon() {
 
 // store {{{ //
 
-function createStoreDiv() {
+function createStoreDiv() {//{{{
   const storeDiv = document.createElement('div')
   storeDiv.className = 'store-div media col-xl-5 mx-auto'
   return storeDiv
-}
+}//}}}
 
-function createStoreThumbnail(src) {
+function createStoreThumbnail(src) {//{{{
   const storeThumbnail = document.createElement('div')
   storeThumbnail.className = 'store-img-div media-left'
 
@@ -194,16 +194,26 @@ function createStoreThumbnail(src) {
   storeThumbnail.appendChild(storeImg)
 
   return storeThumbnail
-}
+}//}}}
 
 function createStoreBody(name) {
   const storeBody = document.createElement('div')
-  storeBody.className = 'store-div-body media-body'
+  storeBody.className = 'store-body media-body'
 
   const storeHeader = document.createElement('h3')
   storeHeader.className = 'store-name media-heading'
   storeHeader.textContent = name
 
+  const storeScoreParElem = document.createElement('p')
+  storeScoreParElem.className = 'store-score-label'
+  storeScoreParElem.textContent = "Score: "
+
+  const storeScoreSpanElem = document.createElement('span')
+  storeScoreSpanElem.className = 'store-score-value'
+  storeScoreParElem.appendChild(storeScoreSpanElem)
+
+  // cart price line {{{ //
+  
   const cartPriceParElem = document.createElement('p')
   cartPriceParElem.className = 'cart-price-label'
   cartPriceParElem.textContent = "Cart Price: "
@@ -211,7 +221,11 @@ function createStoreBody(name) {
   const cartPriceSpanElem = document.createElement('span')
   cartPriceSpanElem.className = 'cart-price-value'
   cartPriceParElem.appendChild(cartPriceSpanElem)
+  
+  // }}} cart price line //
 
+  // store dist line {{{ //
+  
   const storeDistParElem = document.createElement('p')
   storeDistParElem.className = 'store-dist-label'
   storeDistParElem.textContent = "Store Distance: "
@@ -219,8 +233,11 @@ function createStoreBody(name) {
   const storeDistSpanElem = document.createElement('span')
   storeDistSpanElem.className = 'store-dist-value'
   storeDistParElem.appendChild(storeDistSpanElem)
+  
+  // }}} store dist line //
 
   storeBody.appendChild(storeHeader)
+  storeBody.appendChild(storeScoreParElem)
   storeBody.appendChild(cartPriceParElem)
   storeBody.appendChild(storeDistParElem)
 
@@ -348,9 +365,7 @@ function addRandomStoreInfo(storeBody) {//{{{
   storeDistValueElem.textContent = storeDist
 
   updateRange(cartPrice, cartPriceRange)
-  // log(cartPrice, cartPriceRange)
   updateRange(storeDist, storeDistRange)
-  // log(storeDist, storeDistRange)
 }//}}}
 
 function hsv2rgb(h, s, v) {//{{{
@@ -388,12 +403,18 @@ function hsv2rgb(h, s, v) {//{{{
   }).join('');
 }//}}}
 
+function getPercentOfRange(value, range) {
+  return (value - range.min) / (range.max - range.min)
+}
+
 function colorValuesByRange(valueElems, range) {//{{{
+  // will color min value green and max value red
   for (const valueElem of valueElems) {
-    const percentOfMax = (valueElem.textContent - range.min) / (range.max - range.min)
     // TODO: need to modify saturation/value values to get darker colors?
     // depends on bg //
-    valueElem.style.color = hsv2rgb(Math.floor((1 - percentOfMax) * 120), .8, .9)
+    // https://stackoverflow.com/a/11850303/8811872 - 0 is green, 120 is red
+    const hue = Math.floor((1 - getPercentOfRange(valueElem.textContent, range)) * 120)
+    valueElem.style.color = hsv2rgb(hue, .8, .9)
   }
 }//}}}
 
@@ -403,6 +424,39 @@ function addUnitToValues(valueElems, unit, frontOrBack) {
     valueElem.textContent = (frontOrBack == 'front') ? unit + value : value + unit
   }
 }
+
+function addStoreScores() {//{{{
+  const storeBodies = document.querySelectorAll('.store-body')
+  for (const storeBody of storeBodies) {
+    const cartPriceScore = 1 - getPercentOfRange(
+      storeBody.querySelector('.cart-price-value').textContent, cartPriceRange) 
+    const storeDistScore = 1 - getPercentOfRange(
+      storeBody.querySelector('.store-dist-value').textContent, storeDistRange) 
+    const storeScore = ((cartPriceScore + storeDistScore) / 2 * 10).toFixed(1)
+    storeBody.querySelector('.store-score-value').textContent = storeScore
+  }
+}//}}}
+
+function doStoreCalculations() {//{{{
+  // calculate store scores, color values and add units
+  
+  // NOTE: calculations must be done before adding units since calculating
+  // functions assume value elements will only have number and no units
+  // surrounding it
+  addStoreScores()
+
+  const cartPriceValueElems = document.querySelectorAll('.cart-price-value')
+  const storeDistValueElems = document.querySelectorAll('.store-dist-value')
+  const storeScoreValueElems = document.querySelectorAll('.store-score-value')
+
+  colorValuesByRange(cartPriceValueElems, cartPriceRange)
+  colorValuesByRange(storeDistValueElems, storeDistRange)
+  colorValuesByRange(storeScoreValueElems, { min: 10, max: 0 })
+
+  addUnitToValues(cartPriceValueElems, '$', 'front')
+  addUnitToValues(storeDistValueElems, ' km', 'back')
+  addUnitToValues(storeScoreValueElems, '/10.0', 'back')
+}//}}}
 
 function displayStores(storeDict) {//{{{
   foodGrid.innerHTML = ''
@@ -423,20 +477,12 @@ function displayStores(storeDict) {//{{{
     curRow.appendChild(storeDiv)
   })
 
-  const cartPriceValueElems = document.querySelectorAll('.cart-price-value')
-  const storeDistValueElems = document.querySelectorAll('.store-dist-value')
-
-  colorValuesByRange(cartPriceValueElems, cartPriceRange)
-  colorValuesByRange(storeDistValueElems, storeDistRange)
-
-  addUnitToValues(cartPriceValueElems, '$', 'front')
-  addUnitToValues(storeDistValueElems, ' km', 'back')
+  doStoreCalculations()
 }
-displayStores(stores)
+// displayStores(stores)
 document.querySelector('#calc-btn').addEventListener('click', function() {
   displayStores(stores)
 })//}}}
-log(cartPriceRange, storeDistRange)
 
 // }}} show stores //
 
@@ -482,7 +528,7 @@ function toggleFoodCartStatus(e) {
         foodDiv.parentElement.removeChild(foodDiv)
       }
     }
-    log(cart)
+    // log(cart)
   }
 }
 
