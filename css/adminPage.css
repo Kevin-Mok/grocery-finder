@@ -1,0 +1,138 @@
+﻿body {
+	font-family:Verdana;
+	margin:0px;
+	background-color:grey;
+}
+
+.title {
+	font-size:30px;
+	font-weight:bold;
+	position:absolute;
+	top:5%;
+	left:10%;
+	color:white;
+}
+
+.backButton {
+	color:white;
+	background-color:black;
+	border-radius:50%;
+	height:50px;
+	width:50px;
+	font-size:38px;
+	opacity:0.4;
+	border:2px white solid;
+	top:45%;
+	left:2%;
+	position:absolute;
+	text-align:center;
+}
+
+.backButton:hover {
+	opacity:1;
+	cursor:pointer;
+}
+
+.searchBarFrame {
+	left:10%;
+	top:12%;
+	width:700px;
+	font-size:16px;
+	position:absolute;
+	float:left;
+}
+
+#searchBar {
+	float:left;
+	width:30%;
+}
+
+.searchButton {
+	width:100px;
+	margin-left:20px;
+	border:1.5px solid grey;
+	background-color: rgb(201, 206, 55);
+	text-align:center;
+	display:inline-block;
+}
+
+.searchButton:hover {
+	cursor:pointer;
+}
+
+.userListingBox {
+	border:2px black solid;
+	height:70%;
+	width:80%;
+	top:18%;
+	left:10%;
+	position:absolute;
+	overflow-y:auto;
+	background-color:white;
+}
+
+.userListingBox::-webkit-scrollbar {
+	width:15px;
+}
+
+.userListingBox::-webkit-scrollbar-thumb {
+	background: rgb(201, 206, 55);
+	border-radius:50px;
+}
+
+.userLIstingBox::-webkit-scrollbar-track-piece {
+	box-shadow:inset 5px 5px 5px grey;
+	border-radius:10%;
+}
+
+.userListingFrame {
+	background-color:black;
+	height:80%;
+	width:30%;
+	top:10%;
+	left:7%;
+	position:absolute;
+	border-top:3px grey solid;
+	border-bottom:3px grey solid;
+	border-radius:10%;
+}
+
+.userEntryFrame {
+	height:110px;
+	border-bottom:3px grey solid;
+}
+
+.userEntryFrame:hover {
+	background-color:grey;
+	cursor:pointer;
+}
+
+.userEntryProfilePictureFrame {
+	height:110px;
+	width:33%;
+	position:absolute;
+}
+
+.userEntryProfilePicture {
+	height:80px;
+	width:80px;
+	border-radius:50%;
+	top:15px;
+	left:15px;
+	position:absolute;
+}
+
+.userEntryTextFrame {
+	height:110px;
+	width:67%;
+	left:33%;
+	position:absolute;
+}
+
+.userEntryText {
+	margin:0;
+	left:40%;
+	top:50%;
+	transform:translate(-50%, -50%);
+	position:absolute;
+}
