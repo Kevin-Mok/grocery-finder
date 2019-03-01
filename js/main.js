@@ -291,18 +291,22 @@ function showIconsOnFood(e) {
 
 function toggleFoodCartStatus(e) {
   const foodDiv = e.target.parentElement
-  const foodId = /food-div-(\d*)/g.exec(foodDiv.id)[1]
-  if (foodDiv.classList.contains('food-div') && !foodDiv.classList.contains('in-cart')) {
-    cart.push(foodId)
-    foodDiv.classList.add('in-cart')
-  } else {
-    cart.splice(cart.indexOf(foodId), 1)
-    foodDiv.classList.remove('in-cart')
-    if (cartView) {
-      foodDiv.parentElement.removeChild(foodDiv)
+  if (foodDiv.classList.contains('food-div')) {
+    const foodId = /food-div-(\d*)/g.exec(foodDiv.id)[1]
+    if (!foodDiv.classList.contains('in-cart')) {
+      // add to cart
+      cart.push(foodId)
+      foodDiv.classList.add('in-cart')
+    } else {
+      // rm from cart
+      cart.splice(cart.indexOf(foodId), 1)
+      foodDiv.classList.remove('in-cart')
+      if (cartView) {
+        foodDiv.parentElement.removeChild(foodDiv)
+      }
     }
+    log(cart)
   }
-  log(cart)
 }
 
 foodGrid.addEventListener('mouseover', showIconsOnFood);
