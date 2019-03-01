@@ -136,3 +136,22 @@
 	transform:translate(-50%, -50%);
 	position:absolute;
 }
+
+.selectedUserFrame {
+	left:40%;
+	top:10%;
+	height:80%;
+	width:50%;
+	background-color:black;
+	position:absolute;
+	border-radius:10%;
+}
+
+.selectedUserFrameInitialText {
+	color:white;
+	margin:0;
+	left:50%;
+	top:50%;
+	transform:translate(-50%, -50%);
+	position:absolute;
+}
