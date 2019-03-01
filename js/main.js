@@ -76,6 +76,9 @@ const all = Object.assign({}, produce)
 
 const categories = {"Produce": ['Fruits', 'Vegetables']}
 
+const cartPriceRange = { min: 9999, max: 0 }
+const storeDistRange = { min: 999, max: 0 }
+
 // }}} food data //
 
 // }}} vars //
@@ -201,17 +204,27 @@ function createStoreBody(name) {
   storeHeader.className = 'store-name media-heading'
   storeHeader.textContent = name
 
-  const cartPrice = document.createElement('p')
-  cartPrice.className = 'cart-price-p'
-  cartPrice.textContent = "Cart Price: "
+  const cartPriceParElem = document.createElement('p')
+  cartPriceParElem.className = 'cart-price-label'
+  cartPriceParElem.textContent = "Cart Price: $"
 
-  const storeDistance = document.createElement('p')
-  storeDistance.className = 'store-dist-p'
-  storeDistance.textContent = "Store Distance: "
+  const cartPriceSpanElem = document.createElement('span')
+  cartPriceSpanElem.className = 'cart-price-value'
+  cartPriceParElem.appendChild(cartPriceSpanElem)
+
+  const storeDistParElem = document.createElement('p')
+  storeDistParElem.className = 'store-dist-label'
+  storeDistParElem.textContent = "Store Distance: "
+
+  const storeDistSpanElem = document.createElement('span')
+  storeDistSpanElem.className = 'store-dist-value'
+  storeDistParElem.appendChild(storeDistSpanElem)
+  const storeDistUnits = document.createTextNode('km')
+  storeDistParElem.appendChild(storeDistUnits)
 
   storeBody.appendChild(storeHeader)
-  storeBody.appendChild(cartPrice)
-  storeBody.appendChild(storeDistance)
+  storeBody.appendChild(cartPriceParElem)
+  storeBody.appendChild(storeDistParElem)
 
   return storeBody
 }
@@ -227,7 +240,7 @@ function createStoreBody(name) {
 
 // show food {{{ //
 
-function createFoodCategories(categories) {
+function createFoodCategories(categories) {//{{{
   Object.keys(categories).forEach(function(key) {
     const category = createFoodCategory(key)
     categories[key].forEach(function(subcategoryName) {
@@ -235,7 +248,7 @@ function createFoodCategories(categories) {
     })
     categoryList.appendChild(category)
   })
-}
+}//}}}
 createFoodCategories(categories)
 // navbar dropdown {{{ //
 
@@ -279,22 +292,81 @@ function displayFood(foodDict) {//{{{
   })
 }//}}}
 
-function generateRandomFloat(min, max) {
+function generateRandomFloat(min, max) {//{{{
   return (Math.random() * (max - min) + min).toFixed(2)
-}
+}//}}}
 
-function addRandomStoreInfo(storeBody) {
-  const cartPriceParElem = storeBody.querySelector('.cart-price-p')
-  const storeDistParElem = storeBody.querySelector('.store-dist-p')
+function updateRange(value, range) {//{{{
+  // TODO: pass in parsed value? //
+  const parsedValue = parseFloat(value)
+  if (parsedValue < range.min) {
+    // log(parsedValue, '<', range.min)
+    range.min = parsedValue
+  } 
+  if (parsedValue > range.max) {
+    // log(parsedValue, '>', range.max)
+    range.max = parsedValue
+  }
+}//}}}
 
-  const cartPriceSpanElem = document.createElement('span')
-  const storeDistSpanElem = document.createElement('span')
+function addRandomStoreInfo(storeBody) {//{{{
+  const cartPriceValueElem = storeBody.querySelector('.cart-price-value')
+  const storeDistValueElem = storeBody.querySelector('.store-dist-value')
 
-  cartPriceSpanElem.textContent = '$' + generateRandomFloat(10, 50)
-  storeDistSpanElem.textContent = generateRandomFloat(5, 50) + ' km'
+  const cartPrice = generateRandomFloat(10, 50)
+  const storeDist = generateRandomFloat(5, 50)
 
-  cartPriceParElem.appendChild(cartPriceSpanElem)
-  storeDistParElem.appendChild(storeDistSpanElem)
+  cartPriceValueElem.textContent = cartPrice
+  storeDistValueElem.textContent = storeDist
+
+  updateRange(cartPrice, cartPriceRange)
+  // log(cartPrice, cartPriceRange)
+  updateRange(storeDist, storeDistRange)
+  // log(storeDist, storeDistRange)
+}//}}}
+
+function hsv2rgb(h, s, v) {//{{{
+  // http://jsfiddle.net/hqp1nmvr/
+  var rgb, i, data = [];
+  if (s === 0) {
+    rgb = [v,v,v];
+  } else {
+    h = h / 60;
+    i = Math.floor(h);
+    data = [v*(1-s), v*(1-s*(h-i)), v*(1-s*(1-(h-i)))];
+    switch(i) {
+      case 0:
+        rgb = [v, data[2], data[0]];
+        break;
+      case 1:
+        rgb = [data[1], v, data[0]];
+        break;
+      case 2:
+        rgb = [data[0], v, data[2]];
+        break;
+      case 3:
+        rgb = [data[0], data[1], v];
+        break;
+      case 4:
+        rgb = [data[2], data[0], v];
+        break;
+      default:
+        rgb = [v, data[0], data[1]];
+        break;
+    }
+  }
+  return '#' + rgb.map(function(x){
+    return ("0" + Math.round(x*255).toString(16)).slice(-2);
+  }).join('');
+}//}}}
+
+function colorValuesByRange(valueElems, range) {
+  for (const valueElem of valueElems) {
+    const percentOfMax = (valueElem.textContent - range.min) / (range.max - range.min)
+    // TODO: need to modify saturation/value values to get darker colors?
+    // depends on bg //
+    valueElem.style.color = hsv2rgb(Math.floor((1 - percentOfMax) * 120), .8, .9)
+  }
 }
 
 function displayStores(storeDict) {//{{{
@@ -315,12 +387,16 @@ function displayStores(storeDict) {//{{{
 
     curRow.appendChild(storeDiv)
   })
-}//}}}
+
+  colorValuesByRange(document.querySelectorAll('.cart-price-value'), cartPriceRange)
+  colorValuesByRange(document.querySelectorAll('.store-dist-value'), storeDistRange)
+}
 displayStores(stores)
 document.querySelector('#calc-btn').addEventListener('click', function() {
   displayStores(stores)
-})
-
+})//}}}
+// colorCartPrices()
+log(cartPriceRange, storeDistRange)
 
 function createCartFoodDict() {
   const cartFoodDict = {}
