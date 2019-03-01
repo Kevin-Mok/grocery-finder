@@ -54,6 +54,7 @@
 	background-color: rgb(201, 206, 55);
 	text-align:center;
 	display:inline-block;
+	float:left;
 }
 
 .searchButton:hover {
@@ -145,6 +146,8 @@
 	background-color:black;
 	position:absolute;
 	border-radius:10%;
+	border-top:3px grey solid;
+	border-bottom:3px grey solid;
 }
 
 .selectedUserFrameInitialText {
@@ -153,5 +156,46 @@
 	left:50%;
 	top:50%;
 	transform:translate(-50%, -50%);
+	position:absolute;
+}
+
+.selectedUserProfilePictureFrame {
+	height:250px;
+	width:250px;
+	margin-left:50px;
+	margin-top:50px;
+	float:left;
+}
+
+.selectedUserProfilePicture {
+	border-radius:50%;
+	height:200px;
+	width:200px;
+	left:50%;
+	top:50%;
+	transform:translate(-50%, -50%);
+	position:relative;
+
+}
+
+.selectedUserDetailsFrame {
+	height:40%;
+	width:45%;
+	margin-left:10px;
+	top:55px;
+	float:left;
+}
+
+.selectedUserTitle {
+	font-size:28px;
+	color:white;
+	top:50px;
+	position:absolute;
+}
+
+.selectedUserTimeDetails {
+	font-size:18px;
+	color:white;
+	top:100px;
 	position:absolute;
 }
