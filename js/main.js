@@ -176,16 +176,16 @@ function createRemoveIcon() {
 
 function createStoreDiv() {
   const storeDiv = document.createElement('div')
-  storeDiv.className = 'media col-xl-5 mx-auto'
+  storeDiv.className = 'store-div media col-xl-5 mx-auto'
   return storeDiv
 }
 
 function createStoreThumbnail(src) {
   const storeThumbnail = document.createElement('div')
-  storeThumbnail.className = 'media-left'
+  storeThumbnail.className = 'store-img-div media-left'
 
   const storeImg = document.createElement('img')
-  storeImg.className = 'media-object img-thumbnail'
+  storeImg.className = 'store-img media-object img-thumbnail'
   storeImg.src = src
 
   storeThumbnail.appendChild(storeImg)
@@ -195,18 +195,18 @@ function createStoreThumbnail(src) {
 
 function createStoreBody(name) {
   const storeBody = document.createElement('div')
-  storeBody.className = 'media-body'
+  storeBody.className = 'store-div-body media-body'
 
   const storeHeader = document.createElement('h3')
-  storeHeader.className = 'media-heading'
+  storeHeader.className = 'store-name media-heading'
   storeHeader.textContent = name
 
   const cartPrice = document.createElement('p')
-  // storeHeader.className = 'media-heading'
+  cartPrice.className = 'cart-price-p'
   cartPrice.textContent = "Cart Price: "
 
   const storeDistance = document.createElement('p')
-  // storeHeader.className = 'media-heading'
+  storeDistance.className = 'store-dist-p'
   storeDistance.textContent = "Store Distance: "
 
   storeBody.appendChild(storeHeader)
@@ -279,6 +279,24 @@ function displayFood(foodDict) {//{{{
   })
 }//}}}
 
+function generateRandomFloat(min, max) {
+  return (Math.random() * (max - min) + min).toFixed(2)
+}
+
+function addRandomStoreInfo(storeBody) {
+  const cartPriceParElem = storeBody.querySelector('.cart-price-p')
+  const storeDistParElem = storeBody.querySelector('.store-dist-p')
+
+  const cartPriceSpanElem = document.createElement('span')
+  const storeDistSpanElem = document.createElement('span')
+
+  cartPriceSpanElem.textContent = '$' + generateRandomFloat(10, 50)
+  storeDistSpanElem.textContent = generateRandomFloat(5, 50) + ' km'
+
+  cartPriceParElem.appendChild(cartPriceSpanElem)
+  storeDistParElem.appendChild(storeDistSpanElem)
+}
+
 function displayStores(storeDict) {//{{{
   foodGrid.innerHTML = ''
   let curRow = createRow()
@@ -289,13 +307,16 @@ function displayStores(storeDict) {//{{{
     storeDiv.id = 'store-div-' + key
 
     storeDiv.appendChild(createStoreThumbnail(storeDict[key]["img"]))
-    storeDiv.appendChild(createStoreBody(storeDict[key]["name"]))
+
+    const storeBody = createStoreBody(storeDict[key]["name"])
+    addRandomStoreInfo(storeBody)
+    storeDiv.appendChild(storeBody)
     // storeDiv.appendChild(createStoreInfo(storeDict[key]["name"]))
 
     curRow.appendChild(storeDiv)
   })
 }//}}}
-// displayStores(stores)
+displayStores(stores)
 document.querySelector('#calc-btn').addEventListener('click', function() {
   displayStores(stores)
 })

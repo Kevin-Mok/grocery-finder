@@ -72,7 +72,7 @@ body .container-fluid {
   opacity: 0.7;
 }
 
-.media {
+.store-div {
   background-color: rgba(255, 255, 255, 0.4);
   padding: 1.5em;
   border-radius: 1em;
@@ -81,16 +81,16 @@ body .container-fluid {
   margin-left: 2em;
   margin-right: 2em;
 }
-.media .media-left {
+.store-div .store-img-div {
   width: 33%;
 }
-.media .media-left .media-object {
+.store-div .store-img-div .store-img {
   width: 100%;
 }
-.media .media-body {
+.store-div .store-div-body {
   margin-left: 1em;
 }
-.media .media-body .media-heading {
+.store-div .store-div-body .store-name {
   padding-bottom: 1em;
 }
 

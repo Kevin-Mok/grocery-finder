@@ -91,7 +91,7 @@ body {
   }
 }// }}}
 
-.media {
+.store-div {
   background-color: rgba(255,255,255,0.4);
   // background-color: white;
   padding: 1.5em;
@@ -101,18 +101,18 @@ body {
   margin-left: 2em;
   margin-right: 2em;
 
-  .media-left {
+  .store-img-div {
     width: 33%;
 
-    .media-object {
+    .store-img {
       width: 100%;
     }
   }
 
-  .media-body {
+  .store-div-body {
     margin-left: 1em;
 
-    .media-heading {
+    .store-name {
       // color: #;
       padding-bottom: 1em;
     }
