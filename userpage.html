@@ -27,72 +27,7 @@
 <!-- }}} head -->
 
 <body>
-    <div class="container-fluid transition-all">
-        <!-- navbar {{{ -->
-
-        <nav class="navbar navbar-expand-lg fixed-top navbar-custom">
-            <button class="navbar-toggler" id="navCollapseBtn" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault">
-                <span class="navbar-toggler-icon">
-                    <i class="fas fa-bars" id="navCollapseIcon"></i>
-                </span>
-            </button>
-
-            <div class="collapse navbar-collapse" id="navbarsExampleDefault">
-
-                <div class="dropdown">
-                    <button class="btn btn-secondary" type="button" id="userSettingsButton" data-toggle="dropdown">
-                        <img src="imgs/cappuccino.jpg" class="rounded-circle" height=30px width=30px>
-                    </button>
-                    <div class="dropdown-menu">
-                        <a class="dropdown-item" href="index.html">Logout</a>
-                    </div>
-                </div>
-
-
-
-                <button class="btn my-2 my-sm-0 hover-red ml-auto" id="cart-btn">
-                    <i class="fas fa-shopping-cart fa-lg"></i>
-                </button>
-
-                <form class="form-inline my-2 my-lg-0 d-none d-xl-block" id="largeSearchForm">
-                    <input class="form-control mr-sm-2 hover-red" id="searchBar" type="text" placeholder="Search">
-                    <button class="btn btn-secondary my-2 my-sm-0 hover-red" id="searchButton" type="submit">
-                        <i class="fa fa-search"></i>
-                    </button>
-                </form>
-
-                <ul class="navbar-nav" id="category-list">
-
-                    <!-- TODO: move this outside -->
-                    <li class="nav-item dropdown pointer" id="sort-options">
-                        <a class="nav-link dropdown-toggle" data-toggle="dropdown"><i class="fas fa-sort-alpha-down"></i></a>
-                        <div class="dropdown-menu">
-                            <a class="dropdown-item pointer"><i class="fas fa-sort-alpha-up"></i></a>
-                        </div>
-                    </li>
-
-                    <li class="nav-item order-0">
-                        <a class="nav-link pointer" id="all-items">All</a>
-                    </li>
-
-                </ul>
-
-
-
-                <!-- Notice how there are two search bars/forms in this html file
-      The first search bar/form at the top is the search bar that is visible for large screens (#largeSearchForm)
-      This search bar/form is the search bar that is visible in the dropdown, when the navbar is collapsed
-      as a result of a small screen -->
-
-            </div>
-
-
-       
-
-        </nav>
-
-        <!-- }}} navbar -->
-<div class="profile" >
+    <div class="profile" >
             
            
             <!-- nameform {{{ -->
@@ -132,6 +67,67 @@
             </form>
             </div>
         </div>
+    <div class="container-fluid transition-all">
+        <!-- navbar {{{ -->
+
+        <nav class="navbar navbar-expand-lg fixed-top navbar-custom">
+            <button class="navbar-toggler" id="navCollapseBtn" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault">
+                <span class="navbar-toggler-icon">
+                    <i class="fas fa-bars" id="navCollapseIcon"></i>
+                </span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+
+                <div class="dropdown">
+                    <button class="btn btn-secondary" type="button" id="userSettingsButton" data-toggle="dropdown">
+                        <img src="imgs/cappuccino.jpg" class="rounded-circle" height=30px width=30px>
+                    </button>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="index.html">Logout</a>
+                    </div>
+                </div>
+
+
+       
+
+                <button class="btn my-2 my-sm-0 hover-red ml-auto" id="cart-btn">
+                    <i class="fas fa-shopping-cart fa-lg"></i>
+                </button>
+
+               
+
+                <ul class="navbar-nav" id="category-list">
+
+                    <!-- TODO: move this outside -->
+                    <li class="nav-item dropdown pointer" id="sort-options">
+                        <a class="nav-link dropdown-toggle" data-toggle="dropdown"><i class="fas fa-sort-alpha-down"></i></a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item pointer"><i class="fas fa-sort-alpha-up"></i></a>
+                        </div>
+                    </li>
+
+                    <li class="nav-item order-0">
+                        <a class="nav-link pointer" id="all-items">All</a>
+                    </li>
+
+                </ul>
+
+
+
+                <!-- Notice how there are two search bars/forms in this html file
+      The first search bar/form at the top is the search bar that is visible for large screens (#largeSearchForm)
+      This search bar/form is the search bar that is visible in the dropdown, when the navbar is collapsed
+      as a result of a small screen -->
+
+            </div>
+
+
+
+        </nav>
+
+        <!-- }}} navbar -->
+
 
  
         
