@@ -172,3 +172,44 @@ function loginBtnClicked() {
     alert("User Login Successful. (Redirect to the user page)" );
   }
 }
+
+
+// The following code handles the funcitonality where the login and signup
+// popup dissappear when you click outside the popup, or if you hit the
+// Esc key.
+
+$("body").click(function(e) {
+
+  // Without this check, the popup dissappears right after you click
+  // the Login and Signup buttons in the dropdown
+  if (e.target.id == 'openSignupPopup' || e.target.id == 'openLoginPopup') {
+    return;
+  }
+  
+  const p = $('.popup');
+  // If popup currently exists and the user clicked outside of it
+  if (p.length > 0 && !isPartOfPopup(e.target)) {
+    closePopup();
+  }
+});
+
+$(document).keyup(function(e) {
+  if (e.key === "Escape" && $('.popup').length > 0) { // escape key maps to keycode `27`
+    closePopup();
+  }
+});
+
+/**
+ * Returns true if node is an element with the .popup class,
+ * or node is an ancestor that has the .popup class
+ */
+function isPartOfPopup(node) {
+  let child = node;
+  while (child !== null) {
+    if (child.classList && child.classList.contains('popup')) {
+      return true;
+    }
+    child = child.parentNode;
+  }
+  return false;
+}
