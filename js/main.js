@@ -140,6 +140,10 @@ function addItemToDropdown(dropdown, item) {
   dropdown.querySelector('.dropdown-menu').appendChild(item)
 }
 
+function clearDropdownItems(dropdown) {
+  removeAllChildren(dropdown.querySelector('.dropdown-menu')) 
+}
+
 // }}} food categories //
 
 // food {{{ //
@@ -284,9 +288,16 @@ function createFoodCategories(categories) {//{{{
   })
 }//}}}
 createFoodCategories(categories)
-// TODO: transition in //
+
+function removeAllChildren(element) {
+  while (element.firstChild) {
+    element.removeChild(element.firstChild);
+  }
+}
+
 function displayFood(foodDict) {//{{{
-  foodGrid.innerHTML = ''
+  removeAllChildren(foodGrid)
+
   let curRow = createRow()
   foodGrid.appendChild(curRow)
 
@@ -340,22 +351,18 @@ categoryList.addEventListener('click', changeCategory, true)//}}}
 // sorting options {{{ //
 
 function setAlphaSorting() {//{{{
-  const categoryList = document.querySelector('#category-list')
-  const sortingMenu = createDropdownMenu()
-  sortingMenu.id = 'sort-options'
+  const sortingMenu = document.querySelector('#sorting-options')
 
-  const sortingLabel = sortingMenu.querySelector('.dropdown-label')
-  const alphaForward = document.createElement('i')
-  alphaForward.className = "fas fa-sort-alpha-down"
-  sortingLabel.appendChild(alphaForward)
+  const sortingLabel = sortingMenu.querySelector('#sorting-label')
+  sortingLabel.className = "fas fa-sort-alpha-down"
 
+  clearDropdownItems(sortingMenu)
   const alphaBackwardItem = createDropdownItem()
   const alphaBackward = document.createElement('i')
   alphaBackward.className = "fas fa-sort-alpha-up"
   alphaBackwardItem.appendChild(alphaBackward)
   addItemToDropdown(sortingMenu, alphaBackwardItem)
 
-  categoryList.insertAdjacentElement('afterbegin', sortingMenu)
 }//}}}
 setAlphaSorting()
 
@@ -485,7 +492,8 @@ function doStoreCalculations() {//{{{
 }//}}}
 
 function displayStores(storeDict) {//{{{
-  foodGrid.innerHTML = ''
+  removeAllChildren(foodGrid)
+
   let curRow = createRow()
   foodGrid.appendChild(curRow)
 
