@@ -75,7 +75,7 @@ function openSignupPopup() {
 
   const usernameDiv = createInputPopupDiv("fa-envelope", "text", "Username", "signInUsername");
   const passwordDiv = createInputPopupDiv("fa-unlock", "password", "Password", "signInPassword");
-  const postalCodeDiv = createInputPopupDiv("fa-map-marker-alt", "text", "Postal Code", "signInPostalCode");
+  const postalCodeDiv = createInputPopupDiv("fa-map-marker-alt popup-icon-left-padding", "text", "Postal Code", "signInPostalCode");
   postalCodeDiv.getElementsByTagName("input")[0].id = 'postalCodeInput';
 
   const postalCodeQuestionBtn = createElementWithText("button", "btn btn-primary", "postalCodeQuestionBtn", "");
@@ -128,7 +128,7 @@ function createInputPopupDiv(iconName, type, placeholder, id) {
   const div = document.createElement("div");
   const i = document.createElement("i");
   div.className = "popup-input-div"
-  i.className = "fas " + iconName + " popup-icon";
+  i.className = "popup-icon fas " + iconName;
   div.appendChild(i);
 
   const input = document.createElement("input");

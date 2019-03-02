@@ -198,6 +198,10 @@ input:focus {
   margin: 0;
 }
 
+.popup-icon-left-padding {
+  left: 2px;
+}
+
 .popup-text {
   color: white;
   font-weight: 300;
