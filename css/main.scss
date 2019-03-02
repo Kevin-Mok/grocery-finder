@@ -177,7 +177,14 @@ nav {
   }
 
   #sort-options {
-    margin-right: 1em;
+    // margin-right: 1em;
+
+    .dropdown-menu {
+      i {
+        color: black;
+      }
+    }
+
   }
 
   i {

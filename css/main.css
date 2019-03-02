@@ -136,8 +136,8 @@ nav #navCollapseIcon {
 nav #largeSearchForm {
   margin-left: 1em;
 }
-nav #sort-options {
-  margin-right: 1em;
+nav #sort-options .dropdown-menu i {
+  color: black;
 }
 nav i {
   color: white;

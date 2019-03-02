@@ -1,3 +1,5 @@
+- phase1.txt/README
+- move all called js fxn's to after page loaded?
 - replace user icon with first letter of user's name
 - more items/categories
  

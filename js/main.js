@@ -93,40 +93,51 @@ function createRow() {//{{{
 
 // food categories {{{ //
 
-function createFoodCategory(name) {
-  const foodCategory = document.createElement('li')
-  foodCategory.className = "nav-item dropdown pointer"
+function createDropdownMenu() {//{{{
+  const dropdownMenu = document.createElement('li')
+  dropdownMenu.className = "nav-item dropdown pointer"
 
-  const categoryLabel = document.createElement('a')
-  categoryLabel.className = 'nav-link dropdown-toggle'
-  // categoryLabel.id = name + '-dropdown'
-  categoryLabel.setAttribute('data-toggle', 'dropdown')
-  categoryLabel.textContent = name
+  const dropdownLabel = document.createElement('a')
+  dropdownLabel.className = 'dropdown-label nav-link dropdown-toggle'
+  dropdownLabel.setAttribute('data-toggle', 'dropdown')
 
   const dropdown = document.createElement('div')
   dropdown.className = 'dropdown-menu'
 
-  foodCategory.appendChild(categoryLabel)
-  foodCategory.appendChild(dropdown)
+  dropdownMenu.appendChild(dropdownLabel)
+  dropdownMenu.appendChild(dropdown)
+
+  return dropdownMenu
+}//}}}
+
+function createFoodCategory(name) {//{{{
+  const foodCategory = createDropdownMenu()
+  foodCategory.querySelector('.dropdown-label').textContent = name
 
   const allSubCategory = createFoodSubcategory('All')
   allSubCategory.id = name.toLowerCase() + '-items'
-  addSubToCategory(foodCategory, allSubCategory)
+  addItemToDropdown(foodCategory, allSubCategory)
 
   return foodCategory
+}//}}}
+
+function createDropdownItem() {
+  const dropdownItem = document.createElement('a')
+  dropdownItem.className = 'dropdown-item pointer'
+  dropdownItem.setAttribute('data-toggle', 'dropdown')
+
+  return dropdownItem
 }
 
 function createFoodSubcategory(name) {
-  const subcategory = document.createElement('a')
-  subcategory.className = 'dropdown-item pointer'
-  subcategory.setAttribute('data-toggle', 'dropdown')
+  const subcategory = createDropdownItem()
   subcategory.textContent = name
 
   return subcategory
 }
 
-function addSubToCategory(category, subcategory) {
-  category.querySelector('.dropdown-menu').appendChild(subcategory)
+function addItemToDropdown(dropdown, item) {
+  dropdown.querySelector('.dropdown-menu').appendChild(item)
 }
 
 // }}} food categories //
@@ -267,29 +278,12 @@ function createFoodCategories(categories) {//{{{
   Object.keys(categories).forEach(function(key) {
     const category = createFoodCategory(key)
     categories[key].forEach(function(subcategoryName) {
-      addSubToCategory(category, createFoodSubcategory(subcategoryName))
+      addItemToDropdown(category, createFoodSubcategory(subcategoryName))
     })
     categoryList.appendChild(category)
   })
 }//}}}
 createFoodCategories(categories)
-// navbar dropdown {{{ //
-
-// The following code implements the feature where if you hover a dropdown
-// menu link, the dropdown options appear
-// https://stackoverflow.com/questions/50116307/how-to-make-hover-effect-instead-of-click-in-bootstrap-4-dropdown-menu
-$( ".dropdown" ).mouseover(function() {
-    $( this ).addClass('show').attr('aria-expanded', "true");
-    $( this ).find('.dropdown-menu').addClass('show');
-});
-
-$( ".dropdown" ).mouseout(function() {
-  $( this ).removeClass('show').attr('aria-expanded', "false");
-  $( this ).find('.dropdown-menu').removeClass('show');
-});
-
-// }}} navbar dropdown //
-
 // TODO: transition in //
 function displayFood(foodDict) {//{{{
   foodGrid.innerHTML = ''
@@ -342,6 +336,30 @@ function changeCategory(e) {//{{{
 categoryList.addEventListener('click', changeCategory, true)//}}}
 
 // }}} show food //
+
+// sorting options {{{ //
+
+function setAlphaSorting() {//{{{
+  const categoryList = document.querySelector('#category-list')
+  const sortingMenu = createDropdownMenu()
+  sortingMenu.id = 'sort-options'
+
+  const sortingLabel = sortingMenu.querySelector('.dropdown-label')
+  const alphaForward = document.createElement('i')
+  alphaForward.className = "fas fa-sort-alpha-down"
+  sortingLabel.appendChild(alphaForward)
+
+  const alphaBackwardItem = createDropdownItem()
+  const alphaBackward = document.createElement('i')
+  alphaBackward.className = "fas fa-sort-alpha-up"
+  alphaBackwardItem.appendChild(alphaBackward)
+  addItemToDropdown(sortingMenu, alphaBackwardItem)
+
+  categoryList.insertAdjacentElement('afterbegin', sortingMenu)
+}//}}}
+setAlphaSorting()
+
+// }}} sorting options //
 
 // show stores {{{ //
 
@@ -488,7 +506,7 @@ function displayStores(storeDict) {//{{{
 
   doStoreCalculations()
 }
-// displayStores(stores)
+displayStores(stores)
 document.querySelector('#calc-btn').addEventListener('click', function() {
   displayStores(stores)
 })//}}}
@@ -546,3 +564,21 @@ foodGrid.addEventListener('mouseout', showIconsOnFood);
 foodGrid.addEventListener('click', toggleFoodCartStatus);
 
 // }}} show/hide checks //
+
+// navbar dropdown {{{ //
+
+// The following code implements the feature where if you hover a dropdown
+// menu link, the dropdown options appear
+// https://stackoverflow.com/questions/50116307/how-to-make-hover-effect-instead-of-click-in-bootstrap-4-dropdown-menu
+$( ".dropdown" ).mouseover(function() {
+    $( this ).addClass('show').attr('aria-expanded', "true");
+    $( this ).find('.dropdown-menu').addClass('show');
+});
+
+$( ".dropdown" ).mouseout(function() {
+  $( this ).removeClass('show').attr('aria-expanded', "false");
+  $( this ).find('.dropdown-menu').removeClass('show');
+});
+
+// }}} navbar dropdown //
+
