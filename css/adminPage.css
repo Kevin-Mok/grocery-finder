@@ -43,29 +43,52 @@
 .searchBarFrame {
 	left:10%;
 	top:12%;
-	width:700px;
+	width:80%;
 	font-size:16px;
 	position:absolute;
-	float:left;
+
 }
 
 #searchBar {
 	float:left;
-	width:30%;
+	width:40%;
 }
 
 .searchButton {
-	width:100px;
-	margin-left:20px;
+	width:90px;
+	height:27px;
+	margin-left:3%;
 	border:1.5px solid grey;
 	background-color: rgb(201, 206, 55);
-	text-align:center;
-	display:inline-block;
 	float:left;
+	text-align:center;
 }
 
 .searchButton:hover {
 	cursor:pointer;
+	background-color:rgb(145,136,14);
+}
+
+.buttonText {
+	left:50%;
+	top:50%;
+	transform:translate(-50%, -50%);
+	position:relative;
+}
+
+.clearFilterButton {
+	width:100px;
+	height:27px;
+	border:1.5px solid red;
+	background-color:rgb(230,0,0);
+	margin-left:3%;
+	float:left;
+	text-align:center;
+}
+
+.clearFilterButton:hover {
+	cursor:pointer;
+	background-color:rgb(179,0,0);
 }
 
 .userListingBox {

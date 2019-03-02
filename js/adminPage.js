@@ -1,8 +1,8 @@
 // Javascript source code for adminPage.html
 'use strict'
 
-let users = [];
-let hidden_users = [];
+let users = [];			// holds User's that ARE NOT filtered out by the search function
+let hiddenUsers = [];	// holds User's that ARE filtered out 
 
 class User {
 	constructor(username, dateJoined, lastLogin, profilePicture, bannedUntil) {
@@ -27,6 +27,8 @@ users.push(new User("Barnes", new Date("July 1, 2017 23:21:19"), new Date("July 
 
 // loadUsers fills the user listing box
 function loadUsers() {
+
+	sortUsers();
 
 	const userListingBox = document.querySelector('.userListingBox');
 
@@ -69,7 +71,8 @@ function loadUsers() {
 }
 
 
-// Relies on usernames being unique
+/* 	Called when the client clicks on one of the listed user profiles in the user listing box.
+	Loads user profile information onto the selected user frame */
 function userSelected(e) {
 	let target = e.target;
 
@@ -127,34 +130,33 @@ function userSelected(e) {
 
 function deleteUser(e) {
 
-	const verification = window.prompt("Are you sure you want to permanently delete this user? \n (Type 'delete' and press OK to confirm)");
+	const verification = window.prompt("Are you sure you want to permanently delete this user? \n (Type exactly 'delete' and press OK to confirm)");
 
 	if (verification == 'delete') {
 	
 		const targetUser = e.target.parentElement.user;
 
-		console.log(users);
+		users = users.filter(function(user) {return user.username != targetUser.username});
+		hiddenUsers = hiddenUsers.filter(function(user) {return user.username != targetUser.username});
 
-		let newUsersList = users.filter(function(user) {return user.username != targetUser.username});
-
-		users = newUsersList;
-
-		console.log(users);
-
-		resetUI();
+		clearFilter();
+		updateUserListingBox();
+		resetSelectedUserFrame();
 
 	}
 	
 }
 
-function resetUI() {
-
-	/* Clear, and reload the user listing box */
+/* Clear, and reload the user listing box */
+function updateUserListingBox() {
 	const userListingBox = document.querySelector('.userListingBox');
 	while (userListingBox.firstChild) {
 		userListingBox.removeChild(userListingBox.firstChild);
 	}
 	loadUsers();
+}
+
+function resetSelectedUserFrame() {
 
 	/* Clear, and reload the selected user box with the initial text*/
 	const selectedUserFrame = document.querySelector('.selectedUserFrame');
@@ -169,12 +171,47 @@ function resetUI() {
 
 }
 
-document.addEventListener("click", filterUsers);
 
-function filterUsers(e) {
+function applyFilter(e) {
+	e.preventDefault();
+
+	transferHiddenUsers();
+
+	const filterText = document.querySelector('#searchBar').value.toLowerCase();
+
+	hiddenUsers = users.filter(function(user) {return !(user.username.toLowerCase().startsWith(filterText))});
+	users = users.filter(function(user) {return user.username.toLowerCase().startsWith(filterText)});
+
+
+	updateUserListingBox();
 
 }
 
+function clearFilter(e) {
+	transferHiddenUsers();
+	hiddenUsers = [];
+	document.querySelector('#searchBar').value = '';
+	updateUserListingBox();
+	
+}
+
+function transferHiddenUsers() {
+	for (let i = 0; i < hiddenUsers.length; i++) {
+		users.push(hiddenUsers[i]);
+	}
+	hiddenUsers = [];
+}
+
+/* Sorts the User objects in users so that they are listed alphabetically according to their usernames */
+function sortUsers() {
+	function compareUsernames(userA, userB) {
+		if (userA.username < userB.username) { return -1; }
+		if (userA.username > userB.username) { return 1; }
+		return 0;
+	}
+	users.sort(compareUsernames);
+	 
+}
 
 document.addEventListener("DOMContentLoaded", main);
 
@@ -199,5 +236,11 @@ function main() {
 	
 	document.body.background = './imgs/adminPageBackgrounds/adminpagebackground.jpg';
 	loadUsers();
+	const searchBar = document.querySelector('#searchBar');
+	searchBar.addEventListener('keyup', applyFilter);
+	const searchButton = document.querySelector('.searchButton');
+	searchButton.addEventListener('click', applyFilter);
+	const clearFilterButton = document.querySelector('.clearFilterButton');
+	clearFilterButton.addEventListener('click', clearFilter);
 	
 }
