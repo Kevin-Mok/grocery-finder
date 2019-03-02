@@ -111,7 +111,7 @@ function openSignupPopup() {
   $('#postalCodeQuestionBtn').popover({
     container: 'body',
     title: "Why do we need your postal code?",
-    content: "Grocery Finder needs your postal code do better determine grocery prices and deals specific to your region."
+    content: "Grocery Finder needs your postal code to provide you grocery prices and deals specific to your region."
   })
 }
 
@@ -172,10 +172,3 @@ function loginBtnClicked() {
     alert("User Login Successful. (Redirect to the user page)" );
   }
 }
-
-
-$('#postalCodeQuestionBtn').popover({
-  container: 'body',
-  title: "Why do we need your postal code?",
-  content: "Grocery Finder needs your postal code do better determine grocery prices and deals specific to your region."
-})
