@@ -12,15 +12,15 @@ body .container-fluid {
   height: 100%;
 }
 
-#food-grid {
-  padding-top: 6em;
-  height: 100%;
-}
-#food-grid #category-instructions {
+#category-instructions {
   position: absolute;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
+}
+
+#food-grid {
+  margin-top: 6em;
 }
 #food-grid .food-div {
   position: relative;
@@ -98,6 +98,7 @@ body .container-fluid {
 nav {
   /* height: 70px; */
   height: 3em;
+  margin-bottom: 3em;
   background-color: black;
 }
 nav .navbar-nav .nav-link {

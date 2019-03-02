@@ -35,13 +35,13 @@ body {
 
 //  }}} base // 
 
-#food-grid {// {{{
-  padding-top: 6em;
-  height: 100%;
+#category-instructions {
+  @include center-rel-parent();
+}
 
-  #category-instructions {
-    @include center-rel-parent();
-  }
+#food-grid {// {{{
+  margin-top: 6em;
+  // height: 100%;
 
   .food-div {
     position: relative;
@@ -91,7 +91,7 @@ body {
   }
 }// }}}
 
-.store-div {
+.store-div {// {{{
   background-color: rgba(255,255,255,0.2);
   // background-color: rgba(0,0,0,.25);
   // background-color: white;
@@ -118,13 +118,14 @@ body {
       padding-bottom: .5em;
     }
   }
-}
+}// }}}
 
 /* navbar {{{ */
 
 nav {
   /* height: 70px; */
   height: 3em;
+  margin-bottom: 3em;
   background-color: black;
 
   .navbar-nav {

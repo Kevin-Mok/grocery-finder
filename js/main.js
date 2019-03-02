@@ -3,8 +3,9 @@
 const log = console.log
 
 const cart = []
-let cartView = false
+let curView = 'stores'
 const foodGrid = document.querySelector('#food-grid')
+const foodGridRow = document.querySelector('#food-grid-row')
 const categoryList = document.querySelector('#category-list')
 
 // food data (phase 1) {{{ //
@@ -85,12 +86,6 @@ const storeDistRange = { min: 999, max: 0 }
 
 // create elem fxn's {{{ //
 
-function createRow() {//{{{
-  const curRow = document.createElement('div')
-  curRow.className = 'row'
-  return curRow
-}//}}}
-
 // food categories {{{ //
 
 function createDropdownMenu() {//{{{
@@ -131,6 +126,7 @@ function createDropdownItem() {
 
 function createFoodSubcategory(name) {
   const subcategory = createDropdownItem()
+  subcategory.classList.add('food-subcategory')
   subcategory.textContent = name
 
   return subcategory
@@ -184,7 +180,6 @@ function createRemoveIcon() {
   removeIcon.style.display = 'none'
   return removeIcon
 }
-
 
 // }}} icons //
 
@@ -274,6 +269,16 @@ function resetRanges() {
 
 // }}} store //
 
+// sorting icons {{{ //
+
+function createScoreDescIcon() {
+  const scoreDescIcon = document.createElement('i')
+  scoreDescIcon.className = "fas fa-sort-numeric-up"
+  return scoreDescIcon
+}
+
+// }}} sorting icons //
+
 // }}} return elem fxn's //
 
 // show food {{{ //
@@ -287,7 +292,6 @@ function createFoodCategories(categories) {//{{{
     categoryList.appendChild(category)
   })
 }//}}}
-createFoodCategories(categories)
 
 function removeAllChildren(element) {
   while (element.firstChild) {
@@ -295,11 +299,13 @@ function removeAllChildren(element) {
   }
 }
 
-function displayFood(foodDict) {//{{{
-  removeAllChildren(foodGrid)
+function clearFoodGrid() {
+  document.querySelector('#category-instructions').style.display = 'none'
+  removeAllChildren(foodGridRow)
+}
 
-  let curRow = createRow()
-  foodGrid.appendChild(curRow)
+function displayFood(foodDict) {//{{{
+  clearFoodGrid()
 
   Object.keys(foodDict).forEach(function(key) {
     const foodDiv = createFoodDiv()
@@ -316,7 +322,7 @@ function displayFood(foodDict) {//{{{
       checkIcon.style.display = 'inline'
     }
 
-    curRow.appendChild(foodDiv)
+    foodGridRow.appendChild(foodDiv)
   })
 }//}}}
 
@@ -328,15 +334,15 @@ function createCartFoodDict() {
   return cartFoodDict
 }
 document.querySelector('#cart-btn').addEventListener('click', function() {
-  cartView = true
+  curView = 'cart'
   displayFood(createCartFoodDict())
 })
 
 function changeCategory(e) {//{{{
-  cartView = false
+  curView = 'food'
   if (e.target.id == 'all-items') {
     displayFood(all)
-  } else if (e.target.classList.contains('dropdown-item')) {
+  } else if (e.target.classList.contains('food-subcategory')) {
     let foodCategoryName = e.target.textContent.toLowerCase()
     if (foodCategoryName == 'all') {
       foodCategoryName = /(\w*)-*/g.exec(e.target.id)[1]
@@ -344,7 +350,7 @@ function changeCategory(e) {//{{{
     eval('displayFood(' + foodCategoryName +')')
   }
 }
-categoryList.addEventListener('click', changeCategory, true)//}}}
+//}}}
 
 // }}} show food //
 
@@ -352,11 +358,14 @@ categoryList.addEventListener('click', changeCategory, true)//}}}
 
 function setAlphaSorting() {//{{{
   const sortingMenu = document.querySelector('#sorting-options')
+  clearDropdownItems(sortingMenu)
 
   const sortingLabel = sortingMenu.querySelector('#sorting-label')
-  sortingLabel.className = "fas fa-sort-alpha-down"
+  removeAllChildren(sortingLabel)
+  const alphaForwardIcon = document.createElement('i')
+  alphaForwardIcon.className = "fas fa-sort-alpha-down"
+  sortingLabel.appendChild(alphaForwardIcon)
 
-  clearDropdownItems(sortingMenu)
   const alphaBackwardItem = createDropdownItem()
   const alphaBackward = document.createElement('i')
   alphaBackward.className = "fas fa-sort-alpha-up"
@@ -364,7 +373,63 @@ function setAlphaSorting() {//{{{
   addItemToDropdown(sortingMenu, alphaBackwardItem)
 
 }//}}}
-setAlphaSorting()
+
+function setStoreSorting() {//{{{
+  const sortingMenu = document.querySelector('#sorting-options')
+  clearDropdownItems(sortingMenu)
+
+  const scoreDescItem = createDropdownItem()
+  scoreDescItem.appendChild(createScoreDescIcon())
+  addItemToDropdown(sortingMenu, scoreDescItem)
+  scoreDescItem.addEventListener('click', function(e) {
+    sortStoresByValue('.store-score-value', 'desc', createScoreDescIcon()) 
+  })
+
+  const scoreAscItem = createDropdownItem()
+  const scoreAscIcon = document.createElement('i')
+  scoreAscIcon.className = "fas fa-sort-numeric-down"
+  scoreAscItem.appendChild(scoreAscIcon)
+  addItemToDropdown(sortingMenu, scoreAscItem)
+  scoreAscItem.addEventListener('click', function() {
+    sortStoresByValue('.store-score-value', 'asc', scoreAscIcon.cloneNode()) 
+  })
+
+}//}}}
+
+function extractFloat(text) {
+  const float = /[0-9\.]+/g.exec(text)[0]
+  return float
+}
+
+function sortStoresByValue(valueSelector, order, sortingLabelIcon) {
+  const storeDivs = document.querySelectorAll('.store-div')
+  const storeDivsArray = []
+  for (const storeDiv of storeDivs) {
+    storeDivsArray.push(storeDiv)
+  }
+  storeDivsArray.sort(function(a, b) {
+    const aValue = extractFloat(a.querySelector(valueSelector).textContent)
+    const bValue = extractFloat(b.querySelector(valueSelector).textContent)
+    switch (order) {
+      case 'asc':
+        return (aValue > bValue) ? 1 : -1
+      case 'desc':
+        return (aValue > bValue) ? -1 : 1
+    }
+  })
+
+  clearFoodGrid()
+  for (const storeDiv of storeDivsArray) {
+    foodGridRow.appendChild(storeDiv)
+  }
+
+  const sortingLabel = document.querySelector('#sorting-label')
+  removeAllChildren(sortingLabel)
+  /* const scoreDescIcon = document.createElement('i')
+  scoreDescIcon.className = "fas fa-sort-numeric-up" */
+  sortingLabel.appendChild(sortingLabelIcon)
+
+}
 
 // }}} sorting options //
 
@@ -436,9 +501,9 @@ function hsv2rgb(h, s, v) {//{{{
   }).join('');
 }//}}}
 
-function getPercentOfRange(value, range) {
+function getPercentOfRange(value, range) {//{{{
   return (value - range.min) / (range.max - range.min)
-}
+}//}}}
 
 function colorValuesByRange(valueElems, range) {//{{{
   // will color min value green and max value red
@@ -451,12 +516,12 @@ function colorValuesByRange(valueElems, range) {//{{{
   }
 }//}}}
 
-function addUnitToValues(valueElems, unit, frontOrBack) {
+function addUnitToValues(valueElems, unit, frontOrBack) {//{{{
   for (const valueElem of valueElems) {
     const value = valueElem.textContent
     valueElem.textContent = (frontOrBack == 'front') ? unit + value : value + unit
   }
-}
+}//}}}
 
 function addStoreScores() {//{{{
   const storeBodies = document.querySelectorAll('.store-body')
@@ -476,6 +541,7 @@ function doStoreCalculations() {//{{{
   // NOTE: calculations must be done before adding units since calculating
   // functions assume value elements will only have number and no units
   // surrounding it
+  // TODO: use extractFloat() with with calculations? //
   addStoreScores()
 
   const cartPriceValueElems = document.querySelectorAll('.cart-price-value')
@@ -492,10 +558,7 @@ function doStoreCalculations() {//{{{
 }//}}}
 
 function displayStores(storeDict) {//{{{
-  removeAllChildren(foodGrid)
-
-  let curRow = createRow()
-  foodGrid.appendChild(curRow)
+  clearFoodGrid()
 
   resetRanges()
   Object.keys(storeDict).forEach(function(key) {
@@ -509,15 +572,15 @@ function displayStores(storeDict) {//{{{
     storeDiv.appendChild(storeBody)
     // storeDiv.appendChild(createStoreInfo(storeDict[key]["name"]))
 
-    curRow.appendChild(storeDiv)
+    foodGridRow.appendChild(storeDiv)
   })
 
   doStoreCalculations()
-}
-displayStores(stores)
-document.querySelector('#calc-btn').addEventListener('click', function() {
-  displayStores(stores)
-})//}}}
+
+  curView = 'stores'
+  sortStoresByValue('.store-score-value', 'desc', createScoreDescIcon())
+  setStoreSorting()
+}//}}}
 
 // }}} show stores //
 
@@ -559,7 +622,7 @@ function toggleFoodCartStatus(e) {
       // rm from cart
       cart.splice(cart.indexOf(foodId), 1)
       foodDiv.classList.remove('in-cart')
-      if (cartView) {
+      if (curView == 'cart') {
         foodDiv.parentElement.removeChild(foodDiv)
       }
     }
@@ -567,26 +630,36 @@ function toggleFoodCartStatus(e) {
   }
 }
 
-foodGrid.addEventListener('mouseover', showIconsOnFood);
-foodGrid.addEventListener('mouseout', showIconsOnFood);
-foodGrid.addEventListener('click', toggleFoodCartStatus);
-
 // }}} show/hide checks //
 
-// navbar dropdown {{{ //
+window.onload = function() {//{{{
+  foodGridRow.addEventListener('mouseover', showIconsOnFood);
+  foodGridRow.addEventListener('mouseout', showIconsOnFood);
+  foodGridRow.addEventListener('click', toggleFoodCartStatus);
 
-// The following code implements the feature where if you hover a dropdown
-// menu link, the dropdown options appear
-// https://stackoverflow.com/questions/50116307/how-to-make-hover-effect-instead-of-click-in-bootstrap-4-dropdown-menu
-$( ".dropdown" ).mouseover(function() {
-    $( this ).addClass('show').attr('aria-expanded', "true");
-    $( this ).find('.dropdown-menu').addClass('show');
-});
+  createFoodCategories(categories)
+  categoryList.addEventListener('click', changeCategory, true)
 
-$( ".dropdown" ).mouseout(function() {
-  $( this ).removeClass('show').attr('aria-expanded', "false");
-  $( this ).find('.dropdown-menu').removeClass('show');
-});
+  document.querySelector('#calc-btn').addEventListener('click', function() {
+    displayStores(stores)
+  })
 
-// }}} navbar dropdown //
+  displayStores(stores)
+  
+  // dropdown hover (jquery) {{{ //
+  
+  // The following code implements the feature where if you hover a dropdown
+  // menu link, the dropdown options appear
+  // https://stackoverflow.com/questions/50116307/how-to-make-hover-effect-instead-of-click-in-bootstrap-4-dropdown-menu
+  $( ".dropdown" ).mouseover(function() {
+      $( this ).addClass('show').attr('aria-expanded', "true");
+      $( this ).find('.dropdown-menu').addClass('show');
+  });
 
+  $( ".dropdown" ).mouseout(function() {
+    $( this ).removeClass('show').attr('aria-expanded', "false");
+    $( this ).find('.dropdown-menu').removeClass('show');
+  });
+  
+  // }}} dropdown hover (jquery) //
+}//}}}
