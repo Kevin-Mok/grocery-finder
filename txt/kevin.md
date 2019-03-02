@@ -1,6 +1,5 @@
 - replace user icon with first letter of user's name
 - more items/categories
-
  
 ## Phase 2
 - display (colored) item prices in store calculation

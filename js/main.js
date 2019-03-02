@@ -249,6 +249,14 @@ function createStoreBody(name) {
   cartPrice.textContent = name
 } */
 
+function resetRanges() {
+  cartPriceRange.min = 9999
+  cartPriceRange.max = 0
+
+  storeDistRange.min = 999
+  storeDistRange.max = 0
+}
+
 // }}} store //
 
 // }}} return elem fxn's //
@@ -463,6 +471,7 @@ function displayStores(storeDict) {//{{{
   let curRow = createRow()
   foodGrid.appendChild(curRow)
 
+  resetRanges()
   Object.keys(storeDict).forEach(function(key) {
     const storeDiv = createStoreDiv()
     storeDiv.id = 'store-div-' + key
