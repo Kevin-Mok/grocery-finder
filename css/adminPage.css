@@ -52,12 +52,15 @@
 #searchBar {
 	float:left;
 	width:35%;
-	height:27px;
+	height:24px;
+	padding:0;
+	margin:0;
+	border:4px solid white;
 }
 
 .searchButton {
 	width:80px;
-	height:27px;
+	height:28px;
 	margin-left:3%;
 	border:1.5px solid yellow;
 	background-color: rgb(201, 206, 55);
@@ -78,8 +81,8 @@
 }
 
 .clearFilterButton {
-	width:90px;
-	height:27px;
+	width:95px;
+	height:28px;
 	border:1.5px solid red;
 	background-color:rgb(230,0,0);
 	margin-left:3%;
