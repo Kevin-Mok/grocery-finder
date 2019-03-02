@@ -159,6 +159,10 @@ input:focus {
   transform: translate(-50%, -50%);
 }
 
+.popup-larger {
+  height: 450px;
+}
+
 .popup-title {
   color: white;
   font-size: 70px;
@@ -182,7 +186,6 @@ input:focus {
   margin-right: auto;
   margin-bottom: 10px;
   width: 300px;
-  /* background-color: pink; */
 }
 
 .popup-icon {
@@ -211,6 +214,15 @@ input:focus {
 
 #popupCancelBtn {
   margin-left: 5px;
+}
+
+#postalCodeInput {
+  width: 201px;
+}
+
+#postalCodeQuestionBtn {
+  height: 36px;
+  margin-left: 10px;
 }
 
 input:focus {

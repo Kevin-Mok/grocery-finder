@@ -17,10 +17,12 @@ function logInLinkClicked() {
 //   <h1 class="popup-title">Login</h1>
 //   <p class="popup-text">Your groceries are just a click away!</p>
 //   <div class="popup-input-div">
-//     <i class="fas fa-envelope popup-icon"></i><input class="input-box" type="email" placeholder="Username">
+//     <i class="fas fa-envelope popup-icon"></i>
+//     <input class="input-box" id="loginUsername" type="text" placeholder="Username">
 //   </div>
 //   <div class="popup-input-div">
-//     <i class="fas fa-unlock popup-icon"></i><input class="input-box" type="password" placeholder="Password">
+//     <i class="fas fa-unlock popup-icon"></i>
+//     <input class="input-box" id="loginPassword" type="password" placeholder="Password">
 //   </div>
 //   <button class="btn btn-primary popup-button" id="popupLoginBtn">Login</button>
 //   <button class="btn btn-danger popup-button" id="popupCancelBtn">Cancel</button>
@@ -35,7 +37,7 @@ function openLoginPopup() {
   const h1 = createElementWithText('h1', 'popup-title', '', 'Login');
   const p1 = createElementWithText('p', 'popup-text', '', 'Your groceries are just a click away!');
 
-  const usernameDiv = createInputPopupDiv("fa-envelope", "email", "Username", "loginUsername");
+  const usernameDiv = createInputPopupDiv("fa-envelope", "text", "Username", "loginUsername");
   const passwordDiv = createInputPopupDiv("fa-unlock", "password", "Password", "loginPassword");
 
   const loginBtn = createElementWithText("button", "btn btn-primary popup-button", "popupLoginBtn", "Login");
@@ -58,18 +60,31 @@ function openLoginPopup() {
   popup.appendChild(p2);
 
   document.body.appendChild(popup);
+
 }
 
+// To access the Username, Password, Postal Code input fields,
+// use #signInUsername, #signInPassword and #signInPostalCode respectively
 function openSignupPopup() {
   blurBackgroundToggle();
   const popup = document.createElement("div");
-  popup.className = "popup";
+  popup.className = "popup popup-larger";
 
   const h1 = createElementWithText('h1', 'popup-title', '', 'Sign up');
   const p1 = createElementWithText('p', 'popup-text', '', 'Your groceries are just a click away!');
 
-  const usernameDiv = createInputPopupDiv("fa-envelope", "email", "Username");
-  const passwordDiv = createInputPopupDiv("fa-unlock", "password", "Password");
+  const usernameDiv = createInputPopupDiv("fa-envelope", "text", "Username", "signInUsername");
+  const passwordDiv = createInputPopupDiv("fa-unlock", "password", "Password", "signInPassword");
+  const postalCodeDiv = createInputPopupDiv("fa-map-marker-alt", "text", "Postal Code", "signInPostalCode");
+  postalCodeDiv.getElementsByTagName("input")[0].id = 'postalCodeInput';
+
+  const postalCodeQuestionBtn = createElementWithText("button", "btn btn-primary", "postalCodeQuestionBtn", "");
+  const questionIcon = createElementWithText("i", "fas fa-question", "", "");
+  postalCodeQuestionBtn.setAttribute("data-toggle", "popover");
+  postalCodeQuestionBtn.setAttribute("data-trigger", "focus");
+  postalCodeQuestionBtn.setAttribute("data-placement", "right");
+  postalCodeQuestionBtn.appendChild(questionIcon);
+  postalCodeDiv.appendChild(postalCodeQuestionBtn);
 
   const loginBtn = createElementWithText("button", "btn btn-primary popup-button", "popupLoginBtn", "Signup");
   const cancelBtn = createElementWithText("button", "btn btn-danger popup-button", "popupCancelBtn", "Cancel");
@@ -85,11 +100,19 @@ function openSignupPopup() {
   popup.appendChild(p1);
   popup.appendChild(usernameDiv);
   popup.appendChild(passwordDiv);
+  popup.appendChild(postalCodeDiv)
   popup.appendChild(loginBtn);
   popup.appendChild(cancelBtn);
   popup.appendChild(p2);
 
   document.body.appendChild(popup);
+
+  // Code for the popover element for the postal code question mark button
+  $('#postalCodeQuestionBtn').popover({
+    container: 'body',
+    title: "Why do we need your postal code?",
+    content: "Grocery Finder needs your postal code do better determine grocery prices and deals specific to your region."
+  })
 }
 
 function closePopup() {
@@ -149,3 +172,10 @@ function loginBtnClicked() {
     alert("User Login Successful. (Redirect to the user page)" );
   }
 }
+
+
+$('#postalCodeQuestionBtn').popover({
+  container: 'body',
+  title: "Why do we need your postal code?",
+  content: "Grocery Finder needs your postal code do better determine grocery prices and deals specific to your region."
+})
