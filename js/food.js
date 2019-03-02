@@ -82,23 +82,6 @@ const categories = {"Produce": ['Fruits', 'Vegetables']}
 
 // food categories {{{ //
 
-function createDropdownMenu() {//{{{
-  const dropdownMenu = document.createElement('li')
-  dropdownMenu.className = "nav-item dropdown pointer"
-
-  const dropdownLabel = document.createElement('a')
-  dropdownLabel.className = 'dropdown-label nav-link dropdown-toggle'
-  dropdownLabel.setAttribute('data-toggle', 'dropdown')
-
-  const dropdown = document.createElement('div')
-  dropdown.className = 'dropdown-menu'
-
-  dropdownMenu.appendChild(dropdownLabel)
-  dropdownMenu.appendChild(dropdown)
-
-  return dropdownMenu
-}//}}}
-
 function createFoodCategory(name) {//{{{
   const foodCategory = createDropdownMenu()
   foodCategory.querySelector('.dropdown-label').textContent = name
@@ -110,28 +93,12 @@ function createFoodCategory(name) {//{{{
   return foodCategory
 }//}}}
 
-function createDropdownItem() {
-  const dropdownItem = document.createElement('a')
-  dropdownItem.className = 'dropdown-item pointer'
-  dropdownItem.setAttribute('data-toggle', 'dropdown')
-
-  return dropdownItem
-}
-
 function createFoodSubcategory(name) {
   const subcategory = createDropdownItem()
   subcategory.classList.add('food-subcategory')
   subcategory.textContent = name
 
   return subcategory
-}
-
-function addItemToDropdown(dropdown, item) {
-  dropdown.querySelector('.dropdown-menu').appendChild(item)
-}
-
-function clearDropdownItems(dropdown) {
-  removeAllChildren(dropdown.querySelector('.dropdown-menu')) 
 }
 
 // }}} food categories //
@@ -190,7 +157,7 @@ function setAlphaSorting() {//{{{
   const sortingLabel = sortingMenu.querySelector('#sorting-label')
   removeAllChildren(sortingLabel)
   const alphaForwardIcon = document.createElement('i')
-  alphaForwardIcon.className = "fas fa-sort-alpha-down"
+  alphaForwardIcon.className = "fas fa-"
   sortingLabel.appendChild(alphaForwardIcon)
 
   const alphaBackwardItem = createDropdownItem()

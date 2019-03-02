@@ -33,11 +33,11 @@ body {
   }
 }
 
-//  }}} base // 
-
 #category-instructions {
   @include center-rel-parent();
 }
+
+//  }}} base // 
 
 #food-grid {// {{{
   margin-top: 6em;
@@ -138,6 +138,10 @@ nav {
     }
   }
 
+  .dropdown-menu {
+    min-width: 100%;
+  }
+
   #searchBar {
     transition: background-color 0.3s ease;
     height: 34px
@@ -155,10 +159,6 @@ nav {
 
   .hover-red:hover {
     background-color: #ED2A2A!important;
-  }
-
-  #navDropdownList {
-    margin-right: 55px;
   }
 
   input:focus {
@@ -180,9 +180,19 @@ nav {
   #sorting-options {
     // margin-right: 1em;
 
+    .dropdown-label {
+      margin-left: .5em;
+      margin-right: .5em;
+
+      i {
+        margin-right: .25em;
+      }
+    }
+
     .dropdown-menu {
       i {
         color: black;
+        margin-right: .25em;
       }
     }
 

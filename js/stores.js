@@ -22,7 +22,7 @@ function createStoreThumbnail(src) {//{{{
   return storeThumbnail
 }//}}}
 
-function createStoreBody(name) {
+function createStoreBody(name) {//{{{
   const storeBody = document.createElement('div')
   storeBody.className = 'store-body media-body'
 
@@ -68,19 +68,18 @@ function createStoreBody(name) {
   storeBody.appendChild(storeDistParElem)
 
   return storeBody
-}
+}//}}}
 
-/* function createStoreInfo(storeBody) {
-  const cartPrice = document.createElement('p')
-  cartPrice.textContent = name
-} */
-
-function resetRanges() {
+function resetRanges() {//{{{
   cartPriceRange.min = 9999
   cartPriceRange.max = 0
 
   storeDistRange.min = 999
   storeDistRange.max = 0
+}//}}}
+
+function createDistSortingOption(arrow) {
+  const distSortingDiv =  document.createElement('div')
 }
 
 // }}} store //
@@ -93,29 +92,72 @@ function createScoreDescIcon() {//{{{
   return scoreDescIcon
 }//}}}
 
+function extractSortingLabelIcons(e) {//{{{
+  const labelIconElems = (e.target.classList.contains('icon-label-option') ?
+    e.target : e.target.parentElement).children
+  const labelIcons = []
+  for (const labelIcon of labelIconElems) {
+    labelIcons.push(labelIcon.cloneNode())
+  }
+  return labelIcons
+}//}}}
+
 function setStoreSorting() {//{{{
   const sortingMenu = document.querySelector('#sorting-options')
   clearDropdownItems(sortingMenu)
 
-  const scoreDescItem = createDropdownItem()
-  scoreDescItem.appendChild(createScoreDescIcon())
-  addItemToDropdown(sortingMenu, scoreDescItem)
-  scoreDescItem.addEventListener('click', function(e) {
-    sortStoresByValue('.store-score-value', 'desc', createScoreDescIcon()) 
-  })
+  // score {{{ //
+  
+  addSortingOption(createDropdownIconItem(["fas fa-sort-numeric-up"]),
+    sortingMenu, 
+    (e) => sortGridByValue('.store-div', '.store-score-value', 'float', 'desc', extractSortingLabelIcons(e)))
 
-  const scoreAscItem = createDropdownItem()
-  const scoreAscIcon = document.createElement('i')
-  scoreAscIcon.className = "fas fa-sort-numeric-down"
-  scoreAscItem.appendChild(scoreAscIcon)
-  addItemToDropdown(sortingMenu, scoreAscItem)
-  scoreAscItem.addEventListener('click', function() {
-    sortStoresByValue('.store-score-value', 'asc', scoreAscIcon.cloneNode()) 
-  })
+  addSortingOption(createDropdownIconItem(["fas fa-sort-numeric-down"]),
+    sortingMenu, 
+    (e) => sortGridByValue('.store-div', '.store-score-value', 'float', 'asc', extractSortingLabelIcons(e)))
+  
+  // }}} score //
+
+  // price {{{ //
+  
+  addSortingOption(createDropdownIconItem(["fas fa-dollar-sign", "fas fa-long-arrow-alt-up"]),
+    sortingMenu, 
+    (e) => sortGridByValue('.store-div', '.cart-price-value', 'float', 'asc', extractSortingLabelIcons(e)))
+
+  addSortingOption(createDropdownIconItem(["fas fa-dollar-sign", "fas fa-long-arrow-alt-down"]),
+    sortingMenu, 
+    (e) => sortGridByValue('.store-div', '.cart-price-value', 'float', 'desc', extractSortingLabelIcons(e)))
+  
+  // }}} price //
+
+  // dist {{{ //
+  
+  addSortingOption(createDropdownIconItem(["fas fa-car", "fas fa-long-arrow-alt-up"]),
+    sortingMenu, 
+    (e) => sortGridByValue('.store-div', '.store-dist-value', 'float', 'asc', extractSortingLabelIcons(e)))
+
+  addSortingOption(createDropdownIconItem(["fas fa-car", "fas fa-long-arrow-alt-down"]),
+    sortingMenu, 
+    (e) => sortGridByValue('.store-div', '.store-dist-value', 'float', 'desc', extractSortingLabelIcons(e)))
+  
+  // }}} dist  //
+  
+  // alph {{{ //
+  
+  addSortingOption(createDropdownIconItem(["fas fa-sort-alpha-down"]),
+    sortingMenu, 
+    (e) => sortGridByValue('.store-div', '.store-name', 'text', 'asc', extractSortingLabelIcons(e)))
+
+  addSortingOption(createDropdownIconItem(["fas fa-sort-alpha-up"]),
+    sortingMenu, 
+    (e) => sortGridByValue('.store-div', '.store-name', 'text', 'desc', extractSortingLabelIcons(e)))
+  
+  // }}} alph  //
 
 }//}}}
 
-function sortStoresByValue(valueSelector, order, sortingLabelIcon) {//{{{
+// deprecated by sortGridByValue
+function sortStoresByValue(valueSelector, order, sortingLabelElems) {//{{{
   const storeDivs = document.querySelectorAll('.store-div')
   const storeDivsArray = []
   for (const storeDiv of storeDivs) {
@@ -124,7 +166,6 @@ function sortStoresByValue(valueSelector, order, sortingLabelIcon) {//{{{
   storeDivsArray.sort(function(a, b) {
     const aValue = extractFloat(a.querySelector(valueSelector).textContent)
     const bValue = extractFloat(b.querySelector(valueSelector).textContent)
-    log(aValue)
     switch (order) {
       case 'asc':
         return (aValue > bValue) ? 1 : -1
@@ -140,9 +181,9 @@ function sortStoresByValue(valueSelector, order, sortingLabelIcon) {//{{{
 
   const sortingLabel = document.querySelector('#sorting-label')
   removeAllChildren(sortingLabel)
-  /* const scoreDescIcon = document.createElement('i')
-  scoreDescIcon.className = "fas fa-sort-numeric-up" */
-  sortingLabel.appendChild(sortingLabelIcon)
+  for (const sortingLabelElem of sortingLabelElems) {
+    sortingLabel.appendChild(sortingLabelElem)
+  }
 
 }//}}}
 
@@ -155,14 +196,11 @@ function generateRandomFloat(min, max) {//{{{
 }//}}}
 
 function updateRange(value, range) {//{{{
-  // TODO: pass in parsed value? //
   const parsedValue = parseFloat(value)
-  if (parsedValue < range.min) {
-    // log(parsedValue, '<', range.min)
+  if (!compareFloats(parsedValue, range.min)) {
     range.min = parsedValue
   } 
-  if (parsedValue > range.max) {
-    // log(parsedValue, '>', range.max)
+  if (compareFloats(parsedValue, range.max)) {
     range.max = parsedValue
   }
 }//}}}
@@ -293,7 +331,10 @@ function displayStores(storeDict) {//{{{
   doStoreCalculations()
 
   curView = 'stores'
-  sortStoresByValue('.store-score-value', 'desc', createScoreDescIcon())
+  sortGridByValue('.store-div', '.store-score-value', 'float', 'desc', [createScoreDescIcon()])
+  // sortGridByValue('.store-div', '.store-dist-value', 'float', 'desc', [createScoreDescIcon()])
+  // sortGridByValue('.store-div', '.store-name', 'text', 'desc', [createScoreDescIcon()])
+  
   setStoreSorting()
 }//}}}
 
