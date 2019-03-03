@@ -263,11 +263,16 @@ function editPasswordClicked(e) {
 
 function saveChangesClicked(e) {
 	const frame = e.target.parentElement;
-	let newText = '';
+	let currentNode = frame.firstChild;
+	while (currentNode != null && (!currentNode.classList.contains('inputTextField'))) {
+		currentNode = currentNode.nextSibling;
+	}
+	const newText = currentNode.value;
+	if (newText.length < 4) {
+		alert("Password must be at least 4 characters long!");
+		return;
+	}
 	while (frame.firstChild) {
-		if (frame.firstChild.classList.contains('inputTextField')) {
-			newText = frame.firstChild.value;
-		}
 		frame.removeChild(frame.firstChild);
 	}
 	console.log(newText);
