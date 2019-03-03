@@ -1,6 +1,18 @@
+// vars {{{ //
+
 const log = console.log
 // let curView = 'stores'
 let curView = ''
+let curViewBackup = ''
+
+const grid = document.querySelector('#grid')
+const gridRow = document.querySelector('#grid-row')
+const gridItemsBackup = []
+
+const searchBar = document.querySelector('#search-bar')
+const clearSearchBtn = document.querySelector('#clear-search-btn')
+
+// }}} vars //
 
 // dropdown {{{ //
 
@@ -119,9 +131,30 @@ function sortGridByValue(divSelector, valueSelector, valueType, order, sortingLa
 
 }//}}}
 
+function clearGrid() {
+  document.querySelector('#category-instructions').style.display = 'none'
+  removeAllChildren(gridRow)
+}
+
+function clearSearch() {
+  clearGrid()
+  for (const gridItem of gridItemsBackup) {
+    gridRow.appendChild(gridItem)
+  }
+  searchBar.value = ''
+  clearSearchBtn.style.display = 'none'
+  curView = curViewBackup
+}
+
 function search(e) {
-  if (curView == 'stores') {
-    searchCalculatedStores(document.querySelector('#search-bar').value)
+  const searchString = searchBar.value
+  if (searchString != '') {
+    switch (curView) {
+      case 'stores':
+        filterCalculatedStores(searchString)
+        break
+    }
+    clearSearchBtn.style.display = 'block'
   }
 }
 
@@ -148,7 +181,9 @@ window.onload = function() {//{{{
     curView = 'stores'
     displayStores(stores)
   })
+
   document.querySelector('#search-btn').addEventListener('click', search)
+  document.querySelector('#clear-search-btn').addEventListener('click', clearSearch)
 
   curView = 'stores'
   displayStores(stores)

@@ -39,7 +39,7 @@ body {
 
 //  }}} base // 
 
-#food-grid {// {{{
+#grid {// {{{
   margin-top: 6em;
   // height: 100%;
 
@@ -145,10 +145,32 @@ nav {
   }
 
   #search-form {
-    #search-bar {
-      transition: background-color 0.3s ease;
-      height: 34px
+    .search-bar-div {
+      position: relative;
+
+      #search-bar {
+        transition: background-color 0.3s ease;
+        height: 2em;
+      }
+
+      #clear-search-btn {
+        height: 2.5em;
+        width: 2.5em;
+        font-size: .5em;
+        background-color: grey;
+        @include rel-parent(94%, 56%);
+        display: none;
+
+        &:hover {
+          background-color: $navHoverColor;
+        }
+
+        i {
+          @include center-rel-parent();
+        }
+      }
     }
+
 
     #search-btn {
       background-color: #282828;

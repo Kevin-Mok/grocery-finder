@@ -68,7 +68,12 @@
           as a result of a small screen -->
           <!-- <form class="form-inline my-2 my-lg-0 d-none d-xl-block" id="largeSearchForm"> -->
           <form class="form-inline mr-2 my-2 my-lg-0" id="search-form">
-            <input class="form-control mr-sm-2 hover-red" id="search-bar" type="text" placeholder="Search">
+            <div class="search-bar-div">
+              <input class="form-control mr-sm-2 hover-red" id="search-bar" type="text" placeholder="Search">
+              <button class="btn my-2 my-sm-0" id="clear-search-btn" type="submit">
+                <i class="fas fa-times"></i>
+              </button>
+            </div>
             <button class="btn btn-secondary my-2 my-sm-0" id="search-btn" type="submit">
               <i class="fa fa-search"></i>
             </button>
@@ -97,8 +102,8 @@
     <!-- }}} navbar -->
 
     <p class="text-center" id="category-instructions">Select a category to begin adding items to your cart.</p>
-    <div id="food-grid">
-      <div class="row" id="food-grid-row"></div>
+    <div id="grid">
+      <div class="row" id="grid-row"></div>
     </div>
 
   </div>

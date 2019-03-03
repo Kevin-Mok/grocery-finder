@@ -1,8 +1,6 @@
 // vars {{{ //
 
 const cart = []
-const grid = document.querySelector('#food-grid')
-const gridRow = document.querySelector('#food-grid-row')
 const categoryList = document.querySelector('#category-list')
 
 // food data (phase 1) {{{ //
@@ -200,11 +198,6 @@ function removeAllChildren(element) {
   while (element.firstChild) {
     element.removeChild(element.firstChild);
   }
-}
-
-function clearGrid() {
-  document.querySelector('#category-instructions').style.display = 'none'
-  removeAllChildren(gridRow)
 }
 
 function displayFood(foodDict) {//{{{
