@@ -195,9 +195,9 @@
 .selectedUserProfilePictureFrame {
 	height:250px;
 	width:250px;
-	margin-left:50px;
-	margin-top:50px;
-	float:left;
+	left:40px;
+	top:15%;
+	position:absolute;
 }
 
 .selectedUserProfilePicture {
@@ -212,11 +212,12 @@
 }
 
 .selectedUserDetailsFrame {
-	height:40%;
+	height:50%;
 	width:45%;
 	margin-left:10px;
-	top:55px;
-	float:left;
+	top:10px;
+	left:300px;
+	position:absolute;
 }
 
 .selectedUserTitle {
@@ -229,14 +230,15 @@
 .selectedUserTimeDetails {
 	font-size:18px;
 	color:white;
-	top:100px;
+	top:225px;
 	position:absolute;
 }
 
 .deleteUserButton {
 	font-size:26px;
-	color:white;
+	color:black;
 	background-color:rgb(230, 0, 0);
+	border:1px solid red;
 	border-radius:10%;
 	left:50%;
 	top:85%;
@@ -249,5 +251,104 @@
 
 .deleteUserButton:hover {
 	background-color:rgb(179, 0, 0);
+	cursor:pointer;
+}
+
+
+.selectedUserPasswordFrame {
+	left:310px;
+	top:145px;
+	position:absolute;
+	font-size:18px;
+	color:white;
+}
+
+.selectedUserPasswordText {
+	float:right;
+}
+
+.editPasswordButton {
+	background-color:rgb(201, 206, 55);
+	border:1px solid yellow;
+	height:25px;
+	width:60px;
+	float:right;
+	text-align:center;
+	margin-left:20px;
+	border-radius:10%;
+	color:black;
+}
+
+.editPasswordButton:hover {
+	background-color:rgb(145, 136, 14);
+	cursor:pointer;
+}
+
+.editPasswordButtonText {
+	left:50%;
+	top:50%;
+	transform:translate(-50%, -50%);
+	position:absolute;
+}
+
+.saveChangesButton {
+	float:right;
+	height:25px;
+	width:150px;
+	margin-left:20px;
+	background-color:rgb(201, 206, 55);
+	text-align:center;
+	border-radius:10%;
+}
+
+.saveChangesButton:hover {
+	background-color:rgb(145,136,14);
+	cursor:pointer;
+}
+
+.adminFieldsFrame {
+	top:360px;
+	left:310px;
+	position:absolute;
+	height:30px;
+	width:400px;
+	color:white;
+	display:inline-block;
+}
+
+.promoteToAdminButton {
+	background-color:rgb(201, 206, 55);
+	border:1px solid yellow;
+	color:black;
+	top:-10px;
+	left:180px;
+	position:absolute;
+	width:115px;
+	height:45px;
+	text-align:center;
+	border-radius:10%;
+	display:inline-block;
+}
+
+.promoteToAdminButton:hover {
+	background-color:rgb(145, 136, 14);
+	cursor:pointer;
+}
+
+.setToDefaultProfilePictureButton {
+	background-color:rgb(201, 206, 55);
+	border:1px solid yellow;
+	border-radius:10%;
+	color:black;
+	top:58%;
+	left:90px;
+	height:45px;
+	width:130px;
+	position:absolute;
+	text-align:center;
+}
+
+.setToDefaultProfilePictureButton:hover {
+	background-color:rgb(145, 136, 14);
 	cursor:pointer;
 }

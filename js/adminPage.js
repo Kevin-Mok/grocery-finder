@@ -5,24 +5,27 @@ let users = [];			// holds User's that ARE NOT filtered out by the search functi
 let hiddenUsers = [];	// holds User's that ARE filtered out 
 
 class User {
-	constructor(username, dateJoined, lastLogin, profilePicture, bannedUntil) {
+	constructor(username, password, location, dateJoined, lastLogin, profilePicture, bannedUntil, isAdmin) {
 		this.username = username;
+		this.password = password;
+		this.location = location;
 		this.dateJoined = dateJoined;
 		this.lastLogin = lastLogin;
 		this.profilePicture = profilePicture;   //the url to where their profile picture is stored
 		this.bannedUntil = bannedUntil;	// the Date that this user is unbanned. If user is not banned, this is null.
+		this.isAdmin = isAdmin;
 	}
 }
 
 // Dummy user data for phase 1
 
-users.push(new User("Obama", new Date("September 21, 2017 05:25:11"), new Date("February 20, 2018 06:21:33"), 'imgs/profile-pictures/obama.jpg', null));
-users.push(new User("ProGamer", new Date("May 11, 2016 09:29:29"), new Date("May 11, 2016 09:29:29"),'imgs/profile-pictures/progamer.jpeg', null));
-users.push(new User("TimeTraveller", new Date("December 19, 2019 18:59:59"), new Date("December 20, 2019 17:10:02"), 'imgs/profile-pictures/timetraveller.jpeg', null));
-users.push(new User("Ronald", new Date("August 5, 2017 17:21:22"), new Date("August 5, 2017 17:21:22"), 'imgs/profile-pictures/default.jpg', null));
-users.push(new User("Bucky", new Date("January 6, 2016 01:45:00"), new Date("January 6, 2016 07:12:32"), 'imgs/profile-pictures/default.jpg', null));
-users.push(new User("Tony", new Date("February 28, 2019 05:27:19"), new Date("January 19, 2019 05:27:19"), 'imgs/profile-pictures/default.jpg', null));
-users.push(new User("Barnes", new Date("July 1, 2017 23:21:19"), new Date("July 4, 2017 23:59:59"), 'imgs/profile-pictures/barnes.jpeg', null));
+users.push(new User("Obama", "password", "Narnia", new Date("September 21, 2017 05:25:11"), new Date("February 20, 2018 06:21:33"), 'imgs/profile-pictures/obama.jpg', null, false));
+users.push(new User("ProGamer", "password", "Westeros", new Date("May 11, 2016 09:29:29"), new Date("May 11, 2016 09:29:29"),'imgs/profile-pictures/progamer.jpeg', null));
+users.push(new User("TimeTraveller", "password", "Essos",new Date("December 19, 2019 18:59:59"), new Date("December 20, 2019 17:10:02"), 'imgs/profile-pictures/timetraveller.jpeg', null, false));
+users.push(new User("Ronald", "password", "Smallville", new Date("August 5, 2017 17:21:22"), new Date("August 5, 2017 17:21:22"), 'imgs/profile-pictures/default.jpg', null, false));
+users.push(new User("Bucky", "password", "New Boston", new Date("January 6, 2016 01:45:00"), new Date("January 6, 2016 07:12:32"), 'imgs/profile-pictures/default.jpg', null, false));
+users.push(new User("Tony", "password", "Ba Sing Se", new Date("February 28, 2019 05:27:19"), new Date("January 19, 2019 05:27:19"), 'imgs/profile-pictures/default.jpg', null, false));
+users.push(new User("Barnes", "password", "Pluto", new Date("July 1, 2017 23:21:19"), new Date("July 4, 2017 23:59:59"), 'imgs/profile-pictures/barnes.jpeg', null, false));
 
 
 // loadUsers fills the user listing box
@@ -116,17 +119,164 @@ function userSelected(e) {
 
 	selectedUserFrame.appendChild(selectedUserDetailsFrame);
 
-	const deleteUserButton = document.createElement('div');
-	deleteUserButton.className = 'deleteUserButton';
-	const deleteUserButtonText = document.createTextNode('Delete User');
-	deleteUserButton.appendChild(deleteUserButtonText);
+	//create delete user button
+	if (!target.user.isAdmin) {
 
-	deleteUserButton.addEventListener('click', deleteUser);
+		const deleteUserButton = document.createElement('div');
+		deleteUserButton.className = 'deleteUserButton';
 
-	selectedUserFrame.appendChild(deleteUserButton);
+		const deleteUserButtonText = document.createTextNode('Delete User');
+		deleteUserButton.appendChild(deleteUserButtonText);
 
+		deleteUserButton.addEventListener('click', deleteUser);
+
+		selectedUserFrame.appendChild(deleteUserButton);
+	
+	}
+
+	createPasswordTextForm(target.user.password, selectedUserFrame);
+
+	createAdminFields(target.user.isAdmin, selectedUserFrame);
+
+	if (!target.user.isAdmin) {
+		createSetToDefaultProfilePictureButton(selectedUserFrame);
+	}
 
 }
+
+function createSetToDefaultProfilePictureButton(parentDiv) {
+
+	const button = document.createElement('div');
+	button.className = 'setToDefaultProfilePictureButton';
+	button.innerText = 'Set to Default Profile Picture';
+	button.addEventListener('click', setToDefaultProfilePictureClicked);
+
+	parentDiv.append(button);
+
+}
+
+function setToDefaultProfilePictureClicked(e) {
+	console.log(e.target.parentElement.user);
+	if (confirm("Set this user's profile picture to the default picture.\n(Click 'OK' to confirm)")) {
+		e.target.parentElement.user.profilePicture = 'imgs/profile-pictures/default.jpg';
+		updateUserListingBox();
+		reloadSelectedUserFrameWithCurrentUser();
+	}
+}
+
+function createAdminFields(isAdmin, parentDiv) {
+	const frame = document.createElement('div');
+	frame.className = 'adminFieldsFrame';
+	const subtitle = document.createElement('strong');
+	subtitle.className = 'adminFieldsSubtitle';
+	subtitle.innerText = 'Administrator? ';
+
+	frame.appendChild(subtitle);
+
+	if (isAdmin) {
+		const userIsAdminText = document.createTextNode('Yes');
+
+		frame.appendChild(userIsAdminText);
+
+	} else {
+		const userIsNotAdminText = document.createTextNode('No');
+
+		frame.appendChild(userIsNotAdminText);
+
+		const promoteToAdminButton = document.createElement('div');
+		promoteToAdminButton.className = 'promoteToAdminButton';
+		promoteToAdminButton.innerText = 'Promote to Administrator'
+		promoteToAdminButton.addEventListener('click', promoteToAdmin);
+
+		frame.appendChild(promoteToAdminButton);
+
+	}
+
+	parentDiv.appendChild(frame);
+}
+
+function promoteToAdmin(e) {
+	if (confirm("Are you sure you want to promote this user to administrator status?" +
+		"\nThis user will be able to access and modify user profiles. \n\n" +
+		"                                      (Press 'OK' to confirm)")) {
+		const userToChange = e.target.parentElement.parentElement.user;   //e.target.parentElement.parentElement is the selectedUserFrame
+		userToChange.isAdmin = true;
+		console.log(userToChange);
+		reloadSelectedUserFrameWithCurrentUser();
+	}
+}
+
+
+function createPasswordTextForm(text, parentDiv) {
+
+	const selectedUserPasswordFrame = document.createElement('div');
+	selectedUserPasswordFrame.className = 'selectedUserPasswordFrame';
+	const selectedUserPasswordSubtitle = document.createElement('strong');
+	selectedUserPasswordSubtitle.innerText = 'Password: ';
+	const selectedUserPasswordText = document.createTextNode(text);
+	selectedUserPasswordText.className = 'selectedUserPasswordText';
+	selectedUserPasswordFrame.append(selectedUserPasswordSubtitle);
+	selectedUserPasswordFrame.appendChild(selectedUserPasswordText);
+
+	
+	if (!parentDiv.user.isAdmin) {
+
+		const editPasswordButton = document.createElement('div');
+		editPasswordButton.innerText = 'Edit';
+		editPasswordButton.className = 'editPasswordButton';
+		editPasswordButton.addEventListener('click', editPasswordClicked);
+		selectedUserPasswordFrame.appendChild(editPasswordButton);
+	
+	}
+
+
+	parentDiv.appendChild(selectedUserPasswordFrame);
+	
+
+}
+
+function editPasswordClicked(e) {
+
+	const frame = e.target.parentElement;
+	let originalText = '';
+	while (frame.firstChild) {
+		if (frame.firstChild.nodeType == 3) {    // if frame.firstChild is a text node
+			originalText = frame.firstChild.textContent;
+		}
+		frame.removeChild(frame.firstChild);
+	}
+
+	const inputTextField = document.createElement('input');
+	inputTextField.setAttribute('type', 'text');
+	inputTextField.setAttribute('placeholder', originalText);
+	inputTextField.className = 'inputTextField';
+
+	const saveChangesButton = document.createElement('div');
+	saveChangesButton.className = 'saveChangesButton';
+	saveChangesButton.innerText = 'Save Changes';
+	saveChangesButton.addEventListener('click', saveChangesClicked);
+
+	frame.appendChild(inputTextField);
+	frame.appendChild(saveChangesButton);
+	
+}
+
+function saveChangesClicked(e) {
+	const frame = e.target.parentElement;
+	let newText = '';
+	while (frame.firstChild) {
+		if (frame.firstChild.classList.contains('inputTextField')) {
+			newText = frame.firstChild.value;
+		}
+		frame.removeChild(frame.firstChild);
+	}
+	console.log(newText);
+
+	const parentDiv = frame.parentElement;
+	createPasswordTextForm(newText, parentDiv);
+
+}
+
 
 function deleteUser(e) {
 
@@ -168,6 +318,19 @@ function resetSelectedUserFrame() {
 	const selectedUserFrameInitialText = document.createTextNode('Start by selecting a listed user');
 	selectedUserFrameInitial.appendChild(selectedUserFrameInitialText);
 	selectedUserFrame.appendChild(selectedUserFrameInitial);
+
+}
+
+function reloadSelectedUserFrameWithCurrentUser() {
+	const currentUser = document.querySelector('.selectedUserFrame').user;
+	const userListingBox = document.querySelector('.userListingBox');
+	let childNode = userListingBox.firstChild;
+	while (childNode != null) {
+		if (childNode.user == currentUser) {
+			childNode.click();
+		}
+		childNode= childNode.nextSibling;
+	}
 
 }
 
@@ -217,23 +380,7 @@ document.addEventListener("DOMContentLoaded", main);
 
 
 function main() {
-/*  Commented out code periodically changes background of page. 
-	===================================TODO: Make this look nicer or delete=========================================
 
-	changeBackgroundParameters();
-	document.body.background = window.bgSource;
-	setInterval (function () {
-		changeBackgroundParameters();
-		document.body.background = window.bgSource;
-	}, 10000);
-
-	function changeBackgroundParameters() {
-		window.bgIndex = (Math.floor((Math.random())*10)) + 1;
-		window.bgSource = `./imgs/adminPageBackgrounds/bg${bgIndex}proto.jpeg`;
-	}
-
-*/
-	
 	document.body.background = './imgs/adminPageBackgrounds/adminpagebackground.jpg';
 	loadUsers();
 	const searchBar = document.querySelector('#searchBar');
