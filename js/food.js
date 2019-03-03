@@ -1,8 +1,8 @@
 // vars {{{ //
 
 const cart = []
-const foodGrid = document.querySelector('#food-grid')
-const foodGridRow = document.querySelector('#food-grid-row')
+const grid = document.querySelector('#food-grid')
+const gridRow = document.querySelector('#food-grid-row')
 const categoryList = document.querySelector('#category-list')
 
 // food data (phase 1) {{{ //
@@ -202,13 +202,13 @@ function removeAllChildren(element) {
   }
 }
 
-function clearFoodGrid() {
+function clearGrid() {
   document.querySelector('#category-instructions').style.display = 'none'
-  removeAllChildren(foodGridRow)
+  removeAllChildren(gridRow)
 }
 
 function displayFood(foodDict) {//{{{
-  clearFoodGrid()
+  clearGrid()
 
   Object.keys(foodDict).forEach(function(key) {
     const foodDiv = createFoodDiv()
@@ -225,7 +225,7 @@ function displayFood(foodDict) {//{{{
       checkIcon.style.display = 'inline'
     }
 
-    foodGridRow.appendChild(foodDiv)
+    gridRow.appendChild(foodDiv)
   })
 
   sortGridByValue('.food-div', '.food-info', 'text', 'asc', [createAlphDescIcon()])

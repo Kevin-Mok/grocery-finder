@@ -63,10 +63,11 @@ function clearDropdownItems(dropdown) {//{{{
 
 // }}}  dropdown //
 
-function compareFloats(a, b) {
+function compareFloats(a, b) {//{{{
   return (parseFloat(a) > parseFloat(b)) ? true : false;
-}
+}//}}}
 
+// TODO: don't need divSelector - just grab all grid children? //
 function sortGridByValue(divSelector, valueSelector, valueType, order, sortingLabelElems) {//{{{
   const divs = document.querySelectorAll(divSelector)
   const divsArray = []
@@ -105,9 +106,9 @@ function sortGridByValue(divSelector, valueSelector, valueType, order, sortingLa
     }
   })
 
-  clearFoodGrid()
+  clearGrid()
   for (const div of divsArray) {
-    foodGridRow.appendChild(div)
+    gridRow.appendChild(div)
   }
 
   const sortingLabel = document.querySelector('#sorting-label')
@@ -118,29 +119,39 @@ function sortGridByValue(divSelector, valueSelector, valueType, order, sortingLa
 
 }//}}}
 
+function search(e) {
+  if (curView == 'stores') {
+    searchCalculatedStores(document.querySelector('#search-bar').value)
+  }
+}
+
 function extractFloat(text) {//{{{
   // return parseFloat(/[0-9\.]+/g.exec(text)[0])
   return /[0-9\.]+/g.exec(text)[0]
 }//}}}
 
 window.onload = function() {//{{{
-  foodGridRow.addEventListener('mouseover', showIconsOnFood);
-  foodGridRow.addEventListener('mouseout', showIconsOnFood);
-  foodGridRow.addEventListener('click', toggleFoodCartStatus);
+  gridRow.addEventListener('mouseover', showIconsOnFood);
+  gridRow.addEventListener('mouseout', showIconsOnFood);
+  gridRow.addEventListener('click', toggleFoodCartStatus);
 
   createFoodCategories(categories)
-  categoryList.addEventListener('click', changeCategory, true)
+  // categoryList.addEventListener('click', changeCategory, true)
+  document.querySelector('#all-items').addEventListener('click', changeCategory)
+  categoryList.addEventListener('click', changeCategory)
 
-  document.querySelector('#cart-btn').addEventListener('click', function() {
+  document.querySelector('#cart-btn').addEventListener('click', () => {
     curView = 'cart'
     displayFood(createCartFoodDict())
   })
-  document.querySelector('#calc-btn').addEventListener('click', function() {
+  document.querySelector('#calc-btn').addEventListener('click', () => {
     curView = 'stores'
     displayStores(stores)
   })
+  document.querySelector('#search-btn').addEventListener('click', search)
 
-  // displayStores(stores)
+  curView = 'stores'
+  displayStores(stores)
   // displayFood(all)
 
   // dropdown hover (jquery) {{{ //

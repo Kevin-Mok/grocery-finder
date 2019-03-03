@@ -100,38 +100,31 @@ nav {
   margin-bottom: 3em;
   background-color: black;
 }
+nav button:hover {
+  background-color: #ED2A2A;
+}
 nav .navbar-nav .nav-link {
   color: white !important;
 }
 nav .navbar-nav .pointer {
   cursor: pointer !important;
 }
-nav #searchBar {
+nav #search-form #search-bar {
   transition: background-color 0.3s ease;
   height: 34px;
 }
-nav #searchButton {
+nav #search-form #search-btn {
   background-color: #282828;
   border: none;
 }
-nav #searchBar {
-  transition: background-color 0.3s ease;
-  height: 34px;
-}
-nav .hover-red:hover {
-  background-color: #ED2A2A !important;
-}
-nav input:focus {
-  background-color: #ED2A2A !important;
+nav #search-form #search-btn:hover {
+  background-color: #ED2A2A;
 }
 nav #navCollapseBtn {
   background-color: #282828;
 }
 nav #navCollapseIcon {
   font-size: 28px;
-}
-nav #largeSearchForm {
-  margin-left: 1em;
 }
 nav .dropdown-menu {
   min-width: 0%;

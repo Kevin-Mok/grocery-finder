@@ -286,7 +286,7 @@ function doStoreCalculations() {//{{{
 }//}}}
 
 function displayStores(storeDict) {//{{{
-  clearFoodGrid()
+  clearGrid()
 
   resetRanges()
   Object.keys(storeDict).forEach(function(key) {
@@ -300,7 +300,7 @@ function displayStores(storeDict) {//{{{
     storeDiv.appendChild(storeBody)
     // storeDiv.appendChild(createStoreInfo(storeDict[key]["name"]))
 
-    foodGridRow.appendChild(storeDiv)
+    gridRow.appendChild(storeDiv)
   })
 
   doStoreCalculations()
@@ -310,6 +310,24 @@ function displayStores(storeDict) {//{{{
   // sortGridByValue('.store-div', '.store-name', 'text', 'desc', [createScoreDescIcon()])
   
   setStoreSorting()
+}//}}}
+
+function searchCalculatedStores(searchString) {//{{{
+  const storeDivs = document.querySelectorAll('.store-div')
+  const storeDivsArray = []
+
+  let storeName = ''
+  for (const storeDiv of storeDivs) {
+    storeName = storeDiv.querySelector('.store-name').textContent.toLowerCase()
+    if (storeName.includes(searchString)) {
+      storeDivsArray.push(storeDiv)
+    }
+  }
+
+  clearGrid()
+  for (const storeDiv of storeDivsArray) {
+    gridRow.appendChild(storeDiv)
+  }
 }//}}}
 
 // }}} show stores //

@@ -1,3 +1,7 @@
+- navbar icons
+  - hide calc. btn when no items
+  - hide sorting options initially
+  - display how many items in cart
 - pref. for dist./price for score
   - radius
 - validate input/postal code

@@ -122,11 +122,17 @@ body {
 
 /* navbar {{{ */
 
+$navHoverColor: #ED2A2A;
+
 nav {
   /* height: 70px; */
   height: 3em;
   margin-bottom: 3em;
   background-color: black;
+
+  button:hover {
+    background-color: $navHoverColor;
+  }
 
   .navbar-nav {
     .nav-link {
@@ -138,27 +144,20 @@ nav {
     }
   }
 
-  #searchBar {
-    transition: background-color 0.3s ease;
-    height: 34px
-  }
+  #search-form {
+    #search-bar {
+      transition: background-color 0.3s ease;
+      height: 34px
+    }
 
-  #searchButton {
-    background-color: #282828;
-    border: none;
-  }
+    #search-btn {
+      background-color: #282828;
+      border: none;
 
-  #searchBar {
-    transition: background-color 0.3s ease;
-    height: 34px
-  }
-
-  .hover-red:hover {
-    background-color: #ED2A2A!important;
-  }
-
-  input:focus {
-    background-color: #ED2A2A!important;
+      &:hover {
+        background-color: $navHoverColor;
+      }
+    }
   }
 
   #navCollapseBtn {
@@ -167,10 +166,6 @@ nav {
 
   #navCollapseIcon {
     font-size: 28px;
-  }
-
-  #largeSearchForm {
-    margin-left: 1em;
   }
 
   .dropdown-menu {
