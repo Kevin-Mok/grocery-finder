@@ -16,7 +16,7 @@
 
 //  }}} mixins //
 
-//  base {{{ // 
+//  base {{{ //
 
 html {
   height: 100%;
@@ -31,7 +31,7 @@ body {
   }
 }
 
-//  }}} base // 
+//  }}} base //
 
 #food-grid {// {{{
   padding-top: 6em;
@@ -105,7 +105,7 @@ body {
   cursor: pointer!important;
 }
 
-#searchButton {
+.searchButton {
   background-color: #282828;
   border: none;
 }
@@ -130,10 +130,14 @@ input:focus {
 
 #navCollapseBtn {
   background-color: #282828;
+  height: 33px;
+  width: 40px;
+  text-align: center;
+  padding: 0;
 }
 
 #navCollapseIcon {
-  font-size: 28px;
+  font-size: 23px;
 }
 
 #largeSearchForm {
@@ -150,7 +154,7 @@ input:focus {
 
 /* }}} navbar */
 
-//  login pop-up {{{ // 
+//  login pop-up {{{ //
 
 #userSettingsButton {
   background-color: black;
@@ -237,9 +241,25 @@ input:focus {
   margin-left: 5px;
 }
 
-
 input:focus {
   outline: none;
 }
 
-//  }}} login pop-up // 
+.navbar .navbar-collapse {
+  background-color: black;
+}
+
+/* Applies the CSS on screens that are md and smaller
+This CSS makes styles the collapsed navbar. It must be applied when the
+screen is md or smaller, because this CSS alters the layout of the navbars
+for lg and larger screen sizes. */
+@media(max-width:991.98px){
+  .navbar .navbar-collapse {
+    padding-left: 10px;
+    padding-bottom: 10px;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+  }
+}
+
+//  }}} login pop-up //
