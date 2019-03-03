@@ -146,6 +146,12 @@ function createRemoveIcon() {
 
 // }}} food //
 
+function createAlphDescIcon() {//{{{
+  const alphDescIcon = document.createElement('i')
+  alphDescIcon.className = "fas fa-sort-alpha-down"
+  return alphDescIcon
+}//}}}
+
 // }}} return elem fxn's //
 
 // sorting options {{{ //
@@ -157,14 +163,22 @@ function setAlphaSorting() {//{{{
   const sortingLabel = sortingMenu.querySelector('#sorting-label')
   removeAllChildren(sortingLabel)
   const alphaForwardIcon = document.createElement('i')
-  alphaForwardIcon.className = "fas fa-"
+  alphaForwardIcon.className = "fas fa-sort-alpha-down"
   sortingLabel.appendChild(alphaForwardIcon)
 
-  const alphaBackwardItem = createDropdownItem()
+  /* const alphaBackwardItem = createDropdownItem()
   const alphaBackward = document.createElement('i')
   alphaBackward.className = "fas fa-sort-alpha-up"
   alphaBackwardItem.appendChild(alphaBackward)
-  addItemToDropdown(sortingMenu, alphaBackwardItem)
+  addItemToDropdown(sortingMenu, alphaBackwardItem) */
+
+  addSortingOption(createDropdownIconItem(["fas fa-sort-alpha-down"]),
+    sortingMenu, 
+    (e) => sortGridByValue('.food-div', '.food-info', 'text', 'asc', extractSortingLabelIcons(e)))
+
+  addSortingOption(createDropdownIconItem(["fas fa-sort-alpha-up"]),
+    sortingMenu, 
+    (e) => sortGridByValue('.food-div', '.food-info', 'text', 'desc', extractSortingLabelIcons(e)))
 
 }//}}}
 
@@ -213,6 +227,9 @@ function displayFood(foodDict) {//{{{
 
     foodGridRow.appendChild(foodDiv)
   })
+
+  sortGridByValue('.food-div', '.food-info', 'text', 'asc', [createAlphDescIcon()])
+  setAlphaSorting()
 }//}}}
 
 function createCartFoodDict() {

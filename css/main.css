@@ -106,9 +106,6 @@ nav .navbar-nav .nav-link {
 nav .navbar-nav .pointer {
   cursor: pointer !important;
 }
-nav .dropdown-menu {
-  min-width: 100%;
-}
 nav #searchBar {
   transition: background-color 0.3s ease;
   height: 34px;
@@ -136,6 +133,9 @@ nav #navCollapseIcon {
 nav #largeSearchForm {
   margin-left: 1em;
 }
+nav .dropdown-menu {
+  min-width: 0%;
+}
 nav #sorting-options .dropdown-label {
   margin-left: 0.5em;
   margin-right: 0.5em;
@@ -146,6 +146,9 @@ nav #sorting-options .dropdown-label i {
 nav #sorting-options .dropdown-menu i {
   color: black;
   margin-right: 0.25em;
+}
+nav #sorting-options .dropdown-menu .dropdown-item {
+  padding: 2px 0.75rem;
 }
 nav i {
   color: white;

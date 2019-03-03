@@ -138,10 +138,6 @@ nav {
     }
   }
 
-  .dropdown-menu {
-    min-width: 100%;
-  }
-
   #searchBar {
     transition: background-color 0.3s ease;
     height: 34px
@@ -177,6 +173,11 @@ nav {
     margin-left: 1em;
   }
 
+  .dropdown-menu {
+    // min-width: 100%;
+    min-width: 0%;
+  }
+
   #sorting-options {
     // margin-right: 1em;
 
@@ -193,6 +194,10 @@ nav {
       i {
         color: black;
         margin-right: .25em;
+      }
+
+      .dropdown-item {
+        padding: 2px .75rem;
       }
     }
 

@@ -116,6 +116,8 @@ function setStoreSorting() {//{{{
     sortingMenu, 
     (e) => sortGridByValue('.store-div', '.store-score-value', 'float', 'asc', extractSortingLabelIcons(e)))
   
+ addDropdownDivider(sortingMenu)
+  
   // }}} score //
 
   // price {{{ //
@@ -128,6 +130,8 @@ function setStoreSorting() {//{{{
     sortingMenu, 
     (e) => sortGridByValue('.store-div', '.cart-price-value', 'float', 'desc', extractSortingLabelIcons(e)))
   
+ addDropdownDivider(sortingMenu)
+  
   // }}} price //
 
   // dist {{{ //
@@ -139,6 +143,8 @@ function setStoreSorting() {//{{{
   addSortingOption(createDropdownIconItem(["fas fa-car", "fas fa-long-arrow-alt-down"]),
     sortingMenu, 
     (e) => sortGridByValue('.store-div', '.store-dist-value', 'float', 'desc', extractSortingLabelIcons(e)))
+  
+ addDropdownDivider(sortingMenu)
   
   // }}} dist  //
   
@@ -153,37 +159,6 @@ function setStoreSorting() {//{{{
     (e) => sortGridByValue('.store-div', '.store-name', 'text', 'desc', extractSortingLabelIcons(e)))
   
   // }}} alph  //
-
-}//}}}
-
-// deprecated by sortGridByValue
-function sortStoresByValue(valueSelector, order, sortingLabelElems) {//{{{
-  const storeDivs = document.querySelectorAll('.store-div')
-  const storeDivsArray = []
-  for (const storeDiv of storeDivs) {
-    storeDivsArray.push(storeDiv)
-  }
-  storeDivsArray.sort(function(a, b) {
-    const aValue = extractFloat(a.querySelector(valueSelector).textContent)
-    const bValue = extractFloat(b.querySelector(valueSelector).textContent)
-    switch (order) {
-      case 'asc':
-        return (aValue > bValue) ? 1 : -1
-      case 'desc':
-        return (aValue > bValue) ? -1 : 1
-    }
-  })
-
-  clearFoodGrid()
-  for (const storeDiv of storeDivsArray) {
-    foodGridRow.appendChild(storeDiv)
-  }
-
-  const sortingLabel = document.querySelector('#sorting-label')
-  removeAllChildren(sortingLabel)
-  for (const sortingLabelElem of sortingLabelElems) {
-    sortingLabel.appendChild(sortingLabelElem)
-  }
 
 }//}}}
 
@@ -330,7 +305,6 @@ function displayStores(storeDict) {//{{{
 
   doStoreCalculations()
 
-  curView = 'stores'
   sortGridByValue('.store-div', '.store-score-value', 'float', 'desc', [createScoreDescIcon()])
   // sortGridByValue('.store-div', '.store-dist-value', 'float', 'desc', [createScoreDescIcon()])
   // sortGridByValue('.store-div', '.store-name', 'text', 'desc', [createScoreDescIcon()])

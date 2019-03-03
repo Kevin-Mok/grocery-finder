@@ -1,5 +1,6 @@
 const log = console.log
-let curView = 'stores'
+// let curView = 'stores'
+let curView = ''
 
 // dropdown {{{ //
 
@@ -46,6 +47,12 @@ function addSortingOption(option, menu, onclick) {//{{{
   option.addEventListener('click', onclick)
 }//}}}
 
+function addDropdownDivider(menu) {
+  const divider = document.createElement('div')
+  divider.className = 'dropdown-divider'
+  addItemToDropdown(menu, divider)
+}
+
 function addItemToDropdown(dropdown, item) {//{{{
   dropdown.querySelector('.dropdown-menu').appendChild(item)
 }//}}}
@@ -78,7 +85,7 @@ function sortGridByValue(divSelector, valueSelector, valueType, order, sortingLa
       default:
         aValue = a.querySelector(valueSelector).textContent
         bValue = b.querySelector(valueSelector).textContent
-        aGreater = (aValue, bValue) ? 1 : -1
+        aGreater = (aValue > bValue) ? 1 : -1
         break
     }
 
@@ -129,10 +136,12 @@ window.onload = function() {//{{{
     displayFood(createCartFoodDict())
   })
   document.querySelector('#calc-btn').addEventListener('click', function() {
+    curView = 'stores'
     displayStores(stores)
   })
 
-  displayStores(stores)
+  // displayStores(stores)
+  // displayFood(all)
 
   // dropdown hover (jquery) {{{ //
   
