@@ -242,9 +242,12 @@ function createCartFoodDict() {
   })
   return cartFoodDict
 }
-document.querySelector('#cart-btn').addEventListener('click', function() {
-  cartView = true
-  displayFood(createCartFoodDict())
+
+document.querySelectorAll('.cart-btn').forEach(cartBtn => {
+	cartBtn.addEventListener('click', function() {
+	  cartView = true
+	  displayFood(createCartFoodDict())
+	})
 })
 
 function changeCategory(e) {//{{{
@@ -314,4 +317,3 @@ foodGrid.addEventListener('mouseout', showIconsOnFood);
 foodGrid.addEventListener('click', toggleFoodCartStatus);
 
 // }}} show/hide checks //
-

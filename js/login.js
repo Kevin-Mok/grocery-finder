@@ -194,11 +194,16 @@ function loginBtnClicked() {
 // popup dissappear when you click outside the popup, or if you hit the
 // Esc key.
 
-$("body").click(function(e) {
+$('.openLoginPopup').click(openLoginPopup);
+$('.openSignupPopup').click(openSignupPopup);
+
+
+$("body").click((e) => {
 
   // Without this check, the popup dissappears right after you click
   // the Login and Signup buttons in the dropdown
-  if (e.target.id == 'openSignupPopup' || e.target.id == 'openLoginPopup') {
+  if (e.target.classList.contains('openSignupPopup') ||
+  e.target.classList.contains('openLoginPopup')) {
     return;
   }
 
