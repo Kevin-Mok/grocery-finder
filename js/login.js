@@ -65,6 +65,22 @@ function openLoginPopup() {
 
 // To access the Username, Password, Postal Code input fields,
 // use #signInUsername, #signInPassword and #signInPostalCode respectively
+//
+// Create this:
+//
+// <div class="popup popup-larger">
+//   <h1 class="popup-title" id="">Sign up</h1>
+//   <p class="popup-text" id="">Your groceries are just a click away!</p>
+//   <div class="popup-input-div"><i class="popup-icon fas fa-envelope"></i><input class="input-box" type="text" placeholder="Username" id="signInUsername"></div>
+//   <div class="popup-input-div"><i class="popup-icon fas fa-unlock"></i><input class="input-box" type="password" placeholder="Password" id="signInPassword"></div>
+//   <div class="popup-input-div">
+//     <i class="popup-icon fas fa-map-marker-alt popup-icon-left-padding"></i>
+//     <input class="input-box" type="text" placeholder="Postal Code" id="postalCodeInput">
+//     <button class="btn btn-primary" id="postalCodeQuestionBtn" data-toggle="popover" data-trigger="focus" data-placement="right" data-original-title="" title=""><i class="fas fa-question" id=""></i></button>
+//   </div>
+//   <button class="btn btn-primary popup-button" id="popupLoginBtn">Signup</button><button class="btn btn-danger popup-button" id="popupCancelBtn" onclick="closePopup()">Cancel</button>
+//   <p class="popup-text" id="">Already have an account? <a class="" id="" href="#" onclick="logInLinkClicked()">Log in!</a></p>
+// </div>
 function openSignupPopup() {
   blurBackgroundToggle();
   const popup = document.createElement("div");
@@ -185,7 +201,7 @@ $("body").click(function(e) {
   if (e.target.id == 'openSignupPopup' || e.target.id == 'openLoginPopup') {
     return;
   }
-  
+
   const p = $('.popup');
   // If popup currently exists and the user clicked outside of it
   if (p.length > 0 && !isPartOfPopup(e.target)) {

@@ -186,6 +186,7 @@ input:focus {
   margin-right: auto;
   margin-bottom: 10px;
   width: 300px;
+  text-align: left;
 }
 
 .popup-icon {
