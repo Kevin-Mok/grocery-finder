@@ -131,13 +131,17 @@ window.onload = function() {//{{{
   createFoodCategories(categories)
   categoryList.addEventListener('click', changeCategory, true)
 
-  document.querySelector('#cart-btn').addEventListener('click', function() {
-    curView = 'cart'
-    displayFood(createCartFoodDict())
+  document.querySelectorAll('.cart-btn').forEach(cartBtn => {
+    cartBtn.addEventListener('click', function() {
+      curView = 'cart'
+      displayFood(createCartFoodDict())
+    })
   })
-  document.querySelector('#calc-btn').addEventListener('click', function() {
-    curView = 'stores'
-    displayStores(stores)
+  document.querySelectorAll('.calc-btn').forEach(calcBtn => {
+    calcBtn.addEventListener('click', function() {
+      curView = 'stores'
+      displayStores(stores)
+    })
   })
 
   // displayStores(stores)

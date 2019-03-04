@@ -1,102 +1,95 @@
 <!DOCTYPE html>
 <html lang="en">
-<!-- head {{{ -->
-
-<head>
-  <title>Grocery Finder</title>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <script type="text/javascript" src="http://livejs.com/live.js"></script>
-
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-  <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
-
-  <!-- Bootstrap -->
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-
-
-  <link rel="stylesheet" type="text/css" href="css/main.css">
-</head>
-
-<!-- }}} head -->
-
-<body>
-  <div class="container-fluid transition-all">
-    <!-- navbar {{{ -->
-
-    <nav class="navbar navbar-expand-lg fixed-top navbar-custom">
-      <button class="navbar-toggler" id="navCollapseBtn" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault">
-        <span class="navbar-toggler-icon">
+  <!-- head {{{ -->
+  <head>
+    <title>Grocery Finder</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script type="text/javascript" src="http://livejs.com/live.js"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+  </head>
+  <!-- }}} head -->
+  <body>
+    <div class="container-fluid transition-all">
+      <!-- navbar {{{ -->
+      <nav class="navbar navbar-expand-md fixed-top navbar-custom">
+        <button class="navbar-toggler" id="navCollapseBtn" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault">
+          <!-- <span class="navbar-toggler-icon"> -->
           <i class="fas fa-bars" id="navCollapseIcon"></i>
-        </span>
-      </button>
+          <!-- </span> -->
+        </button>
 
-      <div class="collapse navbar-collapse" id="navbarsExampleDefault">
-
-        <div class="dropdown">
-          <button class="btn btn-secondary" type="button" id="userSettingsButton" data-toggle="dropdown">
+        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+          <div class="dropdown d-none d-md-block">
+            <button class="btn btn-secondary" type="button" id="userSettingsButton" data-toggle="dropdown">
             <i class="fas fa-user-circle fa-2x"></i>
-          </button>
-          <div class="dropdown-menu">
-            <a class="dropdown-item" href="#" onclick="openLoginPopup()">Login</a>
-            <a class="dropdown-item" href="#" onclick="openSignupPopup()">Sign up</a>
-          </div>
-        </div>
-
-        <button class="btn my-2 my-sm-0 hover-red ml-auto" id="cart-btn">
-          <i class="fas fa-shopping-cart fa-lg"></i>
-        </button>
-
-        <button class="btn my-2 my-sm-0 hover-red" id="calc-btn">
-          <i class="fas fa-calculator fa-lg"></i>
-        </button>
-
-        <ul class="navbar-nav" id="category-list">
-          <li class="nav-item dropdown pointer" id="sorting-options">
-            <a class="dropdown-label nav-link dropdown-toggle" id="sorting-label" data-toggle="dropdown"></a>
-            <div class="dropdown-menu"></div>
-          </li>
-
-          <form class="form-inline my-2 my-lg-0 d-none d-xl-block" id="largeSearchForm">
-            <input class="form-control mr-sm-2 hover-red" id="searchBar" type="text" placeholder="Search">
-            <button class="btn btn-secondary my-2 my-sm-0 hover-red" id="searchButton" type="submit">
-              <i class="fa fa-search"></i>
             </button>
+            <div class="dropdown-menu">
+              <a class="dropdown-item openLoginPopup" href="#">Login</a>
+              <a class="dropdown-item openSignupPopup" href="#">Sign up</a>
+            </div>
+          </div>
+
+          <button class="btn my-2 my-sm-0 hover-red ml-auto d-none d-md-block cart-btn">
+          <i class="fas fa-shopping-cart fa-lg"></i>
+          </button>
+
+          <button class="btn my-2 my-sm-0 hover-red d-none d-md-block calc-btn">
+          <i class="fas fa-calculator fa-lg"></i>
+          </button>
+
+          <ul class="navbar-nav" id="category-list">
+            <li class="nav-item dropdown pointer" id="sorting-options">
+              <a class="dropdown-label nav-link dropdown-toggle" id="sorting-label" data-toggle="dropdown"></a>
+              <div class="dropdown-menu"></div>
+            </li>
+
+            <form class="form-inline my-auto d-none d-md-block" id="largeSearchForm">
+              <input class="form-control mr-sm-2 hover-red search-bar" type="text" placeholder="Search">
+              <button class="btn btn-secondary my-2 my-sm-0 hover-red search-button" type="submit">
+              <i class="fa fa-search"></i>
+              </button>
+            </form>
+
+            <li class="nav-item order-0">
+              <a class="nav-link pointer" id="all-items">All</a>
+            </li>
+
+            <!-- This li only appears on the collapsed drop down menu -->
+            <!-- d-md-none means hide on screens wider than md -->
+            <li class="nav-item d-md-none">
+              <a class="nav-link pointer openLoginPopup">Login</a>
+              <a class="nav-link pointer openSignupPopup">Sign up</a>
+              <a class="nav-link pointer cart-btn">Cart</a>
+              <a class="nav-link pointer calc-btn">Calculate</a>
+            </li>
+          </ul>
+          <!-- Notice how there are two search bars/forms in this html file
+            The first search bar/form at the top is the search bar that is visible for medium screens (#largeSearchForm)
+            This search bar/form is the search bar that is visible in the dropdown, when the navbar is collapsed
+            as a result of a small screen -->
+          <form class="form-inline my-2 my-md-0 d-md-none" id="#smallSearchForm">
+            <input class="form-control mr-sm-2 hover-red search-bar" type="text" placeholder="Search">
+            <button class="btn btn-secondary my-2 my-sm-0 hover-red search-button" type="submit"><i class="fa fa-search"></i></button>
           </form>
-
-          <li class="nav-item order-0">
-            <a class="nav-link pointer" id="all-items">All</a>
-          </li>
-
-        </ul>
-
-        <!-- Notice how there are two search bars/forms in this html file
-        The first search bar/form at the top is the search bar that is visible for large screens (#largeSearchForm)
-        This search bar/form is the search bar that is visible in the dropdown, when the navbar is collapsed
-        as a result of a small screen -->
-        <form class="form-inline my-2 my-lg-0 d-xl-none" id="#smallSearchForm">
-          <input class="form-control mr-sm-2 hover-red" id="searchBarCollapsed" type="text" placeholder="Search">
-          <button class="btn btn-secondary my-2 my-sm-0 hover-red"
-            id="searchButtonCollapsed" type="submit"><i class="fa fa-search"></i></button>
-        </form>
+        </div>
+      </nav>
+      <!-- }}} navbar -->
+      <p class="text-center" id="category-instructions">Select a category to begin adding items to your cart.</p>
+      <div id="food-grid">
+        <div class="row" id="food-grid-row"></div>
       </div>
-    </nav>
-
-    <!-- }}} navbar -->
-
-    <p class="text-center" id="category-instructions">Select a category to begin adding items to your cart.</p>
-    <div id="food-grid">
-      <div class="row" id="food-grid-row"></div>
     </div>
-
-  </div>
-  <script type='text/javascript' src='js/main.js'></script>
-  <script type='text/javascript' src='js/food.js'></script>
-  <script type='text/javascript' src='js/stores.js'></script>
-  <script type='text/javascript' src='js/login.js'></script>
-</body>
-
+    <script type='text/javascript' src='js/main.js'></script>
+    <script type='text/javascript' src='js/food.js'></script>
+    <script type='text/javascript' src='js/stores.js'></script>
+    <script type='text/javascript' src='js/login.js'></script>
+  </body>
 </html>

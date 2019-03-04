@@ -1,14 +1,15 @@
 html {
-  height: 100%;
+  overflow: auto;
 }
 
 body {
   background-color: grey;
   font-family: "Roboto", sans-serif;
   font-size: 22px;
+  overflow: auto;
 }
 body .container-fluid {
-  height: 100%;
+  overflow: auto;
 }
 
 #category-instructions {
@@ -99,6 +100,10 @@ nav {
   height: 3em;
   margin-bottom: 3em;
   background-color: black;
+  position: absolute;
+  left: 0%;
+  top: 0%;
+  transform: translate(0%, 0%);
 }
 nav .navbar-nav .nav-link {
   color: white !important;
@@ -106,32 +111,34 @@ nav .navbar-nav .nav-link {
 nav .navbar-nav .pointer {
   cursor: pointer !important;
 }
-nav #searchBar {
-  transition: background-color 0.3s ease;
-  height: 34px;
-}
-nav #searchButton {
-  background-color: #282828;
-  border: none;
-}
-nav #searchBar {
-  transition: background-color 0.3s ease;
-  height: 34px;
-}
 nav .hover-red:hover {
   background-color: #ED2A2A !important;
+}
+nav .search-bar {
+  transition: background-color 0.3s ease;
+  height: 34px;
+  width: 190px;
+}
+nav .search-button {
+  background-color: #282828;
+  border: none;
 }
 nav input:focus {
   background-color: #ED2A2A !important;
 }
 nav #navCollapseBtn {
   background-color: #282828;
+  height: 33px;
+  width: 40px;
+  text-align: center;
+  padding: 0;
 }
 nav #navCollapseIcon {
-  font-size: 28px;
+  font-size: 23px;
 }
 nav #largeSearchForm {
-  margin-left: 1em;
+  margin-left: 0.5em;
+  margin-right: 0.5em;
 }
 nav .dropdown-menu {
   min-width: 0%;
@@ -186,6 +193,10 @@ nav i {
   transform: translate(-50%, -50%);
 }
 
+.popup-larger {
+  height: 450px;
+}
+
 .popup-title {
   color: white;
   font-size: 70px;
@@ -209,7 +220,7 @@ nav i {
   margin-right: auto;
   margin-bottom: 10px;
   width: 300px;
-  /* background-color: pink; */
+  text-align: left;
 }
 
 .popup-icon {
@@ -220,6 +231,10 @@ nav i {
   top: 50%;
   transform: translateY(-50%);
   margin: 0;
+}
+
+.popup-icon-left-padding {
+  left: 2px;
 }
 
 .popup-text {
@@ -240,8 +255,34 @@ nav i {
   margin-left: 5px;
 }
 
+#postalCodeInput {
+  width: 201px;
+}
+
+#postalCodeQuestionBtn {
+  height: 36px;
+  margin-left: 10px;
+}
+
 input:focus {
   outline: none;
+}
+
+.navbar .navbar-collapse {
+  background-color: black;
+}
+
+/* Applies the CSS on screens that are md and smaller
+This CSS makes styles the collapsed navbar. It must be applied when the
+screen is md or smaller, because this CSS alters the layout of the navbars
+for lg and larger screen sizes. */
+@media (max-width: 767.98px) {
+  .navbar .navbar-collapse {
+    padding-left: 10px;
+    padding-bottom: 10px;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+  }
 }
 
 /*# sourceMappingURL=main.css.map */
