@@ -1,6 +1,4 @@
 ## Phase 1
-- user settings popup
-  - store values
 - phase1.txt/README
 - server comments
  

@@ -131,6 +131,14 @@ function openSignupPopup() {
   })
 }
 
+function saveUserSettings() {
+  // user.username = document.querySelector('#etf-username').querySelector('.etf-value').textContent
+  user.username = getEtfValue(document.querySelector('#etf-username'))
+  user.password = getEtfValue(document.querySelector('#etf-password'))
+  user.postalCode = getEtfValue(document.querySelector('#etf-postal-code'))
+  closePopup()
+}
+
 function openSettingsPopup() {
   blurBackgroundToggle();
   const popup = document.createElement("div");
@@ -141,11 +149,12 @@ function openSettingsPopup() {
 
   const userInfoDiv = document.createElement('div')
   userInfoDiv.id = 'user-info-div'
-  userInfoDiv.appendChild(createEtf('Username', 'user', 4, 20))
-  userInfoDiv.appendChild(createEtf('Password', 'user', 4, 20))
-  userInfoDiv.appendChild(createEtf('Postal Code', 'ABC 123', 4, 20))
+  userInfoDiv.appendChild(createEtf('Username', user.username, 4, 20))
+  userInfoDiv.appendChild(createEtf('Password', user.password, 4, 20))
+  userInfoDiv.appendChild(createEtf('Postal Code', user.postalCode, 6, 7))
 
   const saveChangesBtn = createElementWithText("button", "btn btn-primary popup-button", "popupLoginBtn", "Save Changes");
+  saveChangesBtn.setAttribute("onclick", "saveUserSettings()");
   const cancelBtn = createElementWithText("button", "btn btn-danger popup-button", "popupCancelBtn", "Cancel");
   cancelBtn.setAttribute("onclick", "closePopup()");
 

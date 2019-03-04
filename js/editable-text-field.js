@@ -1,6 +1,7 @@
 function createEtf(label, initialValue, minLength, maxLength) {//{{{
   const etfElem = document.createElement('div')
   etfElem.className = 'etf-div d-flex flex-row'
+  etfElem.id =  'etf-' + label.replace(/\s+/g, '-').toLowerCase()
   etfElem.innerHTML = `
     <strong class='etf-label'>${label}:&nbsp;</strong><span class='etf-value'>${initialValue}</span>
     <input class='etf-input' type='text' value='${initialValue}' style='display: none;'>
@@ -55,10 +56,15 @@ function toggleEditMode(etfElem) {//{{{
 function saveEtfInput(e, minLength, maxLength) {//{{{
   const etfElem = getEtfElemFromEvent(e)
   const newValue = etfElem.querySelector('.etf-input').value
-  if (parseInt(minLength) <= parseInt(newValue.length) <= parseInt(maxLength)) {
+  // if (parseInt(minLength) <= parseInt(newValue.length) <= parseInt(maxLength)) {
+  if (compareFloats(newValue.length, minLength) && compareFloats(maxLength, newValue.length)) {
     etfElem.querySelector('.etf-value').textContent = newValue
     toggleEditMode(etfElem)
   } else {
 		alert(`Input must be between ${minLength}-${maxLength} characters in length.`)
   }
 }//}}}
+
+function getEtfValue(etfElem) {
+  return etfElem.querySelector('.etf-value').textContent
+}

@@ -1,6 +1,11 @@
 const log = console.log
 // let curView = 'stores'
 let curView = ''
+let user = {
+  username: 'user',
+  password: 'user',
+  postalCode: 'ABC 123',
+}
 
 // dropdown {{{ //
 
@@ -63,9 +68,9 @@ function clearDropdownItems(dropdown) {//{{{
 
 // }}}  dropdown //
 
-function compareFloats(a, b) {
-  return (parseFloat(a) > parseFloat(b)) ? true : false;
-}
+function compareFloats(a, b) {//{{{
+  return (parseFloat(a) >= parseFloat(b)) ? true : false;
+}//}}}
 
 function sortGridByValue(divSelector, valueSelector, valueType, order, sortingLabelElems) {//{{{
   const divs = document.querySelectorAll(divSelector)
@@ -148,8 +153,8 @@ window.onload = function() {//{{{
 
   // displayStores(stores)
   // displayFood(all)
-  foodGridRow.appendChild(createEtf('Test', 'test', 4, 20))
-  openSettingsPopup()
+  // foodGridRow.appendChild(createEtf('Test', 'test', 4, 20))
+  // openSettingsPopup()
 
   // dropdown hover (jquery) {{{ //
   
