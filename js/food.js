@@ -241,8 +241,14 @@ function createCartFoodDict() {
   return cartFoodDict
 }
 
+// This function gets called when you click anything in #category-list
+// This actually causes a slight bug. The curView switches to food mode
+// when you click login/sign up on the collapsed nav bar
 function changeCategory(e) {//{{{
+
+  // TODO If target was a sorting button, then leave the curView as it is
   curView = 'food'
+
   if (e.target.id == 'all-items') {
     displayFood(all)
   } else if (e.target.classList.contains('food-subcategory')) {

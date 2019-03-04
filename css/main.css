@@ -310,5 +310,23 @@ for lg and larger screen sizes. */
     border-bottom-right-radius: 5px;
   }
 }
+.save-cart-btn {
+  position: absolute;
+  top: 80px;
+  left: 15px;
+}
+
+.saved-carts-div {
+  background-color: pink;
+  margin-top: -40px;
+}
+
+.saved-cart-item {
+  font-size: 15px;
+  padding: 15px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  background-color: greenyellow;
+}
 
 /*# sourceMappingURL=main.css.map */

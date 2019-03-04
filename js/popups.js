@@ -1,5 +1,5 @@
-// This javascript file handles user interaction when the user clicks
-// the "Login" and "Sign up" buttons
+// This javascript file handles user interaction for popups
+// This includes the interactions for login, signup, user settings and save carts
 
 function signInLinkClicked() {
   closePopup();
@@ -60,7 +60,6 @@ function openLoginPopup() {
   popup.appendChild(p2);
 
   document.body.appendChild(popup);
-
 }
 
 // To access the Username, Password, Postal Code input fields,
@@ -129,6 +128,45 @@ function openSignupPopup() {
     title: "Why do we need your postal code?",
     content: "Grocery Finder needs your postal code to provide you grocery prices and deals specific to your region."
   })
+}
+
+// Create this
+// <div class="popup">
+//   <h1 class="popup-title" id="">Current cart</h1>
+//   <p class="popup-text" id="">Enter a name for your current cart.</p>
+//   <div class="popup-input-div"><i class="fas fa-file-signature popup-icon"></i></i><input class="input-box" type="text" placeholder="Cart name" id="cartName"></div>
+//
+//   <button class="btn btn-primary popup-button" id="popupSaveBtn">Save cart</button>
+//   <button class="btn btn-danger popup-button" id="popupCancelBtn" onclick="closePopup()">Cancel</button>
+// </div>
+function openCurrentCartPopup() {
+  blurBackgroundToggle();
+  const popup = document.createElement("div");
+  popup.className = "popup";
+
+  const h1 = createElementWithText('h1', 'popup-title', '', 'Current cart');
+  const p1 = createElementWithText('p', 'popup-text', '', 'Enter a name for your current cart.');
+
+  const nameDiv = createInputPopupDiv('fa-file-signature', 'text', 'Cart name', 'cartName');
+
+  const saveBtn = createElementWithText("button", "btn btn-primary popup-button", "popupSaveBtn", "Save cart");
+  saveBtn.setAttribute("onclick", "cartSaveBtnClicked()");
+  const cancelBtn = createElementWithText("button", "btn btn-danger popup-button", "popupCancelBtn", "Cancel");
+  cancelBtn.setAttribute("onclick", "closePopup()");
+
+  popup.appendChild(h1);
+  popup.appendChild(p1);
+  popup.appendChild(nameDiv);
+  popup.appendChild(saveBtn);
+  popup.appendChild(cancelBtn);
+
+  document.body.appendChild(popup);
+}
+
+function cartSaveBtnClicked() {
+  const cartName = $('#cartName').val()
+  user.savedCarts[cartName] = cart
+  closePopup()
 }
 
 function saveUserSettings() {
@@ -237,6 +275,7 @@ function loginBtnClicked() {
 $('.openLoginPopup').click(openLoginPopup);
 $('.openSignupPopup').click(openSignupPopup);
 $('.openSettingsPopup').click(openSettingsPopup);
+$('.save-cart-btn').click(openCurrentCartPopup);
 
 
 $("body").click((e) => {
@@ -246,7 +285,8 @@ $("body").click((e) => {
   // the Login and Signup buttons in the dropdown
   if (e.target.classList.contains('openSignupPopup') ||
     e.target.classList.contains('openLoginPopup') ||
-    e.target.classList.contains('openSettingsPopup')) {
+    e.target.classList.contains('openSettingsPopup') ||
+    e.target.classList.contains('save-cart-btn')) {
     return;
   }
 

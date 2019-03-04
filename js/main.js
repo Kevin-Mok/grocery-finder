@@ -5,6 +5,20 @@ let user = {
   username: 'user',
   password: 'user',
   postalCode: 'ABC 123',
+  savedCarts: {}
+}
+
+function showSavedCartBtn() {
+  if (curView == 'cart') {
+    $('.save-cart-btn').removeClass('d-none')
+  }
+ 
+}
+
+function hideSavedCartBtn() {
+  if (curView != 'cart') {
+    $('.save-cart-btn').addClass('d-none')
+  }
 }
 
 // dropdown {{{ //
@@ -139,6 +153,7 @@ window.onload = function() {//{{{
   document.querySelectorAll('.cart-btn').forEach(cartBtn => {
     cartBtn.addEventListener('click', function() {
       curView = 'cart'
+      showSavedCartBtn()
       displayFood(createCartFoodDict())
     })
   })
@@ -146,10 +161,12 @@ window.onload = function() {//{{{
     calcBtn.addEventListener('click', function() {
     // calcBtn.addEventListener('click', function(e) {
       // log(e.target)
+      hideSavedCartBtn()
       curView = 'stores'
       displayStores(stores)
     })
   })
+
 
   // displayStores(stores)
   // displayFood(all)
