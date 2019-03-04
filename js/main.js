@@ -146,6 +146,7 @@ window.onload = function() {//{{{
 
   // displayStores(stores)
   // displayFood(all)
+  foodGridRow.appendChild(createEtf('Test', 'test', 4, 20))
 
   // dropdown hover (jquery) {{{ //
   
