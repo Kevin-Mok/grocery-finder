@@ -82,9 +82,17 @@
             The first search bar/form at the top is the search bar that is visible for medium screens (#largeSearchForm)
             This search bar/form is the search bar that is visible in the dropdown, when the navbar is collapsed
             as a result of a small screen -->
-          <form class="form-inline my-2 my-md-0 d-md-none" id="smallSearchForm">
-            <input class="form-control mr-sm-2 search-bar" type="text" placeholder="Search">
-            <button class="btn btn-secondary my-2 my-sm-0 search-btn" type="submit"><i class="fa fa-search"></i></button>
+          <form class="form-inline my-2 my-md-0 d-md-none search-form">
+            <div class="search-bar-div">
+              <input class="form-control mr-sm-2 search-bar" id="search-bar-sm" type="text" placeholder="Search">
+              <button class="btn my-2 my-sm-0 clear-search-btn"
+                id="clear-search-btn-sm" type="submit">
+                <i class="fas fa-times"></i>
+              </button>
+            </div>
+            <button class="btn btn-secondary my-2 my-sm-0 search-btn" id="search-btn-sm" type="submit">
+              <i class="fa fa-search"></i>
+            </button>
           </form>
 
           <!-- }}} search bars -->

@@ -173,7 +173,7 @@ nav {
         width: 2.5em;
         font-size: .5em;
         background-color: grey;
-        @include rel-parent(92%, 0%);
+        // @include rel-parent(92%, 0%);
         display: none;
 
         &:hover {
@@ -183,6 +183,14 @@ nav {
         i {
           @include center-rel-parent();
         }
+      }
+
+      #clear-search-btn-lg {
+        @include rel-parent(92%, 0%);
+      }
+
+      #clear-search-btn-sm {
+        @include rel-parent(95%, 65%);
       }
     }
 

@@ -140,10 +140,6 @@ nav .search-form .search-bar-div .clear-search-btn {
   width: 2.5em;
   font-size: 0.5em;
   background-color: grey;
-  position: absolute;
-  left: 92%;
-  top: 0%;
-  transform: translate(-92%, 0%);
   display: none;
 }
 nav .search-form .search-bar-div .clear-search-btn:hover {
@@ -154,6 +150,18 @@ nav .search-form .search-bar-div .clear-search-btn i {
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
+}
+nav .search-form .search-bar-div #clear-search-btn-lg {
+  position: absolute;
+  left: 92%;
+  top: 0%;
+  transform: translate(-92%, 0%);
+}
+nav .search-form .search-bar-div #clear-search-btn-sm {
+  position: absolute;
+  left: 95%;
+  top: 65%;
+  transform: translate(-95%, -65%);
 }
 nav .search-form .search-btn {
   background-color: #282828;

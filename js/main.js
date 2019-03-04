@@ -10,9 +10,6 @@ const grid = document.querySelector('#grid')
 const gridRow = document.querySelector('#grid-row')
 const gridItemsBackup = []
 
-const searchBarLg = document.querySelector('#search-bar-lg')
-const clearSearchBtnLg = document.querySelector('#clear-search-btn-lg')
-
 const user = {
   username: 'user',
   password: 'user',
@@ -141,11 +138,13 @@ function clearGrid() {
 }
 
 function returnSearchBar(size) {
-  return (size == 'lg') ? searchBarLg : null
+  return (size == 'lg') ? document.querySelector('#search-bar-lg') :
+    document.querySelector('#search-bar-sm')
 }
 
 function returnClearSearchBtn(size) {
-  return (size == 'lg') ? clearSearchBtnLg : null
+  return (size == 'lg') ? document.querySelector('#clear-search-btn-lg') :
+    document.querySelector('#clear-search-btn-sm')
 }
 
 function clearSearch(size) {
@@ -156,6 +155,8 @@ function clearSearch(size) {
   returnSearchBar(size).value = ''
   returnClearSearchBtn(size).style.display = 'none'
   curView = curViewBackup
+
+  // log(curView, curViewBackup)
 }
 
 function filterCurrentGridItems(textSelector, searchString) {//{{{
@@ -252,24 +253,42 @@ window.onload = function() {//{{{
     displayStores(stores)
   })
 
+  // search listeners {{{ //
+  
+  document.querySelector('#search-bar-sm').addEventListener('keyup', e => {
+    e.preventDefault()
+    search('sm')
+  })
   document.querySelector('#search-bar-lg').addEventListener('keyup', e => {
     e.preventDefault()
     search('lg')
+  })
+
+  document.querySelector('#search-btn-sm').addEventListener('click', e => {
+    e.preventDefault()
+    search('sm')
   })
   document.querySelector('#search-btn-lg').addEventListener('click', e => {
     e.preventDefault()
     search('lg')
   })
+
+  document.querySelector('#clear-search-btn-sm').addEventListener('click', e => {
+    e.preventDefault()
+    clearSearch('sm')
+  })
   document.querySelector('#clear-search-btn-lg').addEventListener('click', e => {
     e.preventDefault()
     clearSearch('lg')
   })
+  
+  // }}} search listeners //
 
   // curView = 'stores'
   // displayStores(stores)
 
-  // curView = 'food'
-  // displayFood(all)
+  curView = 'food'
+  displayFood(all)
 
   // foodGridRow.appendChild(createEtf('Test', 'test', 4, 20))
   // openSettingsPopup()
