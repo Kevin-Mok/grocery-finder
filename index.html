@@ -26,37 +26,45 @@
   <div class="container-fluid transition-all">
   <!-- navbar {{{ -->
 
-  <nav class="navbar navbar-expand-lg fixed-top navbar-custom">
+  <nav class="navbar navbar-expand-md fixed-top navbar-custom">
     <button class="navbar-toggler" id="navCollapseBtn" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault">
-      <span class="navbar-toggler-icon">
+      <!-- <span class="navbar-toggler-icon"> -->
         <i class="fas fa-bars" id="navCollapseIcon"></i>
-      </span>
+      <!-- </span> -->
     </button>
 
     <div class="collapse navbar-collapse" id="navbarsExampleDefault">
 
-      <div class="dropdown">
+      <div class="dropdown d-none d-md-block">
         <button class="btn btn-secondary" type="button" id="userSettingsButton" data-toggle="dropdown">
           <i class="fas fa-user-circle fa-2x"></i>
         </button>
         <div class="dropdown-menu">
-          <a class="dropdown-item" href="#" onclick="openLoginPopup()">Login</a>
-          <a class="dropdown-item" href="#" onclick="openSignupPopup()">Sign up</a>
+          <a class="dropdown-item openLoginPopup" href="#">Login</a>
+          <a class="dropdown-item openSignupPopup" href="#">Sign up</a>
         </div>
       </div>
 
-      <button class="btn my-2 my-sm-0 hover-red ml-auto" id="cart-btn">
+      <button class="btn my-2 my-sm-0 hover-red ml-auto d-none d-md-block cart-btn">
         <i class="fas fa-shopping-cart fa-lg"></i>
       </button>
 
-      <form class="form-inline my-2 my-lg-0 d-none d-xl-block" id="largeSearchForm">
-        <input class="form-control mr-sm-2 hover-red" id="searchBar" type="text" placeholder="Search">
-        <button class="btn btn-secondary my-2 my-sm-0 hover-red" id="searchButton" type="submit">
+      <form class="form-inline my-2 my-md-0 d-none d-md-block" id="largeSearchForm">
+        <input class="form-control mr-sm-2 hover-red search-bar" type="text" placeholder="Search">
+        <button class="btn btn-secondary my-2 my-sm-0 hover-red search-button" type="submit">
           <i class="fa fa-search"></i>
         </button>
       </form>
 
       <ul class="navbar-nav" id="category-list">
+
+        <!-- This li only appears on the collapsed drop down menu -->
+        <!-- d-md-none means hide on screens wider than md -->
+        <li class="nav-item d-md-none">
+          <a class="nav-link pointer openLoginPopup">Login</a>
+          <a class="nav-link pointer openSignupPopup">Sign up</a>
+          <a class="nav-link pointer cart-btn">Cart</a>
+        </li>
 
         <!-- TODO: move this outside -->
         <li class="nav-item dropdown pointer" id="sort-options">
@@ -74,13 +82,12 @@
       </ul>
 
       <!-- Notice how there are two search bars/forms in this html file
-      The first search bar/form at the top is the search bar that is visible for large screens (#largeSearchForm)
+      The first search bar/form at the top is the search bar that is visible for medium screens (#largeSearchForm)
       This search bar/form is the search bar that is visible in the dropdown, when the navbar is collapsed
       as a result of a small screen -->
-      <form class="form-inline my-2 my-lg-0 d-xl-none" id="#smallSearchForm">
-        <input class="form-control mr-sm-2 hover-red" id="searchBarCollapsed" type="text" placeholder="Search">
-        <button class="btn btn-secondary my-2 my-sm-0 hover-red"
-          id="searchButtonCollapsed" type="submit"><i class="fa fa-search"></i></button>
+      <form class="form-inline my-2 my-md-0 d-md-none" id="#smallSearchForm">
+        <input class="form-control mr-sm-2 hover-red search-bar" type="text" placeholder="Search">
+        <button class="btn btn-secondary my-2 my-sm-0 hover-red search-button" type="submit"><i class="fa fa-search"></i></button>
       </form>
     </div>
   </nav>
