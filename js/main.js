@@ -12,6 +12,12 @@ const gridItemsBackup = []
 const searchBarLg = document.querySelector('#search-bar-lg')
 const clearSearchBtnLg = document.querySelector('#clear-search-btn-lg')
 
+const user = {
+  username: 'user',
+  password: 'user',
+  postalCode: 'ABC 123',
+}
+
 // }}} vars //
 
 // dropdown {{{ //
@@ -76,7 +82,7 @@ function clearDropdownItems(dropdown) {//{{{
 // }}}  dropdown //
 
 function compareFloats(a, b) {//{{{
-  return (parseFloat(a) > parseFloat(b)) ? true : false;
+  return (parseFloat(a) >= parseFloat(b)) ? true : false;
 }//}}}
 
 // TODO: don't need divSelector - just grab all grid children? //
@@ -210,6 +216,8 @@ window.onload = function() {//{{{
   curView = 'stores'
   displayStores(stores)
   // displayFood(all)
+  // foodGridRow.appendChild(createEtf('Test', 'test', 4, 20))
+  // openSettingsPopup()
 
   // dropdown hover (jquery) {{{ //
   

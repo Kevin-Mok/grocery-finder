@@ -1,4 +1,6 @@
 *-cp*
+
+*.map
 *.txt
 
 *-bs.html

@@ -1,10 +1,4 @@
 ## Phase 1
-- PR
-  - admin page
-  - login popup/collapsed menu
-- merge calc/sorting
-  - get merged
-- user settings popup
 - phase1.txt/README
 - server comments
  
