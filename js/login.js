@@ -216,6 +216,11 @@ function loginBtnClicked() {
   if (loginUsername == 'admin' && loginPassword == 'admin') {
     alert("Admin Login Successful. (Redirect to the admin page)");
     closePopup();
+	const manageUsersDropdownItem = document.createElement('a');
+	manageUsersDropdownItem.setAttribute('class', 'dropdown-item');
+	manageUsersDropdownItem.setAttribute('href', 'adminPage.html');
+	manageUsersDropdownItem.innerText = 'Manage Users';
+	document.querySelector('#profileDropdown').appendChild(manageUsersDropdownItem);
   } else if (loginUsername == 'user' && loginPassword == 'user') {
     alert("User Login Successful. (Redirect to the user page)" );
     closePopup();
