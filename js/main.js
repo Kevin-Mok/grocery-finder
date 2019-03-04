@@ -201,7 +201,9 @@ function filterGridItemsBackup(searchString) {//{{{
 }//}}}
 
 function search(size) {
-  const searchString = returnSearchBar(size).value
+
+  // Make search string all lowercase, for case insensitivity
+  const searchString = returnSearchBar(size).value.toLowerCase();
   if (searchString != '') {
     switch (curView) {
       case 'stores':
