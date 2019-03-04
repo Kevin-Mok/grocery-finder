@@ -270,7 +270,7 @@ input:focus {
 This CSS makes styles the collapsed navbar. It must be applied when the
 screen is md or smaller, because this CSS alters the layout of the navbars
 for lg and larger screen sizes. */
-@media(max-width:991.98px){
+@media(max-width:767.98px){
   .navbar .navbar-collapse {
     padding-left: 10px;
     padding-bottom: 10px;
