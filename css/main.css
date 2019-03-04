@@ -6,10 +6,12 @@ body {
   background-color: grey;
   font-family: "Roboto", sans-serif;
   font-size: 22px;
+  min-height: 100vh;
   overflow: auto;
 }
 body .container-fluid {
   overflow: auto;
+  min-height: 100vh;
 }
 
 #category-instructions {
@@ -17,6 +19,10 @@ body .container-fluid {
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
+}
+
+i {
+  pointer-events: none;
 }
 
 #food-grid {
@@ -179,22 +185,42 @@ nav i {
   filter: blur(10px);
 }
 
+#settings-popup {
+  width: 40%;
+}
+#settings-popup .popup-title {
+  font-size: 60px;
+  font-weight: 300;
+}
+#settings-popup #user-info-div {
+  text-align: left;
+  color: white;
+}
+#settings-popup #user-info-div .etf-div {
+  margin-bottom: 0.5em;
+}
+#settings-popup #user-info-div .etf-div .etf-input {
+  flex: 1;
+  max-height: 1.5em;
+  overflow: hidden;
+  margin-left: 0.25em;
+  margin-right: 0.25em;
+}
+#settings-popup #user-info-div .etf-div .etf-btn-div button {
+  margin-left: 0.25em;
+}
+
 .popup {
-  padding-top: 40px;
-  padding-bottom: 40px;
+  padding: 1em;
   border-radius: 5px;
   text-align: center;
   background-color: black;
-  height: 400px;
-  width: 360px;
+  height: auto;
+  width: auto;
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-}
-
-.popup-larger {
-  height: 450px;
 }
 
 .popup-title {

@@ -1,8 +1,15 @@
+## Phase 1
+- user settings popup
+  - store values
+- phase1.txt/README
+- server comments
+ 
+### Extra
+- add sort options labels
 - pref. for dist./price for score
   - radius
 - validate input/postal code
   - https://www.bootcdn.cn/cleave.js/ 
-- phase1.txt/README
 - replace user icon with first letter of user's name
 - more items/categories
  

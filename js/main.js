@@ -139,6 +139,8 @@ window.onload = function() {//{{{
   })
   document.querySelectorAll('.calc-btn').forEach(calcBtn => {
     calcBtn.addEventListener('click', function() {
+    // calcBtn.addEventListener('click', function(e) {
+      // log(e.target)
       curView = 'stores'
       displayStores(stores)
     })
@@ -147,6 +149,7 @@ window.onload = function() {//{{{
   // displayStores(stores)
   // displayFood(all)
   foodGridRow.appendChild(createEtf('Test', 'test', 4, 20))
+  openSettingsPopup()
 
   // dropdown hover (jquery) {{{ //
   
