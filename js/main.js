@@ -9,8 +9,8 @@ const grid = document.querySelector('#grid')
 const gridRow = document.querySelector('#grid-row')
 const gridItemsBackup = []
 
-const searchBar = document.querySelector('#search-bar')
-const clearSearchBtn = document.querySelector('#clear-search-btn')
+const searchBarLg = document.querySelector('#search-bar-lg')
+const clearSearchBtnLg = document.querySelector('#clear-search-btn-lg')
 
 // }}} vars //
 
@@ -136,25 +136,33 @@ function clearGrid() {
   removeAllChildren(gridRow)
 }
 
-function clearSearch() {
+function returnSearchBar(size) {
+  return (size == 'lg') ? searchBarLg : null
+}
+
+function returnClearSearchBtn(size) {
+  return (size == 'lg') ? clearSearchBtnLg : null
+}
+
+function clearSearch(size) {
   clearGrid()
   for (const gridItem of gridItemsBackup) {
     gridRow.appendChild(gridItem)
   }
-  searchBar.value = ''
-  clearSearchBtn.style.display = 'none'
+  returnSearchBar(size).value = ''
+  returnClearSearchBtn(size).style.display = 'none'
   curView = curViewBackup
 }
 
-function search(e) {
-  const searchString = searchBar.value
+function search(size) {
+  const searchString = returnSearchBar(size).value
   if (searchString != '') {
     switch (curView) {
       case 'stores':
         filterCalculatedStores(searchString)
         break
     }
-    clearSearchBtn.style.display = 'block'
+    returnClearSearchBtn(size).style.display = 'block'
   }
 }
 
@@ -162,6 +170,14 @@ function extractFloat(text) {//{{{
   // return parseFloat(/[0-9\.]+/g.exec(text)[0])
   return /[0-9\.]+/g.exec(text)[0]
 }//}}}
+
+function onclickToAll(selector, fxn) {
+  document.querySelectorAll(selector).forEach(btn =>
+    btn.addEventListener('click', e => {
+      e.preventDefault()
+      fxn()
+    }))
+}
 
 window.onload = function() {//{{{
   gridRow.addEventListener('mouseover', showIconsOnFood);
@@ -173,17 +189,23 @@ window.onload = function() {//{{{
   document.querySelector('#all-items').addEventListener('click', changeCategory)
   categoryList.addEventListener('click', changeCategory)
 
-  document.querySelector('#cart-btn').addEventListener('click', () => {
+  onclickToAll('.cart-btn', () => {
     curView = 'cart'
     displayFood(createCartFoodDict())
   })
-  document.querySelector('#calc-btn').addEventListener('click', () => {
+  onclickToAll('.calc-btn', () => {
     curView = 'stores'
     displayStores(stores)
   })
 
-  document.querySelector('#search-btn').addEventListener('click', search)
-  document.querySelector('#clear-search-btn').addEventListener('click', clearSearch)
+  document.querySelector('#search-btn-lg').addEventListener('click', e => {
+      e.preventDefault()
+      search('lg')
+    })
+  document.querySelector('#clear-search-btn-lg').addEventListener('click', e => {
+      e.preventDefault()
+      clearSearch('lg')
+    })
 
   curView = 'stores'
   displayStores(stores)

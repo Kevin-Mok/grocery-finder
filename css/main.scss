@@ -16,20 +16,20 @@
 
 //  }}} mixins //
 
-//  base {{{ // 
+//  base {{{ //
 
 html {
-  height: 100%;
+  overflow: auto;
 }
 
 body {
-  // height: 100%;
   background-color: grey;
   font-family: 'Roboto', sans-serif;
   font-size: 22px;
+  overflow: auto;
 
   .container-fluid {
-    height: 100%;
+    overflow: auto;
   }
 }
 
@@ -37,7 +37,7 @@ body {
   @include center-rel-parent();
 }
 
-//  }}} base // 
+//  }}} base //
 
 #grid {// {{{
   margin-top: 6em;
@@ -129,6 +129,7 @@ nav {
   height: 3em;
   margin-bottom: 3em;
   background-color: black;
+  @include rel-parent(0%, 0%);
 
   button:hover {
     background-color: $navHoverColor;
@@ -147,21 +148,26 @@ nav {
     }
   }
 
-  #search-form {
+  .search-form {
+    margin-left: .5em;
+    margin-right: .5em;
+    
     .search-bar-div {
       position: relative;
+      display: inline;
 
-      #search-bar {
+      .search-bar {
         transition: background-color 0.3s ease;
         height: 2em;
+        // width: 190px;
       }
 
-      #clear-search-btn {
+      .clear-search-btn {
         height: 2.5em;
         width: 2.5em;
         font-size: .5em;
         background-color: grey;
-        @include rel-parent(94%, 56%);
+        @include rel-parent(92%, 0%);
         display: none;
 
         &:hover {
@@ -174,8 +180,7 @@ nav {
       }
     }
 
-
-    #search-btn {
+    .search-btn {
       background-color: #282828;
       border: none;
 
@@ -183,14 +188,19 @@ nav {
         background-color: $navHoverColor;
       }
     }
+
   }
 
   #navCollapseBtn {
     background-color: #282828;
+    height: 33px;
+    width: 40px;
+    text-align: center;
+    padding: 0;
   }
 
   #navCollapseIcon {
-    font-size: 28px;
+    font-size: 23px;
   }
 
   .dropdown-menu {
@@ -230,7 +240,7 @@ nav {
 
 /* }}} navbar */
 
-//  login pop-up {{{ // 
+//  login pop-up {{{ //
 
 #userSettingsButton {
   background-color: black;
@@ -263,6 +273,10 @@ nav {
   transform: translate(-50%, -50%);
 }
 
+.popup-larger {
+  height: 450px;
+}
+
 .popup-title {
   color: white;
   font-size: 70px;
@@ -286,7 +300,7 @@ nav {
   margin-right: auto;
   margin-bottom: 10px;
   width: 300px;
-  /* background-color: pink; */
+  text-align: left;
 }
 
 .popup-icon {
@@ -297,6 +311,10 @@ nav {
   top: 50%;
   transform: translateY(-50%);
   margin: 0;
+}
+
+.popup-icon-left-padding {
+  left: 2px;
 }
 
 .popup-text {
@@ -317,9 +335,33 @@ nav {
   margin-left: 5px;
 }
 
+#postalCodeInput {
+  width: 201px;
+}
+
+#postalCodeQuestionBtn {
+  height: 36px;
+  margin-left: 10px;
+}
 
 input:focus {
   outline: none;
 }
+.navbar .navbar-collapse {
+  background-color: black;
+}
 
-//  }}} login pop-up // 
+/* Applies the CSS on screens that are md and smaller
+This CSS makes styles the collapsed navbar. It must be applied when the
+screen is md or smaller, because this CSS alters the layout of the navbars
+for lg and larger screen sizes. */
+@media(max-width:767.98px){
+  .navbar .navbar-collapse {
+    padding-left: 10px;
+    padding-bottom: 10px;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+  }
+}
+
+//  }}} login pop-up //

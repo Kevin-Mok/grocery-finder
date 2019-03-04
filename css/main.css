@@ -1,14 +1,15 @@
 html {
-  height: 100%;
+  overflow: auto;
 }
 
 body {
   background-color: grey;
   font-family: "Roboto", sans-serif;
   font-size: 22px;
+  overflow: auto;
 }
 body .container-fluid {
-  height: 100%;
+  overflow: auto;
 }
 
 #category-instructions {
@@ -99,6 +100,10 @@ nav {
   height: 3em;
   margin-bottom: 3em;
   background-color: black;
+  position: absolute;
+  left: 0%;
+  top: 0%;
+  transform: translate(0%, 0%);
 }
 nav button:hover {
   background-color: #ED2A2A;
@@ -112,45 +117,54 @@ nav .navbar-nav .nav-link {
 nav .navbar-nav .pointer {
   cursor: pointer !important;
 }
-nav #search-form .search-bar-div {
-  position: relative;
+nav .search-form {
+  margin-left: 0.5em;
+  margin-right: 0.5em;
 }
-nav #search-form .search-bar-div #search-bar {
+nav .search-form .search-bar-div {
+  position: relative;
+  display: inline;
+}
+nav .search-form .search-bar-div .search-bar {
   transition: background-color 0.3s ease;
   height: 2em;
 }
-nav #search-form .search-bar-div #clear-search-btn {
+nav .search-form .search-bar-div .clear-search-btn {
   height: 2.5em;
   width: 2.5em;
   font-size: 0.5em;
   background-color: grey;
   position: absolute;
-  left: 94%;
-  top: 56%;
-  transform: translate(-94%, -56%);
+  left: 92%;
+  top: 0%;
+  transform: translate(-92%, 0%);
   display: none;
 }
-nav #search-form .search-bar-div #clear-search-btn:hover {
+nav .search-form .search-bar-div .clear-search-btn:hover {
   background-color: #ED2A2A;
 }
-nav #search-form .search-bar-div #clear-search-btn i {
+nav .search-form .search-bar-div .clear-search-btn i {
   position: absolute;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
 }
-nav #search-form #search-btn {
+nav .search-form .search-btn {
   background-color: #282828;
   border: none;
 }
-nav #search-form #search-btn:hover {
+nav .search-form .search-btn:hover {
   background-color: #ED2A2A;
 }
 nav #navCollapseBtn {
   background-color: #282828;
+  height: 33px;
+  width: 40px;
+  text-align: center;
+  padding: 0;
 }
 nav #navCollapseIcon {
-  font-size: 28px;
+  font-size: 23px;
 }
 nav .dropdown-menu {
   min-width: 0%;
@@ -205,6 +219,10 @@ nav i {
   transform: translate(-50%, -50%);
 }
 
+.popup-larger {
+  height: 450px;
+}
+
 .popup-title {
   color: white;
   font-size: 70px;
@@ -228,7 +246,7 @@ nav i {
   margin-right: auto;
   margin-bottom: 10px;
   width: 300px;
-  /* background-color: pink; */
+  text-align: left;
 }
 
 .popup-icon {
@@ -239,6 +257,10 @@ nav i {
   top: 50%;
   transform: translateY(-50%);
   margin: 0;
+}
+
+.popup-icon-left-padding {
+  left: 2px;
 }
 
 .popup-text {
@@ -259,8 +281,34 @@ nav i {
   margin-left: 5px;
 }
 
+#postalCodeInput {
+  width: 201px;
+}
+
+#postalCodeQuestionBtn {
+  height: 36px;
+  margin-left: 10px;
+}
+
 input:focus {
   outline: none;
+}
+
+.navbar .navbar-collapse {
+  background-color: black;
+}
+
+/* Applies the CSS on screens that are md and smaller
+This CSS makes styles the collapsed navbar. It must be applied when the
+screen is md or smaller, because this CSS alters the layout of the navbars
+for lg and larger screen sizes. */
+@media (max-width: 767.98px) {
+  .navbar .navbar-collapse {
+    padding-left: 10px;
+    padding-bottom: 10px;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+  }
 }
 
 /*# sourceMappingURL=main.css.map */
