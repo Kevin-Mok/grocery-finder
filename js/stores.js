@@ -312,26 +312,4 @@ function displayStores(storeDict) {//{{{
   setStoreSorting()
 }//}}}
 
-function filterCalculatedStores(searchString) {//{{{
-  const storeDivs = document.querySelectorAll('.store-div')
-  const storeDivsArray = []
-
-  gridItemsBackup.length = 0
-  let storeName = ''
-  for (const storeDiv of storeDivs) {
-    gridItemsBackup.push(storeDiv)
-    storeName = storeDiv.querySelector('.store-name').textContent.toLowerCase()
-    if (storeName.includes(searchString)) {
-      storeDivsArray.push(storeDiv)
-    }
-  }
-
-  clearGrid()
-  for (const storeDiv of storeDivsArray) {
-    gridRow.appendChild(storeDiv)
-  }
-  curViewBackup = curView
-  curView = 'search'
-}//}}}
-
 // }}} show stores //

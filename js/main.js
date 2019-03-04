@@ -4,6 +4,7 @@ const log = console.log
 // let curView = 'stores'
 let curView = ''
 let curViewBackup = ''
+let curSearchSelector = ''
 
 const grid = document.querySelector('#grid')
 const gridRow = document.querySelector('#grid-row')
@@ -111,15 +112,12 @@ function sortGridByValue(divSelector, valueSelector, valueType, order, sortingLa
     if (order == 'desc') {
       aGreater *= -1
     }
-    // log(aValue, bValue, aGreater)
     return aGreater
 
     switch (order) {
       case 'asc':
-        // return (aValue > bValue) ? 1 : -1
         return (compareFloats(aValue, bValue)) ? 1 : -1
       case 'desc':
-        // return (aValue > bValue) ? -1 : 1
         return (compareFloats(aValue, bValue)) ? -1 : 1
     }
   })
@@ -160,16 +158,66 @@ function clearSearch(size) {
   curView = curViewBackup
 }
 
+function filterCurrentGridItems(textSelector, searchString) {//{{{
+  curSearchSelector = textSelector
+  const gridDivs = gridRow.children
+  const matchingDivsArray = []
+
+  gridItemsBackup.length = 0
+  let itemName = ''
+  for (const gridDiv of gridDivs) {
+    gridItemsBackup.push(gridDiv)
+    itemName = gridDiv.querySelector(textSelector).textContent.toLowerCase()
+    if (itemName.includes(searchString)) {
+      matchingDivsArray.push(gridDiv)
+    }
+  }
+
+  clearGrid()
+  for (const matchingDiv of matchingDivsArray) {
+    gridRow.appendChild(matchingDiv)
+  }
+  curViewBackup = curView
+  curView = 'search'
+}//}}}
+
+function filterGridItemsBackup(searchString) {//{{{
+  const matchingDivsArray = []
+
+  let itemName = ''
+  for (const div of gridItemsBackup) {
+    itemName = div.querySelector(curSearchSelector).textContent.toLowerCase()
+    if (itemName.includes(searchString)) {
+      matchingDivsArray.push(div)
+    }
+  }
+
+  clearGrid()
+  for (const matchingDiv of matchingDivsArray) {
+    gridRow.appendChild(matchingDiv)
+  }
+  curView = 'search'
+}//}}}
+
 function search(size) {
   const searchString = returnSearchBar(size).value
   if (searchString != '') {
     switch (curView) {
       case 'stores':
-        filterCalculatedStores(searchString)
+        filterCurrentGridItems('.store-name', searchString)
+        break
+      case 'food':
+        filterCurrentGridItems('.food-info', searchString)
+        break
+      case 'search':
+        filterGridItemsBackup(searchString)
         break
     }
     returnClearSearchBtn(size).style.display = 'block'
+  } else {
+    clearSearch(size)
   }
+  // log(searchString, curView, curViewBackup)
 }
 
 function extractFloat(text) {//{{{
@@ -204,18 +252,25 @@ window.onload = function() {//{{{
     displayStores(stores)
   })
 
+  document.querySelector('#search-bar-lg').addEventListener('keyup', e => {
+    e.preventDefault()
+    search('lg')
+  })
   document.querySelector('#search-btn-lg').addEventListener('click', e => {
-      e.preventDefault()
-      search('lg')
-    })
+    e.preventDefault()
+    search('lg')
+  })
   document.querySelector('#clear-search-btn-lg').addEventListener('click', e => {
-      e.preventDefault()
-      clearSearch('lg')
-    })
+    e.preventDefault()
+    clearSearch('lg')
+  })
 
-  curView = 'stores'
-  displayStores(stores)
+  // curView = 'stores'
+  // displayStores(stores)
+
+  // curView = 'food'
   // displayFood(all)
+
   // foodGridRow.appendChild(createEtf('Test', 'test', 4, 20))
   // openSettingsPopup()
 
