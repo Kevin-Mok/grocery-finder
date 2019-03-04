@@ -322,9 +322,12 @@ function createCartFoodDict() {
   })
   return cartFoodDict
 }
-document.querySelector('#cart-btn').addEventListener('click', function() {
-  cartView = true
-  displayFood(createCartFoodDict())
+
+document.querySelectorAll('.cart-btn').forEach(cartBtn => {
+	cartBtn.addEventListener('click', function() {
+	  cartView = true
+	  displayFood(createCartFoodDict())
+	})
 })
 
 function changeCategory(e) {//{{{
@@ -489,8 +492,11 @@ function displayStores(storeDict) {//{{{
   doStoreCalculations()
 }
 // displayStores(stores)
-document.querySelector('#calc-btn').addEventListener('click', function() {
-  displayStores(stores)
+document.querySelectorAll('.calc-btn').forEach(cartBtn => {
+	cartBtn.addEventListener('click', function() {
+    cartView = false
+    displayStores(stores)
+	})
 })//}}}
 
 // }}} show stores //

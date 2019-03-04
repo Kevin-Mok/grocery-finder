@@ -1,0 +1,371 @@
+﻿body {
+	font-family:Verdana;
+	margin:0px;
+	background-color:grey;
+}
+
+.navBar {
+	background-color:black;
+	height:3em;
+	width:100%;
+}
+
+
+.title {
+	font-size:30px;
+	font-weight:bold;
+	position:absolute;
+	top:5%;
+	left:10%;
+	color:white;
+}
+
+.backButton {
+	color:white;
+	background-color:black;
+	border-radius:50%;
+	height:50px;
+	width:50px;
+	font-size:38px;
+	opacity:0.7;
+	border:2px white solid;
+	top:45%;
+	left:2%;
+	position:absolute;
+	text-align:center;
+}
+
+.backButton:hover {
+	opacity:1;
+	cursor:pointer;
+}
+
+.searchBarFrame {
+	left:10%;
+	top:12%;
+	width:90%;
+	font-size:16px;
+	position:absolute;
+
+}
+
+#searchBar {
+	float:left;
+	width:35%;
+	height:24px;
+	padding:0;
+	margin:0;
+	border:4px solid white;
+}
+
+.searchButton {
+	width:80px;
+	height:28px;
+	margin-left:3%;
+	border:1.5px solid yellow;
+	background-color: rgb(201, 206, 55);
+	float:left;
+	text-align:center;
+}
+
+.searchButton:hover {
+	cursor:pointer;
+	background-color:rgb(145,136,14);
+}
+
+.buttonText {
+	left:50%;
+	top:50%;
+	transform:translate(-50%, -50%);
+	position:relative;
+}
+
+.clearFilterButton {
+	width:95px;
+	height:28px;
+	border:1.5px solid red;
+	background-color:rgb(230,0,0);
+	margin-left:3%;
+	float:left;
+	text-align:center;
+}
+
+.clearFilterButton:hover {
+	cursor:pointer;
+	background-color:rgb(179,0,0);
+}
+
+.userListingBox {
+	border:2px black solid;
+	height:70%;
+	width:80%;
+	top:18%;
+	left:10%;
+	position:absolute;
+	overflow-y:auto;
+	background-color:white;
+}
+
+.userListingBox::-webkit-scrollbar {
+	width:15px;
+}
+
+.userListingBox::-webkit-scrollbar-thumb {
+	background: rgb(201, 206, 55);
+	border-radius:50px;
+}
+
+.userLIstingBox::-webkit-scrollbar-track-piece {
+	box-shadow:inset 5px 5px 5px grey;
+	border-radius:10%;
+}
+
+.userListingFrame {
+	background-color:black;
+	height:80%;
+	width:30%;
+	top:12.5%;
+	left:7%;
+	position:absolute;
+	border-top:3px grey solid;
+	border-bottom:3px grey solid;
+	border-radius:10%;
+}
+
+.userEntryFrame {
+	height:110px;
+}
+
+.userEntryFrame:hover {
+	background-color:grey;
+	cursor:pointer;
+}
+
+.userEntryProfilePictureFrame {
+	height:110px;
+	width:33%;
+	position:absolute;
+}
+
+.userEntryProfilePicture {
+	height:80px;
+	width:80px;
+	border-radius:50%;
+	top:15px;
+	left:15px;
+	position:absolute;
+}
+
+.userEntryTextFrame {
+	height:110px;
+	width:67%;
+	left:33%;
+	position:absolute;
+}
+
+.userEntryText {
+	margin:0;
+	left:40%;
+	top:50%;
+	transform:translate(-50%, -50%);
+	position:absolute;
+}
+
+.selectedUserFrame {
+	left:40%;
+	top:12.5%;
+	height:80%;
+	width:50%;
+	background-color:black;
+	position:absolute;
+	border-radius:10%;
+	border-top:3px grey solid;
+	border-bottom:3px grey solid;
+}
+
+.selectedUserFrameInitialText {
+	color:white;
+	margin:0;
+	left:50%;
+	top:50%;
+	transform:translate(-50%, -50%);
+	position:absolute;
+}
+
+.selectedUserProfilePictureFrame {
+	height:250px;
+	width:250px;
+	left:40px;
+	top:15%;
+	position:absolute;
+}
+
+.selectedUserProfilePicture {
+	border-radius:50%;
+	height:200px;
+	width:200px;
+	left:50%;
+	top:50%;
+	transform:translate(-50%, -50%);
+	position:relative;
+
+}
+
+.selectedUserDetailsFrame {
+	height:50%;
+	width:45%;
+	margin-left:10px;
+	top:10px;
+	left:300px;
+	position:absolute;
+}
+
+.selectedUserTitle {
+	font-size:28px;
+	color:white;
+	top:50px;
+	position:absolute;
+}
+
+.selectedUserTimeDetails {
+	font-size:18px;
+	color:white;
+	top:225px;
+	position:absolute;
+}
+
+.deleteUserButton {
+	font-size:26px;
+	color:black;
+	background-color:rgb(230, 0, 0);
+	border:1px solid red;
+	border-radius:10%;
+	left:50%;
+	top:85%;
+	transform:translate(-50%, -50%);
+	height:36px;
+	width:162px;
+	position:absolute;
+	text-align:center;
+}
+
+.deleteUserButton:hover {
+	background-color:rgb(179, 0, 0);
+	cursor:pointer;
+}
+
+
+.selectedUserPasswordFrame {
+	left:310px;
+	top:145px;
+	position:absolute;
+	font-size:18px;
+	color:white;
+}
+
+.selectedUserPasswordText {
+	float:right;
+}
+
+.editPasswordButton {
+	background-color:rgb(201, 206, 55);
+	border:1px solid yellow;
+	height:25px;
+	width:60px;
+	float:right;
+	text-align:center;
+	margin-left:20px;
+	border-radius:10%;
+	color:black;
+}
+
+.editPasswordButton:hover {
+	background-color:rgb(145, 136, 14);
+	cursor:pointer;
+}
+
+.editPasswordButtonText {
+	left:50%;
+	top:50%;
+	transform:translate(-50%, -50%);
+	position:absolute;
+}
+
+.saveChangesButton {
+	float:left;
+	height:25px;
+	width:150px;
+	margin-left:10px;
+	background-color:rgb(201, 206, 55);
+	text-align:center;
+	border-radius:10%;
+	color:black;
+}
+
+.saveChangesButton:hover {
+	background-color:rgb(145,136,14);
+	cursor:pointer;
+}
+
+.cancelChangesButton {
+	float:left;
+	height:25px;
+	width:30px;
+	margin-left:10px;
+	color:black;
+	background-color:rgb(230, 0, 0);
+	text-align:center;
+	border-radius:10%;
+}
+
+.cancelChangesButton:hover {
+	background-color:rgb(179, 0, 0);
+	cursor:pointer;
+}
+
+.adminFieldsFrame {
+	top:360px;
+	left:310px;
+	position:absolute;
+	height:30px;
+	width:400px;
+	color:white;
+	display:inline-block;
+}
+
+.promoteToAdminButton {
+	background-color:rgb(201, 206, 55);
+	border:1px solid yellow;
+	color:black;
+	top:-10px;
+	left:180px;
+	position:absolute;
+	width:115px;
+	height:45px;
+	text-align:center;
+	border-radius:10%;
+	display:inline-block;
+}
+
+.promoteToAdminButton:hover {
+	background-color:rgb(145, 136, 14);
+	cursor:pointer;
+}
+
+.setToDefaultProfilePictureButton {
+	background-color:rgb(201, 206, 55);
+	border:1px solid yellow;
+	border-radius:10%;
+	color:black;
+	top:58%;
+	left:90px;
+	height:45px;
+	width:130px;
+	position:absolute;
+	text-align:center;
+}
+
+.setToDefaultProfilePictureButton:hover {
+	background-color:rgb(145, 136, 14);
+	cursor:pointer;
+}
