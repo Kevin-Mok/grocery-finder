@@ -17,8 +17,12 @@ class User {
 	}
 }
 
-// Dummy user data for phase 1
+/* SERVER DATA CALL: 
+   The program would need to retrieve the following user data via a server request, i.e., the server will send
+   this data. 
+*/
 
+// Mock data, hard-coded for the purposes of phase 1
 users.push(new User("Obama", "america", "Narnia", new Date("September 21, 2017 05:25:11"), new Date("February 20, 2018 06:21:33"), 'imgs/profile-pictures/obama.jpg', null, false));
 users.push(new User("ProGamer", "1336", "Westeros", new Date("May 11, 2016 09:29:29"), new Date("May 11, 2016 09:29:29"),'imgs/profile-pictures/progamer.jpeg', null));
 users.push(new User("TimeTraveller", "timeisaconstruct", "Essos",new Date("December 19, 2019 18:59:59"), new Date("December 20, 2019 17:10:02"), 'imgs/profile-pictures/timetraveller.jpeg', null, false));
@@ -159,6 +163,9 @@ function setToDefaultProfilePictureClicked(e) {
 	console.log(e.target.parentElement.user);
 	if (confirm("Set this user's profile picture to the default picture.\n(Click 'OK' to confirm)")) {
 		e.target.parentElement.user.profilePicture = 'imgs/profile-pictures/default.jpg';
+		
+		// SERVER DATA CALL: The server will have to update this profilePicture attribute for its own copy of the user data
+		
 		updateUserListingBox();
 		reloadSelectedUserFrameWithCurrentUser();
 	}
@@ -202,6 +209,9 @@ function promoteToAdmin(e) {
 		"\n\n                                      (Press 'OK' to confirm)")) {
 		const userToChange = e.target.parentElement.parentElement.user;   //e.target.parentElement.parentElement is the selectedUserFrame
 		userToChange.isAdmin = true;
+		
+		// SERVER DATA CALL: A request must be sent to the server to update its copy of this user's isAdmin data
+		
 		console.log(userToChange);
 		reloadSelectedUserFrameWithCurrentUser();
 	}
@@ -301,6 +311,9 @@ function saveChangesClicked(e) {
 	const parentDiv = frame.parentElement;
 	const affectedUser = parentDiv.user;
 	affectedUser.password = newText;
+	
+	// SERVER DATA CALL: A request must be sent to the server to update its copy of this user's password data
+	
 	createPasswordTextForm(newText, parentDiv);
 
 }
@@ -327,6 +340,8 @@ function deleteUser(e) {
 	if (verification == 'delete') {
 	
 		const targetUser = e.target.parentElement.user;
+		
+		//SERVER DATA CALL: A request must be sent to the server to delete its copy of this user's data
 
 		users = users.filter(function(user) {return user.username != targetUser.username});
 		hiddenUsers = hiddenUsers.filter(function(user) {return user.username != targetUser.username});
