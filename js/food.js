@@ -156,6 +156,7 @@ function createAlphDescIcon() {//{{{
 
 function setAlphaSorting() {//{{{
   const sortingMenu = document.querySelector('#sorting-options')
+  sortingMenu.classList.remove('d-none');
   clearDropdownItems(sortingMenu)
 
   const sortingLabel = sortingMenu.querySelector('#sorting-label')
