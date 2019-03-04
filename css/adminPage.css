@@ -292,17 +292,34 @@
 }
 
 .saveChangesButton {
-	float:right;
+	float:left;
 	height:25px;
 	width:150px;
-	margin-left:20px;
+	margin-left:10px;
 	background-color:rgb(201, 206, 55);
 	text-align:center;
 	border-radius:10%;
+	color:black;
 }
 
 .saveChangesButton:hover {
 	background-color:rgb(145,136,14);
+	cursor:pointer;
+}
+
+.cancelChangesButton {
+	float:left;
+	height:25px;
+	width:30px;
+	margin-left:10px;
+	color:black;
+	background-color:rgb(230, 0, 0);
+	text-align:center;
+	border-radius:10%;
+}
+
+.cancelChangesButton:hover {
+	background-color:rgb(179, 0, 0);
 	cursor:pointer;
 }
 
