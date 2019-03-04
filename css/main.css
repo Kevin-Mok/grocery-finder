@@ -1,24 +1,26 @@
 html {
-  height: 100%;
+  overflow: auto;
 }
 
 body {
-  height: 100%;
   background-color: grey;
+  font-family: "Roboto", sans-serif;
+  font-size: 22px;
+  overflow: auto;
 }
 body .container-fluid {
-  height: 100%;
+  overflow: auto;
 }
 
-#food-grid {
-  padding-top: 6em;
-  height: 100%;
-}
-#food-grid #category-instructions {
+#category-instructions {
   position: absolute;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
+}
+
+#food-grid {
+  margin-top: 6em;
 }
 #food-grid .food-div {
   position: relative;
@@ -70,65 +72,92 @@ body .container-fluid {
   opacity: 0.7;
 }
 
+.store-div {
+  background-color: rgba(255, 255, 255, 0.2);
+  padding: 1.5em;
+  border-radius: 1em;
+  width: 100%;
+  margin-bottom: 2em;
+  margin-left: 2em;
+  margin-right: 2em;
+}
+.store-div .store-img-div {
+  width: 33%;
+}
+.store-div .store-img-div .store-img {
+  width: 100%;
+}
+.store-div .store-body {
+  margin-left: 1em;
+}
+.store-div .store-body .store-name {
+  padding-bottom: 0.5em;
+}
+
 /* navbar {{{ */
-.navbar-custom {
+nav {
   /* height: 70px; */
   height: 3em;
+  margin-bottom: 3em;
   background-color: black;
+  position: absolute;
+  left: 0%;
+  top: 0%;
+  transform: translate(0%, 0%);
 }
-
-.nav-link {
+nav .navbar-nav .nav-link {
   color: white !important;
 }
-
-.pointer {
+nav .navbar-nav .pointer {
   cursor: pointer !important;
 }
-
-.search-button {
-  background-color: #282828;
-  border: none;
-}
-
-.hover-red:hover {
+nav .hover-red:hover {
   background-color: #ED2A2A !important;
 }
-
-.search-bar {
+nav .search-bar {
   transition: background-color 0.3s ease;
   height: 34px;
   width: 190px;
 }
-
-#navDropdownList {
-  margin-right: 55px;
+nav .search-button {
+  background-color: #282828;
+  border: none;
 }
-
-input:focus {
+nav input:focus {
   background-color: #ED2A2A !important;
 }
-
-#navCollapseBtn {
+nav #navCollapseBtn {
   background-color: #282828;
   height: 33px;
   width: 40px;
   text-align: center;
   padding: 0;
 }
-
-#navCollapseIcon {
+nav #navCollapseIcon {
   font-size: 23px;
 }
-
-#largeSearchForm {
-  margin-left: 1em;
+nav #largeSearchForm {
+  margin-left: 0.5em;
+  margin-right: 0.5em;
 }
-
-#sort-options {
-  margin-right: 1em;
+nav .dropdown-menu {
+  min-width: 0%;
 }
-
-.fa-shopping-cart {
+nav #sorting-options .dropdown-label {
+  margin-left: 0.5em;
+  margin-right: 0.5em;
+}
+nav #sorting-options .dropdown-label i {
+  margin-right: 0.25em;
+}
+nav #sorting-options .dropdown-menu i {
+  color: black;
+  margin-right: 0.25em;
+}
+nav #sorting-options .dropdown-menu .dropdown-item {
+  padding: 2px 0.75rem;
+}
+nav i {
   color: white;
 }
 
