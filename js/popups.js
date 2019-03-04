@@ -165,7 +165,7 @@ function openCurrentCartPopup() {
 
 function cartSaveBtnClicked() {
   const cartName = $('#cartName').val()
-  user.savedCarts[cartName] = cart
+  user.savedCarts[cartName] = JSON.parse(JSON.stringify(cart)); // cloned cart
   closePopup()
 }
 

@@ -65,7 +65,7 @@
             </li>
 
             <li class="nav-item">
-              <a class="nav-link pointer" id="all-items">Saved</a>
+              <a class="nav-link pointer" onclick='createSavedCartsDiv()'>Saved</a>
             </li>
 
             <!-- This li only appears on the collapsed drop down menu -->
@@ -96,51 +96,9 @@
         <div class="row" id="food-grid-row"></div>
       </div>
 
-      <!-- <div class="saved-carts-div">
-        <h3>Saved Carts</h3>
-        <ul class="list-group">
-          <li class="list-group-item px-0">
-            <a class="btn collapsed" data-toggle="collapse" href="#cart1" role="button">
-              Cart 1
-            </a>
-            <div class="collapse" id="cart1">
-              <div class="saved-cart-item">
-                Item 1
-              </div>
-              <div class="saved-cart-item">
-                Item 2
-              </div>
-            </div>
-          </li>
-
-          <li class="list-group-item px-0">
-            <a class="btn collapsed" data-toggle="collapse" href="#cart2" role="button">
-              Cart 2
-            </a>
-            <div class="collapse" id="cart2">
-              <div class="card saved-cart-item">
-                Item 1
-              </div>
-              <div class="card saved-cart-item">
-                Item 2
-              </div>
-            </div>
-          </li>  
-        </ul>
-      </div> -->
-
       <button class="btn btn-primary save-cart-btn d-none">Save current cart</button>
     </div>
 
-    <!-- <div class="popup">
-      <h1 class="popup-title" id="">Current cart</h1>
-      <p class="popup-text" id="">Enter a name for your current cart</p>
-      <div class="popup-input-div"><i class="fas fa-file-signature popup-icon"></i></i><input class="input-box" type="text" placeholder="Cart name" id="cartName"></div>
-     
-      <button class="btn btn-primary popup-button" id="popupLoginBtn">Save cart</button>
-      <button class="btn btn-danger popup-button" id="popupCancelBtn" onclick="closePopup()">Cancel</button>
-    </div> -->
-    
     <script type='text/javascript' src='js/main.js'></script>
     <script type='text/javascript' src='js/food.js'></script>
     <script type='text/javascript' src='js/stores.js'></script>

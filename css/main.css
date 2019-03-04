@@ -317,8 +317,12 @@ for lg and larger screen sizes. */
 }
 
 .saved-carts-div {
-  background-color: pink;
   margin-top: -40px;
+  border-radius: 5px;
+}
+
+.saved-cart-div {
+  position: relative;
 }
 
 .saved-cart-item {
@@ -326,7 +330,16 @@ for lg and larger screen sizes. */
   padding: 15px;
   margin-top: 5px;
   margin-bottom: 5px;
-  background-color: greenyellow;
+}
+
+.saved-cart-add-btn {
+  position: absolute;
+  right: 10px;
+}
+
+.saved-cart-replace-btn {
+  position: absolute;
+  right: 125px;
 }
 
 /*# sourceMappingURL=main.css.map */
