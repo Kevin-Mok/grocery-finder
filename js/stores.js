@@ -104,6 +104,7 @@ function extractSortingLabelIcons(e) {//{{{
 
 function setStoreSorting() {//{{{
   const sortingMenu = document.querySelector('#sorting-options')
+  sortingMenu.classList.remove('d-none');
   clearDropdownItems(sortingMenu)
 
   // score {{{ //
