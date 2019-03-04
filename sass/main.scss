@@ -26,15 +26,21 @@ body {
   background-color: grey;
   font-family: 'Roboto', sans-serif;
   font-size: 22px;
+  min-height: 100vh;
   overflow: auto;
 
   .container-fluid {
     overflow: auto;
+    min-height: 100vh;
   }
 }
 
 #category-instructions {
   @include center-rel-parent();
+}
+
+i {
+  pointer-events: none;
 }
 
 //  }}} base //
@@ -231,22 +237,52 @@ nav {
   filter: blur(10px);
 }
 
+#settings-popup {
+  width: 20em;
+
+  .popup-title {
+    font-size: 60px;
+    font-weight: 300;
+  }
+
+  #user-info-div {
+    text-align: left;
+    color: white;
+
+    .etf-div {
+      margin-bottom: .5em;
+
+      .etf-input {
+        // width: 8em;
+        // width: 50%;
+        // max-width: 33%;
+        flex: 1;
+        max-height: 1.5em;
+        overflow: hidden;
+        margin-left: .25em;
+        margin-right: .25em;
+      }
+
+      .etf-btn-div {
+        button {
+          margin-left: .25em;
+        }
+      }
+    }
+  }
+}
+
 .popup {
-  padding-top: 40px;
-  padding-bottom: 40px;
+  padding: 1em;
   border-radius: 5px;
   text-align: center;
   background-color: black;
-  height: 400px;
-  width: 360px;
+  height: auto;
+  width: auto;
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-}
-
-.popup-larger {
-  height: 450px;
 }
 
 .popup-title {

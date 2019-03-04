@@ -68,7 +68,7 @@ function openLoginPopup() {
 //
 // Create this:
 //
-// <div class="popup popup-larger">
+// <div class="popup">
 //   <h1 class="popup-title" id="">Sign up</h1>
 //   <p class="popup-text" id="">Your groceries are just a click away!</p>
 //   <div class="popup-input-div"><i class="popup-icon fas fa-envelope"></i><input class="input-box" type="text" placeholder="Username" id="signInUsername"></div>
@@ -84,7 +84,7 @@ function openLoginPopup() {
 function openSignupPopup() {
   blurBackgroundToggle();
   const popup = document.createElement("div");
-  popup.className = "popup popup-larger";
+  popup.className = "popup";
 
   const h1 = createElementWithText('h1', 'popup-title', '', 'Sign up');
   const p1 = createElementWithText('p', 'popup-text', '', 'Your groceries are just a click away!');
@@ -129,6 +129,41 @@ function openSignupPopup() {
     title: "Why do we need your postal code?",
     content: "Grocery Finder needs your postal code to provide you grocery prices and deals specific to your region."
   })
+}
+
+function saveUserSettings() {
+  // user.username = document.querySelector('#etf-username').querySelector('.etf-value').textContent
+  user.username = getEtfValue(document.querySelector('#etf-username'))
+  user.password = getEtfValue(document.querySelector('#etf-password'))
+  user.postalCode = getEtfValue(document.querySelector('#etf-postal-code'))
+  closePopup()
+}
+
+function openSettingsPopup() {
+  blurBackgroundToggle();
+  const popup = document.createElement("div");
+  popup.className = "popup";
+  popup.id = "settings-popup";
+
+  const h1 = createElementWithText('h1', 'popup-title', '', 'User Settings');
+
+  const userInfoDiv = document.createElement('div')
+  userInfoDiv.id = 'user-info-div'
+  userInfoDiv.appendChild(createEtf('Username', user.username, 4, 20))
+  userInfoDiv.appendChild(createEtf('Password', user.password, 4, 20))
+  userInfoDiv.appendChild(createEtf('Postal Code', user.postalCode, 6, 7))
+
+  const saveChangesBtn = createElementWithText("button", "btn btn-primary popup-button", "popupLoginBtn", "Save Changes");
+  saveChangesBtn.setAttribute("onclick", "saveUserSettings()");
+  const cancelBtn = createElementWithText("button", "btn btn-danger popup-button", "popupCancelBtn", "Cancel");
+  cancelBtn.setAttribute("onclick", "closePopup()");
+
+  popup.appendChild(h1);
+  popup.appendChild(userInfoDiv);
+  popup.appendChild(saveChangesBtn);
+  popup.appendChild(cancelBtn);
+
+  document.body.appendChild(popup);
 }
 
 function closePopup() {
@@ -196,14 +231,17 @@ function loginBtnClicked() {
 
 $('.openLoginPopup').click(openLoginPopup);
 $('.openSignupPopup').click(openSignupPopup);
+$('.openSettingsPopup').click(openSettingsPopup);
 
 
 $("body").click((e) => {
+// $("html").click((e) => {
 
   // Without this check, the popup dissappears right after you click
   // the Login and Signup buttons in the dropdown
   if (e.target.classList.contains('openSignupPopup') ||
-  e.target.classList.contains('openLoginPopup')) {
+    e.target.classList.contains('openLoginPopup') ||
+    e.target.classList.contains('openSettingsPopup')) {
     return;
   }
 
