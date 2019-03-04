@@ -1,12 +1,19 @@
-- navbar icons
-  - hide calc. btn when no items
-  - hide sorting options initially
-  - display how many items in cart
+## Phase 1
+- PR
+  - admin page
+  - login popup/collapsed menu
+- merge calc/sorting
+  - get merged
+- user settings popup
+- phase1.txt/README
+- server comments
+ 
+### Extra
+- add sort options labels
 - pref. for dist./price for score
   - radius
 - validate input/postal code
   - https://www.bootcdn.cn/cleave.js/ 
-- phase1.txt/README
 - replace user icon with first letter of user's name
 - more items/categories
  

@@ -103,6 +103,9 @@ nav {
 nav button:hover {
   background-color: #ED2A2A;
 }
+nav .navbar-nav {
+  background-color: black;
+}
 nav .navbar-nav .nav-link {
   color: white !important;
 }
