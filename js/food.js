@@ -1,8 +1,6 @@
 // vars {{{ //
 
 const cart = []
-const foodGrid = document.querySelector('#food-grid')
-const foodGridRow = document.querySelector('#food-grid-row')
 const categoryList = document.querySelector('#category-list')
 
 // food data (phase 1) {{{ //
@@ -203,13 +201,8 @@ function removeAllChildren(element) {
   }
 }
 
-function clearFoodGrid() {
-  document.querySelector('#category-instructions').style.display = 'none'
-  removeAllChildren(foodGridRow)
-}
-
 function displayFood(foodDict) {//{{{
-  clearFoodGrid()
+  clearGrid()
 
   Object.keys(foodDict).forEach(function(key) {
     const foodDiv = createFoodDiv()
@@ -226,7 +219,7 @@ function displayFood(foodDict) {//{{{
       checkIcon.style.display = 'inline'
     }
 
-    foodGridRow.appendChild(foodDiv)
+    gridRow.appendChild(foodDiv)
   })
 
   sortGridByValue('.food-div', '.food-info', 'text', 'asc', [createAlphDescIcon()])
@@ -242,14 +235,16 @@ function createCartFoodDict() {
 }
 
 function changeCategory(e) {//{{{
-  curView = 'food'
+  // log('food')
   if (e.target.id == 'all-items') {
+    curView = 'food'
     displayFood(all)
   } else if (e.target.classList.contains('food-subcategory')) {
     let foodCategoryName = e.target.textContent.toLowerCase()
     if (foodCategoryName == 'all') {
       foodCategoryName = /(\w*)-*/g.exec(e.target.id)[1]
     }
+    curView = 'food'
     eval('displayFood(' + foodCategoryName +')')
   }
 }

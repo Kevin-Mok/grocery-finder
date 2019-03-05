@@ -132,7 +132,6 @@ function openSignupPopup() {
 }
 
 function saveUserSettings() {
-  // user.username = document.querySelector('#etf-username').querySelector('.etf-value').textContent
   user.username = getEtfValue(document.querySelector('#etf-username'))
   user.password = getEtfValue(document.querySelector('#etf-password'))
   user.postalCode = getEtfValue(document.querySelector('#etf-postal-code'))

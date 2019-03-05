@@ -1,11 +1,21 @@
+// vars {{{ //
+
 const log = console.log
-// let curView = 'stores'
 let curView = ''
-let user = {
+let curViewBackup = ''
+let curSearchSelector = ''
+
+const grid = document.querySelector('#grid')
+const gridRow = document.querySelector('#grid-row')
+const gridItemsBackup = []
+
+const user = {
   username: 'user',
   password: 'user',
   postalCode: 'ABC 123',
 }
+
+// }}} vars //
 
 // dropdown {{{ //
 
@@ -72,6 +82,7 @@ function compareFloats(a, b) {//{{{
   return (parseFloat(a) >= parseFloat(b)) ? true : false;
 }//}}}
 
+// TODO: don't need divSelector - just grab all grid children? //
 function sortGridByValue(divSelector, valueSelector, valueType, order, sortingLabelElems) {//{{{
   const divs = document.querySelectorAll(divSelector)
   const divsArray = []
@@ -97,22 +108,19 @@ function sortGridByValue(divSelector, valueSelector, valueType, order, sortingLa
     if (order == 'desc') {
       aGreater *= -1
     }
-    // log(aValue, bValue, aGreater)
     return aGreater
 
     switch (order) {
       case 'asc':
-        // return (aValue > bValue) ? 1 : -1
         return (compareFloats(aValue, bValue)) ? 1 : -1
       case 'desc':
-        // return (aValue > bValue) ? -1 : 1
         return (compareFloats(aValue, bValue)) ? -1 : 1
     }
   })
 
-  clearFoodGrid()
+  clearGrid()
   for (const div of divsArray) {
-    foodGridRow.appendChild(div)
+    gridRow.appendChild(div)
   }
 
   const sortingLabel = document.querySelector('#sorting-label')
@@ -123,36 +131,168 @@ function sortGridByValue(divSelector, valueSelector, valueType, order, sortingLa
 
 }//}}}
 
+function clearGrid() {
+  document.querySelector('#category-instructions').style.display = 'none'
+  removeAllChildren(gridRow)
+}
+
+function returnSearchBar(size) {
+  return (size == 'lg') ? document.querySelector('#search-bar-lg') :
+    document.querySelector('#search-bar-sm')
+}
+
+function returnClearSearchBtn(size) {
+  return (size == 'lg') ? document.querySelector('#clear-search-btn-lg') :
+    document.querySelector('#clear-search-btn-sm')
+}
+
+function clearSearch(size) {
+  clearGrid()
+  for (const gridItem of gridItemsBackup) {
+    gridRow.appendChild(gridItem)
+  }
+  returnSearchBar(size).value = ''
+  returnClearSearchBtn(size).style.display = 'none'
+  curView = curViewBackup
+
+  // log(curView, curViewBackup)
+}
+
+function filterCurrentGridItems(textSelector, searchString) {//{{{
+  curSearchSelector = textSelector
+  const gridDivs = gridRow.children
+  const matchingDivsArray = []
+
+  gridItemsBackup.length = 0
+  let itemName = ''
+  for (const gridDiv of gridDivs) {
+    gridItemsBackup.push(gridDiv)
+    itemName = gridDiv.querySelector(textSelector).textContent.toLowerCase()
+    if (itemName.includes(searchString)) {
+      matchingDivsArray.push(gridDiv)
+    }
+  }
+
+  clearGrid()
+  for (const matchingDiv of matchingDivsArray) {
+    gridRow.appendChild(matchingDiv)
+  }
+  
+  // TODO: is this even correct? //
+  if (curView != 'search') {
+    curViewBackup = curView
+    curView = 'search'
+  }
+}//}}}
+
+function filterGridItemsBackup(searchString) {//{{{
+  const matchingDivsArray = []
+
+  let itemName = ''
+  for (const div of gridItemsBackup) {
+    itemName = div.querySelector(curSearchSelector).textContent.toLowerCase()
+    if (itemName.includes(searchString)) {
+      matchingDivsArray.push(div)
+    }
+  }
+
+  clearGrid()
+  for (const matchingDiv of matchingDivsArray) {
+    gridRow.appendChild(matchingDiv)
+  }
+  curView = 'search'
+}//}}}
+
+function search(size) {
+
+  // Make search string all lowercase, for case insensitivity
+  const searchString = returnSearchBar(size).value.toLowerCase();
+  // log(searchString, curView, curViewBackup)
+  if (searchString != '') {
+    switch (curView) {
+      case 'stores':
+        filterCurrentGridItems('.store-name', searchString)
+        break
+      case 'food':
+        filterCurrentGridItems('.food-info', searchString)
+        break
+      case 'search':
+        filterGridItemsBackup(searchString)
+        break
+    }
+    returnClearSearchBtn(size).style.display = 'block'
+  } else {
+    clearSearch(size)
+  }
+}
+
 function extractFloat(text) {//{{{
   // return parseFloat(/[0-9\.]+/g.exec(text)[0])
   return /[0-9\.]+/g.exec(text)[0]
 }//}}}
 
+function onclickToAll(selector, fxn) {
+  document.querySelectorAll(selector).forEach(btn =>
+    btn.addEventListener('click', e => {
+      e.preventDefault()
+      fxn()
+    }))
+}
+
 window.onload = function() {//{{{
-  foodGridRow.addEventListener('mouseover', showIconsOnFood);
-  foodGridRow.addEventListener('mouseout', showIconsOnFood);
-  foodGridRow.addEventListener('click', toggleFoodCartStatus);
+  gridRow.addEventListener('mouseover', showIconsOnFood);
+  gridRow.addEventListener('mouseout', showIconsOnFood);
+  gridRow.addEventListener('click', toggleFoodCartStatus);
 
   createFoodCategories(categories)
-  categoryList.addEventListener('click', changeCategory, true)
+  // categoryList.addEventListener('click', changeCategory, true)
+  document.querySelector('#all-items').addEventListener('click', changeCategory)
+  categoryList.addEventListener('click', changeCategory)
 
-  document.querySelectorAll('.cart-btn').forEach(cartBtn => {
-    cartBtn.addEventListener('click', function() {
-      curView = 'cart'
-      displayFood(createCartFoodDict())
-    })
+  onclickToAll('.cart-btn', () => {
+    curView = 'cart'
+    displayFood(createCartFoodDict())
   })
-  document.querySelectorAll('.calc-btn').forEach(calcBtn => {
-    calcBtn.addEventListener('click', function() {
-    // calcBtn.addEventListener('click', function(e) {
-      // log(e.target)
-      curView = 'stores'
-      displayStores(stores)
-    })
+  onclickToAll('.calc-btn', () => {
+    displayStores(stores)
   })
 
-  // displayStores(stores)
+  // search listeners {{{ //
+  
+  document.querySelector('#search-bar-sm').addEventListener('keyup', e => {
+    e.preventDefault()
+    search('sm')
+  })
+  document.querySelector('#search-bar-lg').addEventListener('keyup', e => {
+    e.preventDefault()
+    search('lg')
+  })
+
+  document.querySelector('#search-btn-sm').addEventListener('click', e => {
+    e.preventDefault()
+    search('sm')
+  })
+  document.querySelector('#search-btn-lg').addEventListener('click', e => {
+    e.preventDefault()
+    search('lg')
+  })
+
+  document.querySelector('#clear-search-btn-sm').addEventListener('click', e => {
+    e.preventDefault()
+    clearSearch('sm')
+  })
+  document.querySelector('#clear-search-btn-lg').addEventListener('click', e => {
+    e.preventDefault()
+    clearSearch('lg')
+  })
+  
+  // }}} search listeners //
+
+  displayStores(stores)
+
+  // curView = 'food'
   // displayFood(all)
+
   // foodGridRow.appendChild(createEtf('Test', 'test', 4, 20))
   // openSettingsPopup()
 
