@@ -1,8 +1,6 @@
 // vars {{{ //
 
 let cart = []
-const foodGrid = document.querySelector('#food-grid')
-const foodGridRow = document.querySelector('#food-grid-row')
 const categoryList = document.querySelector('#category-list')
 
 // food data (phase 1) {{{ //
@@ -126,25 +124,25 @@ function createFoodInfo(name) {
   return foodInfo
 }
 
+// }}} food //
+
 // icons {{{ //
 
 function createCheckIcon() {
   const checkIcon = document.createElement('i')
-  checkIcon.className = "check-icon far fa-check-circle fa-7x"
+  checkIcon.className = "check-icon far fa-check-circle"
   checkIcon.style.display = 'none'
   return checkIcon
 }
 
 function createRemoveIcon() {
   const removeIcon = document.createElement('i')
-  removeIcon.className = "remove-icon far fa-times-circle fa-7x"
+  removeIcon.className = "remove-icon far fa-times-circle"
   removeIcon.style.display = 'none'
   return removeIcon
 }
 
 // }}} icons //
-
-// }}} food //
 
 function createAlphDescIcon() {//{{{
   const alphDescIcon = document.createElement('i')
@@ -203,13 +201,8 @@ function removeAllChildren(element) {
   }
 }
 
-function clearFoodGrid() {
-  document.querySelector('#category-instructions').style.display = 'none'
-  removeAllChildren(foodGridRow)
-}
-
 function displayFood(foodDict) {//{{{
-  clearFoodGrid()
+  clearGrid()
 
   Object.keys(foodDict).forEach(function(key) {
     const foodDiv = createFoodDiv()
@@ -226,7 +219,7 @@ function displayFood(foodDict) {//{{{
       checkIcon.style.display = 'inline'
     }
 
-    foodGridRow.appendChild(foodDiv)
+    gridRow.appendChild(foodDiv)
   })
 
   sortGridByValue('.food-div', '.food-info', 'text', 'asc', [createAlphDescIcon()])
@@ -247,10 +240,9 @@ function createCartFoodDict() {
 function changeCategory(e) {//{{{
 
   // TODO If target was a sorting button, then leave the curView as it is
-  curView = 'food'
-
   if (e.target.id == 'all-items') {
 		$('.saved-carts-div').remove()
+    curView = 'food'
     displayFood(all)
   } else if (e.target.classList.contains('food-subcategory')) {
 		$('.saved-carts-div').remove()
@@ -258,6 +250,7 @@ function changeCategory(e) {//{{{
     if (foodCategoryName == 'all') {
       foodCategoryName = /(\w*)-*/g.exec(e.target.id)[1]
     }
+    curView = 'food'
     eval('displayFood(' + foodCategoryName +')')
   }
 }

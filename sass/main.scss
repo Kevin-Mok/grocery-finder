@@ -45,7 +45,7 @@ i {
 
 //  }}} base //
 
-#food-grid {// {{{
+#grid {// {{{
   margin-top: 6em;
   // height: 100%;
 
@@ -83,17 +83,22 @@ i {
     padding: .3em;
   }
 
+  $food-item-icon-size: 5em;
+  $food-item-icon-opacity: .8;
+
   .check-icon {
     @include center-rel-parent();
     // color: green;
     color: #00ff33;
-    opacity: .7;
+    opacity: $food-item-icon-opacity;
+    font-size: $food-item-icon-size;
   }
 
   .remove-icon {
     @include center-rel-parent();
     color: red;
-    opacity: .7;
+    opacity: $food-item-icon-opacity;
+    font-size: $food-item-icon-size;
   }
 }// }}}
 
@@ -128,6 +133,8 @@ i {
 
 /* navbar {{{ */
 
+$navHoverColor: #ED2A2A;
+
 nav {
   /* height: 70px; */
   height: 3em;
@@ -135,7 +142,14 @@ nav {
   background-color: black;
   @include rel-parent(0%, 0%);
 
+  button:hover {
+    background-color: $navHoverColor;
+  }
+
   .navbar-nav {
+    background-color: black;
+    // max-width: 50%;
+
     .nav-link {
       color: white!important;
     }
@@ -145,23 +159,55 @@ nav {
     }
   }
 
-  .hover-red:hover {
-    background-color: #ED2A2A!important;
-  }
+  .search-form {
+    margin-left: .5em;
+    margin-right: .5em;
+    
+    .search-bar-div {
+      position: relative;
+      display: inline;
 
-  .search-bar {
-    transition: background-color 0.3s ease;
-    height: 34px;
-    width: 190px;
-  }
+      .search-bar {
+        transition: background-color 0.3s ease;
+        height: 2em;
+        // width: 190px;
+      }
 
-  .search-button {
-    background-color: #282828;
-    border: none;
-  }
+      .clear-search-btn {
+        height: 2.5em;
+        width: 2.5em;
+        font-size: .5em;
+        background-color: grey;
+        // @include rel-parent(92%, 0%);
+        display: none;
 
-  input:focus {
-    background-color: #ED2A2A!important;
+        &:hover {
+          background-color: $navHoverColor;
+        }
+
+        i {
+          @include center-rel-parent();
+        }
+      }
+
+      #clear-search-btn-lg {
+        @include rel-parent(92%, 0%);
+      }
+
+      #clear-search-btn-sm {
+        @include rel-parent(95%, 65%);
+      }
+    }
+
+    .search-btn {
+      background-color: #282828;
+      border: none;
+
+      &:hover {
+        background-color: $navHoverColor;
+      }
+    }
+
   }
 
   #navCollapseBtn {
@@ -174,11 +220,6 @@ nav {
 
   #navCollapseIcon {
     font-size: 23px;
-  }
-
-  #largeSearchForm {
-    margin-left: .5em;
-    margin-right: .5em;
   }
 
   .dropdown-menu {
@@ -253,9 +294,6 @@ nav {
       margin-bottom: .5em;
 
       .etf-input {
-        // width: 8em;
-        // width: 50%;
-        // max-width: 33%;
         flex: 1;
         max-height: 1.5em;
         overflow: hidden;

@@ -287,7 +287,8 @@ function doStoreCalculations() {//{{{
 }//}}}
 
 function displayStores(storeDict) {//{{{
-  clearFoodGrid()
+  clearGrid()
+  curView = 'stores'
 
   resetRanges()
   Object.keys(storeDict).forEach(function(key) {
@@ -301,7 +302,7 @@ function displayStores(storeDict) {//{{{
     storeDiv.appendChild(storeBody)
     // storeDiv.appendChild(createStoreInfo(storeDict[key]["name"]))
 
-    foodGridRow.appendChild(storeDiv)
+    gridRow.appendChild(storeDiv)
   })
 
   doStoreCalculations()
