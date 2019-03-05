@@ -202,6 +202,11 @@ function saveUserSettings() {
   closePopup()
 }
 
+function censorText(text) {
+  return '*'.repeat(text.length)
+  // return '•'.repeat(text.length)
+}
+
 function openSettingsPopup() {
   blurBackgroundToggle();
   const popup = document.createElement("div");
@@ -213,7 +218,8 @@ function openSettingsPopup() {
   const userInfoDiv = document.createElement('div')
   userInfoDiv.id = 'user-info-div'
   userInfoDiv.appendChild(createEtf('Username', user.username, 4, 20))
-  userInfoDiv.appendChild(createEtf('Password', user.password, 4, 20))
+  // TODO: actually change user password with this. right now the censor breaks this //
+  userInfoDiv.appendChild(createEtf('Password', censorText(user.password), 4, 20, true))
   userInfoDiv.appendChild(createEtf('Postal Code', user.postalCode, 6, 7))
 
   const saveChangesBtn = createElementWithText("button", "btn btn-primary popup-button", "popupLoginBtn", "Save Changes");
