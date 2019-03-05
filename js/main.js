@@ -10,6 +10,7 @@ const gridRow = document.querySelector('#grid-row')
 const gridItemsBackup = []
 
 const user = {
+  userId: 1,
   username: 'user',
   password: 'user',
   postalCode: 'ABC 123',
@@ -73,7 +74,7 @@ function addItemToDropdown(dropdown, item) {//{{{
 }//}}}
 
 function clearDropdownItems(dropdown) {//{{{
-  removeAllChildren(dropdown.querySelector('.dropdown-menu')) 
+  removeAllChildren(dropdown.querySelector('.dropdown-menu'))
 }//}}}
 
 // }}}  dropdown //
@@ -177,7 +178,7 @@ function filterCurrentGridItems(textSelector, searchString) {//{{{
   for (const matchingDiv of matchingDivsArray) {
     gridRow.appendChild(matchingDiv)
   }
-  
+
   // TODO: is this even correct? //
   if (curView != 'search') {
     curViewBackup = curView
@@ -258,7 +259,7 @@ window.onload = function() {//{{{
   })
 
   // search listeners {{{ //
-  
+
   document.querySelector('#search-bar-sm').addEventListener('keyup', e => {
     e.preventDefault()
     search('sm')
@@ -285,7 +286,7 @@ window.onload = function() {//{{{
     e.preventDefault()
     clearSearch('lg')
   })
-  
+
   // }}} search listeners //
 
   displayStores(stores)
@@ -297,7 +298,7 @@ window.onload = function() {//{{{
   // openSettingsPopup()
 
   // dropdown hover (jquery) {{{ //
-  
+
   // The following code implements the feature where if you hover a dropdown
   // menu link, the dropdown options appear
   // https://stackoverflow.com/questions/50116307/how-to-make-hover-effect-instead-of-click-in-bootstrap-4-dropdown-menu
@@ -310,6 +311,6 @@ window.onload = function() {//{{{
     $( this ).removeClass('show').attr('aria-expanded', "false");
     $( this ).find('.dropdown-menu').removeClass('show');
   });
-  
+
   // }}} dropdown hover (jquery) //
 }//}}}

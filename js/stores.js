@@ -39,7 +39,7 @@ function createStoreBody(name) {//{{{
   storeScoreParElem.appendChild(storeScoreSpanElem)
 
   // cart price line {{{ //
-  
+
   const cartPriceParElem = document.createElement('p')
   cartPriceParElem.className = 'cart-price-label'
   cartPriceParElem.textContent = "Cart Price: "
@@ -47,11 +47,11 @@ function createStoreBody(name) {//{{{
   const cartPriceSpanElem = document.createElement('span')
   cartPriceSpanElem.className = 'cart-price-value'
   cartPriceParElem.appendChild(cartPriceSpanElem)
-  
+
   // }}} cart price line //
 
   // store dist line {{{ //
-  
+
   const storeDistParElem = document.createElement('p')
   storeDistParElem.className = 'store-dist-label'
   storeDistParElem.textContent = "Store Distance: "
@@ -59,7 +59,7 @@ function createStoreBody(name) {//{{{
   const storeDistSpanElem = document.createElement('span')
   storeDistSpanElem.className = 'store-dist-value'
   storeDistParElem.appendChild(storeDistSpanElem)
-  
+
   // }}} store dist line //
 
   storeBody.appendChild(storeHeader)
@@ -108,57 +108,57 @@ function setStoreSorting() {//{{{
   clearDropdownItems(sortingMenu)
 
   // score {{{ //
-  
+
   addSortingOption(createDropdownIconItem(["fas fa-sort-numeric-up"]),
-    sortingMenu, 
+    sortingMenu,
     (e) => sortGridByValue('.store-div', '.store-score-value', 'float', 'desc', extractSortingLabelIcons(e)))
 
   addSortingOption(createDropdownIconItem(["fas fa-sort-numeric-down"]),
-    sortingMenu, 
+    sortingMenu,
     (e) => sortGridByValue('.store-div', '.store-score-value', 'float', 'asc', extractSortingLabelIcons(e)))
-  
+
  addDropdownDivider(sortingMenu)
-  
+
   // }}} score //
 
   // price {{{ //
-  
+
   addSortingOption(createDropdownIconItem(["fas fa-dollar-sign", "fas fa-long-arrow-alt-up"]),
-    sortingMenu, 
+    sortingMenu,
     (e) => sortGridByValue('.store-div', '.cart-price-value', 'float', 'asc', extractSortingLabelIcons(e)))
 
   addSortingOption(createDropdownIconItem(["fas fa-dollar-sign", "fas fa-long-arrow-alt-down"]),
-    sortingMenu, 
+    sortingMenu,
     (e) => sortGridByValue('.store-div', '.cart-price-value', 'float', 'desc', extractSortingLabelIcons(e)))
-  
+
  addDropdownDivider(sortingMenu)
-  
+
   // }}} price //
 
   // dist {{{ //
-  
+
   addSortingOption(createDropdownIconItem(["fas fa-car", "fas fa-long-arrow-alt-up"]),
-    sortingMenu, 
+    sortingMenu,
     (e) => sortGridByValue('.store-div', '.store-dist-value', 'float', 'asc', extractSortingLabelIcons(e)))
 
   addSortingOption(createDropdownIconItem(["fas fa-car", "fas fa-long-arrow-alt-down"]),
-    sortingMenu, 
+    sortingMenu,
     (e) => sortGridByValue('.store-div', '.store-dist-value', 'float', 'desc', extractSortingLabelIcons(e)))
-  
+
  addDropdownDivider(sortingMenu)
-  
+
   // }}} dist  //
-  
+
   // alph {{{ //
-  
+
   addSortingOption(createDropdownIconItem(["fas fa-sort-alpha-down"]),
-    sortingMenu, 
+    sortingMenu,
     (e) => sortGridByValue('.store-div', '.store-name', 'text', 'asc', extractSortingLabelIcons(e)))
 
   addSortingOption(createDropdownIconItem(["fas fa-sort-alpha-up"]),
-    sortingMenu, 
+    sortingMenu,
     (e) => sortGridByValue('.store-div', '.store-name', 'text', 'desc', extractSortingLabelIcons(e)))
-  
+
   // }}} alph  //
 
 }//}}}
@@ -175,7 +175,7 @@ function updateRange(value, range) {//{{{
   const parsedValue = parseFloat(value)
   if (!compareFloats(parsedValue, range.min)) {
     range.min = parsedValue
-  } 
+  }
   if (compareFloats(parsedValue, range.max)) {
     range.max = parsedValue
   }
@@ -256,9 +256,9 @@ function addStoreScores() {//{{{
   const storeBodies = document.querySelectorAll('.store-body')
   for (const storeBody of storeBodies) {
     const cartPriceScore = 1 - getPercentOfRange(
-      storeBody.querySelector('.cart-price-value').textContent, cartPriceRange) 
+      storeBody.querySelector('.cart-price-value').textContent, cartPriceRange)
     const storeDistScore = 1 - getPercentOfRange(
-      storeBody.querySelector('.store-dist-value').textContent, storeDistRange) 
+      storeBody.querySelector('.store-dist-value').textContent, storeDistRange)
     const storeScore = ((cartPriceScore + storeDistScore) / 2 * 10).toFixed(1)
     storeBody.querySelector('.store-score-value').textContent = storeScore
   }
@@ -266,7 +266,7 @@ function addStoreScores() {//{{{
 
 function doStoreCalculations() {//{{{
   // calculate store scores, color values and add units
-  
+
   // NOTE: calculations must be done before adding units since calculating
   // functions assume value elements will only have number and no units
   // surrounding it
@@ -305,12 +305,26 @@ function displayStores(storeDict) {//{{{
     gridRow.appendChild(storeDiv)
   })
 
+
+  // SERVER DATA EXCHANGE: This is where the web app determines the cheapest
+  // grocery store to go to, depending on what is in the cart. The server
+  // will perform the calculations required to determine this.
+  //
+  // The server will be provided with a postal code and the user's current
+  // cart, and the server will respond with stores with the cheapest prices
+  // in the vicinity.
+  //
+  // The results will be added to the DOM.
+  //
+  // The code below randomly creates price and distance data, since we depend
+  // on the server's results for that information.
+
   doStoreCalculations()
 
   sortGridByValue('.store-div', '.store-score-value', 'float', 'desc', [createScoreDescIcon()])
   // sortGridByValue('.store-div', '.store-dist-value', 'float', 'desc', [createScoreDescIcon()])
   // sortGridByValue('.store-div', '.store-name', 'text', 'desc', [createScoreDescIcon()])
-  
+
   setStoreSorting()
 }//}}}
 

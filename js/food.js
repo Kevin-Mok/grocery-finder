@@ -172,11 +172,11 @@ function setAlphaSorting() {//{{{
   addItemToDropdown(sortingMenu, alphaBackwardItem) */
 
   addSortingOption(createDropdownIconItem(["fas fa-sort-alpha-down"]),
-    sortingMenu, 
+    sortingMenu,
     (e) => sortGridByValue('.food-div', '.food-info', 'text', 'asc', extractSortingLabelIcons(e)))
 
   addSortingOption(createDropdownIconItem(["fas fa-sort-alpha-up"]),
-    sortingMenu, 
+    sortingMenu,
     (e) => sortGridByValue('.food-div', '.food-info', 'text', 'desc', extractSortingLabelIcons(e)))
 
 }//}}}
@@ -235,7 +235,19 @@ function createCartFoodDict() {
 }
 
 function changeCategory(e) {//{{{
-  // log('food')
+
+
+	// SERVER DATA EXCHANGE: This is where the web app displays foods depending
+	// on the category the user has selected (All, Fruits, Vegetables, etc..)
+	//
+	// The server is provided with a category. The server provides an object
+	// like the 'fruits' and 'vegetables' objects at the top of this file,
+	// containing the food items for the current category.
+	//
+	// The food information from the server is then displayed in the DOM.
+	//
+	// The code below accesses the dummy objects defined at the top of this file.
+
   if (e.target.id == 'all-items') {
     curView = 'food'
     displayFood(all)
@@ -284,6 +296,14 @@ function toggleFoodCartStatus(e) {
     const foodId = /food-div-(\d*)/g.exec(foodDiv.id)[1]
     if (!foodDiv.classList.contains('in-cart')) {
       // add to cart
+
+			// SERVER DATA EXCHANGE: This is where the user had just entered a
+			// new item to the cart
+			//
+			// Provide the server with the current user Id and the new cart.
+			// Update the cart in the database, so that the current cart can
+			// persist upon login and logout.
+
       cart.push(foodId)
       foodDiv.classList.add('in-cart')
     } else {

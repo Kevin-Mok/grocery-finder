@@ -132,9 +132,26 @@ function openSignupPopup() {
 }
 
 function saveUserSettings() {
+
+  // SERVER DATA EXCHANGE: This is where the user updates their user data.
+
+  // Make a request to the server, providing the server with user.id,
+  // new username, new password and new postal code
+  // The server updates the user with new data in the database.
+  //
+  // This might look something like this
+  // updateUser.then((success) => {
+  //   notify user that it was successful
+  // }, (err) => {
+  //   notify user why it was unsucessful
+  // })
+  //
+  // The code below just modifies the global user object with the new data
+
   user.username = getEtfValue(document.querySelector('#etf-username'))
   user.password = getEtfValue(document.querySelector('#etf-password'))
   user.postalCode = getEtfValue(document.querySelector('#etf-postal-code'))
+
   closePopup()
 }
 
@@ -211,6 +228,34 @@ function blurBackgroundToggle() {
 function loginBtnClicked() {
   const loginUsername = document.querySelector("#loginUsername").value;
   const loginPassword = document.querySelector("#loginPassword").value;
+
+  // SERVER DATA EXCHANGE: This is where we check if the user-entered
+  // user/pass credentials are correct.
+  //
+  // Make a request to the server providing
+  // the server with loginUsername and loginPassword.
+  // The server determines if login was successful or not
+  //
+  // This might look something like this:
+  // login.then((user) => {
+  //
+  //   user is an object containing user credentials such as
+  //   previous cart data, and user postal code. Save this user object
+  //   as a global variable
+  //
+  //   if (user is an admin) {
+  //     admin logged in
+  //     update front end with admin elements
+  //   } else {
+  //     user  logged in
+  //   }
+  // }, (err) => {
+  //   incorrect user/password
+  // })
+  //
+  // The code below assumes that we only have two accounts, a dummy user
+  // account and an admin account. It also assumes that a global 'user'
+  // variable would be made availible.
 
   if (loginUsername == 'admin' && loginPassword == 'admin') {
     alert("Admin Login Successful. (Redirect to the admin page)");
