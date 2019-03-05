@@ -165,7 +165,15 @@ function openCurrentCartPopup() {
 
 function cartSaveBtnClicked() {
   const cartName = $('#cartName').val()
-  user.savedCarts[cartName] = JSON.parse(JSON.stringify(cart)); // cloned cart
+  user.savedCarts[cartName] = [...cart]; // es6 cloned cart
+
+  // If saved carts dropdown is already visible, destory it and make a new one
+  // with the newly saved cart
+  if ($('.saved-carts-div').length) {
+    $('.saved-carts-div').remove()
+    createSavedCartsDiv()
+  }
+
   closePopup()
 }
 

@@ -1,6 +1,6 @@
 // vars {{{ //
 
-const cart = []
+let cart = []
 const foodGrid = document.querySelector('#food-grid')
 const foodGridRow = document.querySelector('#food-grid-row')
 const categoryList = document.querySelector('#category-list')
@@ -174,11 +174,11 @@ function setAlphaSorting() {//{{{
   addItemToDropdown(sortingMenu, alphaBackwardItem) */
 
   addSortingOption(createDropdownIconItem(["fas fa-sort-alpha-down"]),
-    sortingMenu, 
+    sortingMenu,
     (e) => sortGridByValue('.food-div', '.food-info', 'text', 'asc', extractSortingLabelIcons(e)))
 
   addSortingOption(createDropdownIconItem(["fas fa-sort-alpha-up"]),
-    sortingMenu, 
+    sortingMenu,
     (e) => sortGridByValue('.food-div', '.food-info', 'text', 'desc', extractSortingLabelIcons(e)))
 
 }//}}}
@@ -250,8 +250,10 @@ function changeCategory(e) {//{{{
   curView = 'food'
 
   if (e.target.id == 'all-items') {
+		$('.saved-carts-div').remove()
     displayFood(all)
   } else if (e.target.classList.contains('food-subcategory')) {
+		$('.saved-carts-div').remove()
     let foodCategoryName = e.target.textContent.toLowerCase()
     if (foodCategoryName == 'all') {
       foodCategoryName = /(\w*)-*/g.exec(e.target.id)[1]

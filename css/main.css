@@ -310,36 +310,10 @@ for lg and larger screen sizes. */
     border-bottom-right-radius: 5px;
   }
 }
-.save-cart-btn {
+.saved-carts-div {
   position: absolute;
   top: 80px;
   left: 15px;
-}
-
-.saved-carts-div {
-  margin-top: -40px;
-  border-radius: 5px;
-}
-
-.saved-cart-div {
-  position: relative;
-}
-
-.saved-cart-item {
-  font-size: 15px;
-  padding: 15px;
-  margin-top: 5px;
-  margin-bottom: 5px;
-}
-
-.saved-cart-add-btn {
-  position: absolute;
-  right: 10px;
-}
-
-.saved-cart-replace-btn {
-  position: absolute;
-  right: 125px;
 }
 
 /*# sourceMappingURL=main.css.map */

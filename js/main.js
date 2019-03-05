@@ -8,19 +8,6 @@ let user = {
   savedCarts: {}
 }
 
-function showSavedCartBtn() {
-  if (curView == 'cart') {
-    $('.save-cart-btn').removeClass('d-none')
-  }
- 
-}
-
-function hideSavedCartBtn() {
-  if (curView != 'cart') {
-    $('.save-cart-btn').addClass('d-none')
-  }
-}
-
 // dropdown {{{ //
 
 function createDropdownMenu() {//{{{
@@ -77,7 +64,7 @@ function addItemToDropdown(dropdown, item) {//{{{
 }//}}}
 
 function clearDropdownItems(dropdown) {//{{{
-  removeAllChildren(dropdown.querySelector('.dropdown-menu')) 
+  removeAllChildren(dropdown.querySelector('.dropdown-menu'))
 }//}}}
 
 // }}}  dropdown //
@@ -153,16 +140,16 @@ window.onload = function() {//{{{
   document.querySelectorAll('.cart-btn').forEach(cartBtn => {
     cartBtn.addEventListener('click', function() {
       curView = 'cart'
-      showSavedCartBtn()
       displayFood(createCartFoodDict())
+      createSavedCartsDiv()
     })
   })
   document.querySelectorAll('.calc-btn').forEach(calcBtn => {
     calcBtn.addEventListener('click', function() {
     // calcBtn.addEventListener('click', function(e) {
       // log(e.target)
-      hideSavedCartBtn()
       curView = 'stores'
+      $('.saved-carts-div').remove()
       displayStores(stores)
     })
   })
@@ -174,7 +161,7 @@ window.onload = function() {//{{{
   // openSettingsPopup()
 
   // dropdown hover (jquery) {{{ //
-  
+
   // The following code implements the feature where if you hover a dropdown
   // menu link, the dropdown options appear
   // https://stackoverflow.com/questions/50116307/how-to-make-hover-effect-instead-of-click-in-bootstrap-4-dropdown-menu
@@ -187,6 +174,6 @@ window.onload = function() {//{{{
     $( this ).removeClass('show').attr('aria-expanded', "false");
     $( this ).find('.dropdown-menu').removeClass('show');
   });
-  
+
   // }}} dropdown hover (jquery) //
 }//}}}
