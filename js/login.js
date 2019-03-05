@@ -102,8 +102,9 @@ function openSignupPopup() {
   postalCodeQuestionBtn.appendChild(questionIcon);
   postalCodeDiv.appendChild(postalCodeQuestionBtn);
 
-  const loginBtn = createElementWithText("button", "btn btn-primary popup-button", "popupLoginBtn", "Signup");
+  const signupBtn = createElementWithText("button", "btn btn-primary popup-button", "popupSignupBtn", "Signup");
   const cancelBtn = createElementWithText("button", "btn btn-danger popup-button", "popupCancelBtn", "Cancel");
+  signupBtn.setAttribute("onclick", "signupBtnClicked()");
   cancelBtn.setAttribute("onclick", "closePopup()");
 
   const p2 = createElementWithText("p", "popup-text", "", "Already have an account? ");
@@ -117,7 +118,7 @@ function openSignupPopup() {
   popup.appendChild(usernameDiv);
   popup.appendChild(passwordDiv);
   popup.appendChild(postalCodeDiv)
-  popup.appendChild(loginBtn);
+  popup.appendChild(signupBtn);
   popup.appendChild(cancelBtn);
   popup.appendChild(p2);
 
@@ -223,6 +224,20 @@ function createElementWithText(el, classes, id, text) {
 function blurBackgroundToggle() {
   const mainContainer = document.querySelector(".container-fluid");
   mainContainer.classList.toggle("blur");
+}
+
+function signupBtnClicked() {
+  // SERVER DATA EXCHANGE: This is where we handle new signups.
+  //
+  // After retrieving the new username, password and postalcode,
+  // this data is sent to the server, which creates a new user in the
+  // database.
+  const username = document.querySelector("#signInUsername").value;
+  const password = document.querySelector("#signInPassword").value;
+  const postalCode = document.querySelector("#postalCodeInput").value;
+
+  // Send to server
+  // createNewUser(username, password, postalCode)
 }
 
 function loginBtnClicked() {
