@@ -42,6 +42,12 @@ the code.
   in the vicinity of the user. Currently the cart prices are random, since the backend
   is needed to perform potentially large computations to calculate the store prices.
 
+                                            > Updating user info <
+  Once the user has logged in, the user update their own credentials.
+
+  1. Hover over the profile icon on the top left of the navbar.
+  2. Click 'Settings'
+
 
 ===================================================================================================================================
 
