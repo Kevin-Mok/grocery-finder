@@ -32,7 +32,7 @@
                                           > Calculating final prices <
   1. Click on the calculator icon on the navbar.
 
-  The frontend only displays the cheapest total prices for the the top 4 stores
+  The frontend displays the cheapest total prices for the the top 4 stores
   in the vicinity of the user. Currently the cart prices are random, since the backend
   is needed to perform potentially large computations to calculate the store prices.
 
