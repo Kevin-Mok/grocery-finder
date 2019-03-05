@@ -1,7 +1,6 @@
 // vars {{{ //
 
 const log = console.log
-// let curView = 'stores'
 let curView = ''
 let curViewBackup = ''
 let curSearchSelector = ''
@@ -178,8 +177,12 @@ function filterCurrentGridItems(textSelector, searchString) {//{{{
   for (const matchingDiv of matchingDivsArray) {
     gridRow.appendChild(matchingDiv)
   }
-  curViewBackup = curView
-  curView = 'search'
+  
+  // TODO: is this even correct? //
+  if (curView != 'search') {
+    curViewBackup = curView
+    curView = 'search'
+  }
 }//}}}
 
 function filterGridItemsBackup(searchString) {//{{{
@@ -204,6 +207,7 @@ function search(size) {
 
   // Make search string all lowercase, for case insensitivity
   const searchString = returnSearchBar(size).value.toLowerCase();
+  // log(searchString, curView, curViewBackup)
   if (searchString != '') {
     switch (curView) {
       case 'stores':
@@ -220,7 +224,6 @@ function search(size) {
   } else {
     clearSearch(size)
   }
-  // log(searchString, curView, curViewBackup)
 }
 
 function extractFloat(text) {//{{{
@@ -251,7 +254,6 @@ window.onload = function() {//{{{
     displayFood(createCartFoodDict())
   })
   onclickToAll('.calc-btn', () => {
-    curView = 'stores'
     displayStores(stores)
   })
 
@@ -286,11 +288,10 @@ window.onload = function() {//{{{
   
   // }}} search listeners //
 
-  // curView = 'stores'
-  // displayStores(stores)
+  displayStores(stores)
 
-  curView = 'food'
-  displayFood(all)
+  // curView = 'food'
+  // displayFood(all)
 
   // foodGridRow.appendChild(createEtf('Test', 'test', 4, 20))
   // openSettingsPopup()

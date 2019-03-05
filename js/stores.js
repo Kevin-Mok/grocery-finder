@@ -288,6 +288,7 @@ function doStoreCalculations() {//{{{
 
 function displayStores(storeDict) {//{{{
   clearGrid()
+  curView = 'stores'
 
   resetRanges()
   Object.keys(storeDict).forEach(function(key) {

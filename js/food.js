@@ -235,14 +235,16 @@ function createCartFoodDict() {
 }
 
 function changeCategory(e) {//{{{
-  curView = 'food'
+  // log('food')
   if (e.target.id == 'all-items') {
+    curView = 'food'
     displayFood(all)
   } else if (e.target.classList.contains('food-subcategory')) {
     let foodCategoryName = e.target.textContent.toLowerCase()
     if (foodCategoryName == 'all') {
       foodCategoryName = /(\w*)-*/g.exec(e.target.id)[1]
     }
+    curView = 'food'
     eval('displayFood(' + foodCategoryName +')')
   }
 }
