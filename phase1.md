@@ -3,7 +3,7 @@
   - save/restore carts
 - filter/sort items
 - simulated store calculation
-- (responsive) main page
+- responsive main page
 - admin page
 
 ## Server Comments 
