@@ -238,8 +238,18 @@ function createCartFoodDict() {
 // This actually causes a slight bug. The curView switches to food mode
 // when you click login/sign up on the collapsed nav bar
 function changeCategory(e) {//{{{
-
-  // TODO If target was a sorting button, then leave the curView as it is
+	// SERVER DATA EXCHANGE: This is where the web app displays foods depending
+	// on the category the user has selected (All, Fruits, Vegetables, etc..)
+	//
+	// The server is provided with a category. The server provides an object
+	// like the 'fruits' and 'vegetables' objects at the top of this file,
+	// containing the food items for the current category.
+	//
+	// The food information from the server is then displayed in the DOM.
+	//
+	// The code below accesses the dummy objects defined at the top of this file.
+  
+  // log('food')
   if (e.target.id == 'all-items') {
 		$('.saved-carts-div').remove()
     curView = 'food'
@@ -290,6 +300,14 @@ function toggleFoodCartStatus(e) {
     const foodId = /food-div-(\d*)/g.exec(foodDiv.id)[1]
     if (!foodDiv.classList.contains('in-cart')) {
       // add to cart
+
+			// SERVER DATA EXCHANGE: This is where the user had just entered a
+			// new item to the cart
+			//
+			// Provide the server with the current user Id and the new cart.
+			// Update the cart in the database, so that the current cart can
+			// persist upon login and logout.
+
       cart.push(foodId)
       foodDiv.classList.add('in-cart')
     } else {

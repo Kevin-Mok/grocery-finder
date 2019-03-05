@@ -1,3 +1,9 @@
+IMPORTANT:
+Areas in the code where server interaction is required are followed by
+comments that start with 'SERVER DATA EXCHANGE'.
+
+Please Ctrl+F or grep to find the string 'SERVER DATA EXCHANGE' throughout
+the code.
 
 (Standard) User Instructions
 
@@ -35,6 +41,12 @@
   The frontend displays the cheapest total prices for the the top 4 stores
   in the vicinity of the user. Currently the cart prices are random, since the backend
   is needed to perform potentially large computations to calculate the store prices.
+
+                                            > Updating user info <
+  Once the user has logged in, the user update their own credentials.
+
+  1. Hover over the profile icon on the top left of the navbar.
+  2. Click 'Settings'
 
 
 ===================================================================================================================================

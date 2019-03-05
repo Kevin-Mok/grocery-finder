@@ -101,8 +101,9 @@ function openSignupPopup() {
   postalCodeQuestionBtn.appendChild(questionIcon);
   postalCodeDiv.appendChild(postalCodeQuestionBtn);
 
-  const loginBtn = createElementWithText("button", "btn btn-primary popup-button", "popupLoginBtn", "Signup");
+  const signupBtn = createElementWithText("button", "btn btn-primary popup-button", "popupSignupBtn", "Signup");
   const cancelBtn = createElementWithText("button", "btn btn-danger popup-button", "popupCancelBtn", "Cancel");
+  signupBtn.setAttribute("onclick", "signupBtnClicked()");
   cancelBtn.setAttribute("onclick", "closePopup()");
 
   const p2 = createElementWithText("p", "popup-text", "", "Already have an account? ");
@@ -116,7 +117,7 @@ function openSignupPopup() {
   popup.appendChild(usernameDiv);
   popup.appendChild(passwordDiv);
   popup.appendChild(postalCodeDiv)
-  popup.appendChild(loginBtn);
+  popup.appendChild(signupBtn);
   popup.appendChild(cancelBtn);
   popup.appendChild(p2);
 
@@ -178,9 +179,26 @@ function cartSaveBtnClicked() {
 }
 
 function saveUserSettings() {
+
+  // SERVER DATA EXCHANGE: This is where the user updates their user data.
+
+  // Make a request to the server, providing the server with user.id,
+  // new username, new password and new postal code
+  // The server updates the user with new data in the database.
+  //
+  // This might look something like this
+  // updateUser.then((success) => {
+  //   notify user that it was successful
+  // }, (err) => {
+  //   notify user why it was unsucessful
+  // })
+  //
+  // The code below just modifies the global user object with the new data
+
   user.username = getEtfValue(document.querySelector('#etf-username'))
   user.password = getEtfValue(document.querySelector('#etf-password'))
   user.postalCode = getEtfValue(document.querySelector('#etf-postal-code'))
+
   closePopup()
 }
 
@@ -254,9 +272,51 @@ function blurBackgroundToggle() {
   mainContainer.classList.toggle("blur");
 }
 
+function signupBtnClicked() {
+  // SERVER DATA EXCHANGE: This is where we handle new signups.
+  //
+  // After retrieving the new username, password and postalcode,
+  // this data is sent to the server, which creates a new user in the
+  // database.
+  const username = document.querySelector("#signInUsername").value;
+  const password = document.querySelector("#signInPassword").value;
+  const postalCode = document.querySelector("#postalCodeInput").value;
+
+  // Send to server
+  // createNewUser(username, password, postalCode)
+}
+
 function loginBtnClicked() {
   const loginUsername = document.querySelector("#loginUsername").value;
   const loginPassword = document.querySelector("#loginPassword").value;
+
+  // SERVER DATA EXCHANGE: This is where we check if the user-entered
+  // user/pass credentials are correct.
+  //
+  // Make a request to the server providing
+  // the server with loginUsername and loginPassword.
+  // The server determines if login was successful or not
+  //
+  // This might look something like this:
+  // login.then((user) => {
+  //
+  //   user is an object containing user credentials such as
+  //   previous cart data, and user postal code. Save this user object
+  //   as a global variable
+  //
+  //   if (user is an admin) {
+  //     admin logged in
+  //     update front end with admin elements
+  //   } else {
+  //     user  logged in
+  //   }
+  // }, (err) => {
+  //   incorrect user/password
+  // })
+  //
+  // The code below assumes that we only have two accounts, a dummy user
+  // account and an admin account. It also assumes that a global 'user'
+  // variable would be made availible.
 
   if (loginUsername == 'admin' && loginPassword == 'admin') {
     alert("Admin Login Successful. (Redirect to the admin page)");

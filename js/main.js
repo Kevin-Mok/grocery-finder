@@ -10,6 +10,7 @@ const gridRow = document.querySelector('#grid-row')
 const gridItemsBackup = []
 
 const user = {
+  userId: 1,
   username: 'user',
   password: 'user',
   postalCode: 'ABC 123',
@@ -178,7 +179,7 @@ function filterCurrentGridItems(textSelector, searchString) {//{{{
   for (const matchingDiv of matchingDivsArray) {
     gridRow.appendChild(matchingDiv)
   }
-  
+
   // TODO: is this even correct? //
   if (curView != 'search') {
     curViewBackup = curView
@@ -260,7 +261,7 @@ window.onload = function() {//{{{
   })
 
   // search listeners {{{ //
-  
+
   document.querySelector('#search-bar-sm').addEventListener('keyup', e => {
     e.preventDefault()
     search('sm')
@@ -287,7 +288,7 @@ window.onload = function() {//{{{
     e.preventDefault()
     clearSearch('lg')
   })
-  
+
   // }}} search listeners //
 
   // displayStores(stores)
