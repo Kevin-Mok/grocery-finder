@@ -56,7 +56,8 @@ Administrator Instructions:
   An administrator has access to all functionalities that are available to standard users. As such, accessing these common
  functionalities can be achieved by adhering to the standard user's instructions in the section above.
 
-  In addition to the aforementioned functionalities, users with administrative privileges will also have exclusive access to a 'Manage Users' webpage. It is from this specific webpage that an administrator will be able to access administrative processes.
+  In addition to the aforementioned functionalities, users with administrative privileges will also have exclusive access to a 
+  'Manage Users' webpage. It is from this specific webpage that an administrator will be able to access administrative processes.
 
                               > How to access the 'Manage Users' webpage from index.html <
 
