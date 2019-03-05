@@ -1,15 +1,11 @@
 ## Phase 1
-- phase1.txt/README
 - server comments
+- add commit hash for TA to check
  
 ### Extra
 - add sort options labels
-- pref. for dist./price for score
-  - radius
-- validate input/postal code
-  - https://www.bootcdn.cn/cleave.js/ 
-- replace user icon with first letter of user's name
 - more items/categories
+- replace user icon with first letter of user's name
  
 ## Phase 2
 - display (colored) item prices in store calculation
@@ -23,3 +19,9 @@
   - not using actual distance API for stores?
     - Google Maps API is $200/month
     - generate fake data?
+
+### Extra
+- pref. for dist./price for score
+  - radius
+- validate input/postal code
+  - https://www.bootcdn.cn/cleave.js/ 

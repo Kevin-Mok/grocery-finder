@@ -248,8 +248,10 @@ window.onload = function() {//{{{
 
   createFoodCategories(categories)
   // categoryList.addEventListener('click', changeCategory, true)
-  document.querySelector('#all-items').addEventListener('click', changeCategory)
-  categoryList.addEventListener('click', changeCategory)
+  // categoryList.addEventListener('click', changeCategory)
+  // document.querySelector('#all-items').addEventListener('click', changeCategory)
+  document.querySelector('#all-items').addEventListener('click', () =>
+    displayFood(all))
 
   onclickToAll('.cart-btn', () => {
     curView = 'cart'

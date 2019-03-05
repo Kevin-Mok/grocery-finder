@@ -80,12 +80,17 @@ const categories = {"Produce": ['Fruits', 'Vegetables']}
 
 // food categories {{{ //
 
+function displayFoodCategory(category) {
+  eval('displayFood(' + category.toLowerCase() +')')
+}
+
 function createFoodCategory(name) {//{{{
   const foodCategory = createDropdownMenu()
   foodCategory.querySelector('.dropdown-label').textContent = name
 
   const allSubCategory = createFoodSubcategory('All')
   allSubCategory.id = name.toLowerCase() + '-items'
+  allSubCategory.addEventListener('click', () => displayFoodCategory(name))
   addItemToDropdown(foodCategory, allSubCategory)
 
   return foodCategory
@@ -95,6 +100,7 @@ function createFoodSubcategory(name) {
   const subcategory = createDropdownItem()
   subcategory.classList.add('food-subcategory')
   subcategory.textContent = name
+  subcategory.addEventListener('click', () => displayFoodCategory(name))
 
   return subcategory
 }
@@ -249,7 +255,7 @@ function changeCategory(e) {//{{{
 	//
 	// The code below accesses the dummy objects defined at the top of this file.
   
-  // log('food')
+  log('category', e.target)
   if (e.target.id == 'all-items') {
 		$('.saved-carts-div').remove()
     curView = 'food'
