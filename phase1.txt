@@ -1,17 +1,41 @@
 
 (Standard) User Instructions
 
-  Open index.html. In order to browse grocery items, the user would click the 'All' button on the navbar, or
-  use the 'Produce' dropdown menu to select a food category.
+  Open index.html.
 
-  The user would then click on grocery items that they need. Clicking on items automatically adds them to
+                                                  > Login <
+  1. Hover over the profile icon on the top left of the navbar.
+  2. Click 'Login'
+  3. Enter 'user' for the username and password and the click 'Login'
+  4. The user is now logged in
+
+                                      > Navigating and adding to cart <
+  1. Click on the 'All' button on the navbar, or use the 'Produce' dropdown menu to select a food category.
+  2. Click on any desired grocery items. Clicking on items automatically adds them to
   the cart, displaying a persistent green checkmark on the food item.
-
-  Currently, the user cannot add multiple quantities of the same food item.
-
-  To help users locate items, the user can use the search bar to search for items, or use the sorting dropdown
+  3. To help locate items, use the search bar to search for items, or use the sorting dropdown
   menu to sort items alphabetically.
-  
+
+                                              > Saving carts <
+  Saving and restoring carts can be very useful for groceries because users may want
+  to buy the same essential groceries over and over again.
+
+  1. To save the current cart, click the floppy disk icon on the navbar.
+  2. In the popup menu, enter a name for the cart and click 'Save cart'.
+  3. The cart is saved.
+
+                                              > Restore carts <
+  1. To restore a cart, click the cart icon on the navbar.
+  2. Click the 'Saved carts' dropdown menu to view the names of previously saved carts.
+  3. Click on the desired cart to restore.
+
+                                          > Calculating final prices <
+  1. Click on the calculator icon on the navbar.
+
+  The frontend only displays the cheapest total prices for the the top 4 stores
+  in the vicinity of the user. Currently the cart prices are random, since the backend
+  is needed to perform potentially large computations to calculate the store prices.
+
 
 ===================================================================================================================================
 
