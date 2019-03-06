@@ -17,7 +17,7 @@ class User {
 	}
 }
 
-/* SERVER DATA CALL: 
+/* SERVER DATA EXCHANGE: 
    The program would need to retrieve the following user data via a server request, i.e., the server will send
    this data. 
 */

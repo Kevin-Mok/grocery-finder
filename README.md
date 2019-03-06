@@ -24,8 +24,9 @@
 
 ## Server Comments 
 Areas in the code where server interaction is required are followed by comments
-that start with `SERVER DATA EXCHANGE`.  Please `Ctrl`+`F` or `grep` to find
-the string `SERVER DATA EXCHANGE` throughout the code.
+that start with `SERVER DATA EXCHANGE`. You can find all the server call
+comments [in this issue](https://github.com/csc309-winter-2019/team44/issues/14) or 
+run `grep --color=auto -n SERVER js/*` in the root folder of our repository.
 
 ## User Instructions
 Open index.html. Note that this main page is responsive and will fit all items
