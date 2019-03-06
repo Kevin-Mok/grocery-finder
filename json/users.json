@@ -1,6 +1,0 @@
-[
-    
-    
-    user:{pw="user",admin=false,items:[]},
-    admin:{pw="admin",admin=true,items:[]}
-]

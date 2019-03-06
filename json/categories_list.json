@@ -1,0 +1,61 @@
+categories_list=[
+  [
+    "Fruits and Vegetables",
+    [
+      "All",
+      "Fruits",
+      "Vegetables",
+      "Fresh Cut Fruits and Vegetables",
+      "Dried Nuts",
+      "Ethnic Vegetables"
+    ]
+  ],
+  [
+    "Bakery",
+    [
+      "Fresh Bread",
+      "Cakes",
+      "Pastries",
+      "Brownies",
+      "Cookies"
+    ]
+  ],
+  [
+    "Dairy and Eggs",
+    [
+      "Milk",
+      "Cheese",
+      "Yogurt",
+      "Butter and Spreads",
+      "Desserts"
+    ]
+  ],
+  [
+    "Drinks",
+    [
+      "Coffee",
+      "Tea",
+      "Water",
+      "Juice",
+      "Sports and Energy Drinks"
+    ]
+  ],
+  [
+    "Frozen Food",
+    [
+      "Meals",
+      "Meat",
+      "Ice Cream"
+    ]
+  ],
+  [
+    "Meat and Seafood",
+    [
+      "Beef and Veal",
+      "Chicken and Turkey",
+      "Pork",
+      "Lamb and Goat",
+      "Seafood"
+    ]
+  ]
+]

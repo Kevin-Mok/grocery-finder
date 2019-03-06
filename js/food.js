@@ -8,45 +8,45 @@ const categoryList = document.querySelector('#category-list')
 const fruits = {//{{{
 	"1": {
 		"name": "Apples (Red)",
-		"img": "imgs/produce/fruits/apples.jpg",
+		"img": "imgs/food/produce/fruits/apples.jpg",
 	},
 	"2": {
 		"name": "Lemon (Yellow)",
-		"img": "imgs/produce/fruits/lemon.jpg",
+		"img": "imgs/food/produce/fruits/lemon.jpg",
 	},
 	"3": {
 		"name": "Lemon (Green)",
-		"img": "imgs/produce/fruits/green-lemon.jpg",
+		"img": "imgs/food/produce/fruits/green-lemon.jpg",
 	},
 	"4": {
 		"name": "Apples (Green)",
-		"img": "imgs/produce/fruits/green-apple.jpg",
+		"img": "imgs/food/produce/fruits/green-apple.jpg",
 	},
 	"5": {
 		"name": "Cherries",
-		"img": "imgs/produce/fruits/cherries.jpg",
+		"img": "imgs/food/produce/fruits/cherries.jpg",
 	}
 }//}}}
 const vegetables = {//{{{
 	"11": {
 		"name": "Carrots",
-		"img": "imgs/produce/vegetables/carrots.jpg",
+		"img": "imgs/food/produce/vegetables/carrots.jpg",
 	},
 	"12": {
 		"name": "Broccoli",
-		"img": "imgs/produce/vegetables/broccoli.jpg",
+		"img": "imgs/food/produce/vegetables/broccoli.jpg",
 	},
 	"13": {
 		"name": "Bell Pepper (Red)",
-		"img": "imgs/produce/vegetables/bell-pepper-red.jpg",
+		"img": "imgs/food/produce/vegetables/bell-pepper-red.jpg",
 	},
 	"14": {
 		"name": "Eggplant",
-		"img": "imgs/produce/vegetables/eggplant.jpg",
+		"img": "imgs/food/produce/vegetables/eggplant.jpg",
 	},
 	"15": {
 		"name": "Zucchini",
-		"img": "imgs/produce/vegetables/zucchini.jpg",
+		"img": "imgs/food/produce/vegetables/zucchini.jpg",
 	}
 }//}}}
 const stores = {//{{{
