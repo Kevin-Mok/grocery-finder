@@ -64,11 +64,11 @@ function addSortingOption(option, menu, onclick) {//{{{
   option.addEventListener('click', onclick)
 }//}}}
 
-function addDropdownDivider(menu) {
+function addDropdownDivider(menu) {//{{{
   const divider = document.createElement('div')
   divider.className = 'dropdown-divider'
   addItemToDropdown(menu, divider)
-}
+}//}}}
 
 function addItemToDropdown(dropdown, item) {//{{{
   dropdown.querySelector('.dropdown-menu').appendChild(item)
@@ -80,9 +80,20 @@ function clearDropdownItems(dropdown) {//{{{
 
 // }}}  dropdown //
 
+// float fxn's {{{ //
+
 function compareFloats(a, b) {//{{{
   return (parseFloat(a) >= parseFloat(b)) ? true : false;
 }//}}}
+
+function extractFloat(text) {//{{{
+  // return parseFloat(/[0-9\.]+/g.exec(text)[0])
+  return /[0-9\.]+/g.exec(text)[0]
+}//}}}
+
+// }}} float fxn's //
+
+// grid {{{ //
 
 // TODO: don't need divSelector - just grab all grid children? //
 function sortGridByValue(divSelector, valueSelector, valueType, order, sortingLabelElems) {//{{{
@@ -133,22 +144,26 @@ function sortGridByValue(divSelector, valueSelector, valueType, order, sortingLa
 
 }//}}}
 
-function clearGrid() {
+function clearGrid() {//{{{
   document.querySelector('#category-instructions').style.display = 'none'
   removeAllChildren(gridRow)
-}
+}//}}}
 
-function returnSearchBar(size) {
+// }}} grid //
+
+// search {{{ //
+
+function returnSearchBar(size) {//{{{
   return (size == 'lg') ? document.querySelector('#search-bar-lg') :
     document.querySelector('#search-bar-sm')
-}
+}//}}}
 
-function returnClearSearchBtn(size) {
+function returnClearSearchBtn(size) {//{{{
   return (size == 'lg') ? document.querySelector('#clear-search-btn-lg') :
     document.querySelector('#clear-search-btn-sm')
-}
+}//}}}
 
-function clearSearch(size) {
+function clearSearch(size) {//{{{
   clearGrid()
   for (const gridItem of gridItemsBackup) {
     gridRow.appendChild(gridItem)
@@ -158,7 +173,7 @@ function clearSearch(size) {
   curView = curViewBackup
 
   // log(curView, curViewBackup)
-}
+}//}}}
 
 function filterCurrentGridItems(textSelector, searchString) {//{{{
   curSearchSelector = textSelector
@@ -205,7 +220,7 @@ function filterGridItemsBackup(searchString) {//{{{
   curView = 'search'
 }//}}}
 
-function search(size) {
+function search(size) {//{{{
 
   // Make search string all lowercase, for case insensitivity
   const searchString = returnSearchBar(size).value.toLowerCase();
@@ -226,32 +241,43 @@ function search(size) {
   } else {
     clearSearch(size)
   }
-}
-
-function extractFloat(text) {//{{{
-  // return parseFloat(/[0-9\.]+/g.exec(text)[0])
-  return /[0-9\.]+/g.exec(text)[0]
 }//}}}
 
-function onclickToAll(selector, fxn) {
+// }}} search //
+
+// do these when page is loaded {{{ //
+
+function onclickToAll(selector, fxn) {//{{{
   document.querySelectorAll(selector).forEach(btn =>
     btn.addEventListener('click', e => {
       e.preventDefault()
       fxn()
     }))
-}
+}//}}}
 
 window.onload = function() {//{{{
   gridRow.addEventListener('mouseover', showIconsOnFood);
   gridRow.addEventListener('mouseout', showIconsOnFood);
   gridRow.addEventListener('click', toggleFoodCartStatus);
 
+	// SERVER DATA EXCHANGE: This is where the web app creates all the food
+  // categories (returned from the server) displayed in the navbar.
+  //
+  // The code below uses the hardcoded categories object defined at the top
+  // of food.js.
   createFoodCategories(categories)
+
   // categoryList.addEventListener('click', changeCategory, true)
   // categoryList.addEventListener('click', changeCategory)
   // document.querySelector('#all-items').addEventListener('click', changeCategory)
-  document.querySelector('#all-items').addEventListener('click', () =>
-    displayFood(all))
+  
+	// SERVER DATA EXCHANGE: This is where the web app displays all food in the
+  // database. The food information from the server is then displayed in the DOM.
+	// The code below accesses the `all` dummy object defined at the top of food.js.
+  document.querySelector('#all-items').addEventListener('click', () => {
+		$('.saved-carts-div').remove()
+    displayFood(all)
+  })
 
   onclickToAll('.cart-btn', () => {
     curView = 'cart'
@@ -261,6 +287,7 @@ window.onload = function() {//{{{
   onclickToAll('.calc-btn', () => {
     displayStores(stores)
   })
+  $('.save-cart-btn').click(openCurrentCartPopup);
 
   // search listeners {{{ //
 
@@ -295,8 +322,8 @@ window.onload = function() {//{{{
 
   // displayStores(stores)
 
-  curView = 'food'
-  displayFood(all)
+  // curView = 'food'
+  // displayFood(all)
 
   // foodGridRow.appendChild(createEtf('Test', 'test', 4, 20))
   // openSettingsPopup()
@@ -318,3 +345,5 @@ window.onload = function() {//{{{
 
   // }}} dropdown hover (jquery) //
 }//}}}
+
+// }}}  do these when page is loaded //

@@ -90,7 +90,16 @@ function createFoodCategory(name) {//{{{
 
   const allSubCategory = createFoodSubcategory('All')
   allSubCategory.id = name.toLowerCase() + '-items'
-  allSubCategory.addEventListener('click', () => displayFoodCategory(name))
+	// SERVER DATA EXCHANGE: This is where the web app displays all food in this
+  // category with name (argument to this function). The food information from
+  // the server is then displayed in the DOM. 
+  //
+  // The code below accesses the dummy object with the same name as the function
+  // argument defined at the top.
+  allSubCategory.addEventListener('click', () => {
+		$('.saved-carts-div').remove()
+    displayFoodCategory(name)
+  })
   addItemToDropdown(foodCategory, allSubCategory)
 
   return foodCategory
@@ -100,7 +109,16 @@ function createFoodSubcategory(name) {
   const subcategory = createDropdownItem()
   subcategory.classList.add('food-subcategory')
   subcategory.textContent = name
-  subcategory.addEventListener('click', () => displayFoodCategory(name))
+	// SERVER DATA EXCHANGE: This is where the web app displays all food in this
+  // subcategory with name (argument to this function). The food information from
+  // the server is then displayed in the DOM. 
+  //
+  // The code below accesses the dummy object with the same name as the function
+  // argument defined at the top.
+  subcategory.addEventListener('click', () => {
+		$('.saved-carts-div').remove()
+    displayFoodCategory(name)
+  })
 
   return subcategory
 }
@@ -171,12 +189,6 @@ function setAlphaSorting() {//{{{
   alphaForwardIcon.className = "fas fa-sort-alpha-down"
   sortingLabel.appendChild(alphaForwardIcon)
 
-  /* const alphaBackwardItem = createDropdownItem()
-  const alphaBackward = document.createElement('i')
-  alphaBackward.className = "fas fa-sort-alpha-up"
-  alphaBackwardItem.appendChild(alphaBackward)
-  addItemToDropdown(sortingMenu, alphaBackwardItem) */
-
   addSortingOption(createDropdownIconItem(["fas fa-sort-alpha-down"]),
     sortingMenu,
     (e) => sortGridByValue('.food-div', '.food-info', 'text', 'asc', extractSortingLabelIcons(e)))
@@ -240,9 +252,6 @@ function createCartFoodDict() {
   return cartFoodDict
 }
 
-// This function gets called when you click anything in #category-list
-// This actually causes a slight bug. The curView switches to food mode
-// when you click login/sign up on the collapsed nav bar
 function changeCategory(e) {//{{{
 	// SERVER DATA EXCHANGE: This is where the web app displays foods depending
 	// on the category the user has selected (All, Fruits, Vegetables, etc..)
@@ -310,7 +319,7 @@ function toggleFoodCartStatus(e) {
 			// SERVER DATA EXCHANGE: This is where the user had just entered a
 			// new item to the cart
 			//
-			// Provide the server with the current user Id and the new cart.
+			// Provide the server with the current user id and the new cart.
 			// Update the cart in the database, so that the current cart can
 			// persist upon login and logout.
 

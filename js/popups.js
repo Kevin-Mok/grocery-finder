@@ -166,6 +166,9 @@ function openCurrentCartPopup() {
 
 function cartSaveBtnClicked() {
   const cartName = $('#cartName').val()
+  // SERVER DATA EXCHANGE: This is where the user is saving a cart.
+  // Provide the server with the current user id, current cart contents and
+  // saved cart name.
   user.savedCarts[cartName] = [...cart]; // es6 cloned cart
 
   // If saved carts dropdown is already visible, destory it and make a new one
@@ -181,17 +184,9 @@ function cartSaveBtnClicked() {
 function saveUserSettings() {
 
   // SERVER DATA EXCHANGE: This is where the user updates their user data.
-
   // Make a request to the server, providing the server with user.id,
-  // new username, new password and new postal code
-  // The server updates the user with new data in the database.
-  //
-  // This might look something like this
-  // updateUser.then((success) => {
-  //   notify user that it was successful
-  // }, (err) => {
-  //   notify user why it was unsucessful
-  // })
+  // new username, new password and new postal code.
+  // The server then updates the user with new data in the database.
   //
   // The code below just modifies the global user object with the new data
 
@@ -299,44 +294,27 @@ function loginBtnClicked() {
   // SERVER DATA EXCHANGE: This is where we check if the user-entered
   // user/pass credentials are correct.
   //
-  // Make a request to the server providing
-  // the server with loginUsername and loginPassword.
-  // The server determines if login was successful or not
-  //
-  // This might look something like this:
-  // login.then((user) => {
-  //
-  //   user is an object containing user credentials such as
-  //   previous cart data, and user postal code. Save this user object
-  //   as a global variable
-  //
-  //   if (user is an admin) {
-  //     admin logged in
-  //     update front end with admin elements
-  //   } else {
-  //     user  logged in
-  //   }
-  // }, (err) => {
-  //   incorrect user/password
-  // })
+  // Make a request to the server providing the server with loginUsername and
+  // loginPassword.  The server determines if login was successful or not
   //
   // The code below assumes that we only have two accounts, a dummy user
   // account and an admin account. It also assumes that a global 'user'
   // variable would be made availible.
 
   if (loginUsername == 'admin' && loginPassword == 'admin') {
-    alert("Admin Login Successful. (Redirect to the admin page)");
     closePopup();
-	const manageUsersDropdownItem = document.createElement('a');
-	manageUsersDropdownItem.setAttribute('class', 'dropdown-item');
-	manageUsersDropdownItem.setAttribute('href', 'adminPage.html');
-	manageUsersDropdownItem.innerText = 'Manage Users';
-	document.querySelector('#profileDropdown').appendChild(manageUsersDropdownItem);
+
+    const manageUsersDropdownItem = document.createElement('a');
+    manageUsersDropdownItem.setAttribute('class', 'dropdown-item');
+    manageUsersDropdownItem.setAttribute('href', 'adminPage.html');
+    manageUsersDropdownItem.innerText = 'Manage Users';
+    document.querySelector('#profileDropdown').appendChild(manageUsersDropdownItem);
+
+    alert("Admin login Successful. 'Manage Users' is now available from the user dropdown menu.");
   } else if (loginUsername == 'user' && loginPassword == 'user') {
-    alert("User Login Successful. (Redirect to the user page)" );
     closePopup();
   } else {
-    alert("User Login Successful. (Redirect to the user page)" );
+    alert("Incorrect credentials! Please try again.");
   }
 }
 
@@ -348,8 +326,6 @@ function loginBtnClicked() {
 $('.openLoginPopup').click(openLoginPopup);
 $('.openSignupPopup').click(openSignupPopup);
 $('.openSettingsPopup').click(openSettingsPopup);
-$('.save-cart-btn').click(openCurrentCartPopup);
-
 
 $("body").click((e) => {
 // $("html").click((e) => {

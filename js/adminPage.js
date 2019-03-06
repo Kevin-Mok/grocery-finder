@@ -164,7 +164,8 @@ function setToDefaultProfilePictureClicked(e) {
 	if (confirm("Set this user's profile picture to the default picture.\n(Click 'OK' to confirm)")) {
 		e.target.parentElement.user.profilePicture = 'imgs/profile-pictures/default.jpg';
 		
-		// SERVER DATA CALL: The server will have to update this profilePicture attribute for its own copy of the user data
+    // SERVER DATA EXCHANGE: The server will have to update this profilePicture
+    // attribute for its own copy of the user data
 		
 		updateUserListingBox();
 		reloadSelectedUserFrameWithCurrentUser();
@@ -210,7 +211,8 @@ function promoteToAdmin(e) {
 		const userToChange = e.target.parentElement.parentElement.user;   //e.target.parentElement.parentElement is the selectedUserFrame
 		userToChange.isAdmin = true;
 		
-		// SERVER DATA CALL: A request must be sent to the server to update its copy of this user's isAdmin data
+    // SERVER DATA EXCHANGE: A request must be sent to the server to update its
+    // copy of this user's isAdmin value
 		
 		console.log(userToChange);
 		reloadSelectedUserFrameWithCurrentUser();
@@ -312,7 +314,8 @@ function saveChangesClicked(e) {
 	const affectedUser = parentDiv.user;
 	affectedUser.password = newText;
 	
-	// SERVER DATA CALL: A request must be sent to the server to update its copy of this user's password data
+  // SERVER DATA EXCHANGE: A request must be sent to the server to update its
+  // copy of this user's password data
 	
 	createPasswordTextForm(newText, parentDiv);
 
@@ -341,7 +344,8 @@ function deleteUser(e) {
 	
 		const targetUser = e.target.parentElement.user;
 		
-		//SERVER DATA CALL: A request must be sent to the server to delete its copy of this user's data
+    //SERVER DATA EXCHANGE: A request must be sent to the server to delete its
+    //copy of this user
 
 		users = users.filter(function(user) {return user.username != targetUser.username});
 		hiddenUsers = hiddenUsers.filter(function(user) {return user.username != targetUser.username});
@@ -438,7 +442,7 @@ document.addEventListener("DOMContentLoaded", main);
 
 function main() {
 
-	document.body.background = './imgs/adminPageBackgrounds/adminpagebackground.jpg';
+	document.body.background = './imgs/admin-page-bg.jpg';
 	loadUsers();
 	const searchBar = document.querySelector('#searchBar');
 	searchBar.addEventListener('keyup', applyFilter);

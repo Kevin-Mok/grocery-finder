@@ -235,7 +235,16 @@ function getPercentOfRange(value, range) {//{{{
 }//}}}
 
 function colorValuesByRange(valueElems, range) {//{{{
-  // will color min value green and max value red
+  // SERVER DATA EXCHANGE: This is where the web app colors store values
+  // relative to the other stores' values (will color min. value green, max
+  // value red, others yellow-orange). 
+  //
+  // Currently, this is being calculated on the front end for Phase 1, but this
+  // would want to be calculated on the backend and passed over.
+  //
+  // The code below calculates the color for each store's value based on the randomly
+  // generated store values.
+
   for (const valueElem of valueElems) {
     // TODO: need to modify saturation/value values to get darker colors?
     // depends on bg //
@@ -253,6 +262,14 @@ function addUnitToValues(valueElems, unit, frontOrBack) {//{{{
 }//}}}
 
 function addStoreScores() {//{{{
+  // SERVER DATA EXCHANGE: This is where the web app gives a score to each store
+  // based on its price/distance relative to the other stores. 
+  //
+  // Currently, this is being calculated on the front end for Phase 1, but this
+  // would want to be calculated on the backend and passed over.
+  //
+  // The code below calculates the score for each store based on the randomly
+  // generated store values.
   const storeBodies = document.querySelectorAll('.store-body')
   for (const storeBody of storeBodies) {
     const cartPriceScore = 1 - getPercentOfRange(
@@ -264,7 +281,7 @@ function addStoreScores() {//{{{
   }
 }//}}}
 
-function doStoreCalculations() {//{{{
+function addStoreValuesFormatting() {//{{{
   // calculate store scores, color values and add units
 
   // NOTE: calculations must be done before adding units since calculating
@@ -290,6 +307,18 @@ function displayStores(storeDict) {//{{{
   clearGrid()
   curView = 'stores'
 
+  // SERVER DATA EXCHANGE: This is where the web app determines the cheapest
+  // grocery store to go to, depending on what is in the cart. The server
+  // will perform the calculations required to determine this.
+  //
+  // The server will be provided with a postal code and the user's current
+  // cart, and the server will respond with stores with the cheapest prices
+  // in the vicinity.
+  //
+  // The results will be added to the DOM.
+  //
+  // The code below randomly generates price and distance data, since we depend
+  // on the server's results for that information.
   resetRanges()
   Object.keys(storeDict).forEach(function(key) {
     const storeDiv = createStoreDiv()
@@ -305,21 +334,7 @@ function displayStores(storeDict) {//{{{
     gridRow.appendChild(storeDiv)
   })
 
-
-  // SERVER DATA EXCHANGE: This is where the web app determines the cheapest
-  // grocery store to go to, depending on what is in the cart. The server
-  // will perform the calculations required to determine this.
-  //
-  // The server will be provided with a postal code and the user's current
-  // cart, and the server will respond with stores with the cheapest prices
-  // in the vicinity.
-  //
-  // The results will be added to the DOM.
-  //
-  // The code below randomly creates price and distance data, since we depend
-  // on the server's results for that information.
-
-  doStoreCalculations()
+  addStoreValuesFormatting()
 
   sortGridByValue('.store-div', '.store-score-value', 'float', 'desc', [createScoreDescIcon()])
   // sortGridByValue('.store-div', '.store-dist-value', 'float', 'desc', [createScoreDescIcon()])

@@ -63,8 +63,8 @@ price, distance and alphabetical using the dropdown sorting options beside the
 search bar. 
 
 Also note that the store values are colored in relation to the other stores'
-values. For example, the lowest cart price will be green and the highest red;
-this applies to all the values.
+values. For example, the lowest cart price will be green, the highest red and
+middling values yellow-orange. This applies to all the values.
 
 ## Modify User Settings
 1. Hover over the profile icon on the top left of the navbar.
