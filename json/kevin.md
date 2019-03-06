@@ -1,13 +1,11 @@
-## Phase 1
-- server comments
-- add commit hash for TA to check
- 
-### Extra
+- turn search into filter dropdown
 - add sort options labels
 - more items/categories
 - replace user icon with first letter of user's name
- 
-## Phase 2
+- pref. for dist./price for score
+  - radius
+- validate input/postal code
+  - https://www.bootcdn.cn/cleave.js/ 
 - display (colored) item prices in store calculation
 - "refresh" grocery data
   - regen. data on backend
@@ -19,9 +17,3 @@
   - not using actual distance API for stores?
     - Google Maps API is $200/month
     - generate fake data?
-
-### Extra
-- pref. for dist./price for score
-  - radius
-- validate input/postal code
-  - https://www.bootcdn.cn/cleave.js/ 
