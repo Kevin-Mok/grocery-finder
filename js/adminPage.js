@@ -204,10 +204,9 @@ function createAdminFields(isAdmin, parentDiv) {
 }
 
 function promoteToAdmin(e) {
-	if (confirm("Are you sure you want to promote this user to administrator status?" +
-		"\nThis user will be able to access and modify user profiles." +
-		"\nThis action cannot be undone, and you will not be able to revoke administrator privilege." + 
-		"\n\n                                      (Press 'OK' to confirm)")) {
+	if (confirm("Are you sure you want to promote this user to administrator status? " + 
+    "\nThis user will be able to access and modify user profiles. " + 
+    "\nYou will be unable to further modify their settings, and this action cannot be undone.")) {
 		const userToChange = e.target.parentElement.parentElement.user;   //e.target.parentElement.parentElement is the selectedUserFrame
 		userToChange.isAdmin = true;
 		
@@ -276,6 +275,7 @@ function editPasswordClicked(e) {
 	const inputTextField = document.createElement('input');
 	inputTextField.setAttribute('type', 'text');
 	inputTextField.setAttribute('placeholder', originalText);
+	inputTextField.setAttribute('value', originalText);
 	inputTextField.style.float = 'left';
 	inputTextField.className = 'inputTextField';
 

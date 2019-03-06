@@ -275,8 +275,7 @@ window.onload = function() {//{{{
   // database. The food information from the server is then displayed in the DOM.
 	// The code below accesses the `all` dummy object defined at the top of food.js.
   document.querySelector('#all-items').addEventListener('click', () => {
-		$('.saved-carts-div').remove()
-    displayFood(all)
+    displayFoodCategory('all')
   })
 
   onclickToAll('.cart-btn', () => {

@@ -285,6 +285,7 @@ function signupBtnClicked() {
 
   // Send to server
   // createNewUser(username, password, postalCode)
+  closePopup();
 }
 
 function loginBtnClicked() {
