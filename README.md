@@ -1,4 +1,20 @@
-# Main Features
+# Grocery Finder
+
+## Table of Contents
+
+  * [Main Features](#main-features)
+  * [Server Comments](#server-comments)
+  * [User Instructions](#user-instructions)
+     * [Login](#login)
+     * [Add/Remove Items To Cart](#addremove-items-to-cart)
+     * [Save/Restore Carts](#saverestore-carts)
+     * [Calculate Best Stores](#calculate-best-stores)
+     * [Modify User Settings](#modify-user-settings)
+  * [Administrator Instructions](#administrator-instructions)
+     * [How to (Properly) Access Admin Page](#how-to-properly-access-admin-page)
+     * [Admin Page Instructions](#admin-page-instructions)
+
+## Main Features
 - cart to add/remove food items
   - save/restore carts
 - filter/sort items
@@ -11,18 +27,18 @@ Areas in the code where server interaction is required are followed by comments
 that start with `SERVER DATA EXCHANGE`.  Please `Ctrl`+`F` or `grep` to find
 the string `SERVER DATA EXCHANGE` throughout the code.
 
-# User Instructions
+## User Instructions
 Open index.html. Note that this main page is responsive and will fit all items
 based on screen size. The entire navbar will convert to a functional dropdown
 one when it is small enough.
 
-## Login
+### Login
 1. Hover over the profile icon on the top left of the navbar.
 2. Click 'Login'.
 3. Enter 'user' for the username and password and the click 'Login'.
 4. The user is now logged in.
 
-## Add/Remove Items To Cart
+### Add/Remove Items To Cart
 1. Click on the 'All' button on the navbar, or use the 'Produce' dropdown menu
    to select a food category.
 2. Click on any desired grocery items. Clicking on items automatically adds
@@ -34,7 +50,7 @@ one when it is small enough.
 4. You can view your current cart contents by clicking on the cart button in
    the navbar.
 
-## Save/Restore Carts
+### Save/Restore Carts
 Saving and restoring carts can be very useful for groceries because users may
 want to buy the same essential groceries over and over again.
 
@@ -49,7 +65,7 @@ want to buy the same essential groceries over and over again.
    carts.
 3. Click on the desired cart to restore.
 
-## Calculate Best Stores
+### Calculate Best Stores
 1. Click on the calculator icon on the navbar.
 
 This function is not actually reflective of any actual data and all data is
@@ -66,7 +82,7 @@ Also note that the store values are colored in relation to the other stores'
 values. For example, the lowest cart price will be green, the highest red and
 middling values yellow-orange. This applies to all the values.
 
-## Modify User Settings
+### Modify User Settings
 1. Hover over the profile icon on the top left of the navbar.
 2. Click 'Settings'.
 3. Edit a field with the pencil button. Press the check to temporarily save the
@@ -76,7 +92,7 @@ middling values yellow-orange. This applies to all the values.
 
 ---
 
-# Administrator Instructions
+## Administrator Instructions
 An administrator has access to all functionalities that are available to
 standard users. As such, accessing these common functionalities can be achieved
 by adhering to the standard user's instructions in the section above.
@@ -86,7 +102,7 @@ privileges will also have exclusive access to a 'Manage Users' webpage. It is
 from this specific webpage that an administrator will be able to access
 administrative processes.
 
-## How to (Properly) Access Admin Page
+### How to (Properly) Access Admin Page
 1.  Hover over the profile icon located on the left side of the navigation bar
     to open a dropdown menu.
 2.  Click the 'Login' option.
@@ -94,7 +110,7 @@ administrative processes.
 4.  Open the same dropdown menu from step 1, and click the 'Manage Users'
     option. This will open the 'Manage Users' webpage.
 
-## Admin Page Instructions 
+### Admin Page Instructions 
 There are two main frames on this webpage. The left frame lists out all
 registered users, and the administrator will be able to select a specific user
 in order to view/modify that user's account details. If there are a lot of
