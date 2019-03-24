@@ -92,20 +92,9 @@ function createScoreDescIcon() {//{{{
   return scoreDescIcon
 }//}}}
 
-function extractSortingLabelIcons(e) {//{{{
-  const labelIconElems = (e.target.classList.contains('icon-label-option') ?
-    e.target : e.target.parentElement).children
-  const labelIcons = []
-  for (const labelIcon of labelIconElems) {
-    labelIcons.push(labelIcon.cloneNode())
-  }
-  return labelIcons
-}//}}}
-
 function setStoreSorting() {//{{{
   const sortingMenu = document.querySelector('#sorting-options')
   sortingMenu.classList.remove('d-none');
-  clearDropdownItems(sortingMenu)
 
   // score {{{ //
 
@@ -304,7 +293,6 @@ function addStoreValuesFormatting() {//{{{
 }//}}}
 
 function displayStores(storeDict) {//{{{
-  clearGrid()
   curView = 'stores'
 
   // SERVER DATA EXCHANGE: This is where the web app determines the cheapest
@@ -344,3 +332,5 @@ function displayStores(storeDict) {//{{{
 }//}}}
 
 // }}} show stores //
+
+displayStores(stores)

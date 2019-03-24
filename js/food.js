@@ -176,6 +176,9 @@ function createAlphDescIcon() {//{{{
 
 function setAlphaSorting() {//{{{
   const sortingMenu = document.querySelector('#sorting-options')
+  if (!sortingMenu) {
+    return
+  }
   sortingMenu.classList.remove('d-none');
   clearDropdownItems(sortingMenu)
 
@@ -200,6 +203,11 @@ function setAlphaSorting() {//{{{
 // show food {{{ //
 
 function createFoodCategories(categories) {//{{{
+
+  if (!categoryList) {
+    return;
+  }
+
   Object.keys(categories).forEach(function(key) {
     const category = createFoodCategory(key)
     categories[key].forEach(function(subcategoryName) {
@@ -210,6 +218,9 @@ function createFoodCategories(categories) {//{{{
 }//}}}
 
 function removeAllChildren(element) {
+  if (!element) {
+    return
+  }
   while (element.firstChild) {
     element.removeChild(element.firstChild);
   }

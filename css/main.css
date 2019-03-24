@@ -246,6 +246,10 @@ nav i {
   margin-left: 0.25em;
 }
 
+.cart-btn, .save-cart-btn, .calc-btn {
+  color: white;
+}
+
 .popup {
   padding: 1em;
   border-radius: 5px;
