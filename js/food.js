@@ -125,8 +125,7 @@ function createFoodSubcategory(name) {
 
 function createFoodDiv() {
   const foodDiv = document.createElement('div')
-  // foodDiv.classList.add('food-div', 'col-sm-4', 'col-lg-3', 'col-xl-2')
-  foodDiv.className = 'food-div col-sm-4 col-lg-3 col-xl-2'
+  foodDiv.className = 'food-div col-xs-4 col-md-4 col-xl-3'
   return foodDiv
 }
 
@@ -138,9 +137,16 @@ function createFoodImg(src) {
 }
 
 function createFoodInfo(name) {
-  const foodInfo = document.createElement('p')
-  foodInfo.className = 'food-info'
-  foodInfo.textContent = name
+  const foodInfo = document.createElement('div')
+  foodInfo.className = 'food-info-div'
+  const foodInfoTitle = document.createElement('p')
+  foodInfoTitle.className = 'food-info-title'
+  foodInfoTitle.innerHTML = name
+  foodInfo.appendChild(foodInfoTitle)
+
+
+  foodInfo.appendChild(createAddToCartBtn())
+
   return foodInfo
 }
 
@@ -148,18 +154,18 @@ function createFoodInfo(name) {
 
 // icons {{{ //
 
-function createCheckIcon() {
-  const checkIcon = document.createElement('i')
-  checkIcon.className = "check-icon far fa-check-circle"
-  checkIcon.style.display = 'none'
-  return checkIcon
+function createAddToCartBtn() {
+  const btn = document.createElement('button')
+  btn.className = 'btn btn-primary food-info-btn add-cart-btn'
+  btn.textContent = 'Add to Cart'
+  return btn
 }
 
-function createRemoveIcon() {
-  const removeIcon = document.createElement('i')
-  removeIcon.className = "remove-icon far fa-times-circle"
-  removeIcon.style.display = 'none'
-  return removeIcon
+function createRemoveFromCartBtn() {
+  const btn = document.createElement('button')
+  btn.className = 'btn btn-danger food-info-btn remove-cart-btn'
+  btn.textContent = 'Remove from Cart'
+  return btn
 }
 
 // }}} icons //
@@ -190,11 +196,11 @@ function setAlphaSorting() {//{{{
 
   addSortingOption(createDropdownIconItem(["fas fa-sort-alpha-down"]),
     sortingMenu,
-    (e) => sortGridByValue('.food-div', '.food-info', 'text', 'asc', extractSortingLabelIcons(e)))
+    (e) => sortGridByValue('.food-div', '.food-info-div', 'text', 'asc', extractSortingLabelIcons(e)))
 
   addSortingOption(createDropdownIconItem(["fas fa-sort-alpha-up"]),
     sortingMenu,
-    (e) => sortGridByValue('.food-div', '.food-info', 'text', 'desc', extractSortingLabelIcons(e)))
+    (e) => sortGridByValue('.food-div', '.food-info-div', 'text', 'desc', extractSortingLabelIcons(e)))
 
 }//}}}
 
@@ -235,19 +241,20 @@ function displayFood(foodDict) {//{{{
 
     foodDiv.appendChild(createFoodImg(foodDict[key]["img"]))
     foodDiv.appendChild(createFoodInfo(foodDict[key]["name"]))
-    const checkIcon = createCheckIcon()
-    foodDiv.appendChild(checkIcon)
-    foodDiv.appendChild(createRemoveIcon())
+    // const checkIcon = createCheckIcon()
+    // foodDiv.appendChild(checkIcon)
+    // foodDiv.appendChild(createRemoveIcon())
 
     if (cart.indexOf(key) != -1) {
       foodDiv.classList.add('in-cart')
-      checkIcon.style.display = 'inline'
+
+      // checkIcon.style.display = 'inline'
     }
 
     gridRow.appendChild(foodDiv)
   })
 
-  sortGridByValue('.food-div', '.food-info', 'text', 'asc', [createAlphDescIcon()])
+  sortGridByValue('.food-div', '.food-info-div', 'text', 'asc', [createAlphDescIcon()])
   setAlphaSorting()
 }//}}}
 
@@ -292,33 +299,10 @@ function changeCategory(e) {//{{{
 
 // show/hide checks {{{ //
 
-function showIconsOnFood(e) {
-  const foodDiv = e.target.parentElement
-  if (foodDiv.classList.contains('food-div')) {
-    if (e.type == 'mouseover') {
-      if (foodDiv.classList.contains('in-cart')) {
-        // if in cart, hide check and show remove
-        foodDiv.querySelector('.check-icon').style.display = 'none'
-        foodDiv.querySelector('.remove-icon').style.display = 'inline'
-      } else {
-        // else, just show check
-        foodDiv.querySelector('.check-icon').style.display = 'inline'
-      }
-    } else if (e.type == 'mouseout') {
-      if (foodDiv.classList.contains('in-cart')) {
-        foodDiv.querySelector('.check-icon').style.display = 'inline'
-      } else {
-        foodDiv.querySelector('.check-icon').style.display = 'none'
-      }
-      // always hide remove after mouseout
-      foodDiv.querySelector('.remove-icon').style.display = 'none'
-    }
-  }
-}
-
 function toggleFoodCartStatus(e) {
-  const foodDiv = e.target.parentElement
-  if (foodDiv.classList.contains('food-div')) {
+  const foodDiv = e.target.parentElement.parentElement
+  const foodInfoDiv = e.target.parentElement;
+  if (e.target.classList.contains('btn')) {
     const foodId = /food-div-(\d*)/g.exec(foodDiv.id)[1]
     if (!foodDiv.classList.contains('in-cart')) {
       // add to cart
@@ -332,10 +316,14 @@ function toggleFoodCartStatus(e) {
 
       cart.push(foodId)
       foodDiv.classList.add('in-cart')
+      foodInfoDiv.removeChild(e.target)
+      foodInfoDiv.appendChild(createRemoveFromCartBtn())
     } else {
       // rm from cart
       cart.splice(cart.indexOf(foodId), 1)
       foodDiv.classList.remove('in-cart')
+      foodInfoDiv.removeChild(e.target)
+      foodInfoDiv.appendChild(createAddToCartBtn())
       if (curView == 'cart') {
         foodDiv.parentElement.removeChild(foodDiv)
       }

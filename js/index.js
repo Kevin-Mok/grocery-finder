@@ -10,8 +10,6 @@ const user = {
 // }}} vars //
 
 window.onload = function() {//{{{
-  gridRow.addEventListener('mouseover', showIconsOnFood);
-  gridRow.addEventListener('mouseout', showIconsOnFood);
   gridRow.addEventListener('click', toggleFoodCartStatus);
 
 	// SERVER DATA EXCHANGE: This is where the web app creates all the food
