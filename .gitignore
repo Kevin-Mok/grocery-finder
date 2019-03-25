@@ -1,6 +1,7 @@
 *-cp*
 
 *.map
+*.orig
 *.txt
 
 *-bs.html
