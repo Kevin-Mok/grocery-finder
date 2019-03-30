@@ -125,8 +125,10 @@ function createFoodSubcategory(name) {
 
 function createFoodDiv() {
   const foodDiv = document.createElement('div')
-  foodDiv.className = 'food-div col-sm-5 m-sm-3 col-md-3 m-md-4 ' + 
-    'col-lg-3 m-lg-4 col-xl-2 m-xl-3'
+  // foodDiv.className = 'food-div col-sm-5 m-sm-3 col-md-3 m-md-4 ' +
+    // 'col-lg-3 m-lg-4 col-xl-2 m-xl-3'
+  // foodDiv.className = 'food-div col-sm-5 col-md-3 col-lg-3 col-xl-2'
+  foodDiv.className = 'food-div col-sm-6 col-md-4 col-lg-3 col-xl-2'
   return foodDiv
 }
 

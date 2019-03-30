@@ -45,18 +45,38 @@ i {
 
 //  }}} base //
 #grid {// {{{
-  margin-top: 6em;
-  // margin-left: 3em;
+  $spacing-between-items: 30px;
+
+  margin-top: 4.5em;
+  margin-left: $spacing-between-items;
   // height: 100%;
 
   .food-div {
     position: relative;
     height: 250px;
+    margin-bottom: $spacing-between-items;
+
+    // margin-left: 15px;
+    // margin-right: 15px;
+    // margin: 15px;
+    // padding-left: 15px;
+    // padding-right: 15px;
+    
+    &:before {
+      content: "";
+      display: block;
+      width: 0;
+      padding-top: 100%;
+    }
   }
 
+  $food-border-radius: 5px;
+
   .food-img {
-    width: 100%;
-    height: 100%;
+    // width: 100%;
+    // height: 100%;
+    width: 90%;
+    height: 75%;
     /* object-fit: none; */
     object-fit: cover;
     position: absolute;
@@ -64,16 +84,18 @@ i {
     left: 0;
     bottom: 0;
     right: 0;
-    border-top-right-radius: 10px;
-    border-top-left-radius: 10px;
+    border-radius: $food-border-radius;
     // padding-left: 15px;
     // padding-right: 15px;
   }
 
   .food-info-div {
     background-color: white;
-    width: 100%;
+    // width: 100%;
+    width: 90%;
     height: 4.5rem;
+    border-bottom-left-radius: $food-border-radius;
+    border-bottom-right-radius: $food-border-radius;
     @include rel-parent(0%, 100%);
   }
 
@@ -85,7 +107,9 @@ i {
 
   .food-info-btn {
     font-size: .5rem;
-    width: 50%;
+    // width: 50%;
+    min-width: 6.5rem;
+    max-width: 50%;
     @include rel-parent(90%, 50%);
   }
 
