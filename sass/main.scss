@@ -46,12 +46,12 @@ i {
 //  }}} base //
 #grid {// {{{
   margin-top: 6em;
+  // margin-left: 3em;
   // height: 100%;
 
   .food-div {
     position: relative;
-    margin-bottom: 3rem;
-    height: 270px;
+    height: 250px;
   }
 
   .food-img {
@@ -72,33 +72,21 @@ i {
 
   .food-info-div {
     background-color: white;
-    position: absolute;
     width: 100%;
-    height: 55px;
-    bottom:0;
-    left:0;
-    border-bottom-right-radius: 4px;
-    border-bottom-left-radius: 4px;
+    height: 4.5rem;
+    @include rel-parent(0%, 100%);
   }
 
   .food-info-title {
-    font-size: 20px;
-    margin: 0;
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    left: 10px;
-    width: 110px;
-    line-height: 25px;
+    font-size: .9rem;
+    width: 33%;
+    @include rel-parent(10%, 50%);
   }
 
   .food-info-btn {
-    font-size: 13px;
-    margin: 0;
-    position: absolute;
-    top: 53%;
-    transform: translateY(-50%);
-    right: 10px;
+    font-size: .5rem;
+    width: 50%;
+    @include rel-parent(90%, 50%);
   }
 
   $food-item-icon-size: 5em;
@@ -160,10 +148,14 @@ nav {
   background-color: black;
   @include rel-parent(0%, 0%);
 
-  button:hover {
-    background-color: $navHoverColor;
-  }
+  .btn {
+    font-family: 'Roboto', sans-serif;
+    font-size: 22px;
 
+    &:hover {
+      background-color: $navHoverColor;
+    }
+  }
   .navbar-nav {
     background-color: black;
     // max-width: 50%;

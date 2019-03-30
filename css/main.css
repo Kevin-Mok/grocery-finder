@@ -30,8 +30,7 @@ i {
 }
 #grid .food-div {
   position: relative;
-  margin-bottom: 3rem;
-  height: 270px;
+  height: 250px;
 }
 #grid .food-img {
   width: 100%;
@@ -48,31 +47,28 @@ i {
 }
 #grid .food-info-div {
   background-color: white;
-  position: absolute;
   width: 100%;
-  height: 55px;
-  bottom: 0;
-  left: 0;
-  border-bottom-right-radius: 4px;
-  border-bottom-left-radius: 4px;
+  height: 4.5rem;
+  position: absolute;
+  left: 0%;
+  top: 100%;
+  transform: translate(0%, -100%);
 }
 #grid .food-info-title {
-  font-size: 20px;
-  margin: 0;
+  font-size: 0.9rem;
+  width: 33%;
   position: absolute;
+  left: 10%;
   top: 50%;
-  transform: translateY(-50%);
-  left: 10px;
-  width: 110px;
-  line-height: 25px;
+  transform: translate(-10%, -50%);
 }
 #grid .food-info-btn {
-  font-size: 13px;
-  margin: 0;
+  font-size: 0.5rem;
+  width: 50%;
   position: absolute;
-  top: 53%;
-  transform: translateY(-50%);
-  right: 10px;
+  left: 90%;
+  top: 50%;
+  transform: translate(-90%, -50%);
 }
 #grid .check-icon {
   position: absolute;
@@ -126,7 +122,11 @@ nav {
   top: 0%;
   transform: translate(0%, 0%);
 }
-nav button:hover {
+nav .btn {
+  font-family: "Roboto", sans-serif;
+  font-size: 22px;
+}
+nav .btn:hover {
   background-color: #ED2A2A;
 }
 nav .navbar-nav {

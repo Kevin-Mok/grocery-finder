@@ -1,8 +1,14 @@
-*-cp*
+mongo-data/*
+node_modules/*
 
+*.env
+*.log
 *.map
+*.pdf
 *.txt
 
+*-cp*
 *-bs.html
+
+.DS_Store
 gh-md-toc
-phase1.pdf
