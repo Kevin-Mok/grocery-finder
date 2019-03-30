@@ -26,11 +26,13 @@ i {
 }
 
 #grid {
-  margin-top: 6em;
+  margin-top: 4.5em;
+  margin-left: 30px;
 }
 #grid .food-div {
   position: relative;
-  margin-bottom: 3rem;
+  height: 250px;
+  margin-bottom: 30px;
 }
 #grid .food-div:before {
   content: "";
@@ -39,8 +41,8 @@ i {
   padding-top: 100%;
 }
 #grid .food-img {
-  width: 100%;
-  height: 100%;
+  width: 90%;
+  height: 75%;
   /* object-fit: none; */
   object-fit: cover;
   position: absolute;
@@ -48,18 +50,35 @@ i {
   left: 0;
   bottom: 0;
   right: 0;
-  padding-left: 15px;
-  padding-right: 15px;
+  border-radius: 5px;
 }
-#grid .food-info {
+#grid .food-info-div {
+  background-color: white;
+  width: 90%;
+  height: 4.5rem;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
   position: absolute;
   left: 0%;
   top: 100%;
   transform: translate(0%, -100%);
-  margin-left: 15px;
-  color: white;
-  background-color: rgba(0, 0, 0, 0.7);
-  padding: 0.3em;
+}
+#grid .food-info-title {
+  font-size: 0.9rem;
+  width: 33%;
+  position: absolute;
+  left: 10%;
+  top: 50%;
+  transform: translate(-10%, -50%);
+}
+#grid .food-info-btn {
+  font-size: 0.5rem;
+  min-width: 6.5rem;
+  max-width: 50%;
+  position: absolute;
+  left: 90%;
+  top: 50%;
+  transform: translate(-90%, -50%);
 }
 #grid .check-icon {
   position: absolute;
@@ -113,7 +132,11 @@ nav {
   top: 0%;
   transform: translate(0%, 0%);
 }
-nav button:hover {
+nav .btn {
+  font-family: "Roboto", sans-serif;
+  font-size: 22px;
+}
+nav .btn:hover {
   background-color: #ED2A2A;
 }
 nav .navbar-nav {
@@ -244,6 +267,10 @@ nav i {
 }
 #settings-popup #user-info-div .etf-div .etf-btn-div button {
   margin-left: 0.25em;
+}
+
+.cart-btn, .save-cart-btn, .calc-btn {
+  color: white;
 }
 
 .popup {

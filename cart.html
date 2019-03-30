@@ -38,40 +38,23 @@
             </div>
           </div>
 
-          <button onclick="location.href='/cart.html'"
-            class="btn my-2 my-sm-0 ml-auto d-none d-md-block cart-btn">
-            Cart
+          <button class="btn my-2 my-sm-0 hover-red ml-auto d-none d-md-block save-cart-btn">
+            Save current cart
           </button>
 
           <button onclick="location.href='/stores.html'"
             class="btn my-2 my-sm-0 d-none d-md-block calc-btn">
-            Calculate Cart Price
+            Calculate cart price
+          </button>
+
+          <button onclick="location.href='/index.html'"
+            class="btn my-2 my-sm-0 d-none d-md-block cart-btn">
+            Continue shopping
           </button>
 
           <!-- <ul class="navbar-nav" id="category-list"> -->
           <ul class="navbar-nav">
-            <li class="nav-item dropdown pointer d-none" id="sorting-options">
-              <a class="dropdown-label nav-link dropdown-toggle" id="sorting-label" data-toggle="dropdown"></a>
-              <div class="dropdown-menu"></div>
-            </li>
 
-          <!-- search bars {{{ -->
-          
-          <!-- <form class="form-inline my-2 my-lg-0 d-none d-xl-block" id="largeSearchForm"> -->
-          <form class="form-inline my-auto d-none d-md-block search-form">
-            <div class="search-bar-div">
-              <input class="form-control mr-sm-2 hover-red search-bar" id=
-              "search-bar-lg" type="text" placeholder="Search">
-              <button class="btn my-2 my-sm-0 clear-search-btn"
-                id="clear-search-btn-lg" type="submit">
-                <i class="fas fa-times"></i>
-              </button>
-            </div>
-            <button class="btn btn-secondary my-2 my-sm-0 search-btn"
-              id="search-btn-lg" type="submit">
-              <i class="fa fa-search"></i>
-            </button>
-          </form>
 
             <!-- This li only appears on the collapsed drop down menu -->
             <!-- d-md-none means hide on screens wider than md -->
@@ -83,31 +66,6 @@
               <a class="nav-link pointer save-cart-btn">Save Cart</a>
               <a class="nav-link pointer calc-btn">Calculate</a>
             </li>
-          <!-- Notice how there are two search bars/forms in this html file
-            The first search bar/form at the top is the search bar that is visible for medium screens (#largeSearchForm)
-            This search bar/form is the search bar that is visible in the dropdown, when the navbar is collapsed
-            as a result of a small screen -->
-          <form class="form-inline my-2 my-md-0 d-md-none search-form">
-            <div class="search-bar-div">
-              <input class="form-control mr-sm-2 search-bar" id="search-bar-sm" type="text" placeholder="Search">
-              <button class="btn my-2 my-sm-0 clear-search-btn"
-                id="clear-search-btn-sm" type="submit">
-                <i class="fas fa-times"></i>
-              </button>
-            </div>
-            <button class="btn btn-secondary my-2 my-sm-0 search-btn" id="search-btn-sm" type="submit">
-              <i class="fa fa-search"></i>
-            </button>
-          </form>
-
-          <!-- }}} search bars -->
-
-          <li class="nav-item">
-            <a class="nav-link pointer" id="all-items">All</a>
-          </li>
-
-					<div id="category-list">
-          </div>
 
         </ul>
       </div>
@@ -115,16 +73,17 @@
 
     <!-- }}} navbar -->
 
+    <p class="text-center" id="category-instructions">Your cart is empty. Click "Continue shopping" to add 
+    to your cart, or select a previously saved cart.</p>
     <div id="grid">
-      <!-- <div class="row ml-sm-5 ml-md-5 ml-lg-5 ml-xl-2" id="grid-row"></div> -->
       <div class="row" id="grid-row"></div>
     </div>
 
     <script type='text/javascript' src='js/helpers.js'></script>
-    <script type='text/javascript' src='js/index.js'></script>
     <script type='text/javascript' src='js/food.js'></script>
     <script type='text/javascript' src='js/popups.js'></script>
     <script type='text/javascript' src='js/editable-text-field.js'></script>
     <script type='text/javascript' src='js/saved-carts.js'></script>
+    <script type='text/javascript' src='js/cart.js'></script>
   </body>
 </html>
