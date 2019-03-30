@@ -11,9 +11,10 @@ const { ObjectID } = require('mongodb')
 
 // Import our mongoose connection
 // const { mongoose } = require('./db/mongoose');
+const mongoose = require('./mongo/mongoose');
 
 // Import the models
-// const { Student } = require('./models/student')
+const { Food, Store } = require('./mongo/models')
 
 // express
 const app = express();
