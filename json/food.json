@@ -1,0 +1,16 @@
+{
+  "Fruits": [
+    "Apples (Red)",
+    "Apples (Green)",
+    "Lemon (Yellow)",
+    "Lemon (Green)",
+    "Cherries"
+  ],
+  "Vegetables": [
+    "Carrots",
+    "Broccoli",
+    "Bell Pepper (Red)",
+    "Eggplant",
+    "Zucchini"
+  ]
+}

@@ -1,6 +1,8 @@
-const db = connect("mongodb://localhost:27017/GroceryAPI")
-const foods = db.foods.find()
+const log = console.log;
+const { mongoose } = require('./mongoose');
+const { Food } = require('./models')
 
-while (foods.hasNext()) {
-  printjson(foods.next())
-}
+Food.find().then(foods => { 
+  log(foods, foods.length)
+  process.exit()
+}, error => { log(error) })

@@ -4,37 +4,51 @@
 const log = console.log;
 const fs = require('fs');
 const { mongoose } = require('./mongoose');
+const ObjectID = mongoose.Schema.Types.ObjectID 
 const { Food, Store } = require('./models')
 
-const storeNames = JSON.parse(fs.readFileSync('../json/stores.json'))
-const streetNames = JSON.parse(fs.readFileSync('../json/streets.json'))
-const maxStreetNum = 1000
+const foodsDict = JSON.parse(fs.readFileSync('../json/food.json'))
 
 // }}} vars //
 
 // helpers {{{ //
 
-const getRandomElem = array => { 
-  return array[Math.floor(Math.random() * array.length)]
+const getRandomPrice = (min, max) => { 
+  return (Math.random() * (max - min) + min).toFixed(2)
 }
 
-const getRandomAddress = () => { 
-  return Math.ceil(Math.random() * maxStreetNum) + ' ' + getRandomElem(streetNames)
+const getfoodImgSrc = foodName => { 
+  const imgDir = '/imgs/food/'
+  const imgExt = '.jpg'
+  const imgName = foodName.toLowerCase().replace(/\s/g, '-').replace(/[()]/g, '') 
+  return imgDir + imgName + imgExt
 }
 
 // }}} helpers //
 
 // add items {{{ //
 
-for (let i = 0; i < 10; i++) {
-  new Store({
-    name: getRandomElem(storeNames),
-    address: getRandomAddress()
-  }).save().then((result) => {
-    log(result)
-  }, (error) => {
-    log('ERROR: while adding', store)
-  })
+const generatePricesForStore = storeId => { 
+  let foodDoc = null
+  for (const [category, foodList] of Object.entries(foodsDict)) {
+    for (const food of foodList) {
+      new Food({
+        foodType: food,
+        foodSubcategory: category,
+        store: storeId,
+        price: getRandomPrice(1, 5),
+        imgSrc: getfoodImgSrc(food)
+      }).save().then((result) => {
+        log(result)
+      }, (error) => {
+        log('ERROR: while adding', foodDoc)
+      })
+    }
+  }
 }
+
+Store.find().then(stores => { 
+  stores.forEach(store => { generatePricesForStore(store._id) })
+}, error => { log(error) })
 
 // }}} add items //

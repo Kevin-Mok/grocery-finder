@@ -9,8 +9,9 @@ const StoreSchema = new Schema({
 const FoodSchema = new Schema({
     foodType: String,
     foodSubcategory: String,
-    store: [{ type: Schema.ObjectId, ref: 'Store' }],
-    price: Number
+    store: Schema.Types.ObjectId,
+    price: Number,
+    imgSrc: String
 })
 
 const Food = mongoose.model('Food', FoodSchema);
