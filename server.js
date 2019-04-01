@@ -15,6 +15,7 @@ const mongoose = require('./mongo/mongoose');
 
 // Import the models
 const { Food, Store } = require('./mongo/models')
+const { User } = require('./mongo/user-model')
 
 // express
 const app = express();
@@ -60,7 +61,7 @@ app.route('/').get((req, res) => {
  *
  * On success, the newly created user object is returned
  * On failure, (duplicate username / username or password is too short)
- * a 400 error code is returned.
+ * a 400 error code and an appropriate error message is returned.
  */
 app.post('/signup', (req, res) => {
 	// Create a new user
@@ -73,8 +74,19 @@ app.post('/signup', (req, res) => {
 	// save user to database
 	user.save().then((result) => {
 		res.send(user)
-	}, (error) => {
-		res.status(400).send(error) // 400 for bad request
+	}).catch((error) => {
+		let msg = 'Invalid data has been entered.'
+
+		if (!error.errors) {
+			msg = 'Someone is already using that username.'
+		} else if (error.errors.password) {
+			msg = error.errors.password.message
+		} else if (error.errors.username) {
+			msg = error.errors.username.message
+		} else if (error.errors.location) {
+			msg = error.errors.location.message
+		}
+		res.status(400).send(msg);
 	})
 })
 
@@ -91,7 +103,7 @@ app.post('/signup', (req, res) => {
  * so that the front end page can show a "logout" button
  * instead of login
  */
-app.post('/users/login', (req, res) => {
+app.post('/login', (req, res) => {
 	const username = req.body.username
 	const password = req.body.password
 
