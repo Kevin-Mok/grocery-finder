@@ -99,9 +99,9 @@ app.post('/signup', (req, res) => {
  * 		password: password
  * }
  *
- * On success, #TODO need to figure out what to return
+ * #TODO need to figure out what to return
  * so that the front end page can show a "logout" button
- * instead of login
+ * instead of login. 
  */
 app.post('/login', (req, res) => {
 	const username = req.body.username
@@ -113,8 +113,8 @@ app.post('/login', (req, res) => {
 		} else {
 			// Add the user to the session cookie that we will
 			// send to the client
-			req.session.user = user._id;
-			req.session.email = user.email
+			req.session.user_id = user._id;
+			req.session.username = user.username;
 			res.send(user)
 		}
 	}).catch((error) => {
