@@ -115,10 +115,10 @@ app.post('/login', (req, res) => {
 			// send to the client
 			req.session.user = user._id;
 			req.session.email = user.email
-			res.send('LOGIN SUCCESS!')
+			res.send(user)
 		}
 	}).catch((error) => {
-		res.status(400).send('LOGIN FAILED, BAD INPUT!')
+		res.status(400).send(error)
 	})
 })
 

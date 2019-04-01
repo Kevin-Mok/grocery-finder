@@ -274,11 +274,6 @@ function blurBackgroundToggle() {
 }
 
 function signupBtnClicked() {
-  // SERVER DATA EXCHANGE: This is where we handle new signups.
-  //
-  // After retrieving the new username, password and postalcode,
-  // this data is sent to the server, which creates a new user in the
-  // database.
   const username = document.querySelector("#signInUsername").value;
   const password = document.querySelector("#signInPassword").value;
   const postalCode = document.querySelector("#postalCodeInput").value;
@@ -291,10 +286,12 @@ function signupBtnClicked() {
 
   const url = '/signup'
 
+  // Post Request
   const request = new Request(url, {
     method: 'post', 
     body: JSON.stringify(reqBody),
     headers: {
+      'Accept': 'application/json, text/plain, */*',
       'Content-Type': 'application/json'
     },
   })
@@ -304,7 +301,46 @@ function signupBtnClicked() {
     if (res.status === 200) {
       return Promise.resolve('Signup Successful. Please login to continue.')
     }
-    
+
+    return res.text()
+  }).then((res) => {
+    alert(res)
+  }).catch((error) => {
+    alert(error)
+  })
+
+  closePopup();
+}
+
+function loginBtnClicked() {
+
+
+
+  const loginUsername = document.querySelector("#loginUsername").value;
+  const loginPassword = document.querySelector("#loginPassword").value;
+
+  const reqBody = {
+    username: loginUsername,
+    password: loginPassword
+  }
+
+  const url = '/login'
+
+  // Post Request
+  const request = new Request(url, {
+    method: 'post', 
+    body: JSON.stringify(reqBody),
+    headers: {
+      'Accept': 'application/json, text/plain, */*',
+      'Content-Type': 'application/json'
+    },
+  })
+
+  fetch(request).then(function(res) {
+
+    if (res.status === 200) {
+      return Promise.resolve('Login Successful.')
+    }
     return res.text()
   }).then((res) => {
     alert(res)
@@ -313,39 +349,21 @@ function signupBtnClicked() {
   })
 
 
+  // if (loginUsername == 'admin' && loginPassword == 'admin') {
+  //   closePopup();
 
-  closePopup();
-}
+  //   const manageUsersDropdownItem = document.createElement('a');
+  //   manageUsersDropdownItem.setAttribute('class', 'dropdown-item');
+  //   manageUsersDropdownItem.setAttribute('href', 'adminPage.html');
+  //   manageUsersDropdownItem.innerText = 'Manage Users';
+  //   document.querySelector('#profileDropdown').appendChild(manageUsersDropdownItem);
 
-function loginBtnClicked() {
-  const loginUsername = document.querySelector("#loginUsername").value;
-  const loginPassword = document.querySelector("#loginPassword").value;
-
-  // SERVER DATA EXCHANGE: This is where we check if the user-entered
-  // user/pass credentials are correct.
-  //
-  // Make a request to the server providing the server with loginUsername and
-  // loginPassword.  The server determines if login was successful or not
-  //
-  // The code below assumes that we only have two accounts, a dummy user
-  // account and an admin account. It also assumes that a global 'user'
-  // variable would be made availible.
-
-  if (loginUsername == 'admin' && loginPassword == 'admin') {
-    closePopup();
-
-    const manageUsersDropdownItem = document.createElement('a');
-    manageUsersDropdownItem.setAttribute('class', 'dropdown-item');
-    manageUsersDropdownItem.setAttribute('href', 'adminPage.html');
-    manageUsersDropdownItem.innerText = 'Manage Users';
-    document.querySelector('#profileDropdown').appendChild(manageUsersDropdownItem);
-
-    alert("Admin login Successful. 'Manage Users' is now available from the user dropdown menu.");
-  } else if (loginUsername == 'user' && loginPassword == 'user') {
-    closePopup();
-  } else {
-    alert("Incorrect credentials! Please try again.");
-  }
+  //   alert("Admin login Successful. 'Manage Users' is now available from the user dropdown menu.");
+  // } else if (loginUsername == 'user' && loginPassword == 'user') {
+  //   closePopup();
+  // } else {
+  //   alert("Incorrect credentials! Please try again.");
+  // }
 }
 
 

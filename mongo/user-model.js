@@ -28,7 +28,8 @@ const UserSchema = new mongoose.Schema({
 	lastLogin: { type: Date, default: Date.now },
 	profilePicture: { type: String, default: ''},
 	bannedUntil: { type: Date, default: null },
-	isAdmin: false
+	isAdmin: false,
+	cart: [mongoose.Schema.Types.ObjectId]
 })
 
 
@@ -45,7 +46,7 @@ UserSchema.statics.findByLoginCredentials = function(username, password) {
 	return User.findOne({ username }).then((user) => {
 
 		if (!user) {
-			return Promise.reject('Wrong username.')
+			return Promise.reject('Wrong username or password.')
 		}
 
 		return new Promise((resolve, reject) => {
@@ -53,7 +54,7 @@ UserSchema.statics.findByLoginCredentials = function(username, password) {
 				if (result) {
 					resolve(user);
 				} else {
-					reject('Wrong password.');
+					reject('Wrong username or password.');
 				}
 			})
 		})
