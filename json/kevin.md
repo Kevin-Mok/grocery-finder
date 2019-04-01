@@ -1,3 +1,5 @@
+- add food type to schema
+
 ### Extra
 - turn search into filter dropdown
 - pref. for dist./price for score
