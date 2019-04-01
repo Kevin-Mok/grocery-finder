@@ -7,8 +7,8 @@ const ObjectID = mongoose.Schema.Types.ObjectID
 const { Food, FoodType, Store } = require('./models')
 const argv = require('yargs').argv
 
-const imgDir = '/imgs/'
-const imgExt = '.jpg'
+const imgDir = '/imgs'
+const imgExt = 'jpg'
 
 // }}} vars //
 
@@ -51,7 +51,8 @@ const getRandomAddress = () => {
 
 const getStoreImgSrc = storeName => { 
   const imgName = storeName.toLowerCase().replace(/\s/g, '-')
-  return imgDir + 'stores/' + imgName + imgExt
+  // return imgDir + 'stores/' + imgName + imgExt
+  return `${imgDir}/stores/${imgName}.${imgExt}`
 }
 
 const generateStores = storesToAdd => {
@@ -76,9 +77,11 @@ const generateStores = storesToAdd => {
 
 const foodTypesDict = JSON.parse(fs.readFileSync('../json/food.json'))
 
-const getfoodImgSrc = foodName => { 
+const getfoodImgSrc = (foodName, foodSubcategory) => { 
   const imgName = foodName.toLowerCase().replace(/\s/g, '-').replace(/[()]/g, '') 
-  return imgDir + 'food/' + imgName + imgExt
+  // return imgDir + 'food/' + imgName + imgExt
+  return `${imgDir}/food/${foodSubcategory.toLowerCase()}/` + 
+    `${imgName}.${imgExt}`
 }
 
 const generateFoodTypes = () => { 
@@ -87,7 +90,7 @@ const generateFoodTypes = () => {
       new FoodType({
         name: food,
         subcategory: subcategory,
-        imgSrc: getfoodImgSrc(food)
+        imgSrc: getfoodImgSrc(food, subcategory)
       }).save().then((result) => {
         log(result)
       }, (err) => {

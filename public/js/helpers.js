@@ -1,5 +1,7 @@
 // This file was defines helper functions and variables used by many pages. 
 
+// vars {{{ //
+
 const log = console.log
 let curView = ''
 let curViewBackup = ''
@@ -8,6 +10,8 @@ let curSearchSelector = ''
 const grid = document.querySelector('#grid')
 const gridRow = document.querySelector('#grid-row')
 const gridItemsBackup = []
+
+// }}} vars //
 
 // float fxn's {{{ //
 function compareFloats(a, b) {//{{{
@@ -51,12 +55,12 @@ function sortGridByValue(divSelector, valueSelector, valueType, order, sortingLa
     }
     return aGreater
 
-    switch (order) {
+    /* switch (order) {
       case 'asc':
         return (compareFloats(aValue, bValue)) ? 1 : -1
       case 'desc':
         return (compareFloats(aValue, bValue)) ? -1 : 1
-    }
+    } */
   })
 
   clearGrid()
@@ -174,6 +178,16 @@ function search(size) {//{{{
 }//}}}
 
 // }}} search //
+
+const createGetRequest = url => { 
+  return new Request(url, {
+    method: 'get', 
+    headers: {
+      'Accept': 'application/json, text/plain, */*',
+      'Content-Type': 'application/json'
+    },
+  })
+}
 
 // do these when page is loaded {{{ //
 

@@ -1,4 +1,5 @@
 // vars {{{ //
+
 const user = {
   userId: 1,
   username: 'user',
@@ -69,6 +70,9 @@ window.onload = function() {//{{{
   // foodGridRow.appendChild(createEtf('Test', 'test', 4, 20))
   // openSettingsPopup()
 
+  // displayFoodCategory('all')
+  displayAllFoodFetched()
+
   // dropdown hover (jquery) {{{ //
 
   // The following code implements the feature where if you hover a dropdown
@@ -84,9 +88,7 @@ window.onload = function() {//{{{
     $( this ).find('.dropdown-menu').removeClass('show');
   });
 
-  displayFoodCategory('all')
-
   // }}} dropdown hover (jquery) //
-}//}}}
+}
 
 // }}}  do these when page is loaded //

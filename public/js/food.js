@@ -234,30 +234,40 @@ function removeAllChildren(element) {
   }
 }
 
-function displayFood(foodDict) {//{{{
+function displayFood(foodDocs) {//{{{
   clearGrid()
 
-  Object.keys(foodDict).forEach(function(key) {
+  foodDocs.forEach(foodDoc => {
     const foodDiv = createFoodDiv()
-    foodDiv.id = 'food-div-' + key
+    // foodDiv.id = 'food-div-' + key
 
-    foodDiv.appendChild(createFoodImg(foodDict[key]["img"]))
-    foodDiv.appendChild(createFoodInfo(foodDict[key]["name"]))
-    // const checkIcon = createCheckIcon()
-    // foodDiv.appendChild(checkIcon)
-    // foodDiv.appendChild(createRemoveIcon())
+    foodDiv.appendChild(createFoodImg(foodDoc.imgSrc))
+    foodDiv.appendChild(createFoodInfo(foodDoc.name))
 
-    if (cart.indexOf(key) != -1) {
+    /* if (cart.indexOf(key) != -1) {
       foodDiv.classList.add('in-cart')
-
-      // checkIcon.style.display = 'inline'
-    }
+    } */
 
     gridRow.appendChild(foodDiv)
   })
 
   sortGridByValue('.food-div', '.food-info-div', 'text', 'asc', [createAlphDescIcon()])
   setAlphaSorting()
+}//}}}
+
+const displayAllFoodFetched = () => { //{{{
+  fetch(createGetRequest('/foodTypes'))
+    .then(res => {
+      if (res.status === 200) {
+        return res.json()
+      } else {
+        log('GET failed: food types')
+      }
+    })
+    .then(allFoodJson => {
+      displayFood(allFoodJson)
+    })
+    .catch(err => { log(err) })
 }//}}}
 
 function createCartFoodDict() {

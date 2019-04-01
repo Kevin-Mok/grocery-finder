@@ -2,15 +2,15 @@
   "Fruits": [
     "Apples (Red)",
     "Apples (Green)",
-    "Lemon (Yellow)",
-    "Lemon (Green)",
+    "Lemons (Yellow)",
+    "Limes",
     "Cherries"
   ],
   "Vegetables": [
     "Carrots",
     "Broccoli",
-    "Bell Pepper (Red)",
-    "Eggplant",
+    "Bell Peppers (Red)",
+    "Eggplants",
     "Zucchini"
   ]
 }
