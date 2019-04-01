@@ -283,8 +283,35 @@ function signupBtnClicked() {
   const password = document.querySelector("#signInPassword").value;
   const postalCode = document.querySelector("#postalCodeInput").value;
 
-  // Send to server
-  // createNewUser(username, password, postalCode)
+  const reqBody = {
+    username,
+    password,
+    location: postalCode
+  }
+
+  const request = new Request(url, {
+    method: 'post', 
+    body: JSON.stringify(data),
+    headers: {
+      'Accept': 'application/json, text/plain, */*',
+      'Content-Type': 'application/json'
+    },
+  })
+
+  fetch(request).then(function(res) {
+    // Handle response we get from the API
+    // Usually check the error codes to see what happened
+    const message = document.querySelector('#message')
+    if (res.status === 200) {
+      console.log('Sign Up successful')
+    }
+    console.log(res)
+  }).catch((error) => {
+    console.log(error)
+  })
+
+
+
   closePopup();
 }
 
