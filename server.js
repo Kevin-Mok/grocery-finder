@@ -101,7 +101,7 @@ app.post('/signup', (req, res) => {
  *
  * #TODO need to figure out what to return
  * so that the front end page can show a "logout" button
- * instead of login. 
+ * instead of login. (maybe handlebars)
  */
 app.post('/login', (req, res) => {
 	const username = req.body.username
