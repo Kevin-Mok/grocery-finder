@@ -275,71 +275,42 @@ function signupBtnClicked() {//{{{
   const username = document.querySelector("#signInUsername").value;
   const password = document.querySelector("#signInPassword").value;
   const postalCode = document.querySelector("#postalCodeInput").value;
+  const reqBody = { username, password, postalCode }
 
-  const reqBody = {
-    username,
-    password,
-    location: postalCode
-  }
-
-  createRequest('/signup', 'post', reqBody)
-  // const request = new Request('/signup', {
-    // method: 'post',
-    // body: JSON.stringify(reqBody),
-    // headers: {
-      // 'Accept': 'application/json, text/plain, */*',
-      // 'Content-Type': 'application/json'
-    // },
-  // })
-
-  fetch(request).then(function(res) {
-    if (res.status === 200) {
-      return Promise.resolve('Signup Successful. Please login to continue.')
-    }
-    return res.text()
-  }).then((res) => {
-    alert(res)
-  }).catch((error) => {
-    alert(error)
-  })
-
-  closePopup();
+  fetch(createPostRequest('/signup', reqBody))
+    .then(function(res) {
+      if (res.status === 200) {
+        closePopup()
+        return Promise.resolve('Signup Successful. Please login to continue.')
+      }
+      return res.text()
+    }).then((res) => {
+      alert(res)
+    }).catch((error) => {
+      alert(error)
+    })
 }//}}}
 
 function loginBtnClicked() {
-  const loginUsername = document.querySelector("#loginUsername").value;
-  const loginPassword = document.querySelector("#loginPassword").value;
+  const username = document.querySelector("#loginUsername").value;
+  const password = document.querySelector("#loginPassword").value;
+  const reqBody = { username, password }
 
-  const reqBody = {
-    username: loginUsername,
-    password: loginPassword
-  }
+  fetch(createPostRequest('/login', reqBody))
+    .then(function(res) {
+      if (res.status === 200) {
+        closePopup()
+        return Promise.resolve('Login Successful.')
+      }
+      return res.text()
+    }).then((res) => {
+      alert(res)
+    }).catch((error) => {
+      alert(error)
+    })
 
-  const url = '/login'
-
-  // Post Request
-  const request = new Request(url, {
-    method: 'post', 
-    body: JSON.stringify(reqBody),
-    headers: {
-      'Accept': 'application/json, text/plain, */*',
-      'Content-Type': 'application/json'
-    },
-  })
-
-  fetch(request).then(function(res) {
-
-    if (res.status === 200) {
-      return Promise.resolve('Login Successful.')
-    }
-    return res.text()
-  }).then((res) => {
-    alert(res)
-  }).catch((error) => {
-    alert(error)
-  })
-
-
+  // admin code {{{ //
+  
   // if (loginUsername == 'admin' && loginPassword == 'admin') {
   //   closePopup();
 
@@ -355,6 +326,8 @@ function loginBtnClicked() {
   // } else {
   //   alert("Incorrect credentials! Please try again.");
   // }
+  
+  // }}} admin code //
 }
 
 

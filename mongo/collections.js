@@ -212,14 +212,14 @@ if (argv.find) {//{{{
   findDoc(selectedCollection, argv.find)
 }//}}}
 
-if (argv.show) {//{{{
+if (argv.show || argv.s) {//{{{
   if (argv.all) {
     for (const coll of [Store, FoodType, Food]) {
       showCollection(coll)
     }
   } else {
     showCollection(selectedCollection)
-    exitAfter(1)
+    exitAfter(.5)
   }
 }//}}}
 

@@ -189,9 +189,9 @@ const createGetRequest = url => { //{{{
   })
 }//}}}
 
-const createRequest = (url, type, reqBody='') => { //{{{
+const createPostRequest = (url, reqBody) => { //{{{
   return new Request(url, {
-    method: 'get', 
+    method: 'post', 
     body: JSON.stringify(reqBody),
     headers: {
       'Accept': 'application/json, text/plain, */*',
