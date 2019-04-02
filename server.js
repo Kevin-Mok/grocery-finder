@@ -12,6 +12,7 @@ const { mongoose } = require('./mongo/mongoose');
 const { Food, FoodType, Store } = require('./mongo/models')
 const session = require('express-session')
 const { User } = require('./mongo/user-model')
+const hbs = require('express-hbs')
 
 // express
 const app = express();
@@ -25,6 +26,13 @@ app.use("/css", express.static(__dirname + '/public/css'))
 app.use("/imgs", express.static(__dirname + '/public/imgs'))
 app.use("/js", express.static(__dirname + '/public/js'))
 
+// set the view library
+app.set('view engine', 'hbs')
+app.engine('hbs', hbs.express4( {
+  extname: '.hbs',
+  defaultView: 'default'
+}))
+
 app.use(session({
 	secret: 'oursecret',
 	resave: false,
@@ -36,9 +44,8 @@ app.use(session({
 }))
 
 app.route('/').get((req, res) => {
-  res.sendFile(__dirname + '/public/index.html')
+	res.render('index', {loggedIn: req.session.user_id})
 })
-
 
 app.get('/foodTypes', (req, res) => {
 	FoodType.find({}).then(foodTypesDict => {
