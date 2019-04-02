@@ -278,7 +278,8 @@ function getCartFoodTypeIds() {
   const request = createGetRequest('/get_cart')
   return fetch(request).then(function(res) {
     if (res.status === 401) {
-      return Promise.resolve(localStorage.getItem('cart').split(','))
+      let cart = localStorage.getItem('cart') ? localStorage.getItem('cart').split(',') : []
+      return Promise.resolve(cart)
     }
     return res.json()
   })
