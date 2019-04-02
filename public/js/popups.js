@@ -339,6 +339,7 @@ function loginBtnClicked() {
   fetch(request).then(function(res) {
 
     if (res.status === 200) {
+      closePopup();
       return Promise.resolve('Login Successful.')
     }
     return res.text()

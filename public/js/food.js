@@ -239,7 +239,7 @@ function displayFood(foodDocs) {//{{{
 
   foodDocs.forEach(foodDoc => {
     const foodDiv = createFoodDiv()
-    // foodDiv.id = 'food-div-' + key
+    foodDiv.id = 'food-div-' + foodDoc._id
 
     foodDiv.appendChild(createFoodImg(foodDoc.imgSrc))
     foodDiv.appendChild(createFoodInfo(foodDoc.name))
@@ -315,18 +315,9 @@ function toggleFoodCartStatus(e) {
   const foodDiv = e.target.parentElement.parentElement
   const foodInfoDiv = e.target.parentElement;
   if (e.target.classList.contains('btn')) {
-    const foodId = /food-div-(\d*)/g.exec(foodDiv.id)[1]
+    const foodId = /food-div-([A-Za-z0-9]*)/g.exec(foodDiv.id)[1]
     if (!foodDiv.classList.contains('in-cart')) {
-      // add to cart
-
-			// SERVER DATA EXCHANGE: This is where the user had just entered a
-			// new item to the cart
-			//
-			// Provide the server with the current user id and the new cart.
-			// Update the cart in the database, so that the current cart can
-			// persist upon login and logout.
-
-      cart.push(foodId)
+      addToCart(foodId)
       foodDiv.classList.add('in-cart')
       foodInfoDiv.removeChild(e.target)
       foodInfoDiv.appendChild(createRemoveFromCartBtn())
@@ -342,6 +333,37 @@ function toggleFoodCartStatus(e) {
     }
     // log(cart)
   }
+}
+
+/**
+ * Add to cart works in two ways:
+ *
+ * If the user is logged in, then the foodId is stored in the user's cart
+ * in the databse.
+ *
+ * If the user is not logged in, then the foodId is stored locally in the "cart"
+ * global variable.
+ */
+function addToCart(foodId) {
+
+  const request = new Request('/add_to_cart/' + foodId, {
+    method: 'post',
+    headers: {
+      'Accept': 'application/json, text/plain, */*',
+      'Content-Type': 'application/json'
+    },
+  })
+
+  fetch(request).then(function(res) {
+
+    if (res.status === 401) {
+      // User is not logged in 
+      cart.push(foodId)
+    }
+
+  }).catch((error) => {
+    console.log(error)
+  })
 }
 
 // }}} show/hide checks //
