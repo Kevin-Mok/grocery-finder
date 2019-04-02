@@ -12,6 +12,8 @@ function logInLinkClicked() {
 }
 
 
+
+
 // Create this:
 // <div class="popup">
 //   <h1 class="popup-title">Login</h1>
@@ -312,6 +314,21 @@ function signupBtnClicked() {
   closePopup();
 }
 
+function logout() {
+  const request = createGetRequest('/logout')
+  fetch(request).then(function(res) {
+
+    if (res.status === 200) {
+      return Promise.resolve('Logout Successful.')
+    }
+    return res.text()
+  }).then((res) => {
+    alert(res)
+  }).catch((error) => {
+    alert(error)
+  })
+}
+
 function loginBtnClicked() {
 
 
@@ -374,6 +391,7 @@ function loginBtnClicked() {
 $('.openLoginPopup').click(openLoginPopup);
 $('.openSignupPopup').click(openSignupPopup);
 $('.openSettingsPopup').click(openSettingsPopup);
+$('.logout-btn').click(logout)
 
 $("body").click((e) => {
 // $("html").click((e) => {

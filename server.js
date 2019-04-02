@@ -123,12 +123,24 @@ app.post('/login', (req, res) => {
 			// send to the client
 			req.session.user_id = user._id;
 			req.session.username = user.username;
-			res.send(user)
+			res.redirect('/')
 		}
 	}).catch((error) => {
 		res.status(400).send(error)
 	})
 })
+
+
+app.get('/logout', (req, res) => {
+	req.session.destroy((error) => {
+		if (error) {
+			res.status(500).send(error)
+		} else {
+			res.redirect('/')
+		}
+	})
+})
+
 
 app.listen(port, () => {
 	log(`Listening on port ${port}...`)
