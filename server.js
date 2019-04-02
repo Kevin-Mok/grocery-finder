@@ -165,7 +165,12 @@ app.post('/add_to_cart/:id', (req, res) => {
 });
 
 /**
- * Delete 
+ * Deletes the FoodType with specified id
+ * 
+ * IMPORTANT
+ * If user is not logged in, code 401 is sent, then the front
+ * end is in charge of calling a post route with the local cart array, to get an
+ * array of FoodTypes
  */
 app.post('/delete_from_cart/:id', (req, res) => {
 	let id = req.params.id
@@ -211,7 +216,7 @@ app.get('/get_cart', (req, res) => {
 
 	User.findById(req.session.user_id).then((user) => {
 		if (!user) {
-			res.status(400).send()
+			res.status(400).send('User does not exist')
 		}
 
 		return Promise.resolve(user.cart)
@@ -219,9 +224,9 @@ app.get('/get_cart', (req, res) => {
 		// cartArray is an array of FoodType Ids
 		return FoodType.find({'_id': { $in: cartArray }})
 	}).then((cart) => {
-		res.send(rr)
-	}).catch((cart) => {
-		res.status(400).send()
+		res.send(cart)
+	}).catch((error) => {
+		res.status(400).send('Catch')
 	})
 }) 
 

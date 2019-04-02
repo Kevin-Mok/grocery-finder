@@ -16,7 +16,7 @@ window.onload = function() {
     }
     return res.json()
   }).then((cart) => {
-    displayCart(cart)
+      displayCart(cart)
   }).catch((error) => {
     console.log(error)
   })
@@ -40,6 +40,12 @@ function displayCart(cart)  {
   //   12: {name: "Broccoli", img: "imgs/food/produce/vegetables/broccoli.jpg"},
   //   13: {name: "Bell Pepper (Red)", img: "imgs/food/produce/vegetables/bell-pepper-red.jpg"}
   // }
+
+  if (cart.length === 0) {
+    return
+  }
+
+  $('#category-instructions').remove()
 
   cart.forEach(foodDoc => {
     const foodDiv = createFoodDiv()
@@ -70,5 +76,25 @@ function removeFromCart(e) {
   gridRow.removeChild(foodDiv)
 
   
+
+  const request = new Request('/delete_from_cart/' + foodId, {
+    method: 'post',
+    headers: {
+      'Accept': 'application/json, text/plain, */*',
+      'Content-Type': 'application/json'
+    },
+  })
+
+  fetch(request).then(function(res) {
+
+    if (res.status === 401) {
+      // User is not logged in 
+      cart = cart.filter(id => id !== foodId);
+    }
+
+  }).catch((error) => {
+    console.log(error)
+  })
+
 }
 
