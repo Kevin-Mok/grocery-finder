@@ -1,6 +1,6 @@
 // vars {{{ //
 
-let cart = []
+let cart = localStorage.getItem('cart') ? localStorage.getItem('cart').split(',') : []
 const categoryList = document.querySelector('#category-list')
 
 // food data (phase 1) {{{ //
@@ -237,22 +237,42 @@ function removeAllChildren(element) {
 function displayFood(foodDocs) {//{{{
   clearGrid()
 
-  foodDocs.forEach(foodDoc => {
-    const foodDiv = createFoodDiv()
-    foodDiv.id = 'food-div-' + foodDoc._id
+      //   addToCart(foodId)
+      // foodDiv.classList.add('in-cart')
+      // foodInfoDiv.removeChild(e.target)
+      // foodInfoDiv.appendChild(createRemoveFromCartBtn())
 
-    foodDiv.appendChild(createFoodImg(foodDoc.imgSrc))
-    foodDiv.appendChild(createFoodInfo(foodDoc.name))
+  // We need to know what is currently in the cart
+  // because we want the "Remove from Cart" button 
+  // to show up for items already in the cart
+  getCartFoodTypeIds().then((cartIds) => {
 
-    /* if (cart.indexOf(key) != -1) {
-      foodDiv.classList.add('in-cart')
-    } */
+    foodDocs.forEach(foodDoc => {
+      const foodDiv = createFoodDiv()
+      foodDiv.id = 'food-div-' + foodDoc._id
 
-    gridRow.appendChild(foodDiv)
+      foodDiv.appendChild(createFoodImg(foodDoc.imgSrc))
+      foodDiv.appendChild(createFoodInfo(foodDoc.name))
+
+      if (cartIds.includes(foodDoc._id)) {
+        foodDiv.classList.add('in-cart')
+        foodDiv.children[1].removeChild(foodDiv.children[1].children[1])
+        foodDiv.children[1].appendChild(createRemoveFromCartBtn())
+      }
+
+      /* if (cart.indexOf(key) != -1) {
+        foodDiv.classList.add('in-cart')
+      } */
+
+      gridRow.appendChild(foodDiv)
+    })
+
+    sortGridByValue('.food-div', '.food-info-div', 'text', 'asc', [createAlphDescIcon()])
+    setAlphaSorting()
+
+
   })
 
-  sortGridByValue('.food-div', '.food-info-div', 'text', 'asc', [createAlphDescIcon()])
-  setAlphaSorting()
 }//}}}
 
 const displayAllFoodFetched = () => { //{{{
@@ -323,7 +343,7 @@ function toggleFoodCartStatus(e) {
       foodInfoDiv.appendChild(createRemoveFromCartBtn())
     } else {
       // rm from cart
-      cart.splice(cart.indexOf(foodId), 1)
+      removeFromCart(foodId)
       foodDiv.classList.remove('in-cart')
       foodInfoDiv.removeChild(e.target)
       foodInfoDiv.appendChild(createAddToCartBtn())
@@ -358,7 +378,31 @@ function addToCart(foodId) {
 
     if (res.status === 401) {
       // User is not logged in 
+
       cart.push(foodId)
+      localStorage.setItem('cart', cart);
+    }
+
+  }).catch((error) => {
+    console.log(error)
+  })
+}
+
+function removeFromCart(foodId) {
+  const request = new Request('/delete_from_cart/' + foodId, {
+    method: 'post',
+    headers: {
+      'Accept': 'application/json, text/plain, */*',
+      'Content-Type': 'application/json'
+    },
+  })
+
+  fetch(request).then(function(res) {
+
+    if (res.status === 401) {
+      // User is not logged in 
+      cart = cart.filter(id => id !== foodId);
+      localStorage.setItem('cart', cart);
     }
 
   }).catch((error) => {

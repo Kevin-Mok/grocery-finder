@@ -269,3 +269,17 @@ function extractSortingLabelIcons(e) {//{{{
   }
   return labelIcons
 }//}}}
+
+/**
+ * Returns an array of FoodType ids that are currently in 
+ * the cart
+ */
+function getCartFoodTypeIds() {
+  const request = createGetRequest('/get_cart')
+  return fetch(request).then(function(res) {
+    if (res.status === 401) {
+      return Promise.resolve(localStorage.getItem('cart').split(','))
+    }
+    return res.json()
+  })
+}

@@ -147,13 +147,13 @@ app.post('/add_to_cart/:id', (req, res) => {
 	id = mongoose.Types.ObjectId(id);
 	
 	if (!req.session.user_id) {
-		res.status(401).send('Must be logged in to add to the cart in the database')
+		return res.status(401).send('Must be logged in to add to the cart in the database')
 	}	
 	
 
 	User.findByIdAndUpdate(req.session.user_id, { $addToSet: { cart: id }}, { new: true }).then((user) => {
 		if (!user) {
-			res.status(404).send()
+			return res.status(404).send()
 		}
 		res.send({ 
 			user,
@@ -182,12 +182,12 @@ app.post('/delete_from_cart/:id', (req, res) => {
 	id = mongoose.Types.ObjectId(id);
 	
 	if (!req.session.user_id) {
-		res.status(401).send('Must be logged in to add to the cart in the database')
+		return res.status(401).send('Must be logged in to add to the cart in the database')
 	}	
 
 	User.findByIdAndUpdate(req.session.user_id, { $pull: { cart: id }}, { new: true }).then((user) => {
 		if (!user) {
-			res.status(404).send()
+			return res.status(404).send()
 		}
 		res.send({ 
 			user,
@@ -211,12 +211,12 @@ app.post('/delete_from_cart/:id', (req, res) => {
  */
 app.get('/get_cart', (req, res) => {
 	if (!req.session.user_id) {
-		res.status(401).send('Must be logged in')
+		return res.status(401).send('Must be logged in')
 	}
 
 	User.findById(req.session.user_id).then((user) => {
 		if (!user) {
-			res.status(400).send('User does not exist')
+			return res.status(400).send('User does not exist')
 		}
 
 		return Promise.resolve(user.cart)
@@ -226,9 +226,31 @@ app.get('/get_cart', (req, res) => {
 	}).then((cart) => {
 		res.send(cart)
 	}).catch((error) => {
-		res.status(400).send('Catch')
+		res.status(400).send()
 	})
-}) 
+})
+
+
+/**
+ * Returns an array of FoodTypes depending on the input array
+ *
+ * Request body should look like:
+ * {
+ * 		cart: [array of string ids]
+ * }
+ */
+app.post('/get_food_types_from_ids', (req, res) => {
+	const cart = req.body.cart
+	const cartIds = cart.map((stringId) => mongoose.Types.ObjectId(stringId))
+
+
+	FoodType.find({'_id': { $in: cartIds }}).then((cart) => {
+		res.send(cart)
+	}).catch((error) => {
+		res.status(400).send()
+	})
+
+})
 
 app.listen(port, () => {
 	log(`Listening on port ${port}...`)
