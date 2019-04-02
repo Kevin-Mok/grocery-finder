@@ -81,8 +81,14 @@
             <!-- This li only appears on the collapsed drop down menu -->
             <!-- d-md-none means hide on screens wider than md -->
             <li class="nav-item d-md-none">
-              <a class="nav-link pointer openLoginPopup">Login</a>
-              <a class="nav-link pointer openSignupPopup">Sign up</a>
+
+              {{#if loggedIn}}
+                <a class="nav-link pointer logout-btn">Logout</a>
+              {{else}}
+                <a class="nav-link pointer openLoginPopup">Login</a>
+                <a class="nav-link pointer openSignupPopup">Sign up</a>
+              {{/if}}
+              
               <a class="nav-link pointer openSettingsPopup">Settings</a>
               <a class="nav-link pointer cart-btn">Cart</a>
               <a class="nav-link pointer save-cart-btn">Save Cart</a>
