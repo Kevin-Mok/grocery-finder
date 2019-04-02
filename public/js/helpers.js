@@ -179,7 +179,7 @@ function search(size) {//{{{
 
 // }}} search //
 
-const createGetRequest = url => { 
+const createGetRequest = url => { //{{{
   return new Request(url, {
     method: 'get', 
     headers: {
@@ -187,7 +187,18 @@ const createGetRequest = url => {
       'Content-Type': 'application/json'
     },
   })
-}
+}//}}}
+
+const createPostRequest = (url, reqBody) => { //{{{
+  return new Request(url, {
+    method: 'post', 
+    body: JSON.stringify(reqBody),
+    headers: {
+      'Accept': 'application/json, text/plain, */*',
+      'Content-Type': 'application/json'
+    },
+  })
+}//}}}
 
 // do these when page is loaded {{{ //
 

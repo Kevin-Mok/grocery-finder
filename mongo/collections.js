@@ -4,7 +4,7 @@ const log = console.log;
 const fs = require('fs');
 const { mongoose } = require('./mongoose');
 const ObjectID = mongoose.Schema.Types.ObjectID 
-const { Food, FoodType, Store } = require('./models')
+const { Food, FoodType, Store, User } = require('./models')
 const argv = require('yargs').argv
 
 const imgDir = '/imgs'
@@ -19,7 +19,10 @@ if (argv.food) {
   selectedCollection = FoodType
 } else if (argv.stores) {
   selectedCollection = Store
-}//}}}
+} else if (argv.users) {
+  selectedCollection = User
+}
+//}}}
 
 // helpers {{{ //
 
@@ -55,7 +58,7 @@ const getStoreImgSrc = storeName => {
   return `${imgDir}/stores/${imgName}.${imgExt}`
 }
 
-const generateStores = storesToAdd => {
+const generateStores = storesToAdd => {//{{{
   let storeName = ''
   for (let i = 0; i < storesToAdd; i++) {
     storeName = getRandomElem(storeNames)
@@ -65,11 +68,9 @@ const generateStores = storesToAdd => {
       imgSrc: getStoreImgSrc(storeName)
     }).save().then(result => {
       log(result)
-    }, error => {
-      log('ERROR: while adding', store)
-    })
+    }, err => { log(err) })
   }
-}
+}//}}}
 
 // }}} generate stores //
 
@@ -133,20 +134,77 @@ const generateFood = () => {
 
 // }}} generate food //
 
+// generate users {{{ //
+
+const getCurUsers = () => { 
+  User.find().then(users => { 
+    return users.length
+  }, error => { 
+    return 0
+  })
+}
+
+const getRandomPostalCode = () => { 
+  const validPostalChars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+  let result = '';
+  for (let i = 0; i < 6; i++) {
+    result += validPostalChars[Math.floor
+      (Math.random() * validPostalChars.length)]
+  }
+  return result;
+}
+
+const generateUser = (username, admin=false) => { 
+  new User({
+    username: username,
+    password: username,
+    postalCode: getRandomPostalCode(),
+    isAdmin: admin
+  }).save().then(result => {
+    log(result)
+  }, err => { log(err) })
+}
+
+// generates usersToAdd amount of users and 1 admin
+const generateUsers = usersToAdd => {//{{{
+  let curUsers = getCurUsers() || 0
+  const adminName = 'admin' + ((curUsers == 0) ? 
+    '' : curUsers.toString())
+  generateUser(adminName, true)
+  curUsers++
+
+  let username = ''
+  for (let i = curUsers; i < curUsers + usersToAdd; i++) {
+    username = 'user' + ((i == 1) ?  '' : i.toString())
+    log(username)
+    generateUser(username)
+  }
+}//}}}
+
+// }}} generate users //
+
+const exitAfter = seconds => { 
+  setTimeout(() => { process.exit() }, seconds * 1000)
+}
+
 // }}} helpers //
 
-if (argv.generate) {//{{{
+if (argv.gen || argv.g) {//{{{
   if (argv.stores) {
     generateStores(argv.stores)
   } else if (argv.foodTypes) {
     generateFoodTypes()
   } else if (argv.food) {
     generateFood()
-  } else if (argv.all) {
+  } else if (argv.users) {
+    generateUsers(argv.users)
+  }
+  /* } else if (argv.all) {
     generateStores(argv.stores)
     generateFoodTypes()
     generateFood()
-  }
+  } */
+  exitAfter(2)
 }//}}}
 
 if (argv.find) {//{{{
@@ -154,17 +212,18 @@ if (argv.find) {//{{{
   findDoc(selectedCollection, argv.find)
 }//}}}
 
-if (argv.show) {//{{{
+if (argv.show || argv.s) {//{{{
   if (argv.all) {
     for (const coll of [Store, FoodType, Food]) {
       showCollection(coll)
     }
   } else {
     showCollection(selectedCollection)
+    exitAfter(.5)
   }
 }//}}}
 
-if (argv.drop) {//{{{
+if (argv.drop || argv.d) {//{{{
   if (argv.all) {
     for (const coll of [Food, FoodType, Store]) {
       coll.collection.drop()
@@ -173,6 +232,7 @@ if (argv.drop) {//{{{
   } else {
     selectedCollection.collection.drop()
     showCollection(selectedCollection)
+    exitAfter(1)
   }
 }//}}}
 

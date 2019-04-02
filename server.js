@@ -9,9 +9,8 @@ const bodyParser = require('body-parser') // middleware for parsing HTTP body fr
 
 const { ObjectID } = require('mongodb')
 const { mongoose } = require('./mongo/mongoose');
-const { Food, FoodType, Store } = require('./mongo/models')
+const { Food, FoodType, Store, User } = require('./mongo/models')
 const session = require('express-session')
-const { User } = require('./mongo/user-model')
 
 // express
 const app = express();
@@ -54,49 +53,44 @@ app.get('/foodTypes', (req, res) => {
 
 /** User routes **/
 
-/**
- * Used when the user signs up
+/** Used when the user signs up{{{
  *
  * Request body should look like:
  * {
  * 		username: username,
  * 		password: password,
- * 		location: location (postalcode), 
+ * 		postalCode: postalcode, 
  * }
  *
  * On success, the newly created user object is returned
  * On failure, (duplicate username / username or password is too short)
  * a 400 error code and an appropriate error message is returned.
- */
-app.post('/signup', (req, res) => {
-	// Create a new user
-	const user = new User({
+ *///}}}
+app.post('/signup', (req, res) => {//{{{
+	new User({
 		username: req.body.username,
 		password: req.body.password,
-		location: req.body.location
-	})
+		postalCode: req.body.postalCode
+	}).save()
+  .then((result) => {
+    res.send(result)
+  }).catch((error) => {
+    log(error)
+    let msg = 'Invalid data has been entered.'
+    if (!error.errors) {
+      msg = 'Someone is already using that username.'
+    } else if (error.errors.password) {
+      msg = error.errors.password.message
+    } else if (error.errors.username) {
+      msg = error.errors.username.message
+    } else if (error.errors.postalCode) {
+      msg = error.errors.postalCode.message
+    }
+    res.status(400).send(msg);
+  })
+})//}}}
 
-	// save user to database
-	user.save().then((result) => {
-		res.send(user)
-	}).catch((error) => {
-		let msg = 'Invalid data has been entered.'
-
-		if (!error.errors) {
-			msg = 'Someone is already using that username.'
-		} else if (error.errors.password) {
-			msg = error.errors.password.message
-		} else if (error.errors.username) {
-			msg = error.errors.username.message
-		} else if (error.errors.location) {
-			msg = error.errors.location.message
-		}
-		res.status(400).send(msg);
-	})
-})
-
-/**
- * Used when the user attempts to login
+/** Used when the user attempts to login{{{
  *
  * Request body should look like:
  * {
@@ -107,7 +101,7 @@ app.post('/signup', (req, res) => {
  * #TODO need to figure out what to return
  * so that the front end page can show a "logout" button
  * instead of login. (maybe handlebars)
- */
+ *///}}}
 app.post('/login', (req, res) => {
 	const username = req.body.username
 	const password = req.body.password
