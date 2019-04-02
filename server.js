@@ -45,6 +45,8 @@ app.get('/foodTypes', (req, res) => {
 		res.send(foodTypesDict)
 	}, (error) => {
 		res.status(500).send(error)
+	})
+})
 
 /** User routes **/
 
@@ -123,7 +125,4 @@ app.post('/login', (req, res) => {
 
 app.listen(port, () => {
 	log(`Listening on port ${port}...`)
-});
-
-
-
+})
