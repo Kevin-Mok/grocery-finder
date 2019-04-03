@@ -1,5 +1,7 @@
 /* CSC309 - user and resource authentication */
 
+// require {{{ //
+
 'use strict';
 const log = console.log;
 
@@ -19,12 +21,14 @@ app.use(bodyParser.json());
 // parse incoming parameters to req.body
 app.use(bodyParser.urlencoded({ extended:true }))
 
+// }}} require //
+
 // static js directory
 app.use("/css", express.static(__dirname + '/public/css'))
 app.use("/imgs", express.static(__dirname + '/public/imgs'))
 app.use("/js", express.static(__dirname + '/public/js'))
 
-app.use(session({
+app.use(session({//{{{
 	secret: 'oursecret',
 	resave: false,
 	saveUninitialized: false,
@@ -32,20 +36,23 @@ app.use(session({
 		expires: 600000,
 		httpOnly: true
 	}
-}))
+}))//}}}
 
-app.route('/').get((req, res) => {
+app.route('/').get((req, res) => {//{{{
   res.sendFile(__dirname + '/public/index.html')
-})
+})//}}}
 
+app.route('/cart').get((req, res) => {//{{{
+  res.sendFile(__dirname + '/public/cart.html')
+})//}}}
 
-app.get('/foodTypes', (req, res) => {
+app.get('/foodTypes', (req, res) => {//{{{
 	FoodType.find({}).then(foodTypesDict => {
 		res.send(foodTypesDict)
 	}, (error) => {
 		res.status(500).send(error)
 	})
-})
+})//}}}
 
 /** User routes **/
 
@@ -98,7 +105,7 @@ app.post('/signup', (req, res) => {//{{{
  * so that the front end page can show a "logout" button
  * instead of login. (maybe handlebars)
  *///}}}
-app.post('/login', (req, res) => {
+app.post('/login', (req, res) => {//{{{
 	const username = req.body.username
 	const password = req.body.password
 
@@ -115,6 +122,131 @@ app.post('/login', (req, res) => {
 	}).catch((error) => {
 		res.status(400).send(error)
 	})
+})//}}}
+
+/**
+ * Used when the user enters an item in the cart
+ *
+ * The id in the url should be a mongodb id for the food
+ * to add to the cart
+ *
+ * IMPORTANT
+ * If user is not logged in, code 401 is sent, then the front
+ * end is in charge of storing the cart information
+ */
+app.post('/add_to_cart/:id', (req, res) => {
+	let id = req.params.id
+
+	if (!ObjectID.isValid(id)) {
+		return res.status(400).send()
+	}
+
+	id = mongoose.Types.ObjectId(id);
+	
+	if (!req.session.user_id) {
+		return res.status(401).send('Must be logged in to add to the cart in the database')
+	}	
+	
+
+	User.findByIdAndUpdate(req.session.user_id, { $addToSet: { cart: id }}, { new: true }).then((user) => {
+		if (!user) {
+			return res.status(404).send()
+		}
+		res.send({ 
+			user,
+			added_food_id: id
+		})
+	}).catch((error) => {
+		res.status(400).send(error)
+	})
+});
+
+/**
+ * Deletes the FoodType with specified id
+ * 
+ * IMPORTANT
+ * If user is not logged in, code 401 is sent, then the front
+ * end is in charge of calling a post route with the local cart array, to get an
+ * array of FoodTypes
+ */
+app.post('/delete_from_cart/:id', (req, res) => {
+	let id = req.params.id
+
+	if (!ObjectID.isValid(id)) {
+		return res.status(400).send()
+	}
+
+	id = mongoose.Types.ObjectId(id);
+	
+	if (!req.session.user_id) {
+		return res.status(401).send('Must be logged in to add to the cart in the database')
+	}	
+
+	User.findByIdAndUpdate(req.session.user_id, { $pull: { cart: id }}, { new: true }).then((user) => {
+		if (!user) {
+			return res.status(404).send()
+		}
+		res.send({ 
+			user,
+			removed_food_id: id
+		})
+	}).catch((error) => {
+		res.status(400).send(error)
+	})
+
+});
+
+
+/**
+ * Returns an array of FoodTypes, which represents the current 
+ * user's cart
+ * 
+ * IMPORTANT
+ * If user is not logged in, code 401 is sent, then the front
+ * end is in charge of calling a post route with the local cart array, to get an
+ * array of FoodTypes
+ */
+app.get('/get_cart', (req, res) => {
+	if (!req.session.user_id) {
+		return res.status(401).send('Must be logged in')
+	}
+
+	User.findById(req.session.user_id).then((user) => {
+		if (!user) {
+			return res.status(400).send('User does not exist')
+		}
+
+		return Promise.resolve(user.cart)
+	}).then((cartArray) => {
+		// cartArray is an array of FoodType Ids
+		return FoodType.find({'_id': { $in: cartArray }})
+	}).then((cart) => {
+		res.send(cart)
+	}).catch((error) => {
+		res.status(400).send()
+	})
+})
+
+
+/**
+ * Returns an array of FoodTypes depending on the input array
+ *
+ * Request body should look like:
+ * {
+ * 		cart: [array of string ids]
+ * }
+ */
+app.post('/get_food_types_from_ids', (req, res) => {
+	const cart = req.body.cart
+	const cartIds = cart.map((stringId) => mongoose.Types.ObjectId(stringId))
+
+
+	FoodType.find({'_id': { $in: cartIds }}).then((cart) => {
+		res.send(cart)
+	}).catch((error) => {
+		res.status(400).send()
+	})
+
 })
 
 app.listen(port, () => {

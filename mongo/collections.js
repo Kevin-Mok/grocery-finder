@@ -137,11 +137,11 @@ const generateFood = () => {
 // generate users {{{ //
 
 const getCurUsers = () => { 
+  let numUsers = 0
   User.find().then(users => { 
-    return users.length
-  }, error => { 
-    return 0
-  })
+    numUsers = users.length
+    return numUsers
+  }, err => { log(err) })
 }
 
 const getRandomPostalCode = () => { 
@@ -183,13 +183,7 @@ const generateUsers = usersToAdd => {//{{{
 
 // }}} generate users //
 
-const exitAfter = seconds => { 
-  setTimeout(() => { process.exit() }, seconds * 1000)
-}
-
-// }}} helpers //
-
-if (argv.gen || argv.g) {//{{{
+const generateSelectedColl = () => { 
   if (argv.stores) {
     generateStores(argv.stores)
   } else if (argv.foodTypes) {
@@ -204,12 +198,23 @@ if (argv.gen || argv.g) {//{{{
     generateFoodTypes()
     generateFood()
   } */
+}
+
+const exitAfter = seconds => { 
+  setTimeout(() => { process.exit() }, seconds * 1000)
+}
+
+// }}} helpers //
+
+if (argv.gen || argv.g) {//{{{
+  generateSelectedColl()
   exitAfter(2)
 }//}}}
 
-if (argv.find) {//{{{
+if (argv.find || argv.f) {//{{{
   // log(argv, selectedCollection)
   findDoc(selectedCollection, argv.find)
+  exitAfter(.5)
 }//}}}
 
 if (argv.show || argv.s) {//{{{
@@ -234,6 +239,14 @@ if (argv.drop || argv.d) {//{{{
     showCollection(selectedCollection)
     exitAfter(1)
   }
+}//}}}
+
+if (argv.regen || argv.r) {//{{{
+  selectedCollection.collection.drop()
+  showCollection(selectedCollection)
+  generateSelectedColl()
+  showCollection(selectedCollection)
+  exitAfter(2)
 }//}}}
 
 process.on('unhandledRejection', r => console.log(r));
