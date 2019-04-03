@@ -245,8 +245,8 @@ function displayFood(foodDocs) {//{{{
   // We need to know what is currently in the cart
   // because we want the "Remove from Cart" button 
   // to show up for items already in the cart
+  // log(foodDocs)
   getCartFoodTypeIds().then((cartIds) => {
-
     foodDocs.forEach(foodDoc => {
       const foodDiv = createFoodDiv()
       foodDiv.id = 'food-div-' + foodDoc._id
@@ -260,19 +260,12 @@ function displayFood(foodDocs) {//{{{
         foodDiv.children[1].appendChild(createRemoveFromCartBtn())
       }
 
-      /* if (cart.indexOf(key) != -1) {
-        foodDiv.classList.add('in-cart')
-      } */
-
       gridRow.appendChild(foodDiv)
     })
 
     sortGridByValue('.food-div', '.food-info-div', 'text', 'asc', [createAlphDescIcon()])
     setAlphaSorting()
-
-
   })
-
 }//}}}
 
 const displayAllFoodFetched = () => { //{{{
@@ -365,49 +358,14 @@ function toggleFoodCartStatus(e) {
  * global variable.
  */
 function addToCart(foodId) {
-
-  const request = new Request('/add_to_cart/' + foodId, {
-    method: 'post',
-    headers: {
-      'Accept': 'application/json, text/plain, */*',
-      'Content-Type': 'application/json'
-    },
-  })
-
-  fetch(request).then(function(res) {
-
+  const addUrl = '/add_to_cart/' + foodId
+  fetch(createPostRequest(addUrl, {})).then(function(res) {
     if (res.status === 401) {
       // User is not logged in 
-
       cart.push(foodId)
       localStorage.setItem('cart', cart);
     }
-
-  }).catch((error) => {
-    console.log(error)
-  })
-}
-
-function removeFromCart(foodId) {
-  const request = new Request('/delete_from_cart/' + foodId, {
-    method: 'post',
-    headers: {
-      'Accept': 'application/json, text/plain, */*',
-      'Content-Type': 'application/json'
-    },
-  })
-
-  fetch(request).then(function(res) {
-
-    if (res.status === 401) {
-      // User is not logged in 
-      cart = cart.filter(id => id !== foodId);
-      localStorage.setItem('cart', cart);
-    }
-
-  }).catch((error) => {
-    console.log(error)
-  })
+  }).catch((error) => { console.log(error) })
 }
 
 // }}} show/hide checks //

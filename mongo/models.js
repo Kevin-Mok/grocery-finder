@@ -54,7 +54,7 @@ const UserSchema = new mongoose.Schema({//{{{
 	profilePicture: { type: String, default: ''},
 	bannedUntil: { type: Date, default: null },
 	isAdmin: false,
-	cart: [mongoose.Schema.Types.ObjectId]
+	cart: [Schema.Types.ObjectId]
 })//}}}
 
 // Returns a promise where:

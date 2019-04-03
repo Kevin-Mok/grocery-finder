@@ -137,11 +137,12 @@ const generateFood = () => {
 // generate users {{{ //
 
 const getCurUsers = () => { 
+  let numUsers = 0
   User.find().then(users => { 
-    return users.length
-  }, error => { 
-    return 0
-  })
+    numUsers = users.length
+    log('here', numUsers)
+    return numUsers
+  }, err => { log(err) })
 }
 
 const getRandomPostalCode = () => { 
@@ -207,9 +208,10 @@ if (argv.gen || argv.g) {//{{{
   exitAfter(2)
 }//}}}
 
-if (argv.find) {//{{{
+if (argv.find || argv.f) {//{{{
   // log(argv, selectedCollection)
   findDoc(selectedCollection, argv.find)
+  exitAfter(.5)
 }//}}}
 
 if (argv.show || argv.s) {//{{{

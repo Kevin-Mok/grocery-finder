@@ -1,16 +1,4 @@
-// vars {{{ //
-
-const user = {
-  userId: 1,
-  username: 'user',
-  password: 'user',
-  postalCode: 'ABC 123',
-  savedCarts: {}
-}
-
-// }}} vars //
-
-window.onload = function() {//{{{
+window.onload = function() {
   gridRow.addEventListener('click', toggleFoodCartStatus);
 
 	// SERVER DATA EXCHANGE: This is where the web app creates all the food
@@ -90,5 +78,3 @@ window.onload = function() {//{{{
 
   // }}} dropdown hover (jquery) //
 }
-
-// }}}  do these when page is loaded //

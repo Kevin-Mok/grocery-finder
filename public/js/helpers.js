@@ -200,8 +200,6 @@ const createPostRequest = (url, reqBody) => { //{{{
   })
 }//}}}
 
-// do these when page is loaded {{{ //
-
 function onclickToAll(selector, fxn) {//{{{
   document.querySelectorAll(selector).forEach(btn =>
     btn.addEventListener('click', e => {
@@ -289,9 +287,24 @@ function getCartFoodTypeIds() {
   const request = createGetRequest('/get_cart')
   return fetch(request).then(function(res) {
     if (res.status === 401) {
-      let cart = localStorage.getItem('cart') ? localStorage.getItem('cart').split(',') : []
+      let cart = localStorage.getItem('cart') ?
+        localStorage.getItem('cart').split(',') : []
       return Promise.resolve(cart)
     }
     return res.json()
   })
 }
+
+function removeFromCart(foodId) {//{{{
+  const removeUrl = '/delete_from_cart/' + foodId
+  fetch(createPostRequest(removeUrl, {})).then(function(res) {
+    if (res.status === 401) {
+      // User is not logged in 
+      cart = cart.filter(id => id !== foodId);
+      localStorage.setItem('cart', cart);
+    }
+  }).catch((error) => {
+    console.log(error)
+  })
+}//}}}
+

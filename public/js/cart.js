@@ -10,7 +10,6 @@
 window.onload = function() {
   const request = createGetRequest('/get_cart')
   fetch(request).then(function(res) {
-
     if (res.status === 401) {
       // user is not logged in
       displayLocalCart()
@@ -23,11 +22,7 @@ window.onload = function() {
     console.log(error)
   })
 
-
   createSavedCartsDiv()
-
-
-
 }
 
 
@@ -84,31 +79,9 @@ function displayCart(cart)  {
  */
 function removeFromCartInCart(e) {
   const foodDiv = e.target.parentElement.parentElement
-  const foodInfoDiv = e.target.parentElement;
   const foodId = /food-div-([A-Za-z0-9]*)/g.exec(foodDiv.id)[1]
 
   gridRow.removeChild(foodDiv)
-
-
-  const request = new Request('/delete_from_cart/' + foodId, {
-    method: 'post',
-    headers: {
-      'Accept': 'application/json, text/plain, */*',
-      'Content-Type': 'application/json'
-    },
-  })
-
-  fetch(request).then(function(res) {
-
-    if (res.status === 401) {
-      // User is not logged in 
-      cart = cart.filter(id => id !== foodId);
-      localStorage.setItem('cart', cart);
-    }
-
-  }).catch((error) => {
-    console.log(error)
-  })
-
+  removeFromCart(foodId)
 }
 
