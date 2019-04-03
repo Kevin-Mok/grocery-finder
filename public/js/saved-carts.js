@@ -24,7 +24,7 @@ function createSavedCartsDiv() {
   const savedCartsDiv = document.createElement('div')
   savedCartsDiv.className = 'saved-carts-div'
 
-  const btn = createElementWithText('button', 'btn btn-primary dropdown-toggle', 'dropdownMenuButton', 'Saved carts')
+  const btn = createElementWithText('button', 'btn btn-primary dropdown-toggle', 'dropdownMenuButton', 'Saved Carts')
   btn.setAttribute('type', 'button')
   btn.setAttribute('data-toggle', 'dropdown')
 

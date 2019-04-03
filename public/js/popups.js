@@ -11,10 +11,7 @@ function logInLinkClicked() {
   openLoginPopup();
 }
 
-
-
-
-// Create this:
+// Create this:{{{
 // <div class="popup">
 //   <h1 class="popup-title">Login</h1>
 //   <p class="popup-text">Your groceries are just a click away!</p>
@@ -29,8 +26,8 @@ function logInLinkClicked() {
 //   <button class="btn btn-primary popup-button" id="popupLoginBtn">Login</button>
 //   <button class="btn btn-danger popup-button" id="popupCancelBtn">Cancel</button>
 //   <p class="popup-text">Don't have an account yet? <a href="#" onclick="loginClicked()">Sign up!</a></p>
-// </div>
-function openLoginPopup() {
+// </div>}}}
+function openLoginPopup() {//{{{
 
   blurBackgroundToggle();
   const popup = document.createElement("div");
@@ -62,12 +59,12 @@ function openLoginPopup() {
   popup.appendChild(p2);
 
   document.body.appendChild(popup);
-}
+}//}}}
 
 // To access the Username, Password, Postal Code input fields,
 // use #signInUsername, #signInPassword and #signInPostalCode respectively
 //
-// Create this:
+// Create this:{{{
 //
 // <div class="popup">
 //   <h1 class="popup-title" id="">Sign up</h1>
@@ -81,8 +78,8 @@ function openLoginPopup() {
 //   </div>
 //   <button class="btn btn-primary popup-button" id="popupLoginBtn">Signup</button><button class="btn btn-danger popup-button" id="popupCancelBtn" onclick="closePopup()">Cancel</button>
 //   <p class="popup-text" id="">Already have an account? <a class="" id="" href="#" onclick="logInLinkClicked()">Log in!</a></p>
-// </div>
-function openSignupPopup() {
+// </div>}}}
+function openSignupPopup() {//{{{
   blurBackgroundToggle();
   const popup = document.createElement("div");
   popup.className = "popup";
@@ -131,9 +128,9 @@ function openSignupPopup() {
     title: "Why do we need your postal code?",
     content: "Grocery Finder needs your postal code to provide you grocery prices and deals specific to your region."
   })
-}
+}//}}}
 
-// Create this
+// Create this{{{
 // <div class="popup">
 //   <h1 class="popup-title" id="">Current cart</h1>
 //   <p class="popup-text" id="">Enter a name for your current cart.</p>
@@ -141,8 +138,8 @@ function openSignupPopup() {
 //
 //   <button class="btn btn-primary popup-button" id="popupSaveBtn">Save cart</button>
 //   <button class="btn btn-danger popup-button" id="popupCancelBtn" onclick="closePopup()">Cancel</button>
-// </div>
-function openCurrentCartPopup() {
+// </div>}}}
+function openCurrentCartPopup() {//{{{
   blurBackgroundToggle();
   const popup = document.createElement("div");
   popup.className = "popup";
@@ -164,9 +161,9 @@ function openCurrentCartPopup() {
   popup.appendChild(cancelBtn);
 
   document.body.appendChild(popup);
-}
+}//}}}
 
-function cartSaveBtnClicked() {
+function cartSaveBtnClicked() {//{{{
   const cartName = $('#cartName').val()
   // SERVER DATA EXCHANGE: This is where the user is saving a cart.
   // Provide the server with the current user id, current cart contents and
@@ -181,9 +178,9 @@ function cartSaveBtnClicked() {
   }
 
   closePopup()
-}
+}//}}}
 
-function saveUserSettings() {
+function saveUserSettings() {//{{{
 
   // SERVER DATA EXCHANGE: This is where the user updates their user data.
   // Make a request to the server, providing the server with user.id,
@@ -197,14 +194,14 @@ function saveUserSettings() {
   user.postalCode = getEtfValue(document.querySelector('#etf-postal-code'))
 
   closePopup()
-}
+}//}}}
 
-function censorText(text) {
+function censorText(text) {//{{{
   return '*'.repeat(text.length)
   // return '•'.repeat(text.length)
-}
+}//}}}
 
-function openSettingsPopup() {
+function openSettingsPopup() {//{{{
   blurBackgroundToggle();
   const popup = document.createElement("div");
   popup.className = "popup";
@@ -230,18 +227,18 @@ function openSettingsPopup() {
   popup.appendChild(cancelBtn);
 
   document.body.appendChild(popup);
-}
+}//}}}
 
-function closePopup() {
+function closePopup() {//{{{
   blurBackgroundToggle();
   document.querySelector('.popup').remove();
-}
+}//}}}
 
-// Create this:
+// Create this:{{{
 // <div class="popup-input-div">
 //   <i class="fas {@param iconName} popup-icon"></i><input class="input-box" type="{@param type}" placeholder="{@param placeholder}" id="{@param id}">
-// </div>
-function createInputPopupDiv(iconName, type, placeholder, id) {
+// </div>}}}
+function createInputPopupDiv(iconName, type, placeholder, id) {//{{{
   const div = document.createElement("div");
   const i = document.createElement("i");
   div.className = "popup-input-div"
@@ -256,63 +253,43 @@ function createInputPopupDiv(iconName, type, placeholder, id) {
   div.appendChild(input);
 
   return div;
-}
-
+}//}}}
 
 // Returns a dynamically created DOM element el, with
 // its class set as classes, set its id as id and with a textnode text as its child
-function createElementWithText(el, classes, id, text) {
+function createElementWithText(el, classes, id, text) {//{{{
   const element = document.createElement(el);
   element.className = classes;
   element.id = id;
   const textNode = document.createTextNode(text);
   element.appendChild(textNode);
   return element;
-}
+}//}}}
 
-function blurBackgroundToggle() {
+function blurBackgroundToggle() {//{{{
   const mainContainer = document.querySelector(".container-fluid");
   mainContainer.classList.toggle("blur");
-}
+}//}}}
 
-function signupBtnClicked() {
+function signupBtnClicked() {//{{{
   const username = document.querySelector("#signInUsername").value;
   const password = document.querySelector("#signInPassword").value;
   const postalCode = document.querySelector("#postalCodeInput").value;
+  const reqBody = { username, password, postalCode }
 
-  const reqBody = {
-    username,
-    password,
-    location: postalCode
-  }
-
-  const url = '/signup'
-
-  // Post Request
-  const request = new Request(url, {
-    method: 'post', 
-    body: JSON.stringify(reqBody),
-    headers: {
-      'Accept': 'application/json, text/plain, */*',
-      'Content-Type': 'application/json'
-    },
-  })
-
-  fetch(request).then(function(res) {
-
-    if (res.status === 200) {
-      return Promise.resolve('Signup Successful. Please login to continue.')
-    }
-
-    return res.text()
-  }).then((res) => {
-    alert(res)
-  }).catch((error) => {
-    alert(error)
-  })
-
-  closePopup();
-}
+  fetch(createPostRequest('/signup', reqBody))
+    .then(function(res) {
+      if (res.status === 200) {
+        closePopup()
+        return Promise.resolve('Signup Successful. Please login to continue.')
+      }
+      return res.text()
+    }).then((res) => {
+      alert(res)
+    }).catch((error) => {
+      alert(error)
+    })
+}//}}}
 
 function logout() {
   const request = createGetRequest('/logout')
@@ -330,42 +307,25 @@ function logout() {
 }
 
 function loginBtnClicked() {
+  const username = document.querySelector("#loginUsername").value;
+  const password = document.querySelector("#loginPassword").value;
+  const reqBody = { username, password }
 
+  fetch(createPostRequest('/login', reqBody))
+    .then(function(res) {
+      if (res.status === 200) {
+        closePopup()
+        return Promise.resolve('Login Successful.')
+      }
+      return res.text()
+    }).then((res) => {
+      alert(res)
+    }).catch((error) => {
+      alert(error)
+    })
 
-
-  const loginUsername = document.querySelector("#loginUsername").value;
-  const loginPassword = document.querySelector("#loginPassword").value;
-
-  const reqBody = {
-    username: loginUsername,
-    password: loginPassword
-  }
-
-  const url = '/login'
-
-  // Post Request
-  const request = new Request(url, {
-    method: 'post', 
-    body: JSON.stringify(reqBody),
-    headers: {
-      'Accept': 'application/json, text/plain, */*',
-      'Content-Type': 'application/json'
-    },
-  })
-
-  fetch(request).then(function(res) {
-
-    if (res.status === 200) {
-      return Promise.resolve('Login Successful.')
-    }
-    return res.text()
-  }).then((res) => {
-    alert(res)
-  }).catch((error) => {
-    alert(error)
-  })
-
-
+  // admin code {{{ //
+  
   // if (loginUsername == 'admin' && loginPassword == 'admin') {
   //   closePopup();
 
@@ -381,6 +341,8 @@ function loginBtnClicked() {
   // } else {
   //   alert("Incorrect credentials! Please try again.");
   // }
+  
+  // }}} admin code //
 }
 
 

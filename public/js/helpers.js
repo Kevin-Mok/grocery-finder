@@ -179,7 +179,7 @@ function search(size) {//{{{
 
 // }}} search //
 
-const createGetRequest = url => { 
+const createGetRequest = url => { //{{{
   return new Request(url, {
     method: 'get', 
     headers: {
@@ -187,9 +187,18 @@ const createGetRequest = url => {
       'Content-Type': 'application/json'
     },
   })
-}
+}//}}}
 
-// do these when page is loaded {{{ //
+const createPostRequest = (url, reqBody) => { //{{{
+  return new Request(url, {
+    method: 'post', 
+    body: JSON.stringify(reqBody),
+    headers: {
+      'Accept': 'application/json, text/plain, */*',
+      'Content-Type': 'application/json'
+    },
+  })
+}//}}}
 
 function onclickToAll(selector, fxn) {//{{{
   document.querySelectorAll(selector).forEach(btn =>
@@ -269,3 +278,33 @@ function extractSortingLabelIcons(e) {//{{{
   }
   return labelIcons
 }//}}}
+
+/**
+ * Returns an array of FoodType ids that are currently in 
+ * the cart
+ */
+function getCartFoodTypeIds() {
+  const request = createGetRequest('/get_cart')
+  return fetch(request).then(function(res) {
+    if (res.status === 401) {
+      let cart = localStorage.getItem('cart') ?
+        localStorage.getItem('cart').split(',') : []
+      return Promise.resolve(cart)
+    }
+    return res.json()
+  })
+}
+
+function removeFromCart(foodId) {//{{{
+  const removeUrl = '/delete_from_cart/' + foodId
+  fetch(createPostRequest(removeUrl, {})).then(function(res) {
+    if (res.status === 401) {
+      // User is not logged in 
+      cart = cart.filter(id => id !== foodId);
+      localStorage.setItem('cart', cart);
+    }
+  }).catch((error) => {
+    console.log(error)
+  })
+}//}}}
+

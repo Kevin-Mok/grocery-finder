@@ -1,6 +1,6 @@
 // vars {{{ //
 
-let cart = []
+let cart = localStorage.getItem('cart') ? localStorage.getItem('cart').split(',') : []
 const categoryList = document.querySelector('#category-list')
 
 // food data (phase 1) {{{ //
@@ -237,22 +237,35 @@ function removeAllChildren(element) {
 function displayFood(foodDocs) {//{{{
   clearGrid()
 
-  foodDocs.forEach(foodDoc => {
-    const foodDiv = createFoodDiv()
-    // foodDiv.id = 'food-div-' + key
+      //   addToCart(foodId)
+      // foodDiv.classList.add('in-cart')
+      // foodInfoDiv.removeChild(e.target)
+      // foodInfoDiv.appendChild(createRemoveFromCartBtn())
 
-    foodDiv.appendChild(createFoodImg(foodDoc.imgSrc))
-    foodDiv.appendChild(createFoodInfo(foodDoc.name))
+  // We need to know what is currently in the cart
+  // because we want the "Remove from Cart" button 
+  // to show up for items already in the cart
+  // log(foodDocs)
+  getCartFoodTypeIds().then((cartIds) => {
+    foodDocs.forEach(foodDoc => {
+      const foodDiv = createFoodDiv()
+      foodDiv.id = 'food-div-' + foodDoc._id
 
-    /* if (cart.indexOf(key) != -1) {
-      foodDiv.classList.add('in-cart')
-    } */
+      foodDiv.appendChild(createFoodImg(foodDoc.imgSrc))
+      foodDiv.appendChild(createFoodInfo(foodDoc.name))
 
-    gridRow.appendChild(foodDiv)
+      if (cartIds.includes(foodDoc._id)) {
+        foodDiv.classList.add('in-cart')
+        foodDiv.children[1].removeChild(foodDiv.children[1].children[1])
+        foodDiv.children[1].appendChild(createRemoveFromCartBtn())
+      }
+
+      gridRow.appendChild(foodDiv)
+    })
+
+    sortGridByValue('.food-div', '.food-info-div', 'text', 'asc', [createAlphDescIcon()])
+    setAlphaSorting()
   })
-
-  sortGridByValue('.food-div', '.food-info-div', 'text', 'asc', [createAlphDescIcon()])
-  setAlphaSorting()
 }//}}}
 
 const displayAllFoodFetched = () => { //{{{
@@ -315,24 +328,15 @@ function toggleFoodCartStatus(e) {
   const foodDiv = e.target.parentElement.parentElement
   const foodInfoDiv = e.target.parentElement;
   if (e.target.classList.contains('btn')) {
-    const foodId = /food-div-(\d*)/g.exec(foodDiv.id)[1]
+    const foodId = /food-div-([A-Za-z0-9]*)/g.exec(foodDiv.id)[1]
     if (!foodDiv.classList.contains('in-cart')) {
-      // add to cart
-
-			// SERVER DATA EXCHANGE: This is where the user had just entered a
-			// new item to the cart
-			//
-			// Provide the server with the current user id and the new cart.
-			// Update the cart in the database, so that the current cart can
-			// persist upon login and logout.
-
-      cart.push(foodId)
+      addToCart(foodId)
       foodDiv.classList.add('in-cart')
       foodInfoDiv.removeChild(e.target)
       foodInfoDiv.appendChild(createRemoveFromCartBtn())
     } else {
       // rm from cart
-      cart.splice(cart.indexOf(foodId), 1)
+      removeFromCart(foodId)
       foodDiv.classList.remove('in-cart')
       foodInfoDiv.removeChild(e.target)
       foodInfoDiv.appendChild(createAddToCartBtn())
@@ -342,6 +346,26 @@ function toggleFoodCartStatus(e) {
     }
     // log(cart)
   }
+}
+
+/**
+ * Add to cart works in two ways:
+ *
+ * If the user is logged in, then the foodId is stored in the user's cart
+ * in the databse.
+ *
+ * If the user is not logged in, then the foodId is stored locally in the "cart"
+ * global variable.
+ */
+function addToCart(foodId) {
+  const addUrl = '/add_to_cart/' + foodId
+  fetch(createPostRequest(addUrl, {})).then(function(res) {
+    if (res.status === 401) {
+      // User is not logged in 
+      cart.push(foodId)
+      localStorage.setItem('cart', cart);
+    }
+  }).catch((error) => { console.log(error) })
 }
 
 // }}} show/hide checks //
