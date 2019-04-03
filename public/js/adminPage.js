@@ -1,6 +1,8 @@
 // Javascript source code for adminPage.html
 'use strict'
 
+const log = console.log;
+
 let users = [];			// holds User's that ARE NOT filtered out by the search function
 let hiddenUsers = [];	// holds User's that ARE filtered out 
 
@@ -30,6 +32,23 @@ users.push(new User("Ronald", "password", "Smallville", new Date("August 5, 2017
 users.push(new User("Bucky", "chickensoup", "New Boston", new Date("January 6, 2016 01:45:00"), new Date("January 6, 2016 07:12:32"), 'imgs/profile-pictures/default.jpg', null, false));
 users.push(new User("Tony", "password", "Ba Sing Se", new Date("February 28, 2019 05:27:19"), new Date("January 19, 2019 05:27:19"), 'imgs/profile-pictures/default.jpg', null, false));
 users.push(new User("Barnes", "pizza", "Pluto", new Date("July 1, 2017 23:21:19"), new Date("July 4, 2017 23:59:59"), 'imgs/profile-pictures/barnes.jpeg', null, false));
+
+fetchAllUsers();
+
+function fetchAllUsers() {
+
+	const request = new Request('all_users', {
+		method:'get'
+	})
+
+	fetch(request).then((result) => {
+		log(result.status)
+		log('got here')
+		if (result.status == 200) {
+			log(result.json())
+		}
+	})
+}
 
 
 // loadUsers fills the user listing box

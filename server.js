@@ -47,7 +47,7 @@ app.use(session({//{{{
 }))//}}}
 
 app.route('/').get((req, res) => {
-	res.render('index', {loggedIn: req.session.user_id})
+	res.render('index', {loggedIn: req.session.user_id, isAdmin: req.session.isAdmin})
 })
 
 app.route('/cart').get((req, res) => {//{{{
@@ -81,7 +81,8 @@ app.post('/signup', (req, res) => {//{{{
 	new User({
 		username: req.body.username,
 		password: req.body.password,
-		postalCode: req.body.postalCode
+		postalCode: req.body.postalCode,
+		isAdmin: req.body.username === 'admin'
 	}).save()
   .then((result) => {
     res.send(result)
@@ -125,6 +126,7 @@ app.post('/login', (req, res) => {//{{{
 			// send to the client
 			req.session.user_id = user._id;
 			req.session.username = user.username;
+			req.session.isAdmin = user.isAdmin;
 			res.redirect('/')
 		}
 	}).catch((error) => {
@@ -268,6 +270,36 @@ app.get('/logout', (req, res) => {
 	})
 })
 
+app.route('/admin-page').get((req,res) => {
+	res.sendFile(__dirname + '/public/adminPage.html')
+})
+
+// Route for getting all users information
+// GET /allusers
+app.get('/all_users', (req, res) => {
+	User.find({}, (err, users) => {
+		if (err) {
+			res.status(400).send(err)
+		}
+		res.json(users)
+	})
+})
+
+/*
+// Route for changing a user profile picture to the default
+// The id parameter represents the id of the user to modify
+// PATCH /default_profile_picture:id
+app.patch('/default_profile_picture/:user_id', (req, res) => {
+	const userId = req.params.user_id
+	
+	if (!ObjectID.isValid(userId)) {
+		res.status(400).send(error)
+	}
+
+	User.findByIdAndUpdate(userId, )
+
+})
+*/
 
 app.listen(port, () => {
 	log(`Listening on port ${port}...`)
