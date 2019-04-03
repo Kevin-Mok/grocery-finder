@@ -28,23 +28,14 @@ window.onload = function() {
 
 function displayLocalCart() {
   const cart = localStorage.getItem('cart').split(',')
-  const request = new Request('/get_food_types_from_ids', {
-    method: 'post', 
-    body: JSON.stringify({cart}),
-    headers: {
-      'Accept': 'application/json, text/plain, */*',
-      'Content-Type': 'application/json'
-    },
-  })
-
-  fetch(request).then(function(res) {
-    return res.json()
-  }).then((res) => {
-    displayCart(res)
-  }).catch((error) => {
-    console.log(error)
-  })
-
+  fetch(createPostRequest('/get_food_types_from_ids', {cart}))
+    .then(function(res) {
+      return res.json()
+    }).then(res => {
+      displayCart(res)
+    }).catch((error) => {
+      console.log(error)
+    })
 }
 
 

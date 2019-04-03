@@ -284,15 +284,15 @@ function extractSortingLabelIcons(e) {//{{{
  * the cart
  */
 function getCartFoodTypeIds() {
-  const request = createGetRequest('/get_cart')
-  return fetch(request).then(function(res) {
-    if (res.status === 401) {
-      let cart = localStorage.getItem('cart') ?
-        localStorage.getItem('cart').split(',') : []
-      return Promise.resolve(cart)
-    }
-    return res.json()
-  })
+  return fetch(createGetRequest('/get_cart'))
+    .then(function(res) {
+      if (res.status === 401) {
+        let cart = localStorage.getItem('cart') ?
+          localStorage.getItem('cart').split(',') : []
+        return Promise.resolve(cart)
+      }
+      return res.json()
+    })
 }
 
 function removeFromCart(foodId) {//{{{

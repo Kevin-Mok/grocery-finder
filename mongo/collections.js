@@ -140,7 +140,6 @@ const getCurUsers = () => {
   let numUsers = 0
   User.find().then(users => { 
     numUsers = users.length
-    log('here', numUsers)
     return numUsers
   }, err => { log(err) })
 }
@@ -184,13 +183,7 @@ const generateUsers = usersToAdd => {//{{{
 
 // }}} generate users //
 
-const exitAfter = seconds => { 
-  setTimeout(() => { process.exit() }, seconds * 1000)
-}
-
-// }}} helpers //
-
-if (argv.gen || argv.g) {//{{{
+const generateSelectedColl = () => { 
   if (argv.stores) {
     generateStores(argv.stores)
   } else if (argv.foodTypes) {
@@ -205,6 +198,16 @@ if (argv.gen || argv.g) {//{{{
     generateFoodTypes()
     generateFood()
   } */
+}
+
+const exitAfter = seconds => { 
+  setTimeout(() => { process.exit() }, seconds * 1000)
+}
+
+// }}} helpers //
+
+if (argv.gen || argv.g) {//{{{
+  generateSelectedColl()
   exitAfter(2)
 }//}}}
 
@@ -236,6 +239,14 @@ if (argv.drop || argv.d) {//{{{
     showCollection(selectedCollection)
     exitAfter(1)
   }
+}//}}}
+
+if (argv.regen || argv.r) {//{{{
+  selectedCollection.collection.drop()
+  showCollection(selectedCollection)
+  generateSelectedColl()
+  showCollection(selectedCollection)
+  exitAfter(2)
 }//}}}
 
 process.on('unhandledRejection', r => console.log(r));
