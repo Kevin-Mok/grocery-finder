@@ -13,6 +13,7 @@ const { ObjectID } = require('mongodb')
 const { mongoose } = require('./mongo/mongoose');
 const { Food, FoodType, Store, User } = require('./mongo/models')
 const session = require('express-session')
+const hbs = require('express-hbs')
 
 // express
 const app = express();
@@ -28,6 +29,13 @@ app.use("/css", express.static(__dirname + '/public/css'))
 app.use("/imgs", express.static(__dirname + '/public/imgs'))
 app.use("/js", express.static(__dirname + '/public/js'))
 
+// set the view library
+app.set('view engine', 'hbs')
+app.engine('hbs', hbs.express4( {
+  extname: '.hbs',
+  defaultView: 'default'
+}))
+
 app.use(session({//{{{
 	secret: 'oursecret',
 	resave: false,
@@ -38,9 +46,9 @@ app.use(session({//{{{
 	}
 }))//}}}
 
-app.route('/').get((req, res) => {//{{{
-  res.sendFile(__dirname + '/public/index.html')
-})//}}}
+app.route('/').get((req, res) => {
+	res.render('index', {loggedIn: req.session.user_id})
+})
 
 app.route('/cart').get((req, res) => {//{{{
   res.sendFile(__dirname + '/public/cart.html')
@@ -117,7 +125,7 @@ app.post('/login', (req, res) => {//{{{
 			// send to the client
 			req.session.user_id = user._id;
 			req.session.username = user.username;
-			res.send(user)
+			res.redirect('/')
 		}
 	}).catch((error) => {
 		res.status(400).send(error)
@@ -248,6 +256,18 @@ app.post('/get_food_types_from_ids', (req, res) => {
 	})
 
 })
+
+
+app.get('/logout', (req, res) => {
+	req.session.destroy((error) => {
+		if (error) {
+			res.status(500).send(error)
+		} else {
+			res.redirect('/')
+		}
+	})
+})
+
 
 app.listen(port, () => {
 	log(`Listening on port ${port}...`)
