@@ -295,9 +295,6 @@ app.post('/change_password', (req, res) => {
 	const targetUsername = req.body.username
 	bcrypt.genSalt(10, (error, salt) => {
 		bcrypt.hash(req.body.newPassword, salt, (error, hash) => {
-			log('here it is')
-			log(req.body.newPassword)
-			log(hash)
 
 			User.update({ username : targetUsername }, { password: hash}, { new:true }, (err, user) => {
 				if (err) {
