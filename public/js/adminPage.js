@@ -1,6 +1,8 @@
 // Javascript source code for adminPage.html
 'use strict'
 
+const log = console.log;
+
 let users = [];			// holds User's that ARE NOT filtered out by the search function
 let hiddenUsers = [];	// holds User's that ARE filtered out 
 
@@ -22,6 +24,7 @@ class User {
    this data. 
 */
 
+/*
 // Mock data, hard-coded for the purposes of phase 1
 users.push(new User("Obama", "america", "Narnia", new Date("September 21, 2017 05:25:11"), new Date("February 20, 2018 06:21:33"), 'imgs/profile-pictures/obama.jpg', null, false));
 users.push(new User("ProGamer", "1336", "Westeros", new Date("May 11, 2016 09:29:29"), new Date("May 11, 2016 09:29:29"),'imgs/profile-pictures/progamer.jpeg', null));
@@ -30,6 +33,41 @@ users.push(new User("Ronald", "password", "Smallville", new Date("August 5, 2017
 users.push(new User("Bucky", "chickensoup", "New Boston", new Date("January 6, 2016 01:45:00"), new Date("January 6, 2016 07:12:32"), 'imgs/profile-pictures/default.jpg', null, false));
 users.push(new User("Tony", "password", "Ba Sing Se", new Date("February 28, 2019 05:27:19"), new Date("January 19, 2019 05:27:19"), 'imgs/profile-pictures/default.jpg', null, false));
 users.push(new User("Barnes", "pizza", "Pluto", new Date("July 1, 2017 23:21:19"), new Date("July 4, 2017 23:59:59"), 'imgs/profile-pictures/barnes.jpeg', null, false));
+*/
+
+function fetchAllUsers() {
+
+	const request = new Request('all_users', {
+		method:'get'
+	})
+
+	fetch(request).then((result) => {
+		if (result.status == 200) {
+			return result.json()
+		} else {
+			log("Could not return users.")
+		}
+	}).then((json) => {
+		log('got here')
+		json.forEach(user => {
+			log(user)
+			const userToAdd = new User(
+				user.username,
+				user.password,
+				user.postalCode,
+				new Date(user.dateJoined),
+				new Date(user.lastLogin),
+				user.profilePicture,
+				user.bannedUntil,
+				user.isAdmin
+			)
+			log(userToAdd)
+			users.push(userToAdd)
+		})
+		log(users)
+		loadUsers()
+	})
+}
 
 
 // loadUsers fills the user listing box
@@ -48,6 +86,11 @@ function loadUsers() {
 		newEntryProfilePictureFrame.className = 'userEntryProfilePictureFrame';
 		const newEntryProfilePicture = document.createElement('img');
 		newEntryProfilePicture.className = 'userEntryProfilePicture';
+		if (users[i].profilePicture == '' && users[i].isAdmin) {     
+			users[i].profilePicture = 'imgs/profile-pictures/admin.png'
+		} else if (users[i].profilePicture == '') {     
+			users[i].profilePicture = 'imgs/profile-pictures/default.jpg'
+		}	 
 		newEntryProfilePicture.setAttribute('src', users[i].profilePicture);
 		newEntryProfilePictureFrame.appendChild(newEntryProfilePicture);
 
@@ -142,9 +185,15 @@ function userSelected(e) {
 
 	createAdminFields(target.user.isAdmin, selectedUserFrame);
 
+	
+	/*
+	The code below changes a user's profile picture to the default image. This is commented out since 
+	the user is not yet able to set their profile picture
+
 	if (!target.user.isAdmin) {
 		createSetToDefaultProfilePictureButton(selectedUserFrame);
 	}
+	*/
 
 }
 
@@ -213,6 +262,30 @@ function promoteToAdmin(e) {
     // SERVER DATA EXCHANGE: A request must be sent to the server to update its
     // copy of this user's isAdmin value
 		
+		const url = '/promote_to_admin'
+		let data = {
+			username: userToChange.username
+		}
+		const request = new Request(url, {
+			method:'post',
+			body: JSON.stringify(data),
+			headers: {
+				'Accept': 'application/json, text/plain, */*',
+				'Content-Type': 'application/json'
+			}
+		})
+
+		fetch(request).then(result => {
+			if (result.status === 200) {
+				log('Successfully promoted user to administrator.')
+			} else {
+				log('Failed to promote user to administrator')
+				log(result)
+			}
+		}).catch(error => {
+			log(error)
+		})
+
 		console.log(userToChange);
 		reloadSelectedUserFrameWithCurrentUser();
 	}
@@ -248,7 +321,7 @@ function createPasswordTextForm(text, parentDiv) {
 	if (!parentDiv.user.isAdmin) {
 
 		const editPasswordButton = document.createElement('div');
-		editPasswordButton.innerText = 'Edit';
+		editPasswordButton.innerText = 'Edit Password';
 		editPasswordButton.className = 'editPasswordButton';
 		editPasswordButton.addEventListener('click', editPasswordClicked);
 		selectedUserPasswordFrame.appendChild(editPasswordButton);
@@ -317,7 +390,39 @@ function saveChangesClicked(e) {
   // SERVER DATA EXCHANGE: A request must be sent to the server to update its
   // copy of this user's password data
 	
-	createPasswordTextForm(newText, parentDiv);
+	const url = '/change_password'
+	let data = {
+		username: affectedUser.username,
+		newPassword: newText
+	}
+
+	const request = new Request(url, {
+		method:'post',
+		body:JSON.stringify(data),
+		headers: {
+            'Accept': 'application/json, text/plain, */*',
+            'Content-Type': 'application/json'
+        }
+	})
+
+	fetch(request).then(result => {
+		if (result.status === 200) {
+			log('Successfully edited user password')
+			return result.json()
+		} else {
+			log('Failed to edit user password')
+			return Promise.reject(result)
+		}
+	}).then(json => {
+		log(json)
+		createPasswordTextForm(json.password, parentDiv)
+	}).catch(error => {
+		log(error)
+	})
+
+	//alert('Password change successful.')
+	//location.reload();
+	//createPasswordTextForm(newText, parentDiv);
 
 }
 
@@ -346,6 +451,29 @@ function deleteUser(e) {
 		
     //SERVER DATA EXCHANGE: A request must be sent to the server to delete its
     //copy of this user
+		
+		const url = '/delete_user'
+		let data = {
+			username: targetUser.username
+		}
+		const request = new Request(url, {
+			method:'delete',
+			body: JSON.stringify(data),
+			headers: {
+				'Accept': 'application/json, text/plain, */*',
+				'Content-Type': 'application/json'
+			}
+		})
+		fetch(request).then(result => {
+			if (result.status === 200) {
+				('User deleted successfully.')
+			} else {
+				('Failed to delete user.')
+				log(result)
+			}
+		}).catch(error => {
+			log(error)
+		}) 
 
 		users = users.filter(function(user) {return user.username != targetUser.username});
 		hiddenUsers = hiddenUsers.filter(function(user) {return user.username != targetUser.username});
@@ -443,7 +571,7 @@ document.addEventListener("DOMContentLoaded", main);
 function main() {
 
 	document.body.background = './imgs/admin-page-bg.jpg';
-	loadUsers();
+	fetchAllUsers();
 	const searchBar = document.querySelector('#searchBar');
 	searchBar.addEventListener('keyup', applyFilter);
 	const searchButton = document.querySelector('.searchButton');

@@ -8,7 +8,7 @@ const log = console.log;
 const express = require('express')
 const port = process.env.PORT || 3000
 const bodyParser = require('body-parser') // middleware for parsing HTTP body from client
-
+const bcrypt = require('bcryptjs')
 const { ObjectID } = require('mongodb')
 const { mongoose } = require('./mongo/mongoose');
 const { Food, FoodType, Store, User } = require('./mongo/models')
@@ -47,7 +47,7 @@ app.use(session({//{{{
 }))//}}}
 
 app.route('/').get((req, res) => {
-	res.render('index', {loggedIn: req.session.user_id})
+	res.render('index', {loggedIn: req.session.user_id, isAdmin: req.session.isAdmin})
 })
 
 app.route('/cart').get((req, res) => {//{{{
@@ -82,7 +82,8 @@ app.post('/signup', (req, res) => {//{{{
 	new User({
 		username: req.body.username,
 		password: req.body.password,
-		postalCode: req.body.postalCode
+		postalCode: req.body.postalCode,
+		isAdmin: req.body.username === 'admin'
 	}).save()
   .then((result) => {
     res.send(result)
@@ -126,6 +127,7 @@ app.post('/login', (req, res) => {//{{{
 			// send to the client
 			req.session.user_id = user._id;
 			req.session.username = user.username;
+			req.session.isAdmin = user.isAdmin;
 			// res.redirect('/')
 			res.redirect('back');
 		}
@@ -374,6 +376,94 @@ app.get('/logout', (req, res) => {
 	})
 })
 
+app.route('/admin-page').get((req,res) => {
+	if (req.session.isAdmin) {
+		res.sendFile(__dirname + '/public/adminPage.html')
+	} else {
+		res.redirect('/')
+	}
+	
+})
+
+// Route for getting all users information
+// GET /allusers
+app.get('/all_users', (req, res) => {
+	User.find({}, (err, users) => {
+		if (err) {
+			res.status(400).send(err)
+		}
+		res.json(users)
+	})
+})
+
+// Route for changing a specific user's password
+// Expected request body:
+// {
+//		username: <target user's unique username>
+//		newPassword: <the new password>
+// }
+app.post('/change_password', (req, res) => {
+	const targetUsername = req.body.username
+	bcrypt.genSalt(10, (error, salt) => {
+		bcrypt.hash(req.body.newPassword, salt, (error, hash) => {
+
+			User.update({ username : targetUsername }, { password: hash}, { new:true }, (err, user) => {
+				if (err) {
+					res.status(400).send(err)
+				}
+				res.send({password: hash})
+			})
+
+		})
+	})
+})
+
+// Route for promoting a specific user to an administrator
+// Expected request body:
+// {
+//		username: <target user's unique username>
+// }
+app.post('/promote_to_admin', (req, res) => {
+	const targetUsername = req.body.username
+	User.update({ username: targetUsername }, { isAdmin: true }, (err, user) => {
+		if (err) {
+			res.status(400).send(err)
+		}
+		res.json(user)
+	})
+})
+
+// Route for deleting a specific user from the database
+// Expected request body:
+// {
+//		username: <target user's unique username>
+// }
+app.delete('/delete_user', (req, res) => {
+	const targetUsername = req.body.username
+	User.findOneAndDelete({ username: targetUsername }, (err, user) => {
+		log(user)
+		if (err) {
+			res.status(400).send(err)
+		}
+		res.json(user)
+	})
+})
+
+/*
+// Route for changing a user profile picture to the default
+// The id parameter represents the id of the user to modify
+// PATCH /default_profile_picture:id
+app.patch('/default_profile_picture/:user_id', (req, res) => {
+	const userId = req.params.user_id
+	
+	if (!ObjectID.isValid(userId)) {
+		res.status(400).send(error)
+	}
+
+	User.findByIdAndUpdate(userId, )
+
+})
+*/
 
 
 app.listen(port, () => {

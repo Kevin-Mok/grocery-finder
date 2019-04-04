@@ -40,6 +40,9 @@
                 <a class="dropdown-item openSignupPopup" href="#">Sign up</a>
               {{/if}}
              
+			 {{#if isAdmin}}
+				<a class="dropdown-item" href="/admin-page">Manage Users</a>
+			 {{/if}}
               <a class="dropdown-item openSettingsPopup" href="#">Settings</a>
             </div>
           </div>
