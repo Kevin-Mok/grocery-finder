@@ -312,7 +312,7 @@ function createPasswordTextForm(text, parentDiv) {
 	if (!parentDiv.user.isAdmin) {
 
 		const editPasswordButton = document.createElement('div');
-		editPasswordButton.innerText = 'Edit';
+		editPasswordButton.innerText = 'Edit Password';
 		editPasswordButton.className = 'editPasswordButton';
 		editPasswordButton.addEventListener('click', editPasswordClicked);
 		selectedUserPasswordFrame.appendChild(editPasswordButton);
