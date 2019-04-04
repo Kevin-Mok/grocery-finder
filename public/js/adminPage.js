@@ -253,6 +253,30 @@ function promoteToAdmin(e) {
     // SERVER DATA EXCHANGE: A request must be sent to the server to update its
     // copy of this user's isAdmin value
 		
+		const url = '/promote_to_admin'
+		let data = {
+			username: userToChange.username
+		}
+		const request = new Request(url, {
+			method:'post',
+			body: JSON.stringify(data),
+			headers: {
+				'Accept': 'application/json, text/plain, */*',
+				'Content-Type': 'application/json'
+			}
+		})
+
+		fetch(request).then(result => {
+			if (result.status === 200) {
+				log('Successfully promoted user to administrator.')
+			} else {
+				log('Failed to promote user to administrator')
+				log(result)
+			}
+		}).catch(error => {
+			log(error)
+		})
+
 		console.log(userToChange);
 		reloadSelectedUserFrameWithCurrentUser();
 	}
@@ -373,7 +397,14 @@ function saveChangesClicked(e) {
 	})
 
 	fetch(request).then(result => {
-		log(result)
+		if (result.status === 200) {
+			log('Successfully edited user password')
+		} else {
+			log('Failed to edit user password')
+			log(result)
+		}
+	}).catch(error => {
+		log(error)
 	})
 
 	createPasswordTextForm(newText, parentDiv);
@@ -405,6 +436,29 @@ function deleteUser(e) {
 		
     //SERVER DATA EXCHANGE: A request must be sent to the server to delete its
     //copy of this user
+		
+		const url = '/delete_user'
+		let data = {
+			username: targetUser.username
+		}
+		const request = new Request(url, {
+			method:'delete',
+			body: JSON.stringify(data),
+			headers: {
+				'Accept': 'application/json, text/plain, */*',
+				'Content-Type': 'application/json'
+			}
+		})
+		fetch(request).then(result => {
+			if (result.status === 200) {
+				('User deleted successfully.')
+			} else {
+				('Failed to delete user.')
+				log(result)
+			}
+		}).catch(error => {
+			log(error)
+		}) 
 
 		users = users.filter(function(user) {return user.username != targetUser.username});
 		hiddenUsers = hiddenUsers.filter(function(user) {return user.username != targetUser.username});

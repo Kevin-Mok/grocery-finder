@@ -288,9 +288,9 @@ app.get('/all_users', (req, res) => {
 // Route for changing a specific user's password
 // Expected request body:
 // {
-//		username: <target user's username>
+//		username: <target user's unique username>
 //		newPassword: <the new password>
-//}
+// }
 app.post('/change_password', (req, res) => {
 	const targetUsername = req.body.username
 	const newPassword = req.body.newPassword
@@ -299,6 +299,36 @@ app.post('/change_password', (req, res) => {
 			res.status(400).send(err)
 		}
 		res.json(users)
+	})
+})
+
+// Route for promoting a specific user to an administrator
+// Expected request body:
+// {
+//		username: <target user's unique username>
+// }
+app.post('/promote_to_admin', (req, res) => {
+	const targetUsername = req.body.username
+	User.update({ username: targetUsername }, { isAdmin: true }, (err, user) => {
+		if (err) {
+			res.status(400).send(err)
+		}
+		res.json(user)
+	})
+})
+
+// Route for deleting a specific user from the database
+// Expected request body:
+// {
+//		username: <target user's unique username>
+// }
+app.delete('/delete_user', (req, res) => {
+	const targetUsername = req.body.username
+	User.findOneAndDelete({ username: targetUsername }, (err, user) => {
+		if (err) {
+			res.status(400).send(err)
+		}
+		res.json(user)
 	})
 })
 
