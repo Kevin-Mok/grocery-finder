@@ -399,15 +399,21 @@ function saveChangesClicked(e) {
 	fetch(request).then(result => {
 		if (result.status === 200) {
 			log('Successfully edited user password')
+			return result.json()
 		} else {
 			log('Failed to edit user password')
-			log(result)
+			return Promise.reject(result)
 		}
+	}).then(json => {
+		log(json)
+		createPasswordTextForm(json.password, parentDiv)
 	}).catch(error => {
 		log(error)
 	})
 
-	createPasswordTextForm(newText, parentDiv);
+	//alert('Password change successful.')
+	//location.reload();
+	//createPasswordTextForm(newText, parentDiv);
 
 }
 

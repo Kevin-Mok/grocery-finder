@@ -8,7 +8,7 @@ const log = console.log;
 const express = require('express')
 const port = process.env.PORT || 3000
 const bodyParser = require('body-parser') // middleware for parsing HTTP body from client
-
+const bcrypt = require('bcryptjs')
 const { ObjectID } = require('mongodb')
 const { mongoose } = require('./mongo/mongoose');
 const { Food, FoodType, Store, User } = require('./mongo/models')
@@ -293,12 +293,20 @@ app.get('/all_users', (req, res) => {
 // }
 app.post('/change_password', (req, res) => {
 	const targetUsername = req.body.username
-	const newPassword = req.body.newPassword
-	User.update({ username : targetUsername }, { password: newPassword }, (err, users) => {
-		if (err) {
-			res.status(400).send(err)
-		}
-		res.json(users)
+	bcrypt.genSalt(10, (error, salt) => {
+		bcrypt.hash(req.body.newPassword, salt, (error, hash) => {
+			log('here it is')
+			log(req.body.newPassword)
+			log(hash)
+
+			User.update({ username : targetUsername }, { password: hash}, { new:true }, (err, user) => {
+				if (err) {
+					res.status(400).send(err)
+				}
+				res.send({password: hash})
+			})
+
+		})
 	})
 })
 
@@ -325,6 +333,7 @@ app.post('/promote_to_admin', (req, res) => {
 app.delete('/delete_user', (req, res) => {
 	const targetUsername = req.body.username
 	User.findOneAndDelete({ username: targetUsername }, (err, user) => {
+		log(user)
 		if (err) {
 			res.status(400).send(err)
 		}
