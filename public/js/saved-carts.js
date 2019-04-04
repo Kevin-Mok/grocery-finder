@@ -8,6 +8,23 @@ const savedCarts = {};
 // SERVER DATA EXCHANGE:get saved carts from server
 
 
+// {
+//     "savedCarts": [
+//         {
+//             "foodTypeIds": [
+//                 "5ca28abcfdc49f4a47020488",
+//                 "5ca28abcfdc49f4a47020487"
+//             ],
+//             "_id": "5ca5437fc6698d882bb62056",
+//             "name": "SohaniSaga"
+//         }
+//     ]
+// }
+
+
+
+$('.save-cart-btn').click(openCurrentCartPopup)
+
 // This javascript file contains code to dynamically create the saved carts display
 //
 // <div class='saved-carts-div'>
@@ -21,6 +38,7 @@ const savedCarts = {};
 //   </div>
 // </div>
 function createSavedCartsDiv() {
+
   const savedCartsDiv = document.createElement('div')
   savedCartsDiv.className = 'saved-carts-div'
 
@@ -31,22 +49,51 @@ function createSavedCartsDiv() {
   const dropdownMenu = document.createElement('div')
   dropdownMenu.className = 'dropdown-menu'
 
-  const keys = Object.keys(savedCarts)
 
-  keys.forEach((cartName) => {
-    const a = createElementWithText('a', 'dropdown-item saved-cart-option', '', cartName)
-    a.setAttribute('onClick', `changeCart('${cartName}')`)
-    dropdownMenu.appendChild(a)
+  // get Saved Carts from database
+  const request = createGetRequest('/get_save_cart')
+
+  fetch(request).then((res) => {
+    if (res.status === 401) {
+      const noSavedCarts = createElementWithText('span', 'dropdown-item', '', 'You have no saved carts')
+      dropdownMenu.appendChild(noSavedCarts)
+      return Promise.resolve({})
+    }
+    return res.json()
+  }).then((res) => {
+
+    if (!$.isEmptyObject(res)) {
+      const savedCarts = res.savedCarts
+      savedCarts.forEach((savedCart) => {
+        const a = createElementWithText('a', 'dropdown-item saved-cart-option', '', savedCart.name)
+        a.setAttribute('onClick', `changeCart('${savedCart.name}')`)
+        dropdownMenu.appendChild(a)
+      })
+    }
+
+    savedCartsDiv.appendChild(btn)
+    savedCartsDiv.appendChild(dropdownMenu)
+    document.querySelector('.container-fluid').appendChild(savedCartsDiv)
+    
+  }).catch((error) => {
+    console.log(error)
   })
 
-  savedCartsDiv.appendChild(btn)
-  savedCartsDiv.appendChild(dropdownMenu)
+  
 
-  document.querySelector('.container-fluid').appendChild(savedCartsDiv)
 }
 
+/**
+ * Replace the current user's cart with their saved cart
+ * named cartName
+ */
 function changeCart(cartName) {
-  // creates a clone of the saved cart
-  cart = [...savedCarts[cartName]]
-  displayCart(cart)
+  const request = createPostRequest('/replace_curr_cart', {name: cartName})
+  fetch(request).then((res) => {
+    if (res.status === 200) {
+      location.reload();
+    }
+  }).catch((error) => {
+    console.log(error)
+  })
 }

@@ -51,7 +51,8 @@ app.route('/').get((req, res) => {
 })
 
 app.route('/cart').get((req, res) => {//{{{
-  res.sendFile(__dirname + '/public/cart.html')
+  // res.sendFile(__dirname + '/public/cart.html')
+  res.render('cart', {loggedIn: req.session.user_id})
 })//}}}
 
 app.get('/foodTypes', (req, res) => {//{{{
@@ -125,7 +126,8 @@ app.post('/login', (req, res) => {//{{{
 			// send to the client
 			req.session.user_id = user._id;
 			req.session.username = user.username;
-			res.redirect('/')
+			// res.redirect('/')
+			res.redirect('back');
 		}
 	}).catch((error) => {
 		res.status(400).send(error)
@@ -237,6 +239,110 @@ app.get('/get_cart', (req, res) => {
 
 
 /**
+ * Saved the current cart for the user.
+ *
+ * Returns error code 401 if the user is not logged in.
+ *
+ * This route expects the request body to look like this:
+ *
+ * {
+ * 	name: name of cart
+ * }
+ */	
+app.post('/save_cart', (req, res) => {
+	
+	if (!req.session.user_id) {
+		return res.status(401).send('Must be logged in')
+	}
+	if (!req.body.name) {
+		return res.status(400).send('Missing name of cart')
+	}
+
+	User.findById(req.session.user_id).then((user) => {
+		const newSavedCart = {
+			name: req.body.name,
+			foodTypeIds: user.cart
+		}
+		return User.findByIdAndUpdate(req.session.user_id, { $addToSet: { savedCarts: newSavedCart }}, { new: true})
+	}).then((user) => {
+		if (!user) {
+			res.status(404).send()
+		}
+		res.redirect('/cart')
+	}).catch((error) => {
+		res.status(500).send()
+	})
+})
+
+/**
+ * Returns the savedCarts array in the user schema
+ * for the current user
+ *
+ * Send error code 401 if the user is not logged in
+ */
+app.get('/get_save_cart', (req, res) => {
+
+	if (!req.session.user_id) {
+		return res.status(401).send('Must be logged in')
+	}
+
+	User.findById(req.session.user_id).then((user) => {
+
+		if (!user) {
+			res.status(404).send()
+		}
+
+		const savedCarts = user.savedCarts
+		res.send({ savedCarts })
+	}).catch((error) => {
+		res.status(500).send()
+	})
+
+})
+
+/**
+ * Replaces the current cart for the user, with
+ * a saved cart specified by the user.
+ *
+ * Request body should look like:
+ *
+ * {
+ * 		name: saved cart name
+ * }
+ */
+app.post('/replace_curr_cart', (req, res) => {
+	if (!req.session.user_id) {
+		return res.status(401).send('Must be logged in')
+	}
+
+	if (!req.body.name) {
+		return res.status(400).send('Missing name of cart')
+	}
+
+	User.findById(req.session.user_id).then((user) => {
+		if (!user) {
+			res.status(404).send()
+		}
+
+		// find the saved cart
+		const savedCartName = req.body.name
+		let savedCart = user.savedCarts.filter(cart => cart.name === savedCartName)[0]
+
+		if (savedCart.length < 1) {
+			res.status(400).send('Invalid cart name')
+		}
+		user.cart = savedCart.foodTypeIds
+		return user.save()
+	}).then((user) => {
+		res.send(user)
+	}).catch((error) => {
+		res.status(500)
+	})
+
+})
+
+
+/**
  * Returns an array of FoodTypes depending on the input array
  *
  * Request body should look like:
@@ -267,6 +373,7 @@ app.get('/logout', (req, res) => {
 		}
 	})
 })
+
 
 
 app.listen(port, () => {

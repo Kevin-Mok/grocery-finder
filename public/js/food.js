@@ -247,6 +247,7 @@ function displayFood(foodDocs) {//{{{
   // to show up for items already in the cart
   // log(foodDocs)
   getCartFoodTypeIds().then((cartIds) => {
+
     foodDocs.forEach(foodDoc => {
       const foodDiv = createFoodDiv()
       foodDiv.id = 'food-div-' + foodDoc._id
