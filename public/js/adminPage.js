@@ -33,7 +33,6 @@ users.push(new User("Bucky", "chickensoup", "New Boston", new Date("January 6, 2
 users.push(new User("Tony", "password", "Ba Sing Se", new Date("February 28, 2019 05:27:19"), new Date("January 19, 2019 05:27:19"), 'imgs/profile-pictures/default.jpg', null, false));
 users.push(new User("Barnes", "pizza", "Pluto", new Date("July 1, 2017 23:21:19"), new Date("July 4, 2017 23:59:59"), 'imgs/profile-pictures/barnes.jpeg', null, false));
 
-fetchAllUsers();
 
 function fetchAllUsers() {
 
@@ -42,11 +41,30 @@ function fetchAllUsers() {
 	})
 
 	fetch(request).then((result) => {
-		log(result.status)
-		log('got here')
 		if (result.status == 200) {
-			log(result.json())
+			return result.json()
+		} else {
+			log("Could not return users.")
 		}
+	}).then((json) => {
+		log('got here')
+		json.forEach(user => {
+			log(user)
+			const userToAdd = new User(
+				user.username,
+				user.password,
+				user.postalCode,
+				new Date(user.dateJoined),
+				new Date(user.lastLogin),
+				user.profilePicture,
+				user.bannedUntil,
+				user.isAdmin
+			)
+			log(userToAdd)
+			users.push(userToAdd)
+		})
+		log(users)
+		loadUsers()
 	})
 }
 
@@ -67,6 +85,9 @@ function loadUsers() {
 		newEntryProfilePictureFrame.className = 'userEntryProfilePictureFrame';
 		const newEntryProfilePicture = document.createElement('img');
 		newEntryProfilePicture.className = 'userEntryProfilePicture';
+		if (users[i].profilePicture == '') {     
+			users[i].profilePicture = 'imgs/profile-pictures/default.jpg'
+		}	 
 		newEntryProfilePicture.setAttribute('src', users[i].profilePicture);
 		newEntryProfilePictureFrame.appendChild(newEntryProfilePicture);
 
@@ -336,6 +357,25 @@ function saveChangesClicked(e) {
   // SERVER DATA EXCHANGE: A request must be sent to the server to update its
   // copy of this user's password data
 	
+	const url = '/change_password'
+	let data = {
+		username: affectedUser.username,
+		newPassword: newText
+	}
+
+	const request = new Request(url, {
+		method:'post',
+		body:JSON.stringify(data),
+		headers: {
+            'Accept': 'application/json, text/plain, */*',
+            'Content-Type': 'application/json'
+        }
+	})
+
+	fetch(request).then(result => {
+		log(result)
+	})
+
 	createPasswordTextForm(newText, parentDiv);
 
 }
@@ -462,7 +502,7 @@ document.addEventListener("DOMContentLoaded", main);
 function main() {
 
 	document.body.background = './imgs/admin-page-bg.jpg';
-	loadUsers();
+	fetchAllUsers();
 	const searchBar = document.querySelector('#searchBar');
 	searchBar.addEventListener('keyup', applyFilter);
 	const searchButton = document.querySelector('.searchButton');

@@ -285,6 +285,23 @@ app.get('/all_users', (req, res) => {
 	})
 })
 
+// Route for changing a specific user's password
+// Expected request body:
+// {
+//		username: <target user's username>
+//		newPassword: <the new password>
+//}
+app.post('/change_password', (req, res) => {
+	const targetUsername = req.body.username
+	const newPassword = req.body.newPassword
+	User.update({ username : targetUsername }, { password: newPassword }, (err, users) => {
+		if (err) {
+			res.status(400).send(err)
+		}
+		res.json(users)
+	})
+})
+
 /*
 // Route for changing a user profile picture to the default
 // The id parameter represents the id of the user to modify
