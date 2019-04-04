@@ -292,6 +292,19 @@ function getCartFoodTypeIds() {
         return Promise.resolve(cart)
       }
       return res.json()
+    }).then((res) => {
+      if (res.length === 0) {
+        return Promise.resolve([])
+      }
+
+      // ie, if the res is an array of string,
+      // we know that previously, res.status === 401 was
+      // true
+      if (typeof res[0] === 'string') {
+        return Promise.resolve(res)
+      }
+
+      return Promise.resolve(res.map((foodType) => foodType._id))
     })
 }
 

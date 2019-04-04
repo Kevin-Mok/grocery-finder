@@ -27,6 +27,7 @@ window.onload = function() {
 
 
 function displayLocalCart() {
+  clearGrid()
   const cart = localStorage.getItem('cart').split(',')
   fetch(createPostRequest('/get_food_types_from_ids', {cart}))
     .then(function(res) {
@@ -40,7 +41,7 @@ function displayLocalCart() {
 
 
 function displayCart(cart)  {
-
+  clearGrid()
   if (cart.length === 0) {
     return
   }

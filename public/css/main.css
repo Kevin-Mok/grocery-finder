@@ -99,6 +99,10 @@ i {
   font-size: 5em;
 }
 
+.cart-grid {
+  margin-top: 6em !important;
+}
+
 .store-div {
   background-color: rgba(255, 255, 255, 0.2);
   padding: 1.5em;
@@ -376,7 +380,7 @@ for lg and larger screen sizes. */
 .saved-carts-div {
   position: absolute;
   top: 80px;
-  left: 15px;
+  left: 30px;
 }
 
 /*# sourceMappingURL=main.css.map */

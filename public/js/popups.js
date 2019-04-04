@@ -165,18 +165,25 @@ function openCurrentCartPopup() {//{{{
 
 function cartSaveBtnClicked() {//{{{
   const cartName = $('#cartName').val()
-  // SERVER DATA EXCHANGE: This is where the user is saving a cart.
-  // Provide the server with the current user id, current cart contents and
-  // saved cart name.
-  user.savedCarts[cartName] = [...cart]; // es6 cloned cart
+  const request =  createPostRequest('/save_cart', {name: cartName})
 
-  // If saved carts dropdown is already visible, destory it and make a new one
+  fetch(request).then(function(res) {
+    if (res.status === 200) {
+      alert('Successfully saved cart.')
+      location.reload()
+    } else if (res.status === 401){
+      alert('You must be logged in to save carts.')
+    }
+  }).catch((error) => {
+      console.log(error)
+  })
+
+  // If saved carts dropdown is already visible, destroy it and make a new one
   // with the newly saved cart
-  if ($('.saved-carts-div').length) {
-    $('.saved-carts-div').remove()
-    createSavedCartsDiv()
-  }
-
+  // if ($('.saved-carts-div').length) {
+  //   $('.saved-carts-div').remove()
+  //   createSavedCartsDiv()
+  // }
   closePopup()
 }//}}}
 
@@ -286,6 +293,7 @@ function signupBtnClicked() {//{{{
       return res.text()
     }).then((res) => {
       alert(res)
+      location.reload()
     }).catch((error) => {
       alert(error)
     })
@@ -301,6 +309,7 @@ function logout() {
     return res.text()
   }).then((res) => {
     alert(res)
+    location.href = '/';
   }).catch((error) => {
     alert(error)
   })
@@ -320,6 +329,7 @@ function loginBtnClicked() {
       return res.text()
     }).then((res) => {
       alert(res)
+      location.reload()
     }).catch((error) => {
       alert(error)
     })
