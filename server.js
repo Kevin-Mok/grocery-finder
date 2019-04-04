@@ -271,7 +271,12 @@ app.get('/logout', (req, res) => {
 })
 
 app.route('/admin-page').get((req,res) => {
-	res.sendFile(__dirname + '/public/adminPage.html')
+	if (req.session.isAdmin) {
+		res.sendFile(__dirname + '/public/adminPage.html')
+	} else {
+		res.redirect('/')
+	}
+	
 })
 
 // Route for getting all users information
