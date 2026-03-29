@@ -14,7 +14,7 @@
     "express-hbs": "^2.0.2",
     "express-session": "^1.15.6",
     "mongodb": "^3.1.10",
-    "mongoose": "^5.3.14",
+    "mongoose": "^5.7.5",
     "nodemon": "^1.18.10",
     "yargs": "^13.2.2"
   },
